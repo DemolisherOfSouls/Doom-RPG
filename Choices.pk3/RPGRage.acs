@@ -1,0 +1,22 @@
+#library "RPGRage"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+
+script "PlayerRage" (int amt)
+{
+	IncrementUserVar(0, "rage", amt);
+	//RageAlert if rage is active and perk taken
+}
+
+script "PlayerRageTracker" enter
+{
+	if(GetUserVar(0, "rage") > 0)
+		IncrementUserVar(0, "rage", -1);
+	
+	Delay(35);
+	Restart;
+}

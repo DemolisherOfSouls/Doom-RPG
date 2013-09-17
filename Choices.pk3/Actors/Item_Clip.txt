@@ -1,0 +1,15 @@
+Actor Item_Clip : Item_AmmoBase replaces Clip
+{
+	SpawnID 11
+	
+	States
+	{
+	Spawn:
+		CLIP A 15
+		CLIP A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Ammo_Clip", 12)
+		Stop
+	}
+}

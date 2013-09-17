@@ -1,0 +1,223 @@
+#library "RPGAlert"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGKeys.acs"
+#import "RPGPFunc.acs"
+
+/*
+Handles message and display alerts
+
+Contains these functions:
++	BumpMessageID(int messageID);
+
+Contains these scripts:
++	ExpAlert(int amt);
++	RenownAlert(int amt);
+	MoneyAlert(int amt);
+	SoulAlert(int amt);
++	LevelAlert(int player, int levelups);
++	KeyAlert(int keynum);
+	ObjectiveAlert(int operation, int mission, int task);
+	WishListAlert(int item);
+	SkillAlert(int skill);
+*/
+
+int ExpMessageID = MSG_XP;
+int RenownMessageID = MSG_RENOWN;
+int MoneyMessageID = MSG_MONEY;
+int SoulMessageID = MSG_SOUL;
+int LevelMessageID = MSG_LEVEL;
+int KeyMessageID = MSG_KEY;
+
+function void BumpMessageID (int messageID)
+{
+	switch(messageID)
+	{
+	case MSG_XP:
+		if(ExpMessageID == MSG_XP + 49)
+			ExpMessageID = MSG_XP;
+		else
+			ExpMessageID++;
+		break;
+	case MSG_RENOWN:
+		if(RenownMessageID == MSG_RENOWN + 19)
+			RenownMessageID = MSG_RENOWN;
+		else
+			RenownMessageID++;
+		break;
+	case MSG_LEVEL:
+		if(LevelMessageID == MSG_LEVEL + 4)
+			LevelMessageID = MSG_LEVEL;
+		else
+			LevelMessageID++;
+		break;
+	case MSG_KEY:
+		if(KeyMessageID == MSG_KEY + 4)
+			KeyMessageID = MSG_KEY;
+		else
+			KeyMessageID++;
+		break;
+	case MSG_MONEY:
+		if(MoneyMessageID == MSG_MONEY + 49)
+			MoneyMessageID = MSG_MONEY;
+		else
+			MoneyMessageID++;
+		break;
+	case MSG_SOUL:
+		if(SoulMessageID == MSG_SOUL + 49)
+			SoulMessageID = MSG_SOUL;
+		else
+			SoulMessageID++;
+		break;
+	}
+}
+
+script "ExpAlert" (int amt)
+{
+	int currentID = ExpMessageID;
+	BumpMessageID(MSG_XP);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	int c;
+
+	for(c = 1; c < 36; c++)
+	{
+		HudMessage(i:amt, s:" XP Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_BLUE, 8.0, 100.0 + (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+	
+	HudMessage(i:amt, s:" XP Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_BLUE, 8.0, 135.0, 0, 1.0);
+	Delay(35);
+	
+	for(c = 35; c >= 0; c--)
+	{
+		HudMessage(i:amt, s:" XP Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_BLUE, 8.0, 170.0 - (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+}
+
+script "RenownAlert" (int amt)
+{
+	int currentID = RenownMessageID;
+	BumpMessageID(MSG_RENOWN);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	int c;
+
+	for(c = 1; c < 36; c++)
+	{
+		HudMessage(i:amt, s:" Renown Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_RED, 8.0, 100.0 + (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+	
+	HudMessage(i:amt, s:" Renown Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_RED, 8.0, 135.0, 0, 1.0);
+	Delay(35);
+	
+	for(c = 35; c >= 0; c--)
+	{
+		HudMessage(i:amt, s:" Renown Rewarded"; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_RED, 8.0, 170.0 - (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+}
+
+script "SoulAlert" (int amt)
+{
+	int currentID = SoulMessageID;
+	BumpMessageID(MSG_SOUL);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	str text = " Soul Acquired";
+	
+	if(amt > 1)
+	{
+		text = " Souls Acquired";
+	}
+	
+	int c;
+
+	for(c = 1; c < 36; c++)
+	{
+		HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_WHITE, 8.0, 100.0 + (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+	
+	HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_WHITE, 8.0, 135.0, 0, 1.0);
+	Delay(35);
+	
+	for(c = 35; c >= 0; c--)
+	{
+		HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_WHITE, 8.0, 170.0 - (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+}
+
+script "MoneyAlert" (int amt)
+{
+	int currentID = MoneyMessageID;
+	BumpMessageID(MSG_MONEY);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	str text = " Credit Acquired";
+	
+	if(amt > 1)
+	{
+		text = " Credits Acquired";
+	}
+	
+	int c;
+
+	for(c = 1; c < 36; c++)
+	{
+		HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_GOLD, 8.0, 100.0 + (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+	
+	HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_GOLD, 8.0, 135.0, 0, 1.0);
+	Delay(35);
+	
+	for(c = 35; c >= 0; c--)
+	{
+		HudMessage(i:amt, s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, currentID, CR_GOLD, 8.0, 170.0 - (c * 1.0), 0, c * (1.0 / 35));
+		Delay(1);
+	}
+}
+
+script "LevelAlert" (int player, int levelups, int perks)
+{
+	str message = StrParam(s:"Level ", i:GetLevel(player));
+	
+	int currentID = LevelMessageID;
+	BumpMessageID(MSG_LEVEL);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	if(levelups > 1)
+		message = StrParam(s:message, s:"\n", i:levelups, s:" Levels Gained");
+	
+	if(perks > 0)
+		message = StrParam(s:message, s:"\n", s:"A perk is available");
+	
+	SetFont("BIGFONT");
+	HudMessage(s:message ; HUDMSG_FADEINOUT|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_BLUE, 400.0, 64.0, 2.0, 1.0, 1.0, 1.0);
+	SetFont("SMALLFONT");
+}
+
+script "KeyAlert" (int keynum)
+{
+	str message = StrParam(s:KeyList[keynum - 1], s:" acquired");
+	
+	int currentID = KeyMessageID;
+	BumpMessageID(MSG_KEY);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	
+	SetFont("BIGFONT");
+	HudMessage(s:message ; HUDMSG_FADEINOUT|HUDMSG_ALPHA|HUDMSG_LOG, currentID, CR_UNTRANSLATED, 400.0, 576.0, 2.0, 1.0, 1.0, 1.0);
+	SetFont("SMALLFONT");
+}

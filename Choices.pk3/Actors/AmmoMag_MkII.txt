@@ -1,0 +1,8 @@
+Actor AmmoMag_MkII : Ammo
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 12
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 12
+	Inventory.Icon "Gmk2A0"
+}

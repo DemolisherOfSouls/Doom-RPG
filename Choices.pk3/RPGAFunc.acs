@@ -1,0 +1,86 @@
+#library "RPGAFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+
+/*
+Handles generic functions
+
+Contains these functions:
++	GetUserVar(int tid, str var);
++	SetUserVar(int tid, str var, int value);
++	IncrementUserVar(int tid, str var, int value);
++	Min(int value, int mi);
++	Max(int value, int ma);
++	Range(int value, int mi, int ma);
++	KeyPress(int key);
++	OldKeyPress(int key);
++	KeyExec(int key);
++	ClearMessage(int start, int num);
+*/
+
+function int GetUserVar (int tid, str var)
+{
+	return GetUserVariable(tid, strparam(s:"user_", s:var));
+}
+
+function void SetUserVar (int tid, str var, int value)
+{
+	SetUserVariable(tid, strparam(s:"user_", s:var), value);
+}
+
+function void IncrementUserVar (int tid, str var, int value)
+{
+	SetUserVar(tid, var, GetUserVar(tid, var) + value);
+}
+
+function int Max (int value, int ma)
+{
+	if(value > ma)
+		return ma;
+	return value;
+}
+
+function int Min (int value, int mi)
+{
+	if(value < mi)
+		return mi;
+	return value;
+}
+
+function int Range (int value, int mi, int ma)
+{
+	return Max(Min(value, mi), ma);
+}
+
+//**********************************************************************************************************************
+//	KeyPress Checks
+//**********************************************************************************************************************
+
+function bool KeyPress (int key)
+{
+	return GetPlayerInput(-1, INPUT_BUTTONS) & key;
+}
+
+function bool OldKeyPress (int key)
+{
+	return GetPlayerInput(-1, INPUT_OLDBUTTONS) & key;
+}
+
+function bool KeyExec (int key)
+{
+	return OldKeyPress(key) && !KeyPress(key);
+}
+
+//**********************************************************************************************************************
+//	Clear Commands
+//**********************************************************************************************************************
+
+function void ClearMessage(int start, int num)
+{
+	for(int i = start; start < i+num; i++)
+	{
+		HudMessage(s:""; HUDMSG_PLAIN, i, CR_UNTRANSLATED, 0, 0, 0);
+	}
+}

@@ -1,0 +1,23 @@
+terrain Lava
+{
+	footclip				8
+	liquid
+	
+	damagetype				"Terrain_Lava"
+	damageamount			10
+	damagetimemask			15
+}
+
+terrain Nukage
+{
+	footclip				8
+	liquid
+	
+	damagetype				"Terrain_Nukage"
+	damageamount			5
+	damagetimemask			15
+	allowprotection
+}
+
+floor Lava1 Lava
+floor Nukage1 Nukage

@@ -1,0 +1,36 @@
+#library "RPGIList"
+
+#include "zcommon.acs"
+
+/*
+Contains a list of items, their values, and a list of class names
+
+Contains these arrays:
++	ItemInfo
++	ItemData
+*/
+
+#libdefine	II_ITEM			0
+#libdefine	II_INV			1
+#define		II_ARRAY		2
+
+str ItemInfo[2][II_ARRAY] =
+{
+	{ "Item_Soul", "Inv_Soul" },
+	{ "Item_Money", "Inv_Money" }
+};
+
+#libdefine	ID_VALUE		0
+#libdefine	ID_TYPE			1
+#libdefine	ID_STOREAMT		2
+#define		ID_ARRAY		3
+
+#libdefine	IDT_MISC		0
+#libdefine	IDT_AMMO		1
+#libdefine	IDT_ARMOR		2
+
+int ItemData[2][ID_ARRAY] =
+{
+	{ 2, IDT_MISC, 0 },
+	{ 1, IDT_MISC, 0 }
+};

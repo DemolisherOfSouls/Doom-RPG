@@ -1,0 +1,92 @@
+#library "RPGExp"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGIVars.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+
+int WaitingExp[8];
+int WaitingRenown[8];
+
+script "PlayerLevel" enter
+{
+	int player = PlayerNumber();
+	
+	if(GetLevel(player) == 0)
+	{
+		Thing_ChangeTID(0, TID_PLAYER + player);
+		SetUserArray(0, "user_weapon", 2, 1);
+		BumpLevel(player);
+		
+		// If not RPG, immunity to Terrain Slime/Lava
+		if(GetLevelInfo(LEVELINFO_CLUSTERNUM) != 3)
+			GiveInventory("Power_TerrainFix", 1);
+	}
+	
+	if(WaitingExp[player] > 0)
+	{
+		ACS_NamedExecuteAlways("ExpAlert", 0, WaitingExp[player]);
+		IncrementUserVar(TID_PLAYER + player, "experience", WaitingExp[player]);
+		WaitingExp[player] = 0;
+	}
+	
+	if(WaitingRenown[player] > 0)
+	{
+		ACS_NamedExecuteAlways("RenownAlert", 0, WaitingRenown[player]);
+		IncrementUserVar(TID_PLAYER + player, "renown", WaitingRenown[player]);
+		WaitingRenown[player] = 0;
+	}
+	
+	if(WaitingMoney[player] > 0)
+	{
+		ACS_NamedExecuteAlways("MoneyAlert", 0, WaitingMoney[player]);
+		GiveInventory("Inv_Money", WaitingMoney[player]);
+		WaitingMoney[player] = 0;
+	}
+	
+	if(WaitingSouls[player] > 0)
+	{
+		ACS_NamedExecuteAlways("SoulAlert", 0, WaitingSouls[player]);
+		GiveInventory("Inv_Soul", WaitingSouls[player]);
+		WaitingSouls[player] = 0;
+	}
+	
+	int level = GetLevel(player);
+	int exp = GetExp(player);
+	
+	int levelups = 0;
+	int perks = 0;
+	
+	while(exp >= GetLevelUp(level))
+	{
+		BumpLevel(player);
+		level++;
+		if(level % 2 == 1 && level > 4)
+		{
+			perks++;
+		}
+		levelups++;
+	}
+	
+	if(levelups > 0)
+	{
+		ACS_NamedExecuteAlways("LevelAlert", 0, player, levelups, perks);
+	}
+	
+	Delay(1);
+	restart;
+}
+
+script "PlayerExp" (int amt)
+{
+	int player = PlayerNumber();
+	WaitingExp[player] += amt;
+}
+
+script "PlayerRenown" (int amt)
+{
+	int player = PlayerNumber();
+	WaitingRenown[player] += amt;
+}

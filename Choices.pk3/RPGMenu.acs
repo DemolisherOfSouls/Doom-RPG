@@ -1,0 +1,103 @@
+#library "RPGMenu"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+#import "RPGMVars.acs"
+#import "RPGMFunc.acs"
+
+script "MenuWatchdog" enter
+{
+	int player = PlayerNumber();
+	
+	if(!Menu_PlayerUsing[player])
+	{
+		if(CheckOpenMenu())
+		{
+			Menu_PlayerUsing[player] = true;
+		}
+	}
+	
+	Delay(1);
+	Restart;
+}
+
+script "OpenMenu" (void)
+{
+	PlayerFreeze(true);
+	
+	ACS_NamedExecuteAlways("Menu", 0);
+}
+
+script "Menu" (void)
+{
+	int player = PlayerNumber();
+	
+	int tab = Menu_LastTab[player];
+	
+	while(true)
+	{
+		MenuCursor();
+		
+		DrawMenu();
+		
+		if(CheckExitMenu())
+			terminate;
+		
+		Delay(1);
+	}
+}
+
+script "CloseMenu" (void)
+{
+	int player = PlayerNumber();
+	PlayerFreeze(false);
+	ClearMenu();
+	while(KeyPress(BT_USER1) || OldKeyPress(BT_USER1))
+		Delay(1);
+	Menu_PlayerUsing[player] = false;
+}
+
+script "OpenDialog" (void)
+{
+	int npc = ActivatorTID();
+	SetActivatorToTarget(0);
+	
+	int player = PlayerNumber();
+	PlayerFreeze(true);
+	Menu_DialogTID[player] = npc;
+	Menu_PlayerUsing[player] = true;
+	
+	ACS_NamedExecuteAlways("Dialog", 0);
+}
+
+script "Dialog" (void)
+{
+	int player = PlayerNumber();
+	int npc = Menu_DialogTID[player];
+	
+	//code to set allowexit based on circumstances
+	bool allowexit = true;
+	
+	while(true)
+	{
+		MenuCursor();
+		
+		if(allowexit)
+			if(CheckExitDialog())
+				terminate;
+		
+		Delay(1);
+	}
+}
+
+script "CloseDialog" (void)
+{
+	int player = PlayerNumber();
+	PlayerFreeze(false);
+	ClearMenu();
+	Menu_DialogTID[player] = 0;
+	Menu_PlayerUsing[player] = false;
+}

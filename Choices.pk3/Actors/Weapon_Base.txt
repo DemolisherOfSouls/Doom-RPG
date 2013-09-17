@@ -1,0 +1,44 @@
+Actor Weapon_Base : Weapon
+{
+	Weapon.AmmoUse1 0
+	Weapon.AmmoUse2 0
+	Weapon.AmmoGive1 0
+	Weapon.AmmoGive2 0
+	+INVENTORY.UNTOSSABLE
+	+WEAPON.NOAUTOAIM
+	+WEAPON.AMMO_OPTIONAL
+	+WEAPON.CHEATNOTWEAPON
+	
+	States
+	{
+	ChangeWeapon:
+		"####" A 0 ACS_NamedExecuteAlways("ChangeWeapon")
+		"####" A 0 A_Jump(Always, "Ready.NoFire")
+	
+	Ready:
+		"####" A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		Loop
+	Ready.NoFire:
+		"####" A 1 A_WeaponReady(WRF_NOFIRE)
+		Loop
+	
+	Select:
+		"####" A 1 A_Raise
+		Loop
+	Select.Quick:
+		"####" A 0 A_Raise
+		"####" A 1 A_Raise
+		Loop
+	Deselect:
+		"####" A 1 A_Lower
+		Loop
+	Deselect.Quick:
+		"####" A 0 A_Lower
+		"####" A 1 A_Lower
+		Loop
+	
+	Fire:
+		"####" A 1 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.HasAmmo")		//Continue if has 1 bullet in magazine
+		Goto Ready
+	}
+}

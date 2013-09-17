@@ -1,0 +1,8 @@
+Actor AmmoMag_PlasmaRifle : Ammo
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 30
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 30
+	Inventory.Icon "PLASA0"
+}

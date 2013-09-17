@@ -1,0 +1,93 @@
+#include "Actors/RPGConst.txt"
+
+#include "Actors/RPGPlayer.txt"
+
+//Inventory
+#include "Actors/Inv_Base.txt"
+#include "Actors/Inv_Money.txt"
+#include "Actors/Inv_Soul.txt"
+
+//Ammo Types
+#include "Actors/Ammo_Clip.txt"
+#include "Actors/Ammo_Shell.txt"
+#include "Actors/Ammo_Rocket.txt"
+#include "Actors/Ammo_Cell.txt"
+
+//Ammo Items
+#include "Actors/Item_AmmoBase.txt"
+#include "Actors/Item_Clip.txt"
+#include "Actors/Item_ClipBox.txt"
+#include "Actors/Item_Shell.txt"
+#include "Actors/Item_ShellBox.txt"
+#include "Actors/Item_Rocket.txt"
+#include "Actors/Item_RocketBox.txt"
+#include "Actors/Item_Cell.txt"
+#include "Actors/Item_CellPack.txt"
+
+//Ammo Magazines
+#include "Actors/AmmoMag_Pistol.txt"
+#include "Actors/AmmoMag_MkII.txt"
+#include "Actors/AmmoMag_Shotgun.txt"
+#include "Actors/AmmoMag_SuperShotgun.txt"
+#include "Actors/AmmoMag_PlasmaRifle.txt"
+
+//Weapon Items
+#include "Actors/Item_Weapon.txt"
+#include "Actors/Item_Pistol.txt"
+#include "Actors/Item_MkII.txt"
+#include "Actors/Item_Shotgun.txt"
+#include "Actors/Item_SuperShotgun.txt"
+#include "Actors/Item_Chaingun.txt"
+#include "Actors/Item_RocketLauncher.txt"
+#include "Actors/Item_PlasmaRifle.txt"
+
+//Powers
+#include "Actors/Power_TerrainFix.txt"
+
+//Item Drops
+#include "Actors/ItemDrop_Base.txt"
+#include "Actors/ItemDrop_Pistol.txt"
+
+//Weapon Projectiles
+#include "Actors/WeaponProj_Base.txt"
+#include "Actors/WeaponProj_TracerTrail.txt"
+#include "Actors/WeaponProj_Bullet.txt"
+#include "Actors/WeaponProj_Pistol.txt"
+#include "Actors/WeaponProj_MkII.txt"
+#include "Actors/WeaponProj_Shotgun.txt"
+#include "Actors/WeaponProj_SuperShotgun.txt"
+#include "Actors/WeaponProj_Chaingun.txt"
+
+//Weapons
+#include "Actors/Weapon_Base.txt"
+#include "Actors/Weapon_Pistol.txt"
+#include "Actors/Weapon_MkII.txt"
+#include "Actors/Weapon_Shotgun.txt"
+#include "Actors/Weapon_SuperShotgun.txt"
+#include "Actors/Weapon_Chaingun.txt"
+#include "Actors/Weapon_PlasmaRifle.txt"
+
+//Items
+#include "Actors/Item_Soul.txt"
+
+//Key Items
+#include "Actors/Key_RedCard.txt"
+#include "Actors/Key_BlueCard.txt"
+#include "Actors/Key_YellowCard.txt"
+#include "Actors/Key_RedSkull.txt"
+#include "Actors/Key_BlueSkull.txt"
+#include "Actors/Key_YellowSkull.txt"
+
+//Enemies
+#include "Actors/EnemyProj_Base.txt"
+#include "Actors/EnemyProj_Common.txt"
+#include "Actors/Enemy_Base.txt"
+#include "Actors/Enemy_Head.txt"
+
+#include "Actors/Enemy_Zombieman.txt"
+#include "Actors/Enemy_ShotgunGuy.txt"
+#include "Actors/Enemy_ChaingunGuy.txt"
+#include "Actors/Enemy_Imp.txt"
+#include "Actors/Enemy_Demon.txt"
+#include "Actors/Enemy_HellKnight.txt"
+#include "Actors/Enemy_BaronOfHell.txt"

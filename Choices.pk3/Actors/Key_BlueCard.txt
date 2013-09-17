@@ -1,0 +1,16 @@
+Actor Key_BlueCard : CustomInventory replaces BlueCard
+{
+	SpawnID 85
+	
+	States
+	{
+	Spawn:
+		BKEY A 10
+		BKEY B 10 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("BlueCard", 1)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 2)
+		Stop
+	}
+}

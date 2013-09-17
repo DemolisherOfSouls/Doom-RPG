@@ -1,0 +1,62 @@
+Actor Weapon_Pistol : Weapon_Base
+{
+	Weapon.SlotNumber 2
+	Weapon.SelectionOrder 5
+	
+	Weapon.AmmoType1 "Ammo_Clip"
+	Weapon.AmmoType2 "AmmoMag_Pistol"
+	
+	Tag "Standard Issue Pistol"
+	
+	+WEAPON.WIMPY_WEAPON
+	
+	States
+	{
+	Ready:
+		PISG A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		Loop
+	Select:
+		PISG A 1 A_Raise
+		Loop
+	Select.Quick:
+		PISG A 0 A_Raise
+		PISG A 1 A_Raise
+		Loop
+	
+	Fire:
+		PISG A 1 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.HasAmmo")		//Continue if has 1 bullet in magazine
+		PISG A 5 A_PlaySound("Weapon/PistolEmpty", CHAN_WEAPON)
+		Goto Reload
+	Fire.HasAmmo:
+		PISG A 4
+		PISG B 6 A_GunFlash("Shoot")
+		PISG C 4
+		PISG B 5 A_ReFire("Fire")
+		Goto Ready
+	
+	Shoot:
+		PISF A 0 A_PlaySound("Weapon/Pistol", CHAN_WEAPON)
+		PISF A 0 A_TakeInventory("AmmoMag_Pistol", 1)
+		PISF A 0 A_FireCustomMissile("WeaponProj_Pistol", FRandom(-2.5,2.5), false, 0, 0, 0, FRandom(-2.5,2.5))
+	Flash:
+		PISF A 6 Bright A_Light1
+		Goto LightDone
+	
+	Reload:
+		PISG A 1 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Start")				//Continue if has 1 bullet in ammo pool
+		Goto Ready
+	Reload.Start:
+		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Ready")			//Continue if magizine is not full
+		PISG A 1 //Start anim (before ammo swap)
+	Reload.HasAmmo:
+		PISG A 0 //Per item anim (during ammo swap)
+		PISG A 0 A_GiveInventory("AmmoMag_Pistol", 1)
+		PISG A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
+		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Reload.Finish")	//Continue if magizine is not full
+		PISG A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.HasAmmo")				//Continue if has 1 bullet in ammo pool
+		Goto Reload.Finish
+	Reload.Finish:
+		PISG A 1 //Finish anim (after ammo swap)
+		Goto Ready
+	}
+}

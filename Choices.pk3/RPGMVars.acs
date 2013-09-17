@@ -1,0 +1,23 @@
+#library "RPGMVars"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+
+#libdefine Menu_BoxWidth	48
+#libdefine Menu_BoxHeight	24
+
+str Menu_Text_OffOn[2] = { "Off", "On" };
+
+int Menu_LastTab[8];							//Last tab viewed in menu
+
+int Menu_Tab[8];								//Tab the menu is currently showing
+int Menu_SubTab[8];								//SubTab the menu is currently showing
+
+int Menu_DialogTID[8];							//NPC TID for dialog
+
+bool Menu_PlayerUsing[8];						//Players using the menu
+bool Menu_PlayerWaiting[8];						//Players waiting to exit map
+
+int Menu_CursorX[8];							//Cursor x position
+int Menu_CursorY[8];							//Cursor y position

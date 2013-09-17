@@ -1,0 +1,17 @@
+#library "RPGMove"
+
+#include "zcommon.acs"
+
+script "PlayerMove" enter
+{
+	if(GetActorVelX(0) + GetActorVelY(0) == 0)
+		SetActorVelocity(0, 1, 0, 0, true, false);
+	
+	Delay(1);
+	
+	if(GetActorVelX(0) + GetActorVelY(0) == 0)
+		SetActorVelocity(0, -1, 0, 0, true, false);
+	
+	Delay(1);
+	Restart;
+}

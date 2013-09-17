@@ -1,0 +1,35 @@
+Actor RPGPlayer : DoomPlayer
+{
+	Species "Marine"
+	
+	Player.DisplayName "Marine"
+	
+	Player.StartItem "Weapon_Pistol"
+	Player.StartItem "AmmoMag_Pistol", 10
+	Player.StartItem "Ammo_Clip", 50
+	Player.StartItem "Inv_Money", 10
+	
+	// main
+	var int user_level;
+	var int user_renown;
+	var int user_experience;
+	
+	//weapons
+	var int user_weapon[10];
+	
+	// counters
+	var int user_moneyfound;
+	var int user_keysfound;
+	
+	// stats
+	var int user_perks[20];
+	var int user_skills[200];
+	var int user_achievements[50];
+	
+	States
+	{
+	Pain.Terrain_Nukage:
+		PLAY G 0 ACS_NamedExecuteAlways("Pain_Nukage", 0)
+		Goto Pain
+	}
+}

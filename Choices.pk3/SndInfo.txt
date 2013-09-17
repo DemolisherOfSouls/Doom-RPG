@@ -1,0 +1,30 @@
+//Pickup
+
+Pickup/Powerup				dsgetpow
+Pickup/Ammo					PkpAmmo
+Pickup/Item					dsitemup
+Pickup/Weapon				dswpnup		//Placeholder?
+
+//Weapons
+
+Weapon/Pistol				dspistol
+Weapon/PistolEmpty			PistEmpt
+
+Weapon/MkII					PistSil2
+Weapon/MkIIEmpty			PistEmpt
+
+Weapon/Shotgun				dsshotgn
+Weapon/ShotgunLoad			PkpAmmo
+Weapon/ShotgunEmpty			PistEmpt
+
+Weapon/Chaingun				dspistol
+Weapon/ChaingunEmpty		PistEmpt	//Placeholder (Want Q2 Sound)
+
+$Limit Weapon/Pistol		0
+$Limit Weapon/PistolEmpty	0
+$Limit Weapon/MkII			0
+$Limit Weapon/Shotgun		0
+$Limit Weapon/ShotgunLoad	0
+$Limit Weapon/ShotgunEmpty	0
+$Limit Weapon/Chaingun		0
+$Limit Weapon/ChaingunEmpty	0

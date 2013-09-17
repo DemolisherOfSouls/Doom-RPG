@@ -1,0 +1,67 @@
+#library "RPGDraw"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+#import "RPGMVars.acs"
+#import "RPGWList.acs"
+
+/*
+Handles display functions
+
+Contains these functions:
++	DrawCursor();
++	DrawBox(int x, int y, int id);
+	DrawButton(int x, int y, int bid, int mid, str text, int status);
++	DrawWeaponMessage(int type, int weapon);
++	DrawWeaponHeldMessage(int type, int weapon);
+*/
+
+function void DrawCursor(int player)
+{
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	SetFont("Cursor");
+	HudMessage(s:"A"; HUDMSG_PLAIN|HUDMSG_ALPHA, MSG_CURSOR, CR_UNTRANSLATED, Menu_CursorX[player], Menu_CursorY[player], 0, 0.8);
+	SetFont("SMALLFONT");
+}
+
+function void DrawBox(int x, int y, int id)
+{
+	//Change to Image Coordinates from Integers
+	int xc = x * 1.0 + 0.1;
+	int yc = y * 1.0 + 0.1;
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	SetFont("MN_BASE1");
+	HudMessage(s:"A"; HUDMSG_PLAIN|HUDMSG_ALPHA, id, CR_UNTRANSLATED, xc, yc, 0, 1.0);
+	SetFont("SMALLFONT");
+}
+
+//function void DrawButton
+
+function void DrawWeaponMessage(int type, int weapon)
+{
+	int currentweapon = GetUserArray(0, "user_weapon", type);
+	
+	str text = "";
+	
+	if(currentweapon != 0)
+	{
+		text = StrParam(s:"You have a ", s:WeaponName[type][currentweapon], s:"\n");
+	}
+	
+	text = StrParam(s:text, s:"Press <Use> to pick up a ", s:WeaponName[type][weapon]);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	HudMessage(s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, MSG_WEAPON, CR_DARKRED, 400.0, 400.0, 0.1, 1.0);
+}
+
+function void DrawWeaponHeldMessage(int type, int weapon)
+{
+	str text = StrParam(s:"You already possess a ", s:WeaponName[type][weapon]);
+	
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	HudMessage(s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, MSG_WEAPON, CR_DARKRED, 400.0, 400.0, 0.1, 1.0);
+}

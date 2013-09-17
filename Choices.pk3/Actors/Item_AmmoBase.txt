@@ -1,0 +1,4 @@
+Actor Item_AmmoBase : CustomInventory
+{
+	Inventory.PickupSound "Pickup/Ammo"
+}

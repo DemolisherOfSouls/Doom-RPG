@@ -1,0 +1,13 @@
+Graphic MN_BASE2, 48, 32
+{
+	XScale 0.3
+	YScale 0.3
+	Patch MN_BASE1, 0, 0
+}
+
+Graphic MN_BASE3, 48, 32
+{
+	XScale 0.1
+	YScale 0.1
+	Patch MN_BASE1, 0, 0
+}

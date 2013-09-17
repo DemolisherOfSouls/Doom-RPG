@@ -1,0 +1,16 @@
+Actor Item_Shotgun : Item_Weapon replaces Shotgun
+{
+	SpawnID 27
+	
+	States
+	{
+	Spawn:
+		SHOT A 15
+		SHOT A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Weapon_Shotgun", 1)
+		TNT1 A 0 A_GiveInventory("AmmoMag_Shotgun", 6)
+		Stop
+	}
+}

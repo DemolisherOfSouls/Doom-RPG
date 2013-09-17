@@ -1,0 +1,77 @@
+#library "RPGWeaps"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGDraw.acs"
+#import "RPGWList.acs"
+
+#define WD_PISTOL		2
+#define WD_MKII			WD_PISTOL + 1
+#define WD_SHOTGUN		WD_MKII + 1
+#define WD_SUPERSHOTGUN	WD_SHOTGUN + 1
+#define WD_CHAINGUN		WD_SUPERSHOTGUN + 1
+#define WD_ROCKET		WD_CHAINGUN + 1
+#define WS_ROCKET		WD_ROCKET + 1
+#define WR_ROCKET		WS_ROCKET + 1
+
+script "WeaponDamage" (int weapon)
+{
+	int damage = 0;
+	
+	switch(weapon)
+	{
+	case WD_PISTOL:
+		damage = 10;
+		break;
+	case WD_MKII:
+		damage = 8;
+		break;
+	case WD_SHOTGUN:
+		damage = 10;
+		break;
+	case WD_CHAINGUN:
+		damage = 10;
+		break;
+	case WD_SUPERSHOTGUN:
+		damage = 10;
+		break;
+	case WD_ROCKET:
+		damage = 80;
+		break;
+	case WS_ROCKET:
+		damage = 128;
+		break;
+	case WR_ROCKET:
+		damage = 128;
+	}
+	
+	SetResultValue(damage);
+}
+
+#define W_PISTOL	2
+#define W_MKII		W_PISTOL + 1
+
+script "WeaponPickup" (int type, int weapon)
+{
+	SetResultValue(false);
+	
+	int currentweapon = GetUserArray(0, "user_weapon", type);
+
+	if(currentweapon == weapon)
+	{
+		DrawWeaponHeldMessage(type, weapon);
+	}
+	else if(KeyPress(BT_USE))
+	{
+		SetUserArray(0, "user_weapon", type, weapon);
+		TakeInventory(WeaponClass[type][currentweapon], 1);
+		TakeInventory(AmmoMagClass[type][currentweapon], 0x7fffffff);
+		SetResultValue(true);
+	}
+	else
+	{
+		DrawWeaponMessage(type, weapon);
+	}
+}

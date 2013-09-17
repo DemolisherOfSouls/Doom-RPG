@@ -1,0 +1,68 @@
+Actor Weapon_Chaingun : Weapon_Base
+{
+	Weapon.SlotNumber 4
+	Weapon.SelectionOrder 3
+	
+	Weapon.AmmoType1 "Ammo_Clip"
+	//Weapon.AmmoType2 "AmmoMag_Chaingun"
+	
+	Tag "Chaingun"
+	
+	States
+	{
+	SpinDownE:
+		CHGG BBBBAAAABBBBBAAAAABBBBBBBAAAAAAA 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	SpinDown:
+		CHGG AAAABBBBAAAAABBBBBAAAAAAABBBBBBB 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	SpinDownE.NoAmmo:
+		CHGG BBBBAAAABBBBBAAAAABBBBBBBAAAAAAA 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+	SpinDown.NoAmmo:
+		CHGG AAAABBBBAAAAABBBBBAAAAAAABBBBBBB 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+	
+	Ready:
+		CHGG A 1 A_WeaponReady(WRF_NOSECONDARY)
+		Loop
+	Select:
+		CHGG A 1 A_Raise
+		Loop
+	Select.Quick:
+		CHGG A 0 A_Raise
+		CHGG A 1 A_Raise
+		Loop
+	
+	Fire:
+		CHGG A 1 A_JumpIfInventory("Ammo_Clip", 1, "Fire.HasAmmo")		//Continue if has 1 bullet in pool
+		CHGG A 3 A_PlaySound("Weapon/ChaingunEmpty", CHAN_WEAPON)
+		Goto SpinDownE.NoAmmo
+	Fire.HasAmmo:
+		CHGG A 0 A_GunFlash("Shoot")
+		CHGG A 4 A_GunFlash("Flash.A")
+		CHGG A 0 A_ReFire("Hold")
+		Goto SpinDownE
+	Hold:
+		CHGG B 1 A_JumpIfInventory("Ammo_Clip", 1, "Hold.HasAmmo")		//Continue if has 1 bullet in pool
+		CHGG B 3 A_PlaySound("Weapon/ChaingunEmpty", CHAN_WEAPON)
+		Goto SpinDown.NoAmmo
+	Hold.HasAmmo:
+		CHGG B 0 A_GunFlash("Shoot")
+		CHGG B 4 A_GunFlash("Flash.B")
+		CHGG B 0 A_ReFire("Fire")
+		Goto SpinDown
+	
+	Shoot:
+		CHGF A 0 A_PlaySound("Weapon/Chaingun", CHAN_WEAPON)
+		CHGF A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
+		CHGF A 0 A_FireCustomMissile("WeaponProj_Chaingun", FRandom(-2.5,2.5), false, 0, 0, 0, FRandom(-2.5,2.5))
+		Stop
+	Flash.A:
+		CHGF A 3 Bright A_Light(Random(1,2))
+		Goto LightDone
+	Flash.B:
+		CHGF B 3 Bright A_Light(Random(1,2))
+		Goto LightDone
+	}
+}

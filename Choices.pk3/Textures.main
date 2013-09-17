@@ -1,0 +1,7 @@
+Texture SKYV, 256, 128
+{
+	Patch RSKY1, 0, 0
+	{
+		Blend "#000000", 1.0
+	}
+}

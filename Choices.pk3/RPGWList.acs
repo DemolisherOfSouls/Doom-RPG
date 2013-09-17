@@ -1,0 +1,51 @@
+#library "RPGWList"
+
+#include "zcommon.acs"
+
+#define	NOWEAPON	"Unknown Weapon"
+#define NOCLASS		"ACS_Failure"
+
+str WeaponName[10][8] =
+{
+	{	// Unarmed
+		NOWEAPON,
+		"Unarmed Fist"
+	},{	// Chainsaw
+		NOWEAPON,
+		"Chainsaw"
+	},{	// Pistol
+		NOWEAPON,
+		"Standard Issue Pistol",
+		"MkII Sidearm"
+	}
+};
+
+str WeaponClass[10][8] =
+{
+	{	// Unarmed
+		NOCLASS,
+		"Weapon_Fist"
+	},{	// Chainsaw
+		NOCLASS,
+		"Weapon_Chainsaw"
+	},{	// Pistol
+		NOCLASS,
+		"Weapon_Pistol",
+		"Weapon_MkII"
+	}
+};
+
+str AmmoMagClass[10][8] =
+{
+	{	// Unarmed
+		NOCLASS,
+		"Ammo_None"
+	},{	// Chainsaw
+		NOCLASS,
+		"Ammo_None"
+	},{	// Pistol
+		NOCLASS,
+		"AmmoMag_Pistol",
+		"AmmoMag_MkII"
+	}
+};

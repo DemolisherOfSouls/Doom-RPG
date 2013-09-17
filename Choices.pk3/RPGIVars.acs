@@ -1,0 +1,4 @@
+#library "RPGIVars"
+
+int WaitingMoney[8];
+int WaitingSouls[8];

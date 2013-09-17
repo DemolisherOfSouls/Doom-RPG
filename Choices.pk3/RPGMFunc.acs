@@ -1,0 +1,119 @@
+#library "RPGMFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGDraw.acs"
+#import "RPGPFunc.acs"
+#import "RPGMVars.acs"
+
+/*
+Handles menu functions
+
+Contains these functions:
++	MenuCursor();
++	KeyPress(int button);
++	OldKeyPress(int button);
++	KeyExec(int button);
++	CheckExitMenu();
++	CheckExitDialog();
++	ExitMenu();
++	ExitDialog();
++	ClearMenu();
+*/
+
+//**********************************************************************************************************************
+//	Cursor Commands
+//**********************************************************************************************************************
+
+function void MenuCursor (void)
+{
+	int player = PlayerNumber();
+	
+	int MousePosX = GetPlayerInput(-1, INPUT_YAW);
+	int MousePosY = GetPlayerInput(-1, INPUT_PITCH);
+	
+	int ms = GetCVar("Mouse_Sensitivity");
+	
+	Menu_CursorX[player] -= FixedMul(MousePosX, 200.0 * ms);
+	Menu_CursorY[player] -= FixedMul(MousePosY, 200.0 * ms);
+	
+	Menu_CursorX[player] = Range(Menu_CursorX[player], 0, HUD_FWIDTH);
+	Menu_CursorY[player] = Range(Menu_CursorY[player], 0, HUD_FHEIGHT);
+	
+	DrawCursor(player);
+}
+
+//**********************************************************************************************************************
+//	Exec Checks
+//**********************************************************************************************************************
+
+function bool CheckOpenMenu (void)
+{
+	if(KeyExec(BT_USER1))
+	{
+		OpenMenu();
+		return true;
+	}
+	return false;
+}
+
+function bool CheckExitMenu (void)
+{
+	if(KeyExec(BT_USER1))
+	{
+		ExitMenu();
+		return true;
+	}
+	return false;
+}
+
+function bool CheckExitDialog (void)
+{
+	if(KeyExec(BT_USER1))
+	{
+		ExitDialog();
+		return true;
+	}
+	return false;
+}
+
+//**********************************************************************************************************************
+//	Exec Commands
+//**********************************************************************************************************************
+
+function void OpenMenu (void)
+{
+	ACS_NamedExecuteAlways("OpenMenu", 0);
+}
+
+function void ExitMenu (void)
+{
+	ACS_NamedExecuteAlways("CloseMenu", 0);
+}
+
+function void ExitDialog (void)
+{
+	ACS_NamedExecuteAlways("CloseDialog", 0);
+}
+
+//**********************************************************************************************************************
+//	Clear Commands
+//**********************************************************************************************************************
+
+function void ClearMenu (void)
+{
+	ClearMessage(MSG_Menu, 100);
+}
+
+//**********************************************************************************************************************
+//	Menu Layout
+//**********************************************************************************************************************
+
+function void DrawMenu (void)
+{
+	int id = MSG_MENU;
+	DrawBox(200, 300, id++);
+	DrawBox(300, 200, id++);
+}

@@ -1,0 +1,55 @@
+Actor Enemy_Head
+{
+	Height 16
+	Radius 21
+	PainChance 255
+	Health 10000
+	
+	+ISMONSTER
+	+SHOOTABLE
+	+THRUSPECIES
+	+NOGRAVITY
+	+LOOKALLAROUND
+	+NORADIUSDMG
+	
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay ACS_NamedExecuteAlways("EnemyHead")
+		Goto Idle
+	Pain:
+		TNT1 A 0 ACS_NamedExecuteAlways("EnemyHeadshot")
+		Goto See
+	Idle:
+		TNT1 A 1 A_Look
+		Loop
+	See:
+		TNT1 A -1
+		Stop
+	}
+}
+
+Actor Enemy_DemonicHead : Enemy_Head
+{
+	Species "Demon"
+}
+
+Actor Enemy_BaronHead : Enemy_DemonicHead
+{
+	Radius 25
+}
+
+Actor Enemy_DemonHead : Enemy_DemonicHead
+{
+	Radius 31
+}
+
+Actor Enemy_ZombieHead : Enemy_Head
+{
+	Species "Zombie"
+}
+
+Actor Enemy_CyborgHead : Enemy_Head
+{
+	Species "Cyborg"
+}

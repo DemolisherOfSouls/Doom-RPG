@@ -1,0 +1,60 @@
+#library "RPGSkill"
+
+#include "zcommon.acs"
+
+#libdefine Skill_OldSchool		0
+#libdefine Skill_Underdog		Skill_OldSchool + 1
+#libdefine Skill_BloodyMess		Skill_Underdog + 1
+#libdefine Skill_HomingRounds	Skill_BloodyMess + 1
+
+str SkillInfo[2][4] =
+{
+	{
+		"Old School",
+		"Running speed is increased, as well as pistol, shotgun, and chaingun damage",
+		"Run Speed +5%\nPistol Damage +2\nShotgun Damage +1\nChaingun Damage +1",
+		"Requirements: None"
+	},{
+		"Underdog",
+		"Health regeneration at low health",
+		"+1 Regen @ < 20 Health",
+		"Requirements: Level 5"
+	}
+};
+/*
+int SkillData[2][6][3] =
+{
+	{
+		{ Category_General, NULL, NULL },
+		{ Spec_Chaingunner, Spec_Shotgunner,	Spec_Gunslinger },
+		{ Spec_Runner,		Spec_Sprayer,		Spec_Tank },
+		{ No_Reqs },
+		{ No_Reqs },
+		{ No_Reqs },
+	},{
+		
+	}
+};
+*/
+script "AddSkill" (int skill)
+{
+	SetUserArray(0, "user_skills", skill, GetUserArray(0, "user_skills", skill) + 1);
+	ACS_NamedExecuteAlways("SkillAlert", 0, skill);
+	
+	switch(skill)
+	{
+	case Skill_OldSchool:
+		SetActorProperty(0, APROP_Speed, GetActorProperty(0, APROP_Speed) + 0.05);
+		break;
+	}
+}
+
+script "Skill_BloodyMess" (void)
+{
+	SetResultValue(false);
+}
+
+script "Skill_HomingRounds" (void)
+{
+	SetResultValue(false);
+}

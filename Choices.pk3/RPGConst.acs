@@ -1,0 +1,24 @@
+#library "RPGConst"
+
+#include "zcommon.acs"
+
+#libdefine TID_PLAYER	1024
+#libdefine TID_ENEMY	2048
+#libdefine TID_ALLY		3072
+
+#libdefine MSG_CURSOR	1	//1
+#libdefine MSG_XP		100	//50
+#libdefine MSG_RENOWN	150	//20
+#libdefine MSG_LEVEL	170	//5
+#libdefine MSG_KEY		175	//5
+#libdefine MSG_WISH		180	//20
+#libdefine MSG_OBJ		200	//50
+#libdefine MSG_MONEY	250	//50
+#libdefine MSG_SOUL		300	//50
+#libdefine MSG_WEAPON	350	//1
+#libdefine MSG_MENU		500
+
+#libdefine HUD_WIDTH	800
+#libdefine HUD_HEIGHT	600
+#libdefine HUD_FWIDTH	800.0
+#libdefine HUD_FHEIGHT	600.0

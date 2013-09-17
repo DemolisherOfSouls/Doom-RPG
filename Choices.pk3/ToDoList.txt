@@ -1,0 +1,51 @@
+//DONE
+
+Fixed Chaingun flash state
+Fixed SuperShotgun ammo type typo
+Fixed TracerTrail models not showing up
+Fixed optional label in MapInfo (not needed)
+Added Chaingun ammo check
+Fixed souls counting as monsters
+Added terrain fix for non rpg maps
+Added in game menu key to controls menu
+Added DrawBox() function
+Updated menudef to zdoom.pk3 version
+
+//TODO
+
+//weapons
+Add Chaingun belt AmmoMag_Chaingun
+Add Chaingun reload
+
+Add silenced pistol mod
+
+Add Rocket launcher weapon
+Add Riot shotgun weapon
+Add BFG weapon
+
+//enemies
+Add Demon enemy
+Add Spectre enemy
+Add Cacodemon enemy
+Add Revenant enemy
+Add Mancubus enemy
+Add ArchVile enemy
+Add Cyberdemon enemy
+
+//allies
+Add Marine ally
+
+//general
+Add better soul items
+Add money items
+Add money items to zombie drops
+Add money items to marine drops
+
+Add better map scripts
+
+//menus
+Add menu buttons
+Add menu text
+Add tab system
+Add layout system
+Add one finished layout for testing

@@ -1,0 +1,16 @@
+Actor Key_RedCard : CustomInventory replaces RedCard
+{
+	SpawnID 86
+	
+	States
+	{
+	Spawn:
+		RKEY A 10
+		RKEY B 10 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("RedCard", 1)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 1)
+		Stop
+	}
+}

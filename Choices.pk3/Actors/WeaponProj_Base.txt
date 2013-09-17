@@ -1,0 +1,5 @@
+Actor WeaponProj_Base : FastProjectile
+{
+	Species "Marine"
+	+DONTHARMSPECIES
+}

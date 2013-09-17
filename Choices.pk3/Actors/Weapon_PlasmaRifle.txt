@@ -1,0 +1,55 @@
+Actor Weapon_PlasmaRifle : Weapon_Base
+{
+	Weapon.SlotNumber 6
+	Weapon.SelectionOrder 1
+	
+	Weapon.AmmoType1 "Ammo_Cell"
+	Weapon.AmmoType2 "AmmoMag_PlasmaRifle"
+	
+	Tag "Plasma Rifle"
+	
+	States
+	{
+	Ready:
+		PLSG A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		Loop
+	Select:
+		PLSG A 1 A_Raise
+		Loop
+	Select.Quick:
+		PLSG A 0 A_Raise
+		PLSG A 1 A_Raise
+		Loop
+	
+	Fire:
+		PLSG A 1 A_JumpIfInventory("AmmoMag_PlasmaRifle", 1, "Fire.HasAmmo")		//Continue if has 1 cell in magazine
+		Goto Reload
+	Fire.HasAmmo:
+		PLSG A 0 A_TakeInventory("AmmoMag_PlasmaRifle", 1, TIF_NOTAKEINFINITE)
+		PLSG A 3 A_FirePlasma
+		Goto Ready
+	
+	Flash:
+		PLSF A 3 Bright A_Light1
+		Goto LightDone
+		PLSF B 3 Bright A_Light1
+		Goto LightDone
+	
+	Reload:
+		PLSG A 1 A_JumpIfInventory("Ammo_Cell", 1, "Reload.Start")				//Continue if has 1 cell in ammo pool
+		Goto Ready
+	Reload.Start:
+		PLSG A 0 A_JumpIfInventory("AmmoMag_PlasmaRifle", 0, "Ready")			//Continue if magizine is not full
+		PLSG B 20 //Start anim (before ammo swap)
+	Reload.HasAmmo:
+		PLSG A 0 //Per item anim (during ammo swap)
+		PLSG A 0 A_GiveInventory("AmmoMag_PlasmaRifle", 1)
+		PLSG A 0 A_TakeInventory("Ammo_Cell", 1, TIF_NOTAKEINFINITE)
+		PLSG A 0 A_JumpIfInventory("AmmoMag_PlasmaRifle", 0, "Reload.Finish")	//Continue if magizine is not full
+		PLSG A 0 A_JumpIfInventory("Ammo_Cell", 1, "Reload.HasAmmo")				//Continue if has 1 cell in ammo pool
+		Goto Reload.Finish
+	Reload.Finish:
+		PLSG A 1 //Finish anim (after ammo swap)
+		Goto Ready
+	}
+}

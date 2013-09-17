@@ -1,0 +1,11 @@
+#library "RPGKeys"
+
+str KeyList[6] =
+{
+	"\c[Red]Red\cL Keycard",
+	"\c[Blue]Blue\cL Keycard",
+	"\c[Yellow]Yellow\cL Keycard",
+	"\c[Red]Red\cL Skull Key",
+	"\c[Blue]Blue\cL Skull Key",
+	"\c[Yellow]Yellow\cL Skull Key"
+};

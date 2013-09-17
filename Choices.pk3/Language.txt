@@ -1,0 +1,18 @@
+[enu default]
+
+MapName_TM = "The Forgotten";
+
+MapName_00 = "Player Setup";
+
+MapName_01 = "UAC: Recieving";
+MapName_02 = "Hell: The Lava Well";
+MapName_03 = "Hell: The Deep";
+MapName_04 = "UAC: Maintenance";
+MapName_05 = "UAC: Warehouses";
+
+MapName_06 = "";
+MapName_07 = "";
+MapName_08 = "";
+MapName_09 = "UAC: Surface Access";
+
+MapName_IM = "USMC: The Green Zone";

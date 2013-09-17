@@ -1,0 +1,16 @@
+Actor Key_RedSkull : CustomInventory replaces RedSkull
+{
+	SpawnID 89
+	
+	States
+	{
+	Spawn:
+		RSKU A 10
+		RSKU B 10 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("RedSkull", 1)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 4)
+		Stop
+	}
+}

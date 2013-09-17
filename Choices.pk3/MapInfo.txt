@@ -1,0 +1,136 @@
+Include "MapInfo/D1Info.txt"
+Include "MapInfo/D2Info.txt"
+
+GameInfo
+{
+	DimColor = "Black"
+	DimAmount = 0.2
+	PlayerClasses = "RPGPlayer"
+	PickupColor = "Black"
+}
+
+ClearSkills
+
+Skill Easy
+{
+	SpawnFilter = 0
+	ACSReturn = 1
+}
+
+Skill Normal
+{
+	SpawnFilter = 1
+	ACSReturn = 2
+	Aggressiveness = 0.5
+}
+
+Skill Hard
+{
+	SpawnFilter = 2
+	ACSReturn = 3
+	Aggressiveness = 1.0
+}
+
+ClearEpisodes
+
+Episode Rpg00
+{
+	Name = "The Doom RPG"
+	NoSkillMenu
+}
+
+Episode E0M0
+{
+	Name = "Doom 1"
+	NoSkillMenu
+}
+
+Episode Map00
+{
+	Name = "Doom 2"
+	NoSkillMenu
+}
+
+Cluster 1
+{ Hub }
+
+Cluster 2
+{ Hub }
+
+Cluster 3
+{ Hub }
+
+DefaultMap
+{
+	NoIntermission
+	EvenLighting
+	Cluster = 3
+}
+
+Map TitleMap lookup MapName_TM {}
+
+Map Rpg00 lookup MapName_00 //Setup
+{
+	Next = "RPG01"
+	LevelNum = 0
+}
+
+Map Rpg01 lookup MapName_01 //Teleport
+{
+	Sky1 = "Sky1", 0
+	Next = "RPG02"
+	LevelNum = 1
+}
+
+Map Rpg02 lookup MapName_02 //Hell
+{
+	Sky1 = "Sky3", 0
+	Next = "RPG03"
+	LevelNum = 2
+}
+
+Map Rpg03 lookup MapName_03 //Void hell
+{
+	Sky1 = "SkyV", 0
+	Next = "RPG04"
+	LevelNum = 3
+}
+
+Map Rpg04 lookup MapName_04 //Maintenance
+{
+	Sky1 = "Sky1", 0
+	Next = "RPG05"
+	LevelNum = 4
+}
+
+Map Rpg05 lookup MapName_05 //Warehouse
+{
+	Sky1 = "Sky1", 0
+	Next = "InterMap"
+	SecretNext = "RPG04"
+	LevelNum = 5
+}
+
+Map Rpg06 lookup MapName_06
+{
+	Sky1 = "Sky1", 0
+	Next = "RPG07"
+	SecretNext = "InterMap"
+	LevelNum = 6
+}
+
+Map Rpg09 lookup MapName_09 //Surface Access
+{
+	Sky1 = "Sky1", 0
+	Next = "RPG10"
+	SecretNext = "RPG08"
+	LevelNum = 9
+}
+
+Map InterMap lookup MapName_IM //Green zone
+{
+	Sky1 = "Sky1", 0
+	Next = "RPG06"
+	SecretNext = "RPG05"
+	LevelNum = 100
+}

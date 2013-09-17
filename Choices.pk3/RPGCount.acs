@@ -1,0 +1,23 @@
+#library "RPGCount"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+
+/*
+Handles player counters and global counters
+
+Contains these functions:
++	C_MoneyFound(int player);
++	C_KeysFound(int player);
+*/
+
+function int C_MoneyFound (int player)
+{
+	return GetUserVariable(TID_PLAYER + player, "user_moneyfound");
+}
+
+function int C_KeysFound (int player)
+{
+	return GetUserVariable(TID_PLAYER + player, "user_keysfound");
+}

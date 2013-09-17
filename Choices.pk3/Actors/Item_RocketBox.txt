@@ -1,0 +1,15 @@
+Actor Item_RocketBox : Item_AmmoBase replaces RocketBox
+{
+	SpawnID 141
+	
+	States
+	{
+	Spawn:
+		BROK A 15
+		BROK A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Ammo_Rocket", 4)
+		Stop
+	}
+}

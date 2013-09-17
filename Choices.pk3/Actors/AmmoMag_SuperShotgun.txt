@@ -1,0 +1,8 @@
+Actor AmmoMag_SuperShotgun : Ammo
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 2
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 2
+	Inventory.Icon "SGN2A0"
+}

@@ -1,0 +1,60 @@
+#library "RPGEnemy"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGPFunc.acs"
+
+script "EnemyDeath" (int headshot)
+{
+	int xp = GetUserVariable(0, "user_rewardxp");
+	int renown = GetUserVariable(0, "user_rewardrenown");
+	int rage = GetUserVariable(0, "user_deathtype");
+	
+	SetActivatorToTarget(0);
+	
+	if(IsPlayer(ActivatorTID()))
+	{
+		ACS_NamedExecuteAlways("PlayerExp", 0, xp);
+		ACS_NamedExecuteAlways("PlayerRage", 0, rage);
+		
+		Delay(50); // Looks better
+		
+		ACS_NamedExecuteAlways("PlayerRenown", 0, renown);
+	}
+}
+
+script "EnemyTID" (void)
+{
+	int tid = UniqueTID(TID_ENEMY, 1024);
+	
+	Thing_ChangeTID(0, tid);
+}
+
+script "EnemyHead" (void)
+{
+	int master = GetActorProperty(0, APROP_MasterTID);
+	
+	SetActorPosition(0, GetActorX(master), GetActorY(master), GetActorZ(master) + 40.0, false);
+	
+	if(GetActorProperty(master, APROP_Health) <= 0)
+	{
+		Thing_Remove(0);
+		Terminate;
+	}
+	
+	Delay(1);
+	Restart;
+}
+
+script "EnemyHeadshot" (void)
+{
+	int master = GetActorProperty(0, APROP_MasterTID);
+	int shooter = GetActorProperty(0, APROP_TargetTID);
+	
+	int damage = (10000 - GetActorProperty(0, APROP_Health)) * 2;
+	SetActorProperty(0, APROP_Health, 10000);
+	
+	SetActivator(shooter);
+	Thing_Damage2(master, damage, "Headshot");
+}

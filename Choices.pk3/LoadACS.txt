@@ -1,0 +1,9 @@
+RPGExp
+RPGItems
+RPGAlert
+RPGEnemy
+RPGRage
+RPGMenu
+RPGSkill
+RPGWeaps
+RPGMove

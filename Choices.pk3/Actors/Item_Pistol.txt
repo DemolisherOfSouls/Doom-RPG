@@ -1,0 +1,15 @@
+Actor Item_Pistol : Item_Weapon replaces Pistol
+{
+	States
+	{
+	Spawn:
+		PIST A 15
+		PIST A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 2, W_PISTOL), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("Weapon_Pistol", 1)
+		TNT1 A 0 A_GiveInventory("AmmoMag_Pistol", 10)
+		Stop
+	}
+}

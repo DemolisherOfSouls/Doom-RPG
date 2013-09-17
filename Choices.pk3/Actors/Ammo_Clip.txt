@@ -1,0 +1,8 @@
+Actor Ammo_Clip : Ammo
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 300
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 300
+	Inventory.Icon "AMMOA0"
+}
