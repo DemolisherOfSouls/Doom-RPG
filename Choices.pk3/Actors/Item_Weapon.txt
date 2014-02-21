@@ -1,10 +1,4 @@
-Actor Item_Weapon : CustomInventory
+Actor Item_Weapon : Item_Base
 {
 	Inventory.PickupSound "Pickup/Weapon"
-	States
-	{
-	Pickup.Fail:
-		TNT1 A 0
-		Fail
-	}
 }

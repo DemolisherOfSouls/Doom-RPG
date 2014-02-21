@@ -1,0 +1,24 @@
+Actor Item_Mod : Item_Base
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 0x7fffffff
+	Inventory.PickupSound "Pickup/ModItem"
+	Inventory.Icon "TNT1A0"
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.INVBAR
+	
+	States
+	{
+	Spawn:
+		Sile A 15
+		Sile A 5 Bright
+		Loop
+	}
+}
+
+Actor Item_Pistol_Silencer : Item_Mod
+{
+	Inventory.Icon "SileA0"
+}
+
+Actor Item_MkII_Silencer : Item_Pistol_Silencer {}

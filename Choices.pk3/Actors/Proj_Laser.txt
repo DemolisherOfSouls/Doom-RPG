@@ -1,0 +1,58 @@
+Actor Proj_Laser : Proj_Bullet
+{
+	Speed 128
+	
+	//MissileType "Proj_LaserTrail2"
+	//MissileHeight 8
+	
+	States
+	{
+	Select:
+		BULL C 0 A_Jump(Always, "Laser")
+	Laser:
+		BULL C 0 A_JumpIf(CallACS("Skill_HomingLasers"), "Laser.Homing")
+		//BULL C 1 A_SpawnItemEx("Proj_LaserTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL)
+		BULL C 1 A_CustomMissile("Proj_LaserTrail", 32, 0, 0, CMF_STANDARD, 0)
+		Wait
+	Laser.Homing:
+		BULL C 0 A_SeekerMissile(1, 2, SMF_SEEK, 128, 5)
+		BULL C 1 A_SpawnItemEx("Proj_LaserTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL)
+		Loop
+	Death:
+	XDeath:
+		TNT1 A 1 A_AlertMonsters(32)
+		Stop
+	}
+}
+
+Actor Proj_LaserTrail
+{
+	Height 4
+	Radius 2
+	+NOGRAVITY
+	//+NOINTERACTION
+	
+	var int user_offset;
+	
+	States
+	{
+	Spawn:
+		BULL C 0 NoDelay A_JumpIf(user_offset == -56, "Fade")
+		BULL C 0 A_SpawnItemEx("Proj_LaserTrail2", cos(pitch) * -user_offset, 0, sin(pitch) * -user_offset, velx, vely, velz, 0, SXF_TRACERTRAIL)
+		BULL C 0 A_SetUserVar("user_offset", user_offset - 7)
+		Loop
+	Fade:
+		BULL C 1 A_FadeOut(0.05, true)
+		Wait
+	}
+}
+
+Actor Proj_LaserTrail2 : Proj_LaserTrail
+{
+	Speed 1
+	States
+	{
+	Spawn:
+		Goto Fade
+	}
+}

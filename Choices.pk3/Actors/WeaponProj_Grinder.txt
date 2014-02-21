@@ -1,0 +1,26 @@
+Actor WeaponProj_Grinder : WeaponProj_Bullet
+{
+	Damage (CallACS("WeaponDamage", WD_GRINDER))
+	DamageType "Player_Chaingun"
+	Decal "BulletChip"
+	States
+	{
+	XDeath:
+	Death:
+		TNT1 A 0 A_AlertMonsters(128)
+		TNT1 A 1 A_SpawnItem("GrinderPuff")
+		Stop
+	}
+}
+
+Actor GrinderPuff : BulletPuff
+{
+	Scale 0.4
+	States
+	{
+	Spawn:
+		BAL1 B 2
+		BAL1 CDE 4
+		Stop
+	}
+}

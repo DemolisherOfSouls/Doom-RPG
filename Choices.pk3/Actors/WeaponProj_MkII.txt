@@ -4,3 +4,11 @@ Actor WeaponProj_MkII : WeaponProj_Bullet
 	DamageType "Player_Pistol"
 	Decal "BulletChip"
 }
+
+Actor WeaponProj_MkII_57 : WeaponProj_Bullet
+{
+	Speed 80
+	Damage (CallACS("WeaponDamage", WD_MKII))
+	DamageType "Player_Pistol"
+	Decal "BulletChip"
+}

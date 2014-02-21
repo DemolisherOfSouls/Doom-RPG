@@ -9,7 +9,7 @@ Actor Item_CellPack : Item_AmmoBase replaces CellPack
 		CELP A 5 Bright
 		Loop
 	Pickup:
-		TNT1 A 0 A_GiveInventory("Ammo_Cell", 90)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 90, AT_CELL)
 		Stop
 	}
 }

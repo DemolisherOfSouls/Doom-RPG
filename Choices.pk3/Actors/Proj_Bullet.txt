@@ -1,0 +1,35 @@
+Actor Proj_Bullet : Proj_Base
+{
+	Height 4
+	Radius 2
+	Speed 64
+	
+	+BLOODSPLATTER
+	
+	States
+	{
+	Spawn:
+		BULL A 0 NoDelay A_GiveInventory("Action_Set_ExtremeDeath", 1)
+		BULL A 0 A_Jump(Always, "Select")
+	Select:
+		BULL A 0 A_Jump(Always, "Normal")
+	Normal:
+		BULL A -1 A_JumpIf(CallACS("Skill_HomingRounds"), "Normal.Homing")
+	Normal.Homing:
+		BULL A 1 A_SeekerMissile(1, 2, SMF_SEEK, 128, 5)
+		Loop
+	Tracer:
+		BULL B 0 A_JumpIf(CallACS("Skill_HomingRounds"), "Tracer.Homing")
+		BULL B 1 A_SpawnItemEx("Proj_TracerTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL)
+		Wait
+	Tracer.Homing:
+		BULL B 0 A_SeekerMissile(1, 2, SMF_SEEK, 128, 5)
+		BULL B 1 A_SpawnItemEx("Proj_TracerTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL)
+		Loop
+	Death:
+		TNT1 A 0 A_SpawnItem("BulletPuff")
+	XDeath:
+		TNT1 A 1 A_AlertMonsters(32)
+		Stop
+	}
+}

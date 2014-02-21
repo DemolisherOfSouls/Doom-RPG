@@ -1,0 +1,27 @@
+Actor Enemy_Spectre : Enemy_Demon replaces Spectre
+{
+	SpawnID 9
+	RenderStyle OptFuzzy
+	Alpha 0.5
+	SeeSound "spectre/sight"
+	AttackSound "spectre/melee"
+	PainSound "spectre/pain"
+	DeathSound "spectre/death"
+	ActiveSound "spectre/active"
+	HitObituary "$OB_SPECTREHIT"
+	+SHADOW
+	
+	DropItem "Item_Soul", 255
+	DropItem "Item_Soul", 255
+	DropItem "Item_Soul", 176
+	DropItem "Item_Soul", 48
+	
+	States
+	{
+	Spawn.Stage2:
+		SARG A 0 A_SetUserVar("user_rewardxp", 15)
+		SARG A 0 A_SetUserVar("user_paintime", 2)
+		SARG A 0 A_SetUserVar("user_type", ET_SPECTRE)
+		"####" A 0 A_Jump(Always, "Spawn.Final")
+	}
+}

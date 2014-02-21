@@ -1,0 +1,131 @@
+#library "RPGOFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGOList.acs"
+#import "RPGAFunc.acs"
+#import "RPGColor.acs"
+#import "RPGError.acs"
+
+function int GetKeyMission (int keynum)
+{
+	if(WithinRange(keynum, 129, 131))
+		return MISSION_REDKEY + keynum - 129;
+	
+	if(WithinRange(keynum, 132, 134))
+		return MISSION_REDKEY + keynum - 132;
+	
+	if(keynum == 100)
+		return MISSION_ANYKEY;
+	
+	if(!TryIndex(keynum, 1, 6, "GetKeyMission", "keynum"))
+		return EXCEPTION;
+	
+	return keynum - 1 + MISSION_KEY_START;
+}
+
+function int GetKeyDoorMission (int keynum)
+{
+	if(WithinRange(keynum, 129, 131))
+		return MISSION_REDKEYOBJ + keynum - 129;
+	
+	if(WithinRange(keynum, 132, 134))
+		return MISSION_REDKEYOBJ + keynum - 132;
+	
+	if(!TryIndex(keynum, 1, 6, "GetKeyDoorMission", "keynum"))
+		return EXCEPTION;
+	
+	return keynum - 1 + MISSION_KEYOBJ_START;
+}
+
+function int GetKeyIndex (int mission)
+{
+	if(WithinRange(mission, MISSION_REDKEY, MISSION_YELLOWKEY))
+		return mission - MISSION_REDKEY;
+	
+	if(!TryIndex(mission, MISSION_KEY_START, MISSION_KEYOBJ_END, "GetKeyIndex", "mission"))
+		return EXCEPTION;
+	
+	if(WithinRange(mission, MISSION_KEYOBJ_START, MISSION_KEYOBJ_END))
+		return mission - 6;
+	
+	return mission;
+}
+
+//Returns true if the key mission is not active
+function bool CheckKeyMission (int keynum)
+{
+	if(GetMissionStatus(GetKeyMission(keynum), G_Map, NULL) >= MISSION_GOT || GetMissionStatus(GetKeyDoorMission(keynum), G_Map, NULL) >= MISSION_GOT)
+		return false;
+	return true;
+}
+
+//Returns the keynum of the next needed key
+function int CheckAllKeysUsed (void)
+{
+	for(int k = 0; k < 6; k++)
+		if(!LevelKeyUsed[k])
+			return k+1;
+	
+	return NULL; // No key needed, all keys found
+}
+
+//Returns the next unused index (0-1023) or EXCEPTION if the list is full
+function int GetNextMissionIndex (void)
+{
+	for(int c = 0; c < 1024; c++)
+		if(GetUserArray(0, "user_m_status", c) == MISSION_NONE)
+			return c;
+	
+	return EXCEPTION;
+}
+
+//Returns the index (0-1023) or EXCEPTION if the mission is not there
+function int LookupMission (int mission, int map, int owner)
+{
+	for(int m = 0; m < 1024; m++)
+	{
+		if(GetUserArray(0, "user_m_status", m) == MISSION_NONE)
+		{
+			//log(s:"LookupMission: Stopped Search at ", i:m);
+			break;
+		}
+		if(mission != GetUserArray(0, "user_m_type", m))
+			continue;
+		if(map != GetUserArray(0, "user_m_map", m))
+			continue;
+		if(owner != GetUserArray(0, "user_m_owner", m))
+			continue;
+		
+		return m;
+	}
+	
+	return EXCEPTION;
+}
+
+function int GetMissionStatus (int mission, int map, int owner)
+{
+	int index = LookupMission(mission, map, owner);
+	
+	if(index == EXCEPTION)
+		return MISSION_NONE;
+	
+	return GetUserArray(0, "user_m_status", index);
+}
+
+function void SetMissionStatus (int mission, int map, int owner, int value)
+{
+	int index = LookupMission(mission, map, owner);
+	
+	if(index == EXCEPTION)
+	{
+		log(s:MissionInfo[mission][MI_NAME], s:" in map ", i:map, s:" owned by ", i:owner, s:" cannot be found");
+		return;
+	}
+	
+	SetUserArray(0, "user_m_status", index, value);
+}
+

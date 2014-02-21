@@ -1,0 +1,12 @@
+Actor Weapon_BaseShotgun : Weapon_Base
+{
+	Weapon.SlotNumber 3
+	Weapon.SelectionOrder 4
+	
+	Weapon.AmmoUse1 1
+	Weapon.AmmoType2 "Ammo_Shell"
+
+	States
+	{
+	}
+}

@@ -3,12 +3,12 @@
 #include "zcommon.acs"
 
 #import "RPGConst.acs"
-#import "RPGPFunc.acs"
+#import "RPGAFunc.acs"
 
-function str GetSpecStr (int player)
+function str GetSpecStr (void)
 {
 	//"Level ## "
-	str ret = StrParam(s:"Level ", i:GetLevel(player), s:" ");
+	str ret = StrParam(s:"Level ", i:GetLevel(), s:" ");
 	
 	//if purity is high add loyal
 	//if low then add corrupt

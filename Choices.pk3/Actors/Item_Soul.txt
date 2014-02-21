@@ -1,4 +1,4 @@
-Actor Item_Soul : CustomInventory
+Actor Item_Soul : Item_Base
 {
 	FloatSpeed 18
 	Speed 6
@@ -9,11 +9,15 @@ Actor Item_Soul : CustomInventory
 	+BRIGHT
 	+FLOAT
 	+NOGRAVITY
-	+FLOATBOB
+	+FLOORCLIP
 	+LOOKALLAROUND
+	+VISIBILITYPULSE
 	States
 	{
 	Spawn:
+		SOUL AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 1 Bright A_Look
+		Loop
+	See:
 		SOUL AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 1 Bright A_Chase("", "")
 		Loop
 	Pickup:

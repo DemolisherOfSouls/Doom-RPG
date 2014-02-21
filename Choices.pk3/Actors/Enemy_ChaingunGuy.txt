@@ -14,35 +14,37 @@ Actor Enemy_ChaingunGuy : Enemy_Zombie replaces ChaingunGuy
 	DropItem "Item_Clip", 255
 	DropItem "Item_Clip", 232
 	DropItem "Item_Clip", 32
-	DropItem "Item_Chaingun", 128
+	DropItem "ItemDrop_Chaingun", 128
+	DropItem "Item_Money", 208
+	DropItem "Item_Money", 160
+	DropItem "Item_Money", 96
 
 	States
 	{
 	Spawn.Stage2:
 		CPOS A 0 A_SetUserVar("user_rewardxp", 15)
-		Goto Idle
-	See:
+		CPOS A 0 A_SetUserVar("user_type", ET_CHAINGUNGUY)
+		"####" A 0 A_Jump(Always, "Spawn.Final")
+	See.Real:
 		CPOS AABBCCDD 3 A_Chase
 		Loop
 	Missile:
 		CPOS E 10 A_FaceTarget
-		CPOS FE 4 BRIGHT A_CPosAttack
+		CPOS FE 4 Bright A_CustomMissile("EnemyProj_ChaingunGuy", 32, 0, FRandom(-5.75,5.75), CMF_STANDARD, FRandom(-5.75, 5.75))
 		CPOS F 1 A_CPosRefire
-		Goto Missile+1
+		Goto Missile + 1
 	Death.Stage1:
 		CPOS H 5
 		CPOS I 5 A_ScreamAndUnblock
 		CPOS JKLM 5
-		CPOS N -1
-		Stop
+		CPOS N 0 A_Jump(Always, "Death.Finish")
 	Headshot.Stage1:
 	XDeath.Stage1:
 		CPOS O 5 
 		CPOS P 5 A_XScream
 		CPOS Q 5 A_NoBlocking
 		CPOS RS 5
-		CPOS T -1
-		Stop
+		CPOS T 0 A_Jump(Always, "Death.Finish")
 	Raise.Death:
 		CPOS NMLKJIH 5
 		Goto See

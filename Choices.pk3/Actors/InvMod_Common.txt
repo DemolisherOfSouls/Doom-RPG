@@ -1,0 +1,26 @@
+Actor InvMod_Base : Inv_Base
+{
+	Inventory.MaxAmount 1
+}
+
+Actor InvMod_Pistol_Silent	: InvMod_Base {}
+Actor InvMod_Pistol_Second	: InvMod_Base {}
+Actor InvMod_Pistol_Refit	: InvMod_Base {}
+Actor InvMod_Pistol_Dual	: InvMod_Base {}
+Actor InvMod_Pistol_Ext		: InvMod_Base {}
+Actor InvMod_Pistol_Quick	: InvMod_Base {}
+Actor InvMod_Pistol_Custom	: InvMod_Base {}
+Actor InvMod_Pistol_Fire	: InvMod_Base {}
+
+Actor InvMod_MkII_Silent	: InvMod_Base {}
+Actor InvMod_MkII_Grip		: InvMod_Base {}
+Actor InvMod_MkII_Refit		: InvMod_Base {}
+
+Actor InvMod_Shotgun_Ext	: InvMod_Base {}
+Actor InvMod_Shotgun_Shot	: InvMod_Base {}
+
+Actor InvMod_Riotgun_Choke	: InvMod_Base {}
+
+Actor InvMod_Riotgun_Stun	: InvMod_Base {}
+
+Actor InvMod_Chaingun_Motor	: InvMod_Base {}

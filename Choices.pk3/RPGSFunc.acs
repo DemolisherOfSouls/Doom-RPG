@@ -1,0 +1,305 @@
+#library "RPGSFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGMVars.acs"
+#import "RPGSList.acs"
+#import "RPGWList.acs"
+#import "RPGAFunc.acs"
+#import "RPGColor.acs"
+
+function int GetSkill (int skill)
+{
+	return GetUserArray(0, "user_skills", skill);
+}
+
+function int GetReqIndex (int skill, int req)
+{
+	for(int i = SD_REQ1; i <= SD_REQ4; i++)
+		if(SkillData[skill][i][SDR_REQNAME] == req)
+			return i;
+	return EXCEPTION;
+}
+
+function int GetMinSkillLevel (int skill)
+{
+	int index = GetReqIndex(skill, Req_Level);
+	
+	if(index >= 0)
+		return SkillData[skill][index][SDR_REQVAR1];
+	
+	return 2;
+}
+
+function int GetReqSkill (int skill, int index)
+{
+	return SkillData[skill][index][SDR_REQVAR1];
+}
+
+function int GetReqSkillAmt (int skill, int index)
+{
+	return SkillData[skill][index][SDR_REQVAR2];
+}
+
+function bool CheckReqSkills (int skill)
+{
+	int index = GetReqIndex(skill, Req_Skill);
+	
+	if(index != EXCEPTION)
+	{
+		int skillneeded = GetReqSkill(skill, index);
+		int skillamtneeded = GetReqSkillAmt(skill, index);
+		int skillamt = GetSkill(skillneeded) + GetSkillChosen(skillneeded);
+		
+		if(skillamt < skillamtneeded)
+			return false;
+	}
+	
+	return true;
+}
+
+function bool CheckSkillReqs (int skill)
+{
+	if(GetCVar("rpg_debug_anyskill"))
+		return true;
+	
+	return GetMinSkillLevel(skill) <= GetLevel() && CheckReqSkills(skill);
+}
+
+function bool CheckMaxRanks (int skill)
+{
+	return GetMaxRanks(skill) > GetSkill(skill) + GetSkillChosen(skill);
+}
+
+function int GetMaxRanks (int skill)
+{
+	int index = GetReqIndex(skill, Req_Limit);
+	
+	if(index >= 0)
+		return SkillData[skill][index][SDR_REQVAR1];
+	
+	return 1;
+}
+
+function void SetRanks (int skill, int amt)
+{
+	IncrementUserArray(0, "skills", skill, amt);
+}
+
+function bool HasSkillCat (int skill, int cat)
+{
+	for(int i = 0; i < 3; i++)
+	{
+		if(SkillData[skill][SD_CATEGORY][i] == cat)
+			return true;
+	}
+	return false;
+}
+
+function str ListSkills (int status)
+{
+	str ret = "";
+	int color = CR_UNTRANSLATED;
+	
+	int player = PlayerNumber();
+	
+	int selected = Menu_Selection[player];
+	
+	for(int i = 0; i < SKILL_ARRAY; i++)
+	{
+		int count = GetSkill(i);
+		
+		if(i == selected && status == M_STATUS_OVER && Menu_CurrentBox[player] == MDO_SKILLLIST)
+			color = CR_WHITE;
+		
+		else if((
+			(i == selected && status == M_STATUS_CLICK) ||
+			(Menu_IsDragging[player] && Menu_ItemDrag[player] == i)) && !CheckMaxRanks(i)
+		)
+			color = CR_ORANGE;
+		
+		else if(count > 0 && CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_DARKGREEN;
+		else if(count == 0 && CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_GREEN;
+		
+		else if(count == 0 && !CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_RED;
+		else if(count > 0 && !CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_DARKRED;
+		
+		else if(count > 0 && !CheckMaxRanks(i))
+			color = CR_GREY;
+		else if(count == 0 && !CheckMaxRanks(i))
+			color = CR_BLACK;
+		
+		ret = StrParam(s:ret, s:CR(color), i:count, s:": ", s:GetSkillName(i), s:"\n");
+	}
+	return ret;
+}
+
+//Returns the total different skills chosen
+function int SkillChosenCount (void)
+{
+	int i = 0;
+	
+	for(int s = 0; s < SKILL_ARRAY; s++)
+		if(GetSkillChosen(s) > 0)
+			i++;
+	
+	return i;
+}
+
+//Returns the skill at the list index
+function int SkillChosenPos (int pos)
+{
+	int i = -1, s;
+	
+	for(s = 0; s < SKILL_ARRAY && i < pos; s++)
+		if(GetSkillChosen(s) > 0)
+			i++;
+	
+	if(pos == EXCEPTION)
+		return EXCEPTION;
+	
+	return s;
+}
+
+function int GetSkillChosen (int skill)
+{
+	int player = PlayerNumber();
+	return Menu_SkillChosen[skill][player];
+}
+
+function str ListChosenSkills (int status)
+{
+	str ret = "";
+	str color = CR_UNTRANSLATED;
+	int listIndex = -1;
+	
+	int player = PlayerNumber();
+	
+	int selected = SkillChosenPos(Menu_Selection[player]);
+	
+	for(int i = 0; i < SKILL_ARRAY; i++)
+	{
+		int count = GetSkillChosen(i);
+		
+		if(count > 0)
+			listIndex++;
+		else
+			continue;
+		
+		if(listIndex == selected && status == M_STATUS_OVER && !Menu_IsDragging[player] && Menu_CurrentBox[player] == MDO_SKILLCHOSEN)
+			color = CR_WHITE;
+		
+		else if(CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_GREEN;
+			
+		else if(!CheckSkillReqs(i) && CheckMaxRanks(i))
+			color = CR_RED;
+		
+		else if(!CheckMaxRanks(i))
+			color = CR_BLACK;
+		
+		ret = StrParam(s:ret, s:CR(color), i:count, s:": ", s:GetSkillName(i), s:"\n");
+	}
+	return ret;
+}
+
+function str GetSkillName (int skill)
+{
+	return SkillInfo[skill][SI_NAME];
+}
+
+function str GetEffect (int effect, int var1, int var2)
+{
+	switch(effect)
+	{
+	case EFF_WeaponDamage:
+		return StrParam(s:WeaponType[var1], s:" Damage: ", i:var2);
+	}
+	
+	return "";
+}
+
+function str GetPlayerEffects (bool temp)
+{
+	int player = PlayerNumber();
+	
+	str ret = "";
+	
+	for(int i = 0; i < EFF_ARRAY; i++)
+	{
+		int var1 = Menu_PlayerEffects[i][0][player];
+		int var2 = Menu_PlayerEffects[i][1][player];
+		if(var1 != 0 || var2 != 0)
+			ret = StrParam(s:ret, s:GetEffect(i, var1, var2), s:"\n");
+	}
+	
+	return ret;
+}
+
+function str GetSkillEffects (int skill)
+{
+	int player = PlayerNumber();
+	int color = CR_YELLOW;
+	
+	str ret = "";
+	
+	for(int i = SD_EFFECT1; i <= SD_EFFECT5; i++)
+	{
+		int effectindex = SkillData[skill][i][SDR_EFFNAME] - 100;
+		
+		if(effectindex >= 0)
+		{
+			int var1 = SkillData[skill][i][SDR_EFFVAR1];
+			int var2 = SkillData[skill][i][SDR_EFFVAR2];
+			
+			ret = StrParam(s:ret, s:GetEffect(effectindex, var1, var2), s:"\n");
+		}
+		else
+			break;
+	}
+	
+	return ret;
+}
+
+function str GetSkillReqs (int skill)
+{
+	int player = PlayerNumber();
+	int color = CR_ORANGE;
+	
+	int minLevel = GetMinSkillLevel(skill);
+	
+	if(minLevel <= GetLevel())
+		color = CR_GREEN;
+		
+	str ret = StrParam(s:CR(color), s:"Level ", i:minLevel);
+	
+	int index = GetReqIndex(skill, Req_Skill);
+	
+	if(index >= 0)
+	{
+		int nskill = GetReqSkill(skill, index);
+		int nskillamt = GetReqSkillAmt(skill, index);
+		int skillamt = GetSkill(nskill) + GetSkillChosen(nskill);
+		int colorT = CR_RED;
+		
+		if(nskillamt <= skillamt)
+		{
+			color = CR_DARKGREEN;
+			colorT = CR_GREEN;
+		}
+		else
+			color = CR_RED;
+		
+		if(skillamt > 0)
+			colorT = CR_ORANGE;
+		
+		ret = StrParam(s:ret, s:"\n", s:CR(colorT), s:GetSkillName(nskill), s:" (", s:SurroundNumber(CR(color), nskillamt, CR(colorT)), s:")");
+	}
+	
+	return ret;
+}

@@ -1,0 +1,11 @@
+#library "RPGPDisc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+script "PlayerDisconnect" (int player) disconnect
+{
+	//Alert other players
+}

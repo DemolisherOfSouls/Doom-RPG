@@ -1,0 +1,29 @@
+z_decaldef_update : z_decaldef {
+	name = "ZDoom DecalDef (2/18/14)";
+	blocks = "decal", "decalgroup", "stretcher", "fader", "combiner", "slider", "colorchanger";
+}
+
+z_language {
+	name = "ZDoom Language";
+	case_sensitive = 0;
+	keyword_link = "http://zdoom.org/wiki/LANGUAGE";
+	constant_link = "http://zdoom.org/wiki/LANGUAGE";
+	function_link = "http://zdoom.org/wiki/LANGUAGE";
+	blocks = "enu default";
+
+	keywords = {
+		enu, default
+	}
+}
+
+z_textcolors {
+	name = "ZDoom Textcolors";
+	case_sensitive = 0;
+	keyword_link = "http://zdoom.org/wiki/TEXTCOLO";
+	constant_link = "http://zdoom.org/wiki/TEXTCOLO";
+	function_link = "http://zdoom.org/wiki/TEXTCOLO";
+
+	keywords = {
+		Console
+	}
+}

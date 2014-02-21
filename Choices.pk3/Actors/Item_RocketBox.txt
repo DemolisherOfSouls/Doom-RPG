@@ -9,7 +9,7 @@ Actor Item_RocketBox : Item_AmmoBase replaces RocketBox
 		BROK A 5 Bright
 		Loop
 	Pickup:
-		TNT1 A 0 A_GiveInventory("Ammo_Rocket", 4)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 4, AT_ROCKET)
 		Stop
 	}
 }

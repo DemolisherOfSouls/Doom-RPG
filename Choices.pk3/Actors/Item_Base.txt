@@ -1,0 +1,14 @@
+Actor Item_Base : CustomInventory
+{
+	+INVENTORY.HUBPOWER
+	+INVENTORY.PERSISTENTPOWER
+	States
+	{
+	Pickup.Fail:
+		TNT1 A 0
+		Fail
+	Pickup.Force:
+		TNT1 A 0 HealThing(0)
+		Stop
+	}
+}

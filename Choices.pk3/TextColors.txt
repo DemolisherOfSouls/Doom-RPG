@@ -1,0 +1,7 @@
+Teal
+{
+	#004444  #00AAAA
+Console:
+	#000000  #007F7F    0 127
+	#00FFFF  #DEFFFF  128 256
+}

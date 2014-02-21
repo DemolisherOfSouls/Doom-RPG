@@ -1,0 +1,62 @@
+#library "RPGPlay"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGOList.acs"
+#import "RPGWList.acs"
+#import "RPGAFunc.acs"
+#import "RPGWFunc.acs"
+#import "RPGActor.acs"
+
+script "PlayerSetup" enter
+{
+	if(GetLevel() == 0)
+	{
+		Thing_ChangeTID(0, GetTID(TID_PLAYER));
+		SetWeaponData(WT_PISTOL, W_PISTOL, NULL);
+		GetWeaponOrder();
+		BumpLevel();
+		
+		if(G_Episode != EP_RPG)
+			GiveInventory("Power_TerrainFix", 1);
+			
+		else
+			ACS_NamedExecuteAlways("AddMission", 0, MISSION_MAIN_START, NULL, NULL);
+	}
+
+
+	ACS_NamedExecuteAlways("PlayerLevel", 0);
+	EntitySpawnHead(0, "Player_Head");
+}
+
+script "PlayerHead" (void)
+{
+	int head = GetTID(TID_PLAYERHEAD);
+	int body = GetTID(TID_PLAYER);
+	
+	SetHeadPosition(head, body);
+	
+	int health = GetActorProperty(head, APROP_Health);
+	int damage = HEALTH_HEAD - health;
+	
+	if(damage > 0)
+	{
+		SetActivator(0, AAPTR_NULL);
+		
+		Thing_Damage2(body, damage, "Headshot");
+		
+		health = GetActorProperty(head, APROP_Health);
+		SetActorProperty(head, APROP_Health, HEALTH_HEAD);
+	}
+	
+	if(!IsAlive(body))
+	{
+		Thing_Remove(head);
+		terminate;
+	}
+	
+	Delay(1);
+	Restart;
+}

@@ -1,0 +1,47 @@
+#library "RPGXLat"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGMVars.acs"
+#import "RPGOList.acs"
+#import "RPGAFunc.acs"
+#import "RPGOFunc.acs"
+#import "RPGLFunc.acs"
+
+script 1000 (int secret) // Level Exit
+{
+	if(WithinRange(G_Episode, EP_Doom2, EP_Doom2Mod))
+	{
+		if(secret && G_Map == 31)
+			G_Map = 32;
+		else if(secret)
+			G_Map = 31;
+		else if(G_Map == 32)
+			G_Map = 16;
+		else
+			G_Map++;
+	}
+	else if(WithinRange(G_Episode, EP_DoomE1, EP_DoomMod))
+	{
+		if(G_Map == 9)
+			G_Map = 5;
+		else if(secret)
+			G_Map = 9;
+		else
+			G_Map++;
+	}
+	ACS_NamedExecuteAlways("LevelExit", 0, G_Map);
+}
+
+script 1001 (int tag, int locknum, int speed) // Locked Door
+{
+	DoorLock(tag, locknum, speed, false, true);
+}
+
+script 1002 (int tag, int locknum, int speed) // Locked Door (Stays)
+{
+	DoorLock(tag, locknum, speed, true, true);
+}

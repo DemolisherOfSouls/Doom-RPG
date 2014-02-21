@@ -3,21 +3,19 @@
 #include "zcommon.acs"
 
 #import "RPGConst.acs"
-
-/*
-Handles player counters and global counters
-
-Contains these functions:
-+	C_MoneyFound(int player);
-+	C_KeysFound(int player);
-*/
+#import "RPGAFunc.acs"
 
 function int C_MoneyFound (int player)
 {
-	return GetUserVariable(TID_PLAYER + player, "user_moneyfound");
+	return GetUserVar(TID_PLAYER + player, "moneyfound");
 }
 
 function int C_KeysFound (int player)
 {
-	return GetUserVariable(TID_PLAYER + player, "user_keysfound");
+	return GetUserVar(TID_PLAYER + player, "keysfound");
+}
+
+function int C_SoulsFound (int player)
+{
+	return GetUserVar(TID_PLAYER + player, "soulsfound");
 }

@@ -1,0 +1,16 @@
+#library "RPGPain"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+script "Pain_Nukage" (void)
+{
+	CallACS("HazardAlert", "NUKAGE1", 0, 0);
+}
+
+script "Pain_Lava" (void)
+{
+	CallACS("HazardAlert", "LAVA1", 0, 0);
+}

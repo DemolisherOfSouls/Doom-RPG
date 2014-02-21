@@ -20,7 +20,8 @@ Actor Enemy_BaronOfHell : Enemy_Baron replaces BaronOfHell
 	Spawn.Stage2:
 		BOSS A 0 A_SetUserVar("user_rewardxp", 50)
 		BOSS A 0 A_SetUserVar("user_rewardrenown", 5)
-		Goto Idle
+		BOSS A 0 A_SetUserVar("user_type", ET_BARON)
+		"####" A 0 A_Jump(Always, "Spawn.Final")
 	Attack:
 		BOSS EF 8 A_FaceTarget
 		BOSS G 8 A_CustomComboAttack("EnemyProj_BaronBall", 32, 10 * random(1, 8), "baron/melee", "Enemy_BaronMelee", true)

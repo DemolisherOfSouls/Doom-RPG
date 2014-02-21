@@ -1,0 +1,14 @@
+#library "RPGGreet"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+script "LevelGreet" enter
+{
+	str lump = StrParam(n:PRINTNAME_LEVEL);
+	
+	if(!Compare(lump, "Titlemap") && !Compare(lump, "RPG00"))
+		ACS_NamedExecuteAlways("LevelGreetAlert", 0);
+}

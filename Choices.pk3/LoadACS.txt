@@ -1,3 +1,4 @@
+RPGPlay
 RPGExp
 RPGItems
 RPGAlert
@@ -7,3 +8,14 @@ RPGMenu
 RPGSkill
 RPGWeaps
 RPGMove
+RPGRegen
+RPGDeath
+RPGObj
+RPGXLat
+RPGOpen
+RPGGreet
+RPGLevel
+RPGAlly
+RPGPain
+RPGKeys
+RPGPDisc

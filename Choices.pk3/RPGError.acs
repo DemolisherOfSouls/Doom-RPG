@@ -1,0 +1,59 @@
+#library "RPGError"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGColor.acs"
+
+#libdefine IndexOutOfBoundsException	1
+#libdefine MissingActorException		2
+#libdefine CannotFindKeyException		3
+#libdefine InvalidLockException			4
+
+int Exception_Value;
+str Exception_Var;
+
+function void Throw2 (int type, str sender, int index, str var)
+{
+	Exception_Value = index;
+	Exception_Var = var;
+	Throw(type, sender);
+}
+
+function void Throw (int type, str sender)
+{
+	str desc;
+	switch(type)
+	{
+	case IndexOutOfBoundsException:
+		desc = StrParam(s:"IndexOutOfBoundsException thrown, invalid value of ", s:ForceColor(CR_ORANGE, Exception_Var), s:PSurroundNumberC(CR_RED, CR_ORANGE, Exception_Value));
+		break;
+	case MissingActorException:
+		desc = StrParam(s:"MissingActorException thrown, cannot find entity id of ", s:ForceColor(CR_ORANGE, Exception_Var), s:PSurroundNumberC(CR_RED, CR_ORANGE, Exception_Value));
+		break;
+	case CannotFindKeyException:
+		desc = StrParam(s:"CannotFindKeyException thrown, player doesn't possess valid ", s:ForceColor(CR_ORANGE, Exception_Var), s:PSurroundNumberC(CR_RED, CR_ORANGE, Exception_Value));
+		break;
+	case InvalidLockException:
+		desc = StrParam(s:"InvalidLockException thrown, unknown lock combo requested ", s:ForceColor(CR_ORANGE, Exception_Var), s:PSurroundNumberC(CR_RED, CR_ORANGE, Exception_Value));
+		break;
+	default:
+		desc = "Exception thrown";
+		break;
+	}
+	
+	Log(s:SurroundColor(CR_YELLOW, sender, CR_RED), s:": ", s:desc);
+}
+
+function bool TryIndex (int index, int mi, int ma, str sender, str var)
+{
+	if(!WithinRange(index, mi, ma))
+	{
+		Exception_Value = index;
+		Exception_Var = var;
+		Throw(IndexOutOfBoundsException, sender);
+		return false;
+	}
+	return true;
+}

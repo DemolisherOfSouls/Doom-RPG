@@ -2,59 +2,65 @@
 
 #include "zcommon.acs"
 
-#libdefine Skill_OldSchool		0
-#libdefine Skill_Underdog		Skill_OldSchool + 1
-#libdefine Skill_BloodyMess		Skill_Underdog + 1
-#libdefine Skill_HomingRounds	Skill_BloodyMess + 1
+#import "RPGConst.acs"
+#import "RPGIList.acs"
+#import "RPGSList.acs"
+#import "RPGWList.acs"
+#import "RPGAFunc.acs"
+#import "RPGIFunc.acs"
+#import "RPGSFunc.acs"
+#import "RPGWFunc.acs"
 
-str SkillInfo[2][4] =
+script "AddSkill" (int skill, int amt)
 {
-	{
-		"Old School",
-		"Running speed is increased, as well as pistol, shotgun, and chaingun damage",
-		"Run Speed +5%\nPistol Damage +2\nShotgun Damage +1\nChaingun Damage +1",
-		"Requirements: None"
-	},{
-		"Underdog",
-		"Health regeneration at low health",
-		"+1 Regen @ < 20 Health",
-		"Requirements: Level 5"
-	}
-};
-/*
-int SkillData[2][6][3] =
-{
-	{
-		{ Category_General, NULL, NULL },
-		{ Spec_Chaingunner, Spec_Shotgunner,	Spec_Gunslinger },
-		{ Spec_Runner,		Spec_Sprayer,		Spec_Tank },
-		{ No_Reqs },
-		{ No_Reqs },
-		{ No_Reqs },
-	},{
-		
-	}
-};
-*/
-script "AddSkill" (int skill)
-{
-	SetUserArray(0, "user_skills", skill, GetUserArray(0, "user_skills", skill) + 1);
-	ACS_NamedExecuteAlways("SkillAlert", 0, skill);
+	SetRanks(skill, amt);
+	ACS_NamedExecuteAlways("SkillAlert", 0, skill, amt);
 	
 	switch(skill)
 	{
-	case Skill_OldSchool:
-		SetActorProperty(0, APROP_Speed, GetActorProperty(0, APROP_Speed) + 0.05);
+	case SKILL_OldSchool:
+		IncrementActorProperty(0, APROP_Speed, 0.05 * amt);
+		break;
+	case SKILL_Gunner:
+		IncrementActorProperty(0, APROP_Speed, -0.05 * amt);
+		break;
+	case SKILL_Heavy:
+		IncrementAmmoCapacity(AT_Clip, 120 * amt);
+		SetUserArray(0, "user_disableweapon", WT_Rifle, true);
+		IncrementUserArray(0, "accuracy", WT_Chaingun, 3 * amt);
+		break;
+	case SKILL_PackMule:
+		IncrementAmmoCapacity(AT_Clip, 60 * amt);
+		IncrementAmmoCapacity(AT_Shell, 16 * amt);
+		IncrementAmmoCapacity(AT_Rocket, 8 * amt);
+		IncrementAmmoCapacity(AT_Cell, 90 * amt);
+		break;
+	case SKILL_PlasmaSpaz:
+		IncrementAmmoCapacity(AT_Cell, 90 * amt);
+		break;
+	case SKILL_Pyro:
+		IncrementAmmoCapacity(AT_Cell, 180 * amt);
+		SetUserArray(0, "user_disableweapon", WT_SuperShotgun, true);
 		break;
 	}
 }
 
 script "Skill_BloodyMess" (void)
 {
-	SetResultValue(false);
+	SetResultValue(GetSkill(SKILL_BloodyMess));
 }
 
 script "Skill_HomingRounds" (void)
 {
-	SetResultValue(false);
+	SetResultValue(GetSkill(SKILL_HomingRounds));
+}
+
+script "Skill_QuickDraw" (void)
+{
+	SetResultValue(GetSkill(SKILL_QuickDraw));
+}
+
+script "Skill_Reloader" (int tics)
+{
+	SetResultValue(Min(tics - tics / 10 * GetSkill(SKILL_Reloader), 1));
 }

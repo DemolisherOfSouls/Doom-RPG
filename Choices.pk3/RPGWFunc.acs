@@ -1,0 +1,223 @@
+#library "RPGWFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGIList.acs"
+#import "RPGWList.acs"
+#import "RPGAFunc.acs"
+#import "RPGIFunc.acs"
+
+function int GetWeaponVar (int type)
+{
+	return GetUserArray(0, "user_weapon", type);
+}
+
+function int GetWeaponMod (int type)
+{
+	return GetUserArray(0, "user_mod", type);
+}
+
+function void SetWeaponData (int type, int weapon, int mod)
+{
+	SetUserArray(0, "user_weapon", type, weapon);
+	SetUserArray(0, "user_mod", type, mod);
+}
+
+function bool AutoSwitchActive (int player)
+{
+	return GetUserCVar(player, "rpg_option_autoswitch");
+}
+
+function void ToggleAutoSwitch (int player)
+{
+	SetUserCVar(player, "rpg_option_autoswitch", !GetUserCVar(player, "rpg_option_autoswitch"));
+}
+
+function str GetWeaponIcon (int type)
+{
+	int var = GetWeaponVar(type);
+	int mod = GetWeaponMod(type);
+	str ret = WeaponIcon[type][var-1];
+	
+	if(type == WT_PISTOL && var == W_PISTOL)
+	{
+		if(mod & WM2_PISTOL_SECOND && mod & WM2_PISTOL_SILENT)
+			return "PPisA0";
+		
+		else if(mod & WM2_PISTOL_SECOND)
+			return "DPisA0";
+		
+		else if(mod & WM2_PISTOL_SILENT)
+			return "SPisA0";
+	}
+	
+	return ret;
+}
+
+function int GetIndexFromFlag (int flag)
+{
+	int index = -1;
+	
+	while(flag > 0)
+	{
+		index++;
+		flag /= 2;
+	}
+	
+	return index;
+}
+
+function str WriteModClassSuffix (int type, int weapon, int mod, bool full)
+{
+	if(!full)
+		return StrParam(s:"_", s:WeaponModClass[type][weapon-1][GetIndexFromFlag(mod)]);
+	
+	str ret = "";
+	bool append = false;
+	
+	for(int index = 0; index < 8; index++)
+	{
+		if(mod & WeaponModFlag[index])
+		{
+			append = true;
+			ret = StrParam(s:ret, s:WeaponModClass[type][weapon-1][index]);
+		}
+	}
+	
+	if(append)
+		return StrParam(s:"_", s:ret);
+	
+	return ret;
+}
+
+function str GetWeaponItemDropClass (int type, int weapon, int mod)
+{
+	return StrParam(s:"Item_", s:WeaponClass[type][weapon-1], s:"Dropped", s:WriteModClassSuffix(type, weapon, mod, true));
+}
+
+function str GetWeaponClass (int type, int weapon)
+{
+	return StrParam(s:"Weapon_", s:WeaponClass[type][weapon-1]);
+}
+
+function str GetWeaponModClass (int type, int weapon, int mod, bool isIndex)
+{
+	str suffix = "";
+	
+	if(mod > 0 && !isIndex)
+		suffix = WriteModClassSuffix(type, weapon, mod, false);
+	else if(mod >= 0 && isIndex)
+		suffix = WeaponModClass[type][weapon-1][mod];
+	
+	return StrParam(s:"InvMod_", s:WeaponClass[type][weapon-1], s:suffix);
+}
+
+function void TakeWeaponMods (int type, int weapon, int mod)
+{
+	for(int index = 0; index < 8; index++)
+		if(mod & WeaponModFlag[index])
+			RemoveInventory(GetWeaponModClass(type, weapon, index, true));
+}
+
+function str WeaponAmmoClass (int type, int var)
+{
+	str ret = GetAmmoClass(AmmoClassIndex[type]);
+	
+	//exceptions to general ammo usage
+	
+	return ret;
+}
+
+function str GetAmmoMagClass (int type, int var)
+{
+	if(WithinRange(type, WT_UNARMED, WT_MELEE))
+		return GetAmmoClass(AT_None);
+	
+	return StrParam(s:"AmmoMag_", s:WeaponClass[type][var-1]);
+}
+
+function void FillMags (int type, int var)
+{
+	SetInventory(WeaponAmmoClass(type, var), GetAmmoCapacity(WeaponAmmoClass(type, var)));
+}
+
+function void ExtendMags (int type, int var, int mod)
+{
+	if(type == WT_PISTOL && var == W_PISTOL && mod & WM2_PISTOL_EXT)
+	{
+		SetAmmoCapacity(GetAmmoMagClass(type, var), 15);
+		
+		if(type == WT_PISTOL && var == W_PISTOL && mod & WM2_PISTOL_SECOND)
+		{
+			SetAmmoCapacity("AmmoMag_Pistol2", 15);
+		}
+	}
+	else if(type == WT_PISTOL && var == W_MKII && mod & WM2_MKII_EXT)
+	{
+		SetAmmoCapacity(GetAmmoMagClass(type, var), 21);
+		
+		if(type == WT_PISTOL && var == W_MKII && mod & WM2_MKII_SECOND)
+		{
+			SetAmmoCapacity("AmmoMag_MkII2", 21);
+		}
+	}
+}
+
+function void EmptyMags (int type, int var, int mod)
+{
+	str mag = GetAmmoMagClass(type, var);
+	str pool = WeaponAmmoClass(type, var);
+	int amt = CheckInventory(mag);
+	
+	if(type == WT_PISTOL && var == W_PISTOL && mod & WM2_PISTOL_SECOND)
+	{
+		amt += CheckInventory("AmmoMag_Pistol2");
+		RemoveInventory("AmmoMag_Pistol2");
+	}
+	//GiveInventory(pool, amt);
+	ACS_NamedExecuteAlways("Item_Ammo", 0, amt, AmmoClassIndex[type]);
+	RemoveInventory(mag);
+}
+
+function void DropWeapon (int type, int var, int mod)
+{
+	RemoveInventory(GetWeaponClass(type, var));
+	TakeWeaponMods(type, var, mod);
+	EmptyMags(type, var, mod);
+	SpawnSpotFacingForced(GetWeaponItemDropClass(type, var, mod), 0, 0);
+}
+
+function void PickupWeapon (int type, int var, int mod)
+{
+	int player = PlayerNumber();
+	SetWeaponData(type, var, mod);
+	GiveInventory(GetWeaponClass(type, var), 1);
+	if(AutoSwitchActive(player))
+		SetWeapon(GetWeaponClass(type, var));
+}
+
+function bool TryWeapon (int type)
+{
+	int var = GetWeaponVar(type);
+	int mod = GetWeaponMod(type);
+	int class = GetWeaponClass(type, var);
+	
+	if(	CheckInventory(class) > 0 &&
+		CheckInventory(WeaponAmmoClass(type, var)) +
+		CheckInventory(GetAmmoMagClass(type, var)) > 0)
+		if(SetWeapon(class))
+			return true;
+	return false;
+}
+
+function void GetWeaponOrder (void)
+{
+	int player = PlayerNumber();
+	
+	for(int w = 0; w < 10; w++)
+	{
+		str cvar = StrParam(s:"rpg_option_slotorder", i:w);
+		SetUserArray(0, "user_weaponorder", w, GetUserCVar(player, cvar));
+	}
+}

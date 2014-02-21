@@ -1,0 +1,7 @@
+Actor Ammo_None : Ammo
+{
+	Inventory.Amount 0
+	Inventory.MaxAmount 0
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 0
+}

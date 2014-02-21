@@ -1,0 +1,77 @@
+slade_config
+{
+	name = "Slade Config";
+	comment_begin = "/*";
+	comment_end = "*/";
+	comment_line = "//";
+	preprocessor = "#";
+	case_sensitive = 0;
+	blocks = "keywords", "constants", "functions";
+
+	keywords = {
+		name, comment_begin, comment_end, comment_line, preprocessor,
+		case_sensitive, keywords, constants, functions, blocks, keyword_link,
+		constant_link, function_link, format, export_ext, editor, icon,
+		detectable, category, entry_types, match_name, match_extorname,
+		text_language, extra, colour, min_size, size_multiple, reliability,
+		size, match_size, match_ext, image_format, section, match_archive,
+		max_size
+	}
+
+	constants = {
+		false, true,
+		
+		//Format
+		mesh_dmd, mesh_mdl, mesh_md2, mesh_md3, voxel_kvx, voxel_vox,
+		voxel_kv6, voxel_vxl, img_raw, autopage, strifestart, fullscreen,
+		img_doom, img_doom_beta, img_doom_snea, img_doom_arah, img_doom_alpha,
+		img_doom_jaguar, img_doom_psx, img_jaguar_texture, img_jaguar_sprite,
+		img_4bitchunk, img_planar, img_imgz, img_quake, img_qspr, img_quaketex,
+		img_quake2wal, img_scsprite, img_scwall, img_scgfx, img_mipimage,
+		img_arttile, img_m8, img_m32, img_hlt, img_rott, img_rottmask,
+		img_rottwall, img_rottlbm, img_rottraw, img_rottpic, img_wolfpic,
+		img_wolfsprite, img_jedi_bm, img_jedi_fme, img_jedi_wax, img_jedi_delt,
+		img_bmp, img_gif, img_pcx, img_tga, img_tiff, img_jpeg, font_doom_alpha,
+		font_zd_console, font_zd_big, font_bmf, font_mono, font_wolf,
+		font_jedi_fnt, font_jedi_font, mus, midi, xmi, hmi, hmp, gmid, mod_it,
+		mod_xm, mod_s3m, mod_mod, snd_doom, snd_doom_mac, snd_jaguar, misc_rle0,
+		archive_zip, archive_gzip, archive_bz2, archive_tar, archive_wad,
+		archive_lib, archive_dat, archive_res, archive_pak, archive_grp,
+		archive_rff, archive_gob, archive_lfd, archive_hog, archive_wad2,
+		archive_wadj, archive_adat, archive_wolf, archive_disk, pnames,
+		
+		
+		//Extra
+		image, patch, textures,
+		
+		//Editor
+		gfx, audio, ansi, animated, switches, text, palette
+	}
+
+
+slade_styleset : slade_config
+{
+	name = "Slade Styleset";
+	blocks = "styleset", "default";
+	
+	keywords = {
+		styleset,
+		
+		font, default, foreground, background, bold, italic, underlined,
+		comment, string, character, keyword, constant, function, bracematch, bracebad
+	}
+}
+
+slade_nodebuilders : slade_config
+{
+	name = "Slade Nodebuilders Config";
+	blocks = "nodebuilders", "zdbsp", "glbsp", "bsp";
+	
+	keywords = {
+		nodebuilders,
+		
+		zdbsp, zennode, glbsp, bsp,
+		
+		command, option, executable
+	}
+}

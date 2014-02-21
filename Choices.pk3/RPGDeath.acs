@@ -1,0 +1,41 @@
+#library "RPGDeath"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+Function int AngleTo (int tid)
+{
+	int x = GetActorX(0) - GetActorX(tid);
+	int y = GetActorY(0) - GetActorY(tid);
+	
+	return VectorAngle(x, y);
+}
+
+script "PlayerDeath" death
+{
+	int camtid = GetTID(TID_DEATHCAM);
+	int playertid = GetTID(TID_PLAYER);
+	
+	SetActivatorToTarget(0);
+	SpawnForced("AimingCamera", GetActorX(0), GetActorY(0), GetActorZ(0) + 40.0, camtid, AngleTo(playertid));
+	
+	SetThingSpecial(camtid, 0, 0, 120, 120, playertid);
+	
+	ChangeCamera(camtid, false, false);
+	
+	until(GetActorProperty(playertid, APROP_Health) > 0)
+		Delay(1);
+	
+	ChangeCamera(playertid, false, false);
+	Thing_Remove(camtid);
+	ACS_NamedExecuteAlways("PlayerHead",  0);
+}
+
+script "PlayerRespawn" respawn
+{
+	log(s:"TID now: ", i:ActivatorTID());
+	
+	//Take lives? souls? heh.
+}

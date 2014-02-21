@@ -1,0 +1,6 @@
+Actor WeaponProj_Riotgun : WeaponProj_Bullet
+{
+	Damage (CallACS("WeaponDamage", WD_RIOTGUN))
+	DamageType "Player_Shotgun"
+	Decal "BulletChip"
+}

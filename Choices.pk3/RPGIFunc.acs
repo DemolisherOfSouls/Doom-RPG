@@ -1,0 +1,21 @@
+#library "RPGIFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGIList.acs"
+
+function str GetAmmoClass (int type)
+{
+	return StrParam(s:"Ammo_", s:AmmoTypes[type]);
+}
+
+function void IncrementAmmoCapacity (int type, int value)
+{
+	SetAmmoCapacity(GetAmmoClass(type), GetAmmoCapacity(GetAmmoClass(type)) + value);
+}
+
+function bool CheckAmmoFull (int type)
+{
+	return CheckInventory(GetAmmoClass(type)) >= GetAmmoCapacity(GetAmmoClass(type));
+}

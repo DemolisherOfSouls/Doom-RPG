@@ -1,0 +1,42 @@
+Actor WeaponProj_PlasmaBall : WeaponProj_Base replaces PlasmaBall
+{
+	SpawnID 51
+	Radius 13
+	Height 8
+	Speed 25
+	Damage (CallACS("WeaponDamage", WD_PLASMA))
+	DamageType "Player_PlasmaRifle"
+	Decal "PlasmaScorch"
+	RenderStyle Add
+	Alpha 0.75
+	SeeSound "weapons/plasmaf"
+	DeathSound "weapons/plasmax"
+	Obituary "$OB_MPPLASMARIFLE"
+	+RANDOMIZE
+	
+	States
+	{
+	Spawn:
+		PLSS AB 6
+		Loop
+	Death:
+		PLSE A 4 A_Explode(CallACS("WeaponDamage", WS_PLASMA), CallACS("WeaponDamage", WR_PLASMA))
+		PLSE BCDE 4
+		Stop
+	}
+}
+
+Actor WeaponProj_HotPlasmaBall : WeaponProj_PlasmaBall
+{
+	Speed 32
+	Damage (CallACS("WeaponDamage", WD_HOTPLASMA))
+	Decal "PlasmaScorch"
+	
+	States
+	{
+	Death:
+		PLSE A 4 A_Explode(CallACS("WeaponDamage", WS_HOTPLASMA), CallACS("WeaponDamage", WR_HOTPLASMA))
+		PLSE BCDE 4
+		Stop
+	}
+}

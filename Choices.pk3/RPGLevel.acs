@@ -1,0 +1,59 @@
+#library "RPGLevel"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGMVars.acs"
+#import "RPGOList.acs"
+#import "RPGAFunc.acs"
+#import "RPGOFunc.acs"
+#import "RPGLFunc.acs"
+
+script "DoorLock" (int tag, int locknum, int speed)
+{
+	DoorLock(tag, locknum, speed, false, false);
+}
+
+script "LevelExit" (int level)
+{
+	G_Map = level;
+	
+	ChangeLevel(GenerateMapName(), 0, CHANGELEVEL_NOINTERMISSION, CalculateSkill());
+}
+
+script "LevelInit" (void)
+{
+	G_Map = 1;
+	G_Episode = EP_RPG;
+	ChangeLevel("RPG01", 0, CHANGELEVEL_NOINTERMISSION, CalculateSkill());
+}
+
+script "LevelStatus" (int status)
+{
+	G_Status[G_Map] |= status;
+}
+
+script "Reload" (void)
+{
+	for(int p = 0; p < PlayerCount(); p++)
+	{
+		SpawnSpotFacingForced("MapSpot", TID_PLAYER + p, TID_PLAYERSPOT + p);
+		CopyActorPosition(TID_PLAYERSPOT + p, TID_PLAYER + p);
+	}
+	
+	G_Reset = true;
+	ChangeLevel(GenerateMapName(), 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, CalculateSkill());
+}
+
+script "ReloadCompanion" return
+{
+	if(G_Reset)
+	{
+		G_Reset = false;
+		int tid = GetTID(TID_PLAYERSPOT);
+		
+		CopyActorPosition(0, tid);
+	}
+}

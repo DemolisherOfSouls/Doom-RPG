@@ -1,0 +1,28 @@
+ListMenu "MainMenu"
+{
+	//StaticPatch -64, -64, "TS_MAIN"
+	Position 97, 72
+	IfOption(ReadThis)
+	{
+		Position 97, 64
+	}
+
+	PatchItem "M_NGAME", "n", "SetupGameMenu"
+	ifOption(SwapMenu)
+	{
+		PatchItem "M_LOADG", "l", "LoadGameMenu"
+		PatchItem "M_SAVEG", "s", "SaveGameMenu"
+		PatchItem "M_OPTION","o", "OptionsMenu"
+	}
+	else
+	{
+		PatchItem "M_OPTION","o", "OptionsMenu"
+		PatchItem "M_LOADG", "l", "LoadGameMenu"
+		PatchItem "M_SAVEG", "s", "SaveGameMenu"
+	}
+	ifOption(ReadThis)
+	{
+		PatchItem "M_RDTHIS","r", "ReadThisMenu"
+	}
+	PatchItem "M_QUITG", "q", "QuitMenu"
+}

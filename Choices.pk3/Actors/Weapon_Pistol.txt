@@ -1,31 +1,47 @@
-Actor Weapon_Pistol : Weapon_Base
+Actor Weapon_Pistol : Weapon_BasePistol
 {
-	Weapon.SlotNumber 2
-	Weapon.SelectionOrder 5
+	AttackSound "Weapon/Pistol"
 	
-	Weapon.AmmoType1 "Ammo_Clip"
-	Weapon.AmmoType2 "AmmoMag_Pistol"
+	Weapon.AmmoType1 "AmmoMag_Pistol"
+	
+	Inventory.Icon "PISTA0"
 	
 	Tag "Standard Issue Pistol"
 	
-	+WEAPON.WIMPY_WEAPON
-	
 	States
 	{
+	
+	//******************************************************
+	//	Ready
+	//******************************************************
+	
 	Ready:
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Ready.Second")
 		PISG A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
 		Loop
-	Select:
-		PISG A 1 A_Raise
-		Loop
-	Select.Quick:
-		PISG A 0 A_Raise
-		PISG A 1 A_Raise
+	Ready.Second:
+		PISG F 1 A_WeaponReady(WRF_ALLOWRELOAD)
 		Loop
 	
+	//******************************************************
+	//	Select
+	//******************************************************
+	
+	Select:
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Select.Second")
+		Goto Super::Select
+	Select.Second:
+		PISG F 0
+		Goto Super::Select
+	
+	//******************************************************
+	//	Firing - Single
+	//******************************************************
+	
 	Fire:
-		PISG A 1 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.HasAmmo")		//Continue if has 1 bullet in magazine
-		PISG A 5 A_PlaySound("Weapon/PistolEmpty", CHAN_WEAPON)
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Fire.Second")
+		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.HasAmmo")
+		PISG A 5 A_PlayWeaponSound("Weapon/PistolEmpty")
 		Goto Reload
 	Fire.HasAmmo:
 		PISG A 4
@@ -34,29 +50,171 @@ Actor Weapon_Pistol : Weapon_Base
 		PISG B 5 A_ReFire("Fire")
 		Goto Ready
 	
+	//******************************************************
+	//	Firing - Second
+	//******************************************************
+	
+	Fire.Second:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.Second.HasAmmo")
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 1, "Hold.Second.HasAmmo")
+		Goto Reload
+	Fire.Second.HasAmmo:
+		PISG F 2
+		PISG G 3 A_GunFlash("Shoot.Left")
+		PISG F 2
+		PISG F 2 A_ReFire("Hold.Second")
+		Goto Ready
+	
+	Hold.Second:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 1, "Hold.Second.HasAmmo")
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Fire.Second.HasAmmo")
+		Goto Reload
+	Hold.Second.HasAmmo:
+		PISG F 2
+		PISG H 3 A_GunFlash("Shoot.Right")
+		PISG F 2
+		PISG F 2 A_ReFire("Fire.Second")
+		Goto Ready
+	
+	//******************************************************
+	//	Firing - AltFire
+	//******************************************************
+	
+	AltFire:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "AltFire.HasAmmo")
+		PISG F 1 A_JumpIfInventory("AmmoMag_Pistol2", 1, "AltHold.HasAmmo")
+		Goto Reload
+	AltFire.HasAmmo:
+		PISG F 1
+		PISG G 3 A_GunFlash("Shoot.Left")
+		PISG F 1
+		PISG F 4 A_ReFire("AltHold")
+		Goto Ready
+	
+	AltHold:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 1, "AltHold.HasAmmo")
+		PISG F 1 A_JumpIfInventory("AmmoMag_Pistol", 1, "AltFire.HasAmmo")
+		Goto Reload
+	AltHold.HasAmmo:
+		PISG F 1
+		PISG H 3 A_GunFlash("Shoot.Right")
+		PISG F 5
+		PISG F 4 A_ReFire("AltFire")
+		Goto Ready
+	
+	//******************************************************
+	//	Firing - Actual
+	//******************************************************
+	
 	Shoot:
-		PISF A 0 A_PlaySound("Weapon/Pistol", CHAN_WEAPON)
-		PISF A 0 A_TakeInventory("AmmoMag_Pistol", 1)
-		PISF A 0 A_FireCustomMissile("WeaponProj_Pistol", FRandom(-2.5,2.5), false, 0, 0, 0, FRandom(-2.5,2.5))
-	Flash:
-		PISF A 6 Bright A_Light1
+		PISF A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_PISTOL, 21))
+		PISF A 0 A_FireCustomMissile("WeaponProj_Pistol", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, FRandom(-args[2], args[2]) / 10)
+
+	Shoot.Check.Silent:
+		PISF A 0 A_JumpIfInventory("InvMod_Pistol_Silent", 1, "Shoot.Silent")
+		
+	Shoot.Normal:
+		PISF A 0 A_ActiveSound
+		PISF A 0 A_AlertMonsters(512)
+		PISF A 4 Bright A_Light1
+	Flash.Less:
+		TNT1 A 2 Bright A_Light1
 		Goto LightDone
+		
+	Shoot.Silent:
+		TNT1 A 0 A_PlayWeaponSound("Weapon/SilentPistol")
+		Goto Flash.Less
+	
+	Shoot.Left:
+		TNT1 A 0 A_TakeInventory("AmmoMag_Pistol", 1)
+		TNT1 A 0 A_SetArg(0, -12)
+		Goto Shoot.Second
+	Shoot.Right:
+		TNT1 A 0 A_TakeInventory("AmmoMag_Pistol2", 1)
+		TNT1 A 0 A_SetArg(0, 12)
+	Shoot.Second:
+		TNT1 A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_PISTOL, 25))
+		TNT1 A 0 A_FireCustomMissile("WeaponProj_Pistol", FRandom(-args[2], args[2]) / 10, false, args[0], 0, 0, FRandom(-args[2], args[2]) / 10)
+		TNT1 A 0 A_JumpIfInventory("InvMod_Pistol_Silent", 1, "Shoot.Silent")
+		TNT1 A 0 A_ActiveSound
+		TNT1 A 0 A_AlertMonsters(512)
+		Goto Flash.Less
+	
+	//******************************************************
+	//	Reloading - Single
+	//******************************************************
 	
 	Reload:
-		PISG A 1 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Start")				//Continue if has 1 bullet in ammo pool
-		Goto Ready
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Reload.Second")
+		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Delay")
+		PISG A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Start")
+		Goto ChangeWeapon
+	
 	Reload.Start:
-		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Ready")			//Continue if magizine is not full
-		PISG A 1 //Start anim (before ammo swap)
-	Reload.HasAmmo:
-		PISG A 0 //Per item anim (during ammo swap)
-		PISG A 0 A_GiveInventory("AmmoMag_Pistol", 1)
-		PISG A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
-		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Reload.Finish")	//Continue if magizine is not full
-		PISG A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.HasAmmo")				//Continue if has 1 bullet in ammo pool
-		Goto Reload.Finish
-	Reload.Finish:
-		PISG A 1 //Finish anim (after ammo swap)
+		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Ready")
+		PISG A 1 Offset(0,48)
+		PISG A 1 Offset(0,56)
+		PISG A 1 Offset(0,64)
+		PISG A 1 Offset(0,72)
+		PISG A 1 Offset(0,80)
+		PISG A 1 Offset(0,88) A_GunFlash("Reload.Process.L")
+		PISG A 1 Offset(0,80)
+		PISG A 1 Offset(0,72)
+		PISG A 1 Offset(0,64)
+		PISG A 1 Offset(0,56)
+		PISG A 1 Offset(0,48)
 		Goto Ready
+	
+	//******************************************************
+	//	Reloading - Second
+	//******************************************************
+	
+	Reload.Second:
+		PISG F 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Second.Start")
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Delay")
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 1, "Delay")
+		Goto ChangeWeapon
+	Reload.Second.Start:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Reload.Second.Check")
+		Goto Reload.Second.Left
+	Reload.Second.Check:
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 0, "Delay")
+		Goto Reload.Second.Right
+	
+	Reload.Second.Left:
+		PISG F 1
+		PISG F 0 A_GunFlash("Reload.Process.L")
+		PISG F 1
+		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 0, "Reload.Second.Finish")
+		PISG F 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Second.Right")
+		Goto Reload.Second.Finish
+	Reload.Second.Right:
+		PISG F 1
+		PISG F 0 A_GunFlash("Reload.Process.R")
+		PISG F 1
+		Goto Reload.Second.Finish
+	Reload.Second.Finish:
+		PISG F 1
+		Goto Ready
+	
+	//******************************************************
+	//	Reloading - Process
+	//******************************************************
+	
+	Reload.Process.L:
+		TNT1 A 0 A_GiveInventory("AmmoMag_Pistol", 1)
+		TNT1 A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
+		TNT1 A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Reload.Process.Done")
+		TNT1 A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Process.L")
+		Goto Reload.Process.Done
+	Reload.Process.R:
+		TNT1 A 0 A_GiveInventory("AmmoMag_Pistol2", 1)
+		TNT1 A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
+		TNT1 A 0 A_JumpIfInventory("AmmoMag_Pistol2", 0, "Reload.Process.Done")
+		TNT1 A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Process.R")
+	Reload.Process.Done:
+		TNT1 A 0 A_PlayWeaponSound("Weapon/PistolEmpty")
+		Stop
+	
 	}
 }

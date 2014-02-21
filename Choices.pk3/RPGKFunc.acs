@@ -1,0 +1,190 @@
+#library "RPGKFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGAFunc.acs"
+#import "RPGColor.acs"
+#import "RPGError.acs"
+
+str KeyColor[3] = { "Red", "Blue", "Yellow" };
+str KeyType[2] = { "Card", "Skull" };
+str KeyName[2] = { "Keycard", "Skull Key" };
+
+#libdefine KF_ALLBITS	6
+
+int KeyFlag[7] = { 1, 2, 4, 8, 16, 32, 63 };
+
+function int GetKeyType (int keynum)
+{
+	return keynum > 3;
+}
+
+function str GetKeyColor (int keynum)
+{
+	if(keynum > 3)
+		keynum -= 3;
+	
+	return KeyColor[keynum - 1];
+}
+
+function str GetKeyName (int keynum)
+{
+	str c = GetKeyColor(keynum);
+	int t = GetKeyType(keynum);
+	return StrParam(s:"\c[", s:c, s:"]", s:c, s:"\cL ", s:KeyName[t]);
+}
+
+function str GetKeyClass (int keynum)
+{
+	return StrParam(s:GetKeyColor(keynum), s:KeyType[GetKeyType(keynum)]);
+}
+
+function int GetFirstKey (void)
+{
+	for(int k = 1; k <= 6; k++)
+	{
+		if(GetKeyStorage(k))
+			return k;
+	}
+	
+	return NULL;
+}
+
+//Returns (0) for cards, and (1) for skulls, based on the held key of the given color
+//Returns (EXCEPTION) if the key is not held
+function int GetHeldKeyType (int kc)
+{
+	if(GetKeyStorage(kc + 1))
+		return 0;
+	if(GetKeyStorage(kc + 4))
+		return 1;
+	return EXCEPTION;
+}
+
+function void SetKeyUsed (int locknum)
+{
+	int held;
+	switch(locknum)
+	{
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+		LevelKeyUsed[locknum - 1] = true;
+		break;
+		
+	case 100: // Any 1 Key
+		LevelKeyUsed[GetFirstKey() - 1] = true;
+		break;
+	
+	case 101: // All 6 Keys
+		for(int k = 0; k < 6; k++)
+			LevelKeyUsed[k] = true;
+		break;
+		
+	case 129:
+	case 130:
+	case 131:
+		held = GetHeldKeyType(locknum - 129);
+		if(held == EXCEPTION)
+		{
+			Throw2(CannotFindKeyException, "SetKeyUsed", locknum, "locknum");
+			return;
+		}
+		LevelKeyUsed[locknum - 129 + 3 * held] = true;
+		break;
+		
+	case 132:
+	case 133:
+	case 134:
+		held = GetHeldKeyType(locknum - 132);
+		if(held == EXCEPTION)
+		{
+			Throw2(CannotFindKeyException, "SetKeyUsed", locknum, "locknum");
+			return;
+		}
+		LevelKeyUsed[locknum - 132 + 3 * held] = true;
+		break;
+		
+	case 229: // One of each color
+		for(int kc = 0; kc < 3; kc++)
+		{
+			held = GetHeldKeyType(kc);
+			if(held == EXCEPTION)
+			{
+				Throw2(CannotFindKeyException, "SetKeyUsed", locknum, "locknum");
+				return;
+			}
+			LevelKeyUsed[kc + 3 * held] = true;
+		}
+		break;
+	
+	default:
+		Throw2(InvalidLockException, "SetKeyUsed", locknum, "locknum");
+		return;
+	}	
+}
+
+function int KeyBits (void)
+{
+	return G_Keys[G_Map];
+}
+
+function void AddKeyBit (int keynum)
+{
+	int index = keynum - 1;
+	int bit = KeyFlag[index];
+	G_Keys[G_Map] |= bit;
+}
+
+function void TakeKeyBit (int keynum)
+{
+	int index = keynum - 1;
+	int bit = KeyFlag[index];
+	G_Keys[G_Map] &= ~bit;
+}
+
+function void SetKeyStorage (int keynum)
+{
+	if(!TryIndex(keynum, 1, 6, "SetKeyStorage", "keynum"))
+		return;
+	
+	int index = keynum - 1;
+	str class = GetKeyClass(keynum);
+	
+	if(!CheckInventory(class))
+		GiveInventory(class, 1);
+	
+	LevelKeyFound[index] = true;
+	AddKeyBit(keynum);
+}
+
+function void UnSetKeyStorage (int keynum)
+{
+	if(!TryIndex(keynum, 1, 6, "UnSetKeyStorage", "keynum"))
+		return;
+	
+	int index = keynum - 1;
+	str class = GetKeyClass(keynum);
+	
+	RemoveInventory(class);
+	LevelKeyFound[index] = false;
+	TakeKeyBit(keynum);
+}
+
+function bool GetKeyStorage (int keynum)
+{
+	if(!TryIndex(keynum, 1, 6, "GetKeyStorage", "keynum"))
+		return false;
+	
+	int index = keynum - 1;
+	str class = GetKeyClass(keynum);
+	int bit = KeyFlag[index];
+	
+	return LevelKeyFound[index] || KeyBits() & bit || CheckInventory(class);
+}

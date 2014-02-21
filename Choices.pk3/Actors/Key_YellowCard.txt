@@ -5,11 +5,10 @@ Actor Key_YellowCard : CustomInventory replaces YellowCard
 	States
 	{
 	Spawn:
-		YKEY A 10
-		YKEY B 10 Bright
+		YKEY A 15
+		YKEY B 5 Bright
 		Loop
 	Pickup:
-		TNT1 A 0 A_GiveInventory("YellowCard", 1)
 		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 3)
 		Stop
 	}

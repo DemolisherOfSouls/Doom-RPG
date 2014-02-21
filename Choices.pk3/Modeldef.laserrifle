@@ -1,0 +1,11 @@
+Model WeaponProj_LaserRifle
+{
+	Path "Models/Tracer"
+	Model 0 "Tracer.md2"
+	Skin 0 "Laser.png"
+	Scale 1.2 1.2 1.2
+	//PitchFromMomentum
+	InheritActorPitch
+	
+	FrameIndex BULL C 0 0
+}

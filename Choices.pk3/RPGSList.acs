@@ -1,0 +1,240 @@
+#library "RPGSList"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+
+#libdefine SKILL_OldSchool		0
+#libdefine SKILL_Underdog		SKILL_OldSchool + 1
+#libdefine SKILL_BloodyMess		SKILL_Underdog + 1
+#libdefine SKILL_HomingRounds	SKILL_BloodyMess + 1
+#libdefine SKILL_QuickDraw		SKILL_HomingRounds + 1
+#libdefine SKILL_Observant		SKILL_QuickDraw + 1
+#libdefine SKILL_Gunner			SKILL_Observant + 1
+#libdefine SKILL_Heavy			SKILL_Gunner + 1
+#libdefine SKILL_Finesse		SKILL_Heavy + 1
+#libdefine SKILL_PackMule		SKILL_Finesse + 1
+#libdefine SKILL_Reloader		SKILL_PackMule + 1
+#libdefine SKILL_PlasmaSpaz		SKILL_Reloader + 1
+#libdefine SKILL_FleshWound		SKILL_PlasmaSpaz + 1
+#libdefine SKILL_Pyro			SKILL_FleshWound + 1
+#libdefine SKILL_Fortunate		SKILL_Pyro + 1
+#libdefine SKILL_FieldMedic		SKILL_Fortunate + 1
+#libdefine SKILL_ARRAY			SKILL_FieldMedic + 1
+
+#libdefine SI_NAME	0
+#libdefine SI_DESC	1
+
+str SkillInfo[SKILL_ARRAY][2] =
+{
+	{
+		"Old School",
+		"Running speed is increased, as well as pistol, shotgun, and chaingun damage"
+	},{
+		"Underdog",
+		"Health regeneration at low health"
+	},{
+		"Bloody Mess",
+		"Enemies always gib upon death"
+	},{
+		"Homing Rounds",
+		"Bullets seem to lean toward your targets"
+	},{
+		"Quick Draw",
+		"Speeds up weapon switching"
+	},{
+		"Observant",
+		"Increases all experience earned"
+	},{
+		"Gunner",
+		"Running speed is decreased, while chaingun damage is increased"
+	},{
+		"Heavy",
+		"Rifles are unusable, while chaingun damage and accuracy are increased, increases bullet ammo capacity"
+	},{
+		"Finesse",
+		"Headshots do significantly more damage"
+	},{
+		"Pack Mule",
+		"Increases carrying capacity for all types of ammunition"
+	},{
+		"Reloader",
+		"Increases reload speed and efficiency"
+	},{
+		"Plasma Spaz",
+		"Increased plasma damage, increased cell capacity, increased plasma grenade effectiveness"
+	},{
+		"Flesh Wound",
+		"Regenerate to full health if you are almost there"
+	},{
+		"Pyro",
+		"Heavy shotguns are unusable, while flame damage is increased, increases cell capacity"
+	},{
+		"Fortunate",
+		"Money drops more frequently and in greater amounts"
+	},{
+		"Field Medic",
+		"Up to 5 stimpacks can be carried if at full health"
+	}
+};
+
+#libdefine CATEGORY_General		1
+#libdefine CATEGORY_Offence		2
+#libdefine CATEGORY_Defense		3
+#libdefine CATEGORY_SkillPerk1	4
+#libdefine CATEGORY_Bullets		5
+#libdefine CATEGORY_NoCombat	6
+
+#libdefine SD_CATEGORY			0
+#libdefine SD_REQ1				1
+#libdefine SD_REQ2				2
+#libdefine SD_REQ3				3
+#libdefine SD_REQ4				4
+#libdefine SD_EFFECT1			5
+#libdefine SD_EFFECT2			6
+#libdefine SD_EFFECT3			7
+#libdefine SD_EFFECT4			8
+#libdefine SD_EFFECT5			9
+
+#libdefine SDR_REQNAME			0
+#libdefine SDR_REQVAR1			1
+#libdefine SDR_REQVAR2			2
+
+#libdefine SDR_EFFNAME			0
+#libdefine SDR_EFFVAR1			1
+#libdefine SDR_EFFVAR2			2
+
+int SkillData[SKILL_ARRAY][10][3] =
+{
+	{ // Old School
+		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_Bullets },
+		{ Req_Limit, 3 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_RunSpeed, 5 },
+		{ EFF_WeaponDamage, WT_Pistol, 2 },
+		{ EFF_WeaponDamage, WT_Shotgun, 1 },
+		{ EFF_WeaponDamage, WT_Chaingun, 1 },
+	},{ // Underdog
+		{ CATEGORY_General, CATEGORY_Defense },
+		{ Req_Level, 5 },
+		{ Req_Limit, 3 },
+		{ Req_RankEffect },
+		{ Null },
+		{ EFF_HealthRegen, 1, 20 },
+		{ EFF_HealthRegen, 1, 30 },
+		{ EFF_HealthRegen, 2, 30 }
+	},{ // Bloody Mess
+		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_SkillPerk1 },
+		{ Req_Level, 5 },
+		{ Req_Limit, 1 },
+		{ Null },
+		{ Null },
+		{ EFF_GibChance, 100 }
+	},{ // Homing Rounds
+		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_Bullets },
+		{ Req_Level, 20 },
+		{ Req_Limit, 1 },
+		{ Null },
+		{ null },
+		{ EFF_HomingRounds, 1 }
+	},{ // Quick Draw
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Limit, 2 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_QuickDraw, 50 }
+	},{ // Observant
+		{ CATEGORY_General, CATEGORY_NoCombat },
+		{ Req_Limit, 5 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_ExperienceBoost, 10 }
+	},{ // Gunner
+		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_Bullets },
+		{ Req_Level, 5 },
+		{ Req_Limit, 3 },
+		{ Null },
+		{ Null },
+		{ EFF_WeaponDamage, WT_Chaingun, 2 },
+		{ EFF_RunSpeed, -5 }
+	},{ // Heavy
+		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_Bullets },
+		{ Req_Level, 7 },
+		{ Req_Limit, 2 },
+		{ Null },
+		{ Null },
+		{ EFF_WeaponDamage, WT_Chaingun, 1 },
+		{ EFF_DisableWeapon, WT_Rifle },
+		{ EFF_WeaponAccuracy, WT_Chaingun, 3 },
+		{ EFF_AmmoStorage, AT_Clip, 120 }
+	},{ // Finesse
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Level, 4 },
+		{ Req_Limit, 5 },
+		{ Null },
+		{ Null },
+		{ EFF_HeadshotDamage, 20 }
+	},{ // Pack Mule
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Limit, 5 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_AmmoStorage, AT_Clip, 60 },
+		{ EFF_AmmoStorage, AT_Shell, 16 },
+		{ EFF_AmmoStorage, AT_Rocket, 8 },
+		{ EFF_AmmoStorage, AT_Cell, 90 }
+	},{ // Reloader
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Limit, 2 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_ReloadSpeed, 10 }
+	},{ // Plasma Spaz
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Limit, 1 },
+		{ Null },
+		{ Null },
+		{ Null },
+		{ EFF_WeaponDamage, WT_Plasma, 5 },
+		{ EFF_AmmoStorage, AT_Cell, 90 },
+		{ EFF_GrenadeDamage, GT_Plasma, 75 }
+	},{ // Flesh Wound
+		{ CATEGORY_General, CATEGORY_Defense },
+		{ Req_Level, 8 },
+		{ Req_Limit, 2 },
+		{ Req_RankEffect },
+		{ Null },
+		{ EFF_HealthRegen, 1, -5 },
+		{ EFF_HealthRegen, 2, -10 }
+	},{ // Pyro
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Level, 20 },
+		{ Req_Limit, 1 },
+		{ Null },
+		{ Null },
+		{ EFF_DisableWeapon, WT_SuperShotgun },
+		{ EFF_AmmoStorage, AT_Cell, 180 }
+		//flame damage
+	},{ // Fortunate
+		{ CATEGORY_General, CATEGORY_NoCombat },
+		{ Req_Level, 5 },
+		{ Req_Limit, 2 },
+		{ Null },
+		{ Null },
+		{ EFF_MoneyDropRate, 5 },
+		{ EFF_MoneyDropAmt, 1 }
+	},{ // Field Medic
+		{ CATEGORY_General, CATEGORY_Defense },
+		{ Req_Level, 7 },
+		{ Req_Limit, 1 },
+		{ Null },
+		{ Null },
+		{ EFF_StimpackCarry, 5 }
+	}
+};

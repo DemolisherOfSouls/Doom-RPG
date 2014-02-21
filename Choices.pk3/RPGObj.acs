@@ -1,0 +1,225 @@
+#library "RPGObj"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGOList.acs"
+#import "RPGAFunc.acs"
+#import "RPGKFunc.acs"
+#import "RPGOFunc.acs"
+
+script "AddMission" (int mission, int map, int owner)
+{
+	int index = GetNextMissionIndex();
+	
+	SetUserArray(0, "user_m_type", index, mission);
+	SetUserArray(0, "user_m_status", index, MISSION_GOT);
+	SetUserArray(0, "user_m_map", index, map);
+	SetUserArray(0, "user_m_owner", index, owner);
+	
+	ACS_NamedExecuteAlways("MissionAlert", 0, mission);
+	ACS_NamedExecuteAlways("MissionTracker", 0, mission, map, owner);
+}
+
+script "MissionTrackerStarter" enter
+{
+	for(int i = 0; i < 1024; i++)
+	{
+		int o = GetUserArray(0, "user_m_owner", i);
+		int m = GetUserArray(0, "user_m_map", i);
+		int t = GetUserArray(0, "user_m_type", i);
+		int s = GetUserArray(0, "user_m_status", i);
+		
+		if(WithinRange(s, MISSION_GOT, MISSION_DONE - 1))
+			ACS_NamedExecuteAlways("MissionTracker", 0, t, m, o);
+		
+		else if(s == MISSION_NONE)
+			break;
+	}
+}
+
+script "MissionTracker" (int mission, int map, int owner)
+{
+	int status = GetMissionStatus(mission, map, owner);
+	int keyindex;
+	
+	if(WithinRange(mission, MISSION_KEY_START, MISSION_KEYOBJ_END))
+		keyindex = GetKeyIndex(mission);
+
+	switch(mission)
+	{
+	case MISSION_REDCARD:
+	case MISSION_BLUECARD:
+	case MISSION_YELLOWCARD:
+	case MISSION_REDSKULL:
+	case MISSION_BLUESKULL:
+	case MISSION_YELLOWSKULL:
+	
+		if(LevelKeyUsed[keyindex])
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = MISSION_DONE;
+			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+		}
+		
+		break;
+	case MISSION_REDCARDOBJ:
+	case MISSION_BLUECARDOBJ:
+	case MISSION_YELLOWCARDOBJ:
+	case MISSION_REDSKULLOBJ:
+	case MISSION_BLUESKULLOBJ:
+	case MISSION_YELLOWSKULLOBJ:
+	
+		if(status == MISSION_GOT && LevelKeyFound[keyindex])
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = 30;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, StrParam(s:"Use the ", s:GetKeyName(keyindex+1)));
+		}
+		else if(status == 30 && LevelKeyUsed[keyindex])
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = MISSION_DONE;
+			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+		}
+		
+		break;
+	case MISSION_MAIN_START:
+		
+		if(status == MISSION_GOT && G_Status[G_Map] & GS01_RED_DOOR_PASSED)
+		{
+			status = 2;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Find a red keycard");
+		}
+		else if(status == 2 && LevelKeyFound[0])
+		{
+			status = 3;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Open the red door");
+		}
+		else if(status == 3 && LevelKeyUsed[0])
+		{
+			status = 4;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Proceed to the green zone");
+		}
+		else if(status == 4 && G_Status[G_Map] & GS01_BLUE_DOOR_PASSED)
+		{
+			status = 5;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Find a blue keycard");
+		}
+		else if( (status == 5 || status == 4) && G_Status[G_Map] & GS01_TOXIC_DOOR_PASSED)
+		{
+			status = 6;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Unlock the sewer access door");
+		}
+		else if( (status == 6 || status == 5 || status == 4) && G_Status[G_Map] & GS01_TOXIC_DOOR_OPEN)
+		{
+			status = 7;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Find a blue keycard in the sewers");
+		}
+		else if(status == 7 && LevelKeyFound[1])
+		{
+			status = 8;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Open the blue door");
+		}
+		else if(status == 8 && LevelKeyUsed[1])
+		{
+			status = 9;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Proceed to the green zone");
+			ACS_NamedExecuteAlways("AddMission", MISSION_CLOSEPORTAL, 1, NULL);
+		}
+		
+		break;
+	case MISSION_REDKEY:
+	case MISSION_BLUEKEY:
+	case MISSION_YELLOWKEY:
+		
+		if(status == MISSION_GOT && (LevelKeyFound[keyindex] || LevelKeyFound[keyindex + 3]))
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = 50;
+		}
+		else if(status == 50 && (LevelKeyUsed[keyindex] || LevelKeyUsed[keyindex + 3]))
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = MISSION_DONE;
+			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+		}
+		
+		break;
+	case MISSION_ALLKEYS:
+	
+		int allkeys = CheckAllKeysUsed();
+		
+		if(status == MISSION_GOT)
+		{
+			//......
+		}
+		else if(allkeys == 0)
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = MISSION_DONE;
+			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+		}
+		
+		break;
+	case MISSION_EACHKEY:
+	case MISSION_ANYKEY:
+		break;
+	case MISSION_CLOSEPORTAL:
+	
+		int marineID = 200; // TODO: Add Marine
+		int marineTID = GetActorTID(marineID);
+		
+		int bossID = 201; // TODO: Add Boss
+		int bossTID = GetActorTID(bossID);
+		bool bossAlive = IsAlive(bossTID);
+		
+		int minionID = 202; // TODO: Add Minions
+		int minionCount = ThingCountID(minionID);
+		
+		if(status == MISSION_GOT && G_Status[G_Map] & GS01_MARINES_FOUND)
+		{
+			status = 2;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Speak to (TODO: Add Marine) about the portal");
+		}
+		else if(status == 2) // speak to check GetActorTID(id).GetUserVar(tid, "var mission_active")
+		{
+			status = 3;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Enter the portal");
+		}
+		else if(status == 3 && IsAlert(bossTID))
+		{
+			status = 4;
+			ACS_NamedExecuteAlways("ObjectiveAlert", 0, "Kill the creatures controlling the portal");
+		}
+		else if(status == 4)
+		{
+			if(!bossAlive)
+			{
+				
+			}
+			
+			//update screen vars and menu stuffs
+			//play boss music?
+		}
+		else if(status == 5 && G_Status[G_Map] & GS01_HELL_PORTAL_CLOSED)
+		{
+			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
+			status = MISSION_DONE;
+			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+		}
+		
+		break;
+	}
+	
+	if(status != GetMissionStatus(mission, map, owner))
+		SetMissionStatus(mission, map, owner, status);
+	
+	if(status == MISSION_DONE)
+		terminate;
+	
+	Delay(1);
+	restart;
+}

@@ -3,13 +3,17 @@
 #include "zcommon.acs"
 
 #import "RPGConst.acs"
+#import "RPGPlist.acs"
 #import "RPGAFunc.acs"
 #import "RPGPFunc.acs"
 
 script "PlayerRage" (int amt)
 {
-	IncrementUserVar(0, "rage", amt);
-	//RageAlert if rage is active and perk taken
+	if(GetPerk(PERK_Rage))
+	{
+		IncrementUserVar(0, "rage", amt);
+		//RageAlert if rage is active and perk taken
+	}
 }
 
 script "PlayerRageTracker" enter

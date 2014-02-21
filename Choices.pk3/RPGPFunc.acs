@@ -3,60 +3,70 @@
 #include "zcommon.acs"
 
 #import "RPGConst.acs"
+#import "RPGMVars.acs"
+#import "RPGPList.acs"
 #import "RPGAFunc.acs"
+#import "RPGColor.acs"
 
-/*
-Handles player related functions
-
-Contains these functions:
-+	GetLevel(int player);
-+	GetLevelUp(int level);
-+	GetExp(int player);
-+	GetRenown(int player);
-+	BumpLevel(int player);
-+	IsPlayer(int tid);
-+	PlayerFreeze(bool active);
-*/
-
-function int GetLevel (int player)
+function int GetPerk (int perk)
 {
-	return GetUserVar(TID_PLAYER + player, "level");
+	return GetUserArray(0, "user_perks", perk);
 }
 
-function int GetLevelUp (int level)
+function int GetPerkChosen (int perk)
 {
-	return (250 + (level - 1) * 50) * level;
+	int player = PlayerNumber();
+	return Menu_PerkChosen[perk][player];
 }
 
-function int GetExp (int player)
+function int PerkChosenPos (int pos)
 {
-	return GetUserVar(TID_PLAYER + player, "experience");
+	int i = -1, p;
+	
+	for(p = 0; p < PERK_ARRAY && i < pos; p++)
+		if(GetPerkChosen(p) > 0)
+			i++;
+	
+	if(pos == EXCEPTION)
+		return EXCEPTION;
+	
+	return p;
 }
 
-function int GetRenown (int player)
+function bool CheckPerkReqs (int perk)
 {
-	return GetUserVar(TID_PLAYER + player, "renown");
+	return true;
 }
 
-function void BumpLevel (int player)
+function str ListPerks (int status)
 {
-	SetUserVar(TID_PLAYER + player, "level", GetLevel(player) + 1);
-}
-
-function bool IsPlayer (int tid)
-{
-	return (tid >= 1024 && tid <= 1031);
-}
-
-function void PlayerFreeze (bool active)
-{
-	if(active)
+	str ret = "";
+	
+	int player = PlayerNumber();
+	int selected = Menu_Selection[player];
+	int color = CR_UNTRANSLATED;
+	int total = PERK_ARRAY;
+	
+	for(int i = 0; i < PERK_ARRAY; i++)
 	{
-		Thing_Stop(0);
-		SetPlayerProperty(false, true, PROP_TOTALLYFROZEN);
+		bool has = GetPerk(i) || GetPerkChosen(i) || (Menu_ItemDrag[player] == i && Menu_IsDragging[player]);
+		
+		if(has)
+		{
+			total--;
+			continue;
+		}
+		
+		else if(i == selected && status == M_STATUS_OVER && Menu_DragOrigin[player] == MDO_PERKLIST)
+			color = CR_WHITE;
+		
+		else if(CheckPerkReqs(i))
+			color = CR_GREEN;
+		
+		else if(!CheckPerkReqs(i))
+			color = CR_RED;
+		
+		ret = StrParam(s:ret, s:CR(color), s:PerkInfo[i][PI_NAME], s:"\n");
 	}
-	else
-	{
-		SetPlayerProperty(false, false, PROP_TOTALLYFROZEN);
-	}
+	return ret;
 }

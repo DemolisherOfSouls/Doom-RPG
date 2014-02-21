@@ -1,0 +1,41 @@
+Actor Item_ArmorBase : Item_Base
+{
+	Radius 20
+	Height 16
+	
+	Inventory.PickupSound "Pickup/Armor"
+}
+
+Actor Item_ArmorGreen : BasicArmorPickup replaces GreenArmor
+{
+	Inventory.Icon "ARM1A0"
+	
+	Armor.MaxFullAbsorb 2
+	Armor.SavePercent 40
+	Armor.SaveAmount 100
+	
+	States
+	{
+	Spawn:
+		ARM1 A 6
+		ARM1 B 7 bright
+		loop
+	}
+}
+
+Actor Item_ArmorBlue : BasicArmorPickup replaces BlueArmor
+{
+	Inventory.Icon "ARM2A0"
+	
+	Armor.MaxFullAbsorb 5
+	Armor.SavePercent 60
+	Armor.SaveAmount 200
+	
+	States
+	{
+	Spawn:
+		ARM2 A 6
+		ARM2 B 7 bright
+		loop
+	}
+}

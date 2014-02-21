@@ -1,0 +1,7 @@
+Actor WeaponProj_LaserRifle : WeaponProj_Laser
+{
+	Damage (CallACS("WeaponDamage", WD_LASERRIFLE))
+	DamageType "Player_PlasmaRifle"
+	SeeSound "Weapon/LaserRifle"
+	Decal "RailScorch"
+}

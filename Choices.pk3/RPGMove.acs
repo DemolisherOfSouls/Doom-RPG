@@ -2,16 +2,18 @@
 
 #include "zcommon.acs"
 
-script "PlayerMove" enter
+int ShiftValue = 1;
+
+function void Shift (void)
 {
 	if(GetActorVelX(0) + GetActorVelY(0) == 0)
-		SetActorVelocity(0, 1, 0, 0, true, false);
-	
-	Delay(1);
-	
-	if(GetActorVelX(0) + GetActorVelY(0) == 0)
-		SetActorVelocity(0, -1, 0, 0, true, false);
-	
+		SetActorVelocity(0, ShiftValue, 0, 0, true, false);
+	ShiftValue = -ShiftValue;
+}
+
+script "PlayerMove" enter
+{
+	Shift();
 	Delay(1);
 	Restart;
 }

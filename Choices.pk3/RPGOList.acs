@@ -1,0 +1,209 @@
+#library "RPGOList"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGIList.acs"
+
+#libdefine MI_NAME		0
+#libdefine MI_DESC		1
+#libdefine MI_TYPE		2
+
+#libdefine MIDS_KEY		"This key looks important, there is probably a door or switch that uses it."
+#libdefine MIDS_DOOR	"This door is locked, there should be a key around here to open it."
+
+#libdefine MISSION_FAIL -100		//Mission cannot be completed this playthrough
+#libdefine MISSION_PMAP -2			//Mission paused due to leaving the map, mission is level specific
+#libdefine MISSION_STOP -1			//Mission stopped temporarily, NPC unavailable, level blocked, etc.
+#libdefine MISSION_NONE	0			//Mission unknown
+#libdefine MISSION_GOT	1			//Mission started
+#libdefine MISSION_DONE	100			//Mission complete
+#libdefine MISSION_LIST	101			//Mission complete, show in completed list
+
+#libdefine MISSION_KEY_START		0
+#libdefine MISSION_REDCARD			0
+#libdefine MISSION_BLUECARD			1
+#libdefine MISSION_YELLOWCARD		2
+#libdefine MISSION_REDSKULL			3
+#libdefine MISSION_BLUESKULL		4
+#libdefine MISSION_YELLOWSKULL		5
+#libdefine MISSION_KEY_END			5
+#libdefine MISSION_KEYOBJ_START		6
+#libdefine MISSION_REDCARDOBJ		6
+#libdefine MISSION_BLUECARDOBJ		7
+#libdefine MISSION_YELLOWCARDOBJ	8
+#libdefine MISSION_REDSKULLOBJ		9
+#libdefine MISSION_BLUESKULLOBJ		10
+#libdefine MISSION_YELLOWSKULLOBJ	11
+#libdefine MISSION_KEYOBJ_END		11
+#libdefine MISSION_MAIN_START		12
+#libdefine MISSION_REDKEY			13
+#libdefine MISSION_BLUEKEY			14
+#libdefine MISSION_YELLOWKEY		15
+#libdefine MISSION_ALLKEYS			16
+#libdefine MISSION_EACHKEY			17
+#libdefine MISSION_ANYKEY			18
+#libdefine MISSION_REDKEYOBJ		19
+#libdefine MISSION_BLUEKEYOBJ		20
+#libdefine MISSION_YELLOWKEYOBJ		21
+#libdefine MISSION_CLOSEPORTAL		22
+#libdefine MI_ARRAY					23
+
+str MissionInfo[MI_ARRAY][3] =
+{
+	{ "Gain Red Keycard Access", MIDS_KEY, "Key" },
+	{ "Use The Blue KeyCard", MIDS_KEY, "Key" },
+	{ "Use The Yellow KeyCard", MIDS_KEY, "Key" },
+	{ "Use The Red Skull Key", MIDS_KEY, "Key" },
+	{ "Use The Blue Skull Key", MIDS_KEY, "Key" },
+	{ "Use The Yellow Skull Key", MIDS_KEY, "Key" },
+	{ "Find The Red KeyCard", MIDS_DOOR, "Key" },
+	{ "Find The Blue KeyCard", MIDS_DOOR, "Key" },
+	{ "Find The Yellow KeyCard", MIDS_DOOR, "Key" },
+	{ "Find The Red Skull Key", MIDS_DOOR, "Key" },
+	{ "Find The Blue Skull Key", MIDS_DOOR, "Key" },
+	{ "Find The Yellow Skull Key", MIDS_DOOR, "Key" },
+	{ "Rendezvous With Base", "The Mars Commander has requested your assistance in dealing with the invasion.", "Main" },
+	{ "Close the Portal", "There is a detachment of Marines guarding an active portal, Assist them.", "Secondary" }
+};
+
+#libdefine OD_TYPE			0 // Type of objective
+#libdefine OD_NAMEINDEX		1 // Index of objective name in index
+#libdefine OD_DESCINDEX		2 // Index of objective description in index
+#libdefine OD_ICONINDEX		3 // Index of objective icon in index
+#libdefine OD_DATA1			4 // Objective Data 1
+#libdefine OD_DATA2			5 // Objective Data 2
+#libdefine OD_DATA3			6 // Objective Data 3
+#libdefine OD_DATA4			7 // Objective Data 4
+#libdefine OD_DATA5			8 // Objective Data 5
+#libdefine OD_DATA6			9 // Objective Data 6
+#libdefine OD_DATA7			10 // Objective Data 7
+#libdefine OD_ARRAY			11 // Array Size
+
+#libdefine ODT_NONE 		0 // (none)
+#libdefine ODT_FIND			1 // (find, <method>[, <map>], <data>[, <amt>])
+
+	#libdefine ODD1_KEY		0 // (find, key, <lock>)
+	#libdefine ODD1_ITEM	1 // (find, item, <item>, <amt>)
+	#libdefine ODD1_MAP		2 // (find, <method>|map, <map>, <data>[, <amt>])
+	#libdefine ODD1_MARKER	4 // (find, <method>|marker[|map, <map>], <data>[, <amt>], <markid>)
+
+#libdefine ODT_KILL			2 // (kill, <method>, <alignment>, <filter>[, <map>][, <data>][, <amt>])
+	
+	#libdefine ODD2_ALL		0 // (kill, all, <alignment>, <filter>[, <data>])
+	#libdefine ODD2_AMT		1 // (kill, amt, <alignment>, <filter>[, <data>], <amt>)
+	#libdefine ODD2_MAP		2 // (kill, <method>|map, <alignment>, <filter>, <map>[, <data>][, <amt>])
+	
+		#libdefine ODD2_X_MARINE	0 // (kill, <method>, marine, <filter>[, <map>][, <data>][, <amt>])
+		#libdefine ODD2_X_HELL		1 // (kill, <method>, hell, <filter>[, <map>][, <data>][, <amt>])
+		#libdefine ODD2_X_VOID		2 // (kill, <method>, void, <filter>[, <map>][, <data>][, <amt>])
+	
+			#libdefine ODD2_XX_ALL	0 // (kill, <method>, <alignment>, all[, <map>][, <amt>])
+			#libdefine ODD2_XX_ID	1 // (kill, <method>, <alignment>, id[, <map>], <id>[, <amt>])
+			#libdefine ODD2_XX_TYPE	2 // (kill, <method>, <alignment>, type[, <map>], <type>[, <amt>])
+	
+#libdefine ODT_PROTECT		3 // (protect, <method>, <alignment>, <map>, <id>)
+
+	#libdefine ODD3_NOFAIL	0 // (protect, <nofail>, <alignment>, <map>, <id>)
+	#libdefine ODD3_FAILOK	1 // (protect, <failok>, <alignment>, <map>, <id>)
+	#libdefine ODD3_FAILBAD	2 // (protect, <failbad>, <alignment>, <map>, <id>)
+	
+		#libdefine ODD3_X_MARINE	0 // (protect, <method>, marine, <map>, <id>)
+		#libdefine ODD3_X_HELL		1 // (protect, <method>, hell, <map>, <id>)
+		#libdefine ODD3_X_VOID		2 // (protect, <method>, void, <map>, <id>)
+	
+#libdefine ODT_GOTO			4 // (goto, <map>, <area>)
+#libdefine ODT_TALK			5 // (talk, <method>, <alignment>, <filter>[, <map>][, <data>])
+
+	#libdefine ODD5_GAME 	0 // (talk, game, <alignment>, <filter>[, <data>])
+	#libdefine ODD5_MAP		1 // (talk, map, <alignment>, <filter>, <map>[, <data>])
+	
+		#libdefine ODD5_X_MARINE	0 // (talk, <method>, marine, <filter>[, <map>][, <data>])
+		#libdefine ODD5_X_HELL		1 // (talk, <method>, hell, <filter>[, <map>][, <data>])
+		#libdefine ODD5_X_VOID		2 // (talk, <method>, void, <filter>[, <map>][, <data>])
+		
+			#libdefine ODD5_XX_ANY	0 // (talk, <method>, <alignment>, all[, <map>])
+			#libdefine ODD5_XX_ID	1 // (talk, <method>, <alignment>, id[, <map>], <id>)
+			#libdefine ODD5_XX_TYPE	2 // (talk, <method>, <alignment>, type[, <map>], <type>)
+
+#libdefine ODT_MISSION		6 // (mission, <id>, <progress>)
+#libdefine ODT_LSTATUS		7 // (lstatus, <map>, <bit>)
+#libdefine ODT_GSTATUS		8 // (gstatus, <flags>, <bit>)
+#libdefine ODT_PURITY		9 // (purity, <condition>, <value>, <filter>[, <map>][, <data>])
+#libdefine ODT_CRAFT		10 // (craft, <method>[, craftcat, recipe])
+#libdefine ODT_SELL			11 // (sell, <method>[, data])
+#libdefine ODT_BUY			12 // (buy, <method>[, data])
+#libdefine ODT_TRAIN		13 // (train, <method>[, data])
+#libdefine ODT_DAMAGE		14 // (damage, <method>[, type[, amt]])
+
+	#libdefine ODD14_ALL 	0 // (damage, all)
+	#libdefine ODD14_WEAPON	1 // (damage, weapon, <weapontype>)
+	#libdefine ODD14_TYPE	2 // (damage, type, <alignment>, <type>)
+	#libdefine ODD14_FOLLOW	3 // (damage, follower)
+
+		#libdefine ODD14_X_MARINE	0 // (damage, type, marine, <filter>[, <map>][, <data>])
+		#libdefine ODD14_X_HELL		1 // (damage, type, hell, <filter>[, <map>][, <data>])
+		#libdefine ODD14_X_VOID		2 // (damage, type, void, <filter>[, <map>][, <data>])
+		
+			#libdefine ODD14_XX_ANY		0 // (damage, <method>, <alignment>, all[, <map>])
+			#libdefine ODD14_XX_ID		1 // (damage, <method>, <alignment>, id[, <map>], <id>)
+			#libdefine ODD14_XX_TYPE	2 // (damage, <method>, <alignment>, type[, <map>], <type>)
+
+#libdefine ODT_HURT			15
+#libdefine ODT_LEARN		16
+#libdefine ODT_UNLOCK		17 // (unlock, <method>[, <map>], <lock>)
+
+	#libdefine ODD17_LOCK		0 // (unlock, lock, <lock>)
+	#libdefine ODD17_LOCKMAP	1 // (unlock, lockmap, <map>, <lock>)
+
+#libdefine ODT_FIRE			18 // (fire, <method>[, <weapon>[, <variant>]], <amt>)
+
+	#libdefine ODD18_ANY		0 // (fire, any, <amt>)
+	#libdefine ODD18_ANYVAR		1 // (fire, anyvar, <weapon>, <amt>)
+	#libdefine ODD18_SPEC		2 // (fire, spec, <weapon>, <variant>, <amt>)
+	
+#libdefine ODT_RELOAD		19
+#libdefine ODT_DISCOVER		20
+#libdefine ODT_MOD			21
+
+#libdefine ON_FIND_REDCARD	0
+#libdefine ON_FIND_BLUECARD	1
+#libdefine ON_KILL_BARON	2
+
+str ObjectiveName[3] =
+{
+	"Find the Red Keycard",
+	"Find the Blue Keycard",
+	"Kill the Baron"
+};
+
+#libdefine OI_REDCARD	0
+#libdefine OI_BLUECARD	1
+#libdefine OI_BARON		2
+
+str ObjectiveIcon[3] =
+{
+	"R",
+	"B",
+	"B"
+};
+
+#libdefine OT_RPG01_REDCARD		0
+#libdefine OT_RPG01_BLUECARD	1
+#libdefine OT_RPG01_BARON		2
+
+str ObjectiveText[3] =
+{
+	"Find the Red Keycard in RPG01",
+	"Find the Blue Keycard in RPG01",
+	"Kill the Baron holding the portal open"
+};
+
+int ObjectiveData[3][OD_ARRAY] =
+{
+	{ ODT_FIND, ON_FIND_REDCARD, OT_RPG01_REDCARD, OI_REDCARD, ODD1_KEY|ODD1_MAP, 1, KEY_REDCARD },
+	{ ODT_KILL, ON_KILL_BARON, OT_RPG01_BARON, OI_BARON, ODD2_AMT|ODD2_MAP, ODD2_X_MARINE, ODD2_XX_ID, 1 }
+};
+
+//Objectives and Missions need to be shared across all players, easier to use global arrays?
+

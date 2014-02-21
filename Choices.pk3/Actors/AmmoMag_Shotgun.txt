@@ -1,6 +1,5 @@
 Actor AmmoMag_Shotgun : Ammo
 {
-	Inventory.Amount 1
 	Inventory.MaxAmount 6
 	Ammo.BackpackAmount 0
 	Ammo.BackpackMaxAmount 6

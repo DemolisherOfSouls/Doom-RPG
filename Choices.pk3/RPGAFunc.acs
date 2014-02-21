@@ -4,21 +4,95 @@
 
 #import "RPGConst.acs"
 
-/*
-Handles generic functions
+int NextEnemyTID = TID_ENEMY;
+int NextAllyTID = TID_ALLY;
 
-Contains these functions:
-+	GetUserVar(int tid, str var);
-+	SetUserVar(int tid, str var, int value);
-+	IncrementUserVar(int tid, str var, int value);
-+	Min(int value, int mi);
-+	Max(int value, int ma);
-+	Range(int value, int mi, int ma);
-+	KeyPress(int key);
-+	OldKeyPress(int key);
-+	KeyExec(int key);
-+	ClearMessage(int start, int num);
-*/
+function int ThingCountID (int id)
+{
+	int count = 0, i;
+	
+	for(i = TID_ENEMY; i < NextEnemyTID; i++)
+		if(GetUserVar(i, "id") == id)
+			count++;
+	
+	for(i = TID_ALLY; i < NextAllyTID; i++)
+		if(GetUserVar(i, "id") == id)
+			count++;
+	
+	return count;
+}
+
+function int GetActorTID (int id)
+{
+	int tid;
+	
+	for(tid = TID_ENEMY; tid < NextEnemyTID; tid++)
+		if(GetUserVar(tid, "id") == id)
+			return tid;
+	
+	for(tid = TID_ALLY; tid < NextAllyTID; tid++)
+		if(GetUserVar(tid, "id") == id)
+			return tid;
+	
+	return EXCEPTION;
+}
+
+function int GetHTID (int tid)
+{
+	if(tid == 0)
+		tid = ActivatorTID();
+	if(IsPlayer(tid))
+		return tid - TID_PLAYER + TID_PLAYERHEAD;
+	
+	return tid + TID_MAX;
+}
+
+function int GetTID (int tid)
+{
+	int value = EXCEPTION, next = EXCEPTION;
+	
+	if(tid == TID_ENEMY || tid == TID_ALLY)
+	{
+		value = UniqueTID(tid, TID_MAX);
+		next = UniqueTID(value + 1, tid * 2 - value - 1);
+	}
+	switch(tid)
+	{
+	case TID_PLAYER:
+	case TID_PLAYERHEAD:
+	case TID_PLAYERSPOT:
+	case TID_DEATHCAM:
+		value = PlayerNumber() + tid;
+		break;
+	case TID_ENEMY:
+		NextEnemyTID = next;
+		break;
+	case TID_ALLY:
+		NextAllyTID = next;
+		break;
+	case TID_ENEMYHEAD:
+	case TID_ALLYHEAD:
+		value = ActivatorTID() + TID_MAX;
+		break;
+	}
+	
+	return value;
+}
+
+function str SurroundNumber (str pre, int value, str post)
+{
+	return StrParam(s:pre, i:value, s:post);
+}
+
+function str PSurroundNumber (int value)
+{
+	return StrParam(s:"(", i:value, s:")");
+}
+
+function void CallACS (str name, int v1, int v2, int v3)
+{
+	ACS_NamedExecuteAlways(name, 0, v1, v2, v3);
+}
 
 function int GetUserVar (int tid, str var)
 {
@@ -35,6 +109,66 @@ function void IncrementUserVar (int tid, str var, int value)
 	SetUserVar(tid, var, GetUserVar(tid, var) + value);
 }
 
+function void InvertUserVar (int tid, str var)
+{
+	SetUserVar(tid, var, !GetUserVar(tid, var));
+}
+
+function void IncrementUserArray (int tid, str var, int pos, int value)
+{
+	SetUserArray(tid, strparam(s:"user_", s:var), pos, GetUserArray(tid, strparam(s:"user_", s:var), pos) + value);
+}
+
+function void CopyActorPosition (int tid, int spot)
+{
+	SetActorPosition(tid, GetActorX(spot), GetActorY(spot), GetActorZ(spot), false);
+	SetActorAngle(tid, GetActorAngle(spot));
+	SetActorPitch(tid, GetActorPitch(spot));
+}
+
+function void IncrementActorProperty (int tid, int aprop, int value)
+{
+	SetActorProperty(tid, aprop, GetActorProperty(tid, aprop) + value);
+}
+
+function void CopyActorProperty (int tid, int aprop, int fromtid)
+{
+	SetActorProperty(tid, aprop, GetActorProperty(fromtid, aprop));
+}
+
+function void RemoveInventory (str item)
+{
+	SetInventory(item, 0);
+}
+
+function void SetInventory (str item, int amt)
+{
+	int cur = CheckInventory(item);
+	
+	if(cur > amt)
+		TakeInventory(item, cur - amt);
+	else if(cur < amt)
+		GiveInventory(item, amt - cur);
+}
+
+function int Abs (int value)
+{
+	if(value < 0)
+		return -value;
+	return value;
+}
+
+function int Pow (int base, int exp)
+{
+	if(exp == 0)
+		return 1;
+	
+	for(int i = 1; i < exp; i++)
+		base *= base;
+	
+	return base;
+}
+
 function int Max (int value, int ma)
 {
 	if(value > ma)
@@ -49,9 +183,51 @@ function int Min (int value, int mi)
 	return value;
 }
 
+function int Greater (int value1, int value2)
+{
+	if(value1 > value2)
+		return value1;
+	return value2;
+}
+
+function bool Compare (str s1, str s2)
+{
+	return StrIcmp(s1, s2) == 0;
+}
+
+function int F2IC (int value)
+{
+	return I2F(F2I(value)) + 0.1;
+}
+
+function int F2I (int value)
+{
+	return value / 1.0;
+}
+
+function int I2F (int value)
+{
+	return value * 1.0;
+}
+
+function int I2IC (int value)
+{
+	return I2F(value) + 0.1;
+}
+
+function int I2TC (int value, int unit)
+{
+	return I2F(value) + I2F(unit) / 2;
+}
+
 function int Range (int value, int mi, int ma)
 {
 	return Max(Min(value, mi), ma);
+}
+
+function bool WithinRange (int value, int mi, int ma)
+{
+	return (value >= mi && value <= ma);
 }
 
 //**********************************************************************************************************************
@@ -79,8 +255,100 @@ function bool KeyExec (int key)
 
 function void ClearMessage(int start, int num)
 {
-	for(int i = start; start < i+num; i++)
-	{
+	for(int i = start; i < start+num; i++)
 		HudMessage(s:""; HUDMSG_PLAIN, i, CR_UNTRANSLATED, 0, 0, 0);
-	}
+}
+
+function void ClearMessage2(int start, int afterlast)
+{
+	for(int i = start; i < afterlast; i++)
+		HudMessage(s:""; HUDMSG_PLAIN, i, CR_UNTRANSLATED, 0, 0, 0);
+}
+
+function void ClearMessage3(int end, int afterfirst)
+{
+	for(int i = end; i > afterfirst; i--)
+		HudMessage(s:""; HUDMSG_PLAIN, i, CR_UNTRANSLATED, 0, 0, 0);
+}
+
+//**********************************************************************************************************************
+//	Player Commands
+//**********************************************************************************************************************
+
+function int GetLevel (void)
+{
+	return GetUserVar(0, "level");
+}
+
+function int GetLevelP (int player)
+{
+	return GetUserVar(TID_PLAYER + player, "level");
+}
+
+function int GetLevelUp (int level)
+{
+	return 25 * (3 * (level + 1) + 2) * level;
+}
+
+function int GetExp (void)
+{
+	return GetUserVar(0, "experience");
+}
+
+function int GetRenown (void)
+{
+	return GetUserVar(0, "renown");
+}
+
+function void BumpLevel (void)
+{
+	IncrementUserVar(0, "level", 1);
+}
+
+function bool IsAlive (int tid)
+{
+	if(tid == EXCEPTION)
+		return false;
+	
+	return GetActorProperty(tid, APROP_Health) > 0;
+}
+
+function bool IsAwake (int tid)
+{
+	return GetUserVar(tid, "awake");
+}
+
+function bool IsAlert (int tid)
+{
+	return GetUserVar(tid, "alert");
+}
+
+function bool IsPlayer (int tid)
+{
+	if(tid == 0)
+		tid = ActivatorTID();
+	
+	return WithinRange(tid, TID_PLAYER, TID_PLAYER + 7);
+}
+
+function bool IsEnemy (int tid)
+{
+	if(tid == 0)
+		tid = ActivatorTID();
+	
+	return WithinRange(tid, TID_ENEMY, TID_ENEMY + 1023);
+}
+
+function bool IsAlly (int tid)
+{
+	if(tid == 0)
+		tid = ActivatorTID();
+	
+	return WithinRange(tid, TID_ALLY, TID_ALLY + 1023);
+}
+
+function void PlayerFreeze (bool active)
+{
+	Thing_Stop(0);
+	SetPlayerProperty(false, active, PROP_TOTALLYFROZEN);
 }

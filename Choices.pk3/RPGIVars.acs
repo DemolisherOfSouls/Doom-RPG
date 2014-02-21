@@ -2,3 +2,7 @@
 
 int WaitingMoney[8];
 int WaitingSouls[8];
+int WaitingAmmo[5][8];
+
+bool LevelKeyFound[6];
+bool LevelKeyUsed[6];

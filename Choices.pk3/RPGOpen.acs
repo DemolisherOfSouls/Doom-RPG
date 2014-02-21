@@ -1,0 +1,209 @@
+#library "RPGOpen"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGAFunc.acs"
+
+int IsMap_LumpChar[8];
+str IsMap_LumpStr;
+str IsMap_NameStr;
+
+str DoomMapNames[4] =
+{
+	"Hangar",
+	"Deimos Anomaly",
+	"Hell Keep",
+	"Hell Beneath"
+};
+
+function bool IsMap_EXMX (void)
+{
+	if(StrCpy(a:IsMap_LumpChar, IsMap_LumpStr))
+	{
+		int c_e = IsMap_LumpChar[0];
+		int c_m = IsMap_LumpChar[2];
+		
+		return(  (c_e == 'e' || c_e == 'E')  &&  (c_m == 'm' || c_m == 'M')  );
+	}
+	return false;
+}
+
+function bool IsMap_EXMX_Episode (int episode)
+{
+	str needed = StrParam(s:"e", i:episode, s:"m");
+	return StrICmp(needed, IsMap_LumpStr, 3) == 0;
+}
+
+function bool IsMap_RPGXX (void)
+{
+	return StrICmp("rpg", IsMap_LumpStr, 3) == 0;
+}
+
+function bool IsMap_MAPXX (void)
+{
+	return StrICmp("map", IsMap_LumpStr, 3) == 0;
+}
+
+function bool CompareMapNameE (int episode)
+{
+	return CompareMapName(DoomMapNames[episode - 1]);
+}
+
+function bool CompareMapName (str name)
+{
+	return Compare(IsMap_NameStr, name);
+}
+
+function bool CompareMapLump (str lump)
+{
+	return Compare(IsMap_LumpStr, lump);
+}
+
+function bool CompareMapLump_EXMX (int e, int m)
+{
+	return Compare(IsMap_LumpStr, GetMapLump_EXMX(e, m));
+}
+
+function str GetDoubleDigit (int value)
+{
+	value %= 100;
+	
+	if(WithinRange(value, 10, 99))
+		return StrParam(i:value);
+	else if(WithinRange(value, 1, 9))
+		return StrParam(s:"0", i:value);
+	
+	return "00";
+}
+
+function str GetMapLump_EXMX (int e, int m)
+{
+	return StrParam(s:"e", i:e, s:"m", i:m);
+}
+
+function str GetMapLump_MAPXX (int m)
+{
+	return StrParam(s:"map", s:GetDoubleDigit(m));
+}
+
+function int GetMapNum_MAPXX (void)
+{
+	for(int num = 0; num < LEVELNUM_ARRAY; num++)
+		if(CompareMapLump(GetMapLump_MAPXX(num)))
+			return num;
+	return 0;
+}
+
+function int GetMapNum_EXMX (void)
+{
+	int ep = G_Episode;
+	int e = 0, m;
+	
+	if(WithinRange(ep - EP_DoomE, 1, 4))
+		e = ep - EP_DoomE;
+	
+	else if(WithinRange(ep - EP_DoomEXMod, 1, 4))
+		e = ep - EP_DoomEXMod;
+	
+	if(e != 0)
+		for(m = 0; m < 100; m++)
+			if(CompareMapLump_EXMX(e, m))
+				return m;
+	else
+		for(e = 0; e < 10; e++)
+			for(m = 0; m < 100; m++)
+				if(CompareMapLump_EXMX(e, m))
+					return m;
+	
+	return 0;
+}
+
+// Returns true if episode has changed, false otherwise
+function bool EpisodeChanged (void)
+{
+	int this = GetEpisode();
+	int old = G_Episode;
+	
+	if(old == this)
+		return false;
+	
+	if(old <= EP_DoomMod)
+		for(int e = 1; e <= 4; e++)
+		{
+			int pure = EP_DoomE + e;
+			int mod = EP_DoomEXMod + e;
+			
+			if( (old == pure || old == mod) && (this == pure || this == mod) )
+				return false;
+		}
+	
+	if( WithinRange(old, EP_Doom2, EP_Plutonia) )
+		if( this == EP_Doom2Mod )
+			return false;
+	
+	return true;
+}
+
+function int GetEpisode (void)
+{
+	IsMap_NameStr = StrParam(n:PRINTNAME_LEVELNAME);
+	IsMap_LumpStr = StrParam(n:PRINTNAME_LEVEL);
+	
+	if(IsMap_RPGXX())
+		return EP_RPG;
+	
+	if(IsMap_EXMX())
+	{
+		for(int e = 1; e <= 4; e++)
+		{
+			if( IsMap_EXMX_Episode(e) )
+			{
+				if( CompareMapNameE(e) )
+					return EP_DoomE + e;
+				
+				return EP_DoomEXMod + e;
+			}
+		}
+		
+		return EP_DoomMod;
+	}
+
+	if(IsMap_MAPXX())
+	{
+		if( CompareMapName("Entryway") )
+			return EP_Doom2;
+		
+		if( CompareMapName("System Control") )
+			return EP_TNT;
+		
+		if( CompareMapName("Congo") )
+			return EP_Plutonia;
+		
+		return EP_Doom2Mod;
+	}
+	
+	if(CompareMapLump("TitleMap"))
+		return EP_TitleMap;
+	
+	return EP_Unknown;
+}
+
+script "MapInit" open
+{
+	if(EpisodeChanged())
+		G_Episode = GetEpisode();
+	
+	if(G_Episode <= EP_DoomMod)
+		G_Map = GetMapNum_EXMX();
+	
+	else if(WithinRange(G_Episode, EP_Doom2, EP_Doom2Mod))
+		G_Map = GetMapNum_MAPXX();
+	
+	else if(G_Episode == EP_RPG)
+		G_Map = GetLevelInfo(LEVELINFO_LEVELNUM);
+	
+	else
+		G_Map = 0;
+}

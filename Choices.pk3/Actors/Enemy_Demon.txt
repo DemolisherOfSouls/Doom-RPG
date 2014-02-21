@@ -20,14 +20,12 @@ Actor Enemy_Demon : Enemy_Demonic replaces Demon
 	
 	States
 	{
-	Spawn.Stage1:
-		TNT1 A 0 A_SpawnItemEx("Enemy_DemonHead", 0, 0, 41, 0, 0, 0, 0, SXF_HEADSPAWN)
-		TNT1 A 0 A_Jump(Always, "Spawn.Stage2")
 	Spawn.Stage2:
 		SARG A 0 A_SetUserVar("user_rewardxp", 15)
 		SARG A 0 A_SetUserVar("user_paintime", 2)
-		Goto Idle
-	See:
+		SARG A 0 A_SetUserVar("user_type", ET_DEMON)
+		"####" A 0 A_Jump(Always, "Spawn.Final")
+	See.Real:
 		SARG AABBCCDD 2 A_Chase
 		Loop
 	Melee:

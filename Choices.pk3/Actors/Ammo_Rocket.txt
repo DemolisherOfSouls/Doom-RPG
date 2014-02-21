@@ -1,6 +1,5 @@
 Actor Ammo_Rocket : Ammo
 {
-	Inventory.Amount 1
 	Inventory.MaxAmount 32
 	Ammo.BackpackAmount 0
 	Ammo.BackpackMaxAmount 32

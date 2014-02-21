@@ -1,6 +1,6 @@
 Actor Item_SuperShotgun : Item_Weapon replaces SuperShotgun
 {
-	//SpawnID #
+	SpawnID 33
 	
 	States
 	{
@@ -9,8 +9,18 @@ Actor Item_SuperShotgun : Item_Weapon replaces SuperShotgun
 		SGN2 A 5 Bright
 		Loop
 	Pickup:
-		TNT1 A 0 A_GiveInventory("Weapon_SuperShotgun", 1)
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 4, W_SUPERSHOTGUN), "Pickup.Fail")
 		TNT1 A 0 A_GiveInventory("AmmoMag_SuperShotgun", 2)
-		Stop
+		Goto Pickup.Force
+	}
+}
+
+Actor Item_SuperShotgunDropped : Item_SuperShotgun
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 4, W_SUPERSHOTGUN), "Pickup.Fail")
+		Goto Pickup.Force
 	}
 }

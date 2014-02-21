@@ -1,0 +1,9 @@
+//Needs Icon
+
+Actor AmmoMag_LaserRifle : Ammo
+{
+	Inventory.MaxAmount 40
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 40
+	Inventory.Icon "PLASA0"
+}

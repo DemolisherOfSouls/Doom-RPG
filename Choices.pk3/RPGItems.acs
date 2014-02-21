@@ -3,55 +3,27 @@
 #include "zcommon.acs"
 
 #import "RPGConst.acs"
-#import "RPGAFunc.acs"
-#import "RPGPFunc.acs"
+#import "RPGGVars.acs"
 #import "RPGIVars.acs"
 #import "RPGIList.acs"
-
-#define EXPERIENCE_KEY		25
-
-script "KeyStorage" enter
-{
-	TakeInventory("RedCard", 1);
-	TakeInventory("BlueCard", 1);
-	TakeInventory("YellowCard", 1);
-	TakeInventory("RedSkull", 1);
-	TakeInventory("BlueSkull", 1);
-	TakeInventory("YellowSkull", 1);
-}
-
-script "Item_Key" (int keynum)
-{
-	ACS_NamedExecuteAlways("KeyAlert", 0, keynum);
-	//Set level key found array if not RPG
-	
-	//if(Game is RPG)
-	//{
-	//	ObjectiveAlert(int operation, int mission, int task);
-	//	Set objective marker
-	//	Update Screen
-	//}
-	//if(Game is Doom)
-	//{
-	//	SetUserArray(0, "keyloggerperkey", map, keynum - 1)
-	//}
-	
-	IncrementUserVar(0, "keysfound", 1);
-	ACS_NamedExecuteAlways("PlayerExp", 0, EXPERIENCE_KEY);
-}
+#import "RPGSList.acs"
+#import "RPGAFunc.acs"
+#import "RPGIFunc.acs"
+#import "RPGOFunc.acs"
+#import "RPGSFunc.acs"
 
 script "Item_Money" (int amt)
 {
 	int player = PlayerNumber();
 	
-	//if(Game is RPG)
-	//{
+	if(G_Episode == EP_RPG)
+	{
 	//	Update Screen
 	//	Alert player if items in wishlist can be afforded
 	//	WishListAlert(item);
-	//	Add amt to money found counter (rpg only because it requires the economy to be running)
-	//}
+	}
 	
+	IncrementUserVar(0, "moneyfound", amt);
 	WaitingMoney[player] += amt;
 }
 
@@ -59,13 +31,48 @@ script "Item_Soul" (int amt)
 {
 	int player = PlayerNumber();
 	
-	//if(Game is RPG)
-	//{
+	if(G_Episode == EP_RPG)
+	{
 	//	Update Screen
 	//	Alert player if items in wishlist can be afforded
 	//	WishListAlert(item);
-	//	Add amt to soul found counter (rpg only because it requires the demon economy to be running)
-	//}
+	}
 	
+	IncrementUserVar(0, "soulsfound", amt);
 	WaitingSouls[player] += amt;
+}
+
+script "Item_Ammo" (int amt, int type)
+{
+	SetResultValue(false);
+	
+	int player = PlayerNumber();
+	
+	if(!CheckAmmoFull(type))
+	{
+		SetResultValue(true);
+		WaitingAmmo[type][player] += amt;
+	}
+	else
+	{
+		Print(s:"Full Ammo");
+		//Ammo full alert
+	}
+}
+
+script "Item_Stimpack" (void)
+{
+	int player = PlayerNumber();
+	SetResultValue(false);
+	
+	if(GetActorProperty(0, APROP_Health) < GetActorProperty(0, APROP_SpawnHealth))
+	{
+		SetResultValue(true);
+		HealThing(10);
+	}
+	else if(GetSkill(SKILL_FieldMedic))
+	{
+		GiveInventory("Item_Carried_Stimpack", 1);
+		SetResultValue(true);
+	}
 }

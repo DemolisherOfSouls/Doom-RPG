@@ -1,0 +1,14 @@
+Actor ItemDrop_Chaingun : ItemDrop_Base
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_Jump(Always, "Drop.Chaingun", "Drop.Chaingun", "Drop.Minigun", "Drop.Minigun")
+	Drop.Chaingun:
+		TNT1 A 0 A_SpawnItem("Item_Chaingun")
+		Stop
+	Drop.Minigun:
+		TNT1 A 0 A_SpawnItem("Item_Minigun")
+		Stop
+	}
+}

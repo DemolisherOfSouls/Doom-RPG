@@ -1,0 +1,8 @@
+Actor Proj_Base : FastProjectile
+{
+	+BRIGHT
+	+DONTHARMSPECIES
+	+NOGRAVITY
+	+SEEKERMISSILE
+	+THRUSPECIES
+}

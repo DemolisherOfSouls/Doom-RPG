@@ -2,42 +2,19 @@
 
 #include "zcommon.acs"
 
-str PerkInfo[5][7] =
+#import "RPGConst.acs"
+#import "RPGPList.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+
+script "AddPerk" (int perk)
 {
+	SetUserArray(0, "user_perks", perk, 1);
+	ACS_NamedExecuteAlways("PerkAlert", 0, perk);
+	
+	switch(perk)
 	{
-		"Crafting I",	"Allows crafting of items at a workbench, and enables simple field crafting",
-		"Crafting consists of the construction of weapon parts and enhancements at a workbench\n",
-		"or in Marine controlled areas. You can also pay to have items assembled by Marine techs\n",
-		"that are in the world. Unless you have the specified crafting perk taken, or the\n",
-		"blueprints unlocked, you will not be able to utilize the crafting mechanic.",
-		"Requires level 5"
-	},{
-		"Skills I",		"Enables a wider variety of skills to be selected upon level up",
-		"Skills form your Marine's ability to handle himself, whether it's punching, shooting,\n",
-		"or sneaking through Mars and beyond. The Skills I perk unlocks more specialized skills\n",
-		"to help you develop a very specific playstyle, like a very fast stealth based character,\n",
-		"or an ammo regenerating chaingunner who has a squad of Marines at his side.",
-		"Requires level 5"
-	},{
-		"Skills II",	"Unlocks additional, more specific skills to select",
-		"",
-		"",
-		"",
-		"",
-		"Requires level 13"
-	},{
-		"Purity I",		"Enables the purity system, and allows you to influence Marines",
-		"",
-		"",
-		"",
-		"",
-		"Requires level 11"
-	},{
-		"Rage I",		"Enables the rage system, allowing your stats to improve while killing enemies",
-		"",
-		"",
-		"",
-		"",
-		"Requires level 15"
+	default:
+		break;
 	}
-};
+}

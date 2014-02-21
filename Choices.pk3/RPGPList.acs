@@ -1,0 +1,117 @@
+#library "RPGPList"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+
+#libdefine PI_NAME			0
+#libdefine PI_SUM			1
+#libdefine PI_DESC			2
+
+#libdefine PERK_Craft		0
+#libdefine PERK_Skill		1
+#libdefine PERK_Skill2		2
+#libdefine PERK_Rage		3
+#libdefine PERK_Pure		4
+#libdefine PERK_RageAssist	5
+#libdefine PERK_WeaponTech	6
+#libdefine PERK_ARRAY		7
+
+str PerkInfo[PERK_ARRAY][6] =
+{
+	{//lvl 5
+		"Crafting I",	"Allows crafting of items at a workbench, and enables simple field crafting",
+		"Crafting consists of the construction of weapon parts and enhancements at a workbench\n",
+		"or in Marine controlled areas. You can also pay to have items assembled by Marine techs\n",
+		"that are in the world. Unless you have the specified crafting perk taken, or the\n",
+		"blueprints unlocked, you will not be able to utilize the crafting mechanic."
+	},{//lvl 7
+		"Skills I",		"Enables a wider variety of skills to be selected upon level up",
+		"Skills form your Marine's ability to handle himself, whether it's punching, shooting,\n",
+		"or sneaking through Mars and beyond. The Skills I perk unlocks more specialized skills\n",
+		"to help you develop a very specific playstyle, like a very fast stealth based character,\n",
+		"or an ammo regenerating chaingunner who has a squad of Marines at his side."
+	},{//lvl 9
+		"Skills II",	"Unlocks additional, more specific skills to select",
+		"",
+		"",
+		"",
+		""
+	},{//lvl 11
+		"Rage I",		"Enables the rage skills, and allows rage to be accumulated in battle",
+		"",
+		"",
+		"",
+		""
+	},{//lvl 11
+		"Purity I",		"Enables the purity system, and allows you to influence Marines",
+		"",
+		"",
+		"",
+		""
+	},{//lvl 15
+		"Rage Assist",	"Enables the rage assist system, to keep your rage abilities strong",
+		"",
+		"",
+		"",
+		""
+	},{//lvl 15
+		"Weapon Tech",	"Can substitute currency for parts when modifying weapons",
+		"",
+		"",
+		"",
+		""
+	}
+};
+
+#libdefine PD_DATA		0
+
+#libdefine PDD_TYPE		0
+
+#libdefine PDD_RANK		1
+#libdefine PDD_ENDS		2
+
+#libdefine PD_REQ1		1
+#libdefine PD_REQ2		2
+#libdefine PD_REQ3		3
+
+
+int PerkData[PERK_ARRAY][4][3] =
+{
+	{
+		{ PERK_Craft },
+		{ Req_Level, 5 },
+		{ Null },
+		{ Null }
+	},{
+		{ PERK_Skill },
+		{ Req_Level, 7 },
+		{ Null },
+		{ Null }
+	},{
+		{ PERK_Skill2 },
+		{ Req_Level, 11 },
+		{ Null },
+		{ Null }
+	},{
+		{ PERK_Rage },
+		{ Req_Level, 11 },
+		{ Null },
+		{ Null }
+	},{
+		{ PERK_Pure },
+		{ Req_Level, 11 },
+		{ Null },
+		{ Null }
+	},{
+		{ PERK_RageAssist },
+		{ Req_Level, 15 },
+		{ Req_Perk, PERK_Rage },
+		{ Null }
+	},{
+		{ PERK_WeaponTech },
+		{ Req_Level, 15 },
+		{ Null },
+		{ Null }
+	}
+};

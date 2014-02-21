@@ -1,0 +1,16 @@
+Actor Item_BFG9000 : Item_Weapon replaces BFG9000
+{
+	//SpawnID #
+	
+	States
+	{
+	Spawn:
+		BFUG A 15
+		BFUG A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 8, W_BFG9000), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("AmmoMag_BFG9000", 40)
+		Goto Pickup.Force
+	}
+}

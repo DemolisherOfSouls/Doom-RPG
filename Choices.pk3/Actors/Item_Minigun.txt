@@ -1,0 +1,24 @@
+Actor Item_Minigun : Item_Weapon
+{
+	States
+	{
+	Spawn:
+		MNGN A 15
+		MNGN A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 5, W_MINIGUN), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("Ammo_Clip", 60)
+		Goto Pickup.Force
+	}
+}
+
+Actor Item_MinigunDropped : Item_Minigun
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 5, W_MINIGUN), "Pickup.Fail")
+		Goto Pickup.Force
+	}
+}

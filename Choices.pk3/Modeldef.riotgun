@@ -1,0 +1,21 @@
+Model WeaponProj_Riotgun
+{
+	Path "Models/Tracer"
+	Model 0 "Tracer.md2"
+	Skin 0 "Bullet.png"
+	Scale 0.7 0.7 0.7
+	PitchFromMomentum
+	
+	FrameIndex BULL A 0 0
+}
+
+Model WeaponProj_Riotgun
+{
+	Path "Models/Tracer"
+	Model 0 "Tracer.md2"
+	Skin 0 "Tracer.png"
+	Scale 0.8 0.8 0.8
+	PitchFromMomentum
+	
+	FrameIndex BULL B 0 0
+}

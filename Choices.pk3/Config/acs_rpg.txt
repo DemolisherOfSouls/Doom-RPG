@@ -1,0 +1,445 @@
+acs_rpg : acs_z {
+	name = "ACS (DoomRPG)";
+	
+	keywords = {
+		//common
+		player, value, tid, text, x, y, status, color,
+		
+		//menu coords
+		grid_x, grid_y,
+		menu_x, menu_y, tab_y, tab_x, title_x, title_y,
+		
+		//global vars
+		G_Episode, G_Map, G_Status, G_Keys, G_Reset
+	}
+	
+	constants = {
+		
+		TID_PLAYER, TID_ENEMY, TID_ALLY, TID_PLAYERSPOT, TID_DEATHCAM, TID_PLAYERHEAD,
+		TID_ALLYHEAD, TID_ENEMYHEAD,
+		
+		HEALTH_HEAD,
+		
+		MSG_CURSOR, MSG_LEFT, MSG_TOP, MSG_BOTTOM, MSG_CENTER,
+		MSG_WISH, MSG_OBJ, MSG_WEAPON, MSG_MENUFRONT,
+		MSG_MENUBACK, MSG_CURSORTEXT,
+		
+		ID_LEFT, ID_TOP, ID_BOTTOM, ID_CENTER,
+		
+		EXPERIENCE_KEY,
+		
+		EP_RPG, EP_Doom, EP_Doom2, EP_Doom2Mod, EP_TNT, EP_Unknown,
+		
+		HUD_WIDTH, HUD_HEIGHT, HUD_FWIDTH, HUD_FHEIGHT, HUD_FCENTERX,
+		HUD_FCENTERY,
+		
+		MENU_BOXWIDTH, MENU_BOXHEIGHT, MENU_TAB_ARRAY,
+		
+		GRID_SCREEN_X, GRID_SCREEN_Y,
+		
+		BT_MENUKEY,
+		
+		KF_ALLBITS,
+		
+		M_STATUS_NORMAL, M_STATUS_INVALID, M_STATUS_OVER, M_STATUS_CLICK,
+		M_STATUS_RELEASE,
+		
+		CATEGORY_General, CATEGORY_Offence, CATEGORY_Defense,
+		CATEGORY_SkillPerk1, CATEGORY_Bullets, CATEGORY_NoCombat,
+		
+		SD_CATEGORY,
+		
+		SDR_USE, SDR_SKILL, SDR_REQNAME, SDR_REQVAR1,
+		SDR_REQVAR2,
+		
+		REQ_Level, REQ_Limit, REQ_Skill,
+		
+		MDO_SKILLCHOSEN, MDO_SKILLLIST,
+		
+		SI_NAME, SI_DESC, SI_LIST,
+		
+		SKILL_OldSchool,
+		SKILL_BloodyMess,
+		SKILL_HomingRounds,
+		SKILL_Underdog,
+		SKILL_Observant,
+		SKILL_QuickDraw,
+		SKILL_Finesse,
+		SKILL_Heavy,
+		SKILL_Reloader,
+		SKILL_FieldMedic,
+		SKILL_ARRAY,
+		
+		PERK_Craft,
+		PERK_Skill,
+		PERK_Skill2,
+		PERK_Rage,
+		PERK_Pure,
+		PERK_RageAssist,
+		PERK_WeaponTech,
+		PERK_ARRAY,
+		
+		EXCEPTION,
+		
+		NOWEAPON, NOCLASS, NOICON,
+		
+		AT_None, AT_Clip, AT_Shell, AT_Rocket, AT_Cell,
+		
+		WT_UNARMED, WT_MELEE, WT_PISTOL,
+		
+		W_PISTOL, W_MKII,
+		
+		WM2_PISTOL_EXT, WM2_PISTOL_SECOND,
+		
+		WM2_MKII_EXT, WM2_MKII_SECOND,
+		
+		II_ARRAY, ID_ARRAY,
+		
+		IDT_MISC,
+		
+		MI_NAME, MI_DESC, MI_TYPE,
+		
+		MISSION_NONE, MISSION_GOT, MISSION_DONE,
+		
+		GS01_RED_DOOR_PASSED, GS01_BLUE_DOOR_PASSED, GS01_TOXIC_DOOR_PASSED,
+		GS01_TOXIC_DOOR_OPEN, 
+		
+		MISSION_REDCARD, MISSION_BLUECARD, MISSION_YELLOWCARD,
+		MISSION_REDSKULL, MISSION_BLUESKULL, MISSION_YELLOWSKULL,
+		MISSION_MAIN_START, MISSION_CLOSEPORTAL, 
+		MI_ARRAY,
+		
+		LEVELNUM_ARRAY,
+		
+		IndexOutOfBoundsException,
+		MissingActorException,
+		
+	}
+
+	functions {
+		
+		//Arrays
+		ColorArray = "[color][status] = str color";
+		WaitingExp = "[player] = xp";
+		WaitingRenown = "[player] = renown";
+		WaitingMoney = "[player] = money";
+		WaitingSouls = "[player] = souls";
+		
+		//RPGError.acs
+		TryIndex = "int index, int mi, int ma, str sender, str var";
+		Throw = "int type, str sender";
+		
+		//RPGOpen.acs
+		DoomMapNames = "[episode] = str name";
+		
+		EpisodeChanged;
+		GetEpisode;
+		GetMapNum_EXMX;
+		GetMapNum_MAPXX;
+		IsMap_EXMX;
+		
+		//RPGDeath.acs
+		AngleTo = "int tid";
+		
+		//RPGColor.acs
+		Colors = "[color] = str color";
+		
+		CR = "int color";
+		
+		//RPGDraw.acs
+		BasicDrawTC = "int x, int y, str font, str text, int width, int height, bool checkFade";
+		BasicDrawIC = "int x, int y, str img, bool checkFade";
+		BasicDrawCC = "int id, str font, str text";
+		BasicDraw = "int id, int x, int y, str font, str text";
+		BasicDraw2 = "int id, int x, int y, int alpha, str font, str text, bool checkFade";
+		BasicDraw3 = "int id, int x, int y, str font, str text";
+
+		GetColorIndex = "int color";
+		GetStatusIndex = "int status";
+		GetStatusColor = "int status, int color";
+		
+		DrawBox = "int x, int y, str img";
+		DrawBox2 = "int x, int y, int status";
+		DrawBox3 = "int x, int y, int status, str img1, str img2";
+		DrawBox4 = "int x, int y, int status, str img1, str img2, bool checkFade";
+		
+		DrawTextBox = "int x, int y, str img, str text";
+		DrawTextBox2 = "int x, int y, int sizeX, int sizeY, str img, str text";
+		
+		DrawText = "int x, int y, str text";
+		DrawText2 = "int x, int y, str font, str text";
+		DrawText3 = "int x, int y, str font, str text, int width, int height";
+		DrawTextA = "int x, int y, str text";
+		DrawText2A = "int x, int y, str font, str text";
+		DrawText4 = "int x, int y, str font, str text, int width, int height, bool checkFade";
+		
+		DrawImage = "int x, int y, str img";
+		
+		DrawButton = "int x, int y, str text, int status, str img1, str img2";
+		DrawButton2 = "int x, int y, str text, int status, str img1, str img2, int color";
+		DrawButton3 = "int x, int y, str text, int status, str img1, str img2, int color, bool checkFade";
+		DrawImageButton = "int x, int y, str img, int status";
+		DrawTabButton = "int x, int y, int tab, int status";
+		
+		DrawCursor;
+		DrawCursorText = "str text";
+		
+		DrawWeaponHeldMessage = "int type, int weapon";
+		DrawWeaponMessage = "int type, int weapon";
+		
+		DrawSkillList = "int x, int y, int selected, int status";
+		DrawChosenSkillList = "int x, int y, int selected, int status";
+		
+		//RPGAFunc.acs
+		GetTID = "int tid";
+		
+		Abs = "int value";
+		Pow = "int base, int exp";
+		F2I = "fixed value";
+		F2IC = "fixed value";
+		I2F = "int value";
+		I2IC = "int value";
+		I2TC = "int value, int unit";
+		Compare = "str s1, str s2";
+		Min = "int value, int mi";
+		Max = "int value, int ma";
+		Greater = "int value1, int value2";
+		Range = "int value, int mi, int ma";
+		WithinRange = "int value, int mi, int ma";
+		
+		SurroundNumber = "str pre, int value, str post";
+		
+		ClearMessage = "int start, int num";
+		ClearMessage2 = "int start, int afterlast";
+		ClearMessage3 = "int end, int afterfirst";
+		
+		ThingCountID = "int id";
+		GetActorTID = "int id";
+		
+		IncrementUserArray = "int tid, str var, int pos, int value";
+		IncrementUserVar = "int tid, str var, int value";
+		GetUserVar = "int tid, str var";
+		SetUserVar = "int tid, str var, int value";
+		InvertUserVar = "int tid, str var";
+		
+		IncrementActorProperty = "int tid, int property, int value";
+		CopyActorProperty = "int tid, int property, int fromtid";
+		
+		CopyActorPosition = "int tid, int spot";
+		
+		RemoveInventory = "int item";
+		SetInventory = "int item, int value";
+		
+		KeyExec = "int key";
+		KeyPress = "int key";
+		OldKeyPress = "int key";
+		
+		BumpLevel;
+		GetLevel;
+		GetLevelP = "int player";
+		GetLevelUp = "int level";
+		GetExp;
+		GetRenown;
+		IsPlayer = "int tid";
+		IsEnemy = "int tid";
+		IsAlly = "int tid";
+		IsAlive = "int tid";
+		IsAwake = "int tid";
+		IsAlert = "int tid";
+		PlayerFreeze = "bool active";
+		
+		//RPGAlert.acs
+		BasicAlert = "int id, int x, int y, int alpha, str text";
+		PushMessage = "int type, str text";
+		
+		//RPGCount.acs
+		C_KeysFound = "int player";
+		C_MoneyFound = "int player";
+		C_SoulsFound = "int player";
+		
+		//RPGAlly.acs
+		
+		//RPGEnemy.acs
+		GetEnemyHeadClass = "int type";
+		
+		//RPGActor.acs
+		EntityHead;
+		SetHeadPosition = "int head, int body";
+		
+		//RPGMVars.acs
+		Menu_CursorX = "[player] = fixed x";
+		Menu_CursorY = "[player] = fixed y";
+		Menu_DialogTID = "[player] = int npctid";
+		Menu_DisableMenu = "[player] = bool disabled";
+		Menu_DragOrigin = "[player] = int box";
+		Menu_Fade = "[player] = bool faded";
+		Menu_ForcePrompt = "[player] = bool prompt";
+		Menu_IsDragging = "[player] = bool dragging";
+		Menu_LastMessageID = "[player] = int nextidreversed";
+		Menu_NextMessageID = "[player] = int nextid";
+		Menu_NoticeSkill = "[player] = bool showing";
+		Menu_NoticePerk = "[player] = bool showing";
+		Menu_NoticeUnlock = "[player] = bool showing";
+		Menu_NoticeItem = "[player] = bool showing";
+		Menu_PlayerUsing = "[player] = bool inmenu";
+		Menu_PlayerWaiting = "[player] = bool waiting";
+		Menu_Popup = "[player] = int popup";
+		Menu_Selection = "[player] = int skill";
+		Menu_SkillChange;
+		Menu_SkillChosen = "[skill][player] = int ranks";
+		Menu_SkillPending;
+		Menu_SubTab = "[player] = int subtab";
+		Menu_Tab = "[player] = int tab";
+		Menu_TabList = "[tab] = str text";
+		Menu_TabSpot = "[tab] = int position";
+		Menu_Text_OffOn = "[bool] = str text";
+		Menu_TitleList = "[tab] = str title";
+		Menu_WishList = "[10-position][player] = int item";
+		
+		//RPGMFunc.acs
+		InitGrid;
+		
+		MenuCursor;
+		MouseEdge;
+		GetBoxStatus = "int x, int y";
+		MenuActive;
+		CursorInBox = "int x, int y";
+		CustomCursorBox = "int x, int x2, int y, int y2";
+		
+		ClearMenu = "bool cursor";
+		
+		DragDropListSelect = "int x, int y, int count";
+		DragDropListStatus = "int selected";
+		
+		CheckOpenMenu;
+		CheckExitMenu;
+		
+		ExitMenu;
+		CycleGameSkill = "int skill";
+		CheckLevelSkillChange;
+		ApplySkillsChosen;
+		ResetSkillsChosen;
+		PopupInit = "int popup";
+		PopupDestroy;
+		StartDrag = "int selected, int box";
+		QueueSkill = "int skill, int amt";
+		ClearDrag;
+		
+		ExecButton = "int x, int y, str text";
+		ExecButton2 = "int x, int y, str text";
+		ExecButton3 = "int x, int y, str text, str img1, str img2";
+		ExecButton4 = "int x, int y, str text, str img1, str img2, int color";
+		ExecButton5 = "int x, int y, str text, str img1, str img2, int color, bool checkFade";
+		ExecImageButton = "int x, int y, str img";
+		ExecCheckButton = "int x, int y, bool valid, str text";
+		ExecNoticeButton = "int x, int y, int tx, bool valid";
+		ExecTabButton = "int x, int y, int tab, bool valid, str text";
+		ExecSubTabButton = "int x, int y, int tab, bool valid, str img";
+		ExecTextDisplay = "int x, int y, int tx, str text, int boxes";
+		ExecNotificationBox = "int rows";
+		ExecTabRow;
+		ExecSkillBox = "int x, int y, int xSize, int ySize, int player, int box, str label, int count";
+		
+		DrawMenu;
+		DrawSaveMenu;
+		DrawSkillDescription = "int x, int y, int selected";
+		DrawDialog;
+		DrawBackground;
+		DrawMenuTitle;
+		DrawModName;
+		DrawWeaponTabs;
+		DrawReloadQuery;
+		DrawMissionQuery;
+		
+		WishListGet = "int index";
+		WishListGetUnused;
+		WishlistPut = "int item";
+		
+		//RPGIList.acs
+		ItemData = "[2-items][3-value-type-storeamt] = int";
+		ItemInfo = "[2-items][2-itemclass-invclass] = class";
+		
+		//RPGSList.acs
+		SkillData = "[skill][10-cat-4req-5eff][3-type-2var] = data";
+		SkillInfo = "[skill][3-name-desc-list] = info";
+		
+		//RPGSFunc.acs
+		CheckMaxRanks = "int skill";
+		CheckReqSkills = "int skill";
+		CheckSkillReqs = "int skill";
+		GetSkill = "int skill";
+		GetSkillChosen = "int skill";
+		GetSkillName = "int skill";
+		GetMaxRanks = "int skill";
+		GetMinSkillLevel = "int skill";
+		SetRanks = "int skill, int amt";
+		HasSkillCat = "int skill, int cat";
+		SkillChosenCount;
+		SkillChosenPos = "int pos";
+		SkillCount = "bool allowhidden";
+		ListSkills = "int selected, int status";
+		ListChosenSkills = "int selected, int status";
+		
+		//RPGPList.acs
+		PerkInfo = "[perks][7-name-sum-4desc-req] = info";
+		
+		//RPGPFunc.acs
+		GetPerk = "int perk";
+		
+		//RPGWList.acs
+		WeaponName = "[type][weapon] = str name";
+		
+		//RPGWFunc.acs
+		AutoSwitchActive = "int player";
+		ToggleAutoSwitch = "int player";
+		DropWeapon = "int type, int weapon, int mod";
+		GetIndexFromFlag = "int flag";
+		GetWeaponIcon = "int type";
+		GetWeaponOrder;
+		GetWeaponVar = "int type";
+		GetWeaponMod = "int type";
+		GetWeaponItemDropClass = "int type, int weapon, int mod";
+		GetWeaponClass = "int type, int weapon";
+		GetWeaponModClass = "int type, int weapon, int mod, bool isIndex";
+		TakeWeaponMods = "int type, int weapon, int mod";
+		WeaponAmmoClass = "int type, int weapon";
+		GetAmmoClass = "int type, int weapon";
+		GetAmmoMagClass = "int type, int weapon";
+		IncrementAmmoCapacity = "int type, int value";
+		SetWeaponData = "int type, int weapon, int mod";
+		WriteModClassSuffix = "int type, int weapon, int mod, bool full";
+		EmptyMags = "int type, int weapon, int mod";
+		ExtendMags = "int type, int weapon, int mod";
+		
+		//RPGLFunc.acs
+		GenerateMapName;
+		CalculateSkill;
+		DoorLock = "int tag, int keynum, int speed, bool stay, bool mission";
+		
+		//RPGKFunc.acs
+		AddKeyBit = "int keynum";
+		GetFirstKey;
+		GetKeyType = "int keynum";
+		GetKeyColor = "int keynum";
+		GetKeyClass = "int keynum";
+		GetKeyName = "int keynum";
+		GetKeyStorage = "int keynum";
+		KeyBits;
+		SetKeyStorage = "int keynum";
+		SetKeyUsed = "int keynum";
+		
+		//RPGOFunc.acs
+		CheckAllKeysUsed;
+		CheckKeyMission = "int keynum";
+		GetNextMissionIndex;
+		GetKeyMission = "int keynum";
+		GetKeyDoorMission = "int keynum";
+		GetKeyIndex = "int mission";
+		GetMissionStatus = "int mission, int map, int owner";
+		LookupMission = "int mission, int map, int owner";
+		SetMissionStatus = "int mission, int map, int owner, int value";
+		
+		//RPGSpecs.acs
+		GetSpecStr = "int player";
+	}
+}

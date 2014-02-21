@@ -2,6 +2,7 @@ Actor WeaponProj_Chaingun : WeaponProj_Bullet
 {
 	Damage (CallACS("WeaponDamage", WD_CHAINGUN))
 	DamageType "Player_Chaingun"
+	SeeSound "Weapon/Chaingun"
 	Decal "BulletChip"
 	States
 	{

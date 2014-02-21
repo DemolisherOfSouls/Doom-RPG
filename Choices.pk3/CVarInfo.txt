@@ -1,0 +1,42 @@
+//Save your player, so you can new game plus!
+
+user int	rpg_player_level		= 0;
+user int	rpg_player_xp			= 0;
+user int	rpg_player_renown		= 0;
+user int	rpg_player_skillpoints	= 0;
+user int	rpg_player_perkpoints	= 0;
+user string	rpg_player_skills		= "";
+user string	rpg_player_perks		= "";
+user string	rpg_player_achievements	= "";
+user string rpg_player_endings		= "";
+user int	rpg_player_moneyfound	= 0;
+user int	rpg_player_keysfound	= 0;
+user int	rpg_player_soulsfound	= 0;
+
+user int	rpg_player_newgameplus	= 0;
+
+user int	rpg_option_slotorder0	= 7;
+user int	rpg_option_slotorder1	= 4;
+user int	rpg_option_slotorder2	= 5;
+user int	rpg_option_slotorder3	= 9;
+user int	rpg_option_slotorder4	= 3;
+user int	rpg_option_slotorder5	= 2;
+user int	rpg_option_slotorder6	= 1;
+user int	rpg_option_slotorder7	= 0;
+user int	rpg_option_slotorder8	= 8;
+user int	rpg_option_slotorder9	= 6;
+
+user bool	rpg_option_autoswitch	= false;
+
+//Debugging
+
+user bool	rpg_debug_log			= true;
+user bool	rpg_debug_anyskill		= false;
+user bool	rpg_debug_anyperk		= false;
+
+//Server options for multiplayer
+
+server bool	rpg_server_equality		= false;
+server bool	rpg_server_friendlyfire	= false;
+server bool	rpg_server_allowsplit	= true;
+server int	rpg_server_mapchanger	= 0;

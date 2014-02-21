@@ -1,0 +1,5 @@
+#library "RPGDList"
+
+#include "zcommon.acs"
+
+int DifficultyName[4] = { "", "\c[Blue]Easy\cL", "\c[Yellow]Normal\cL", "\c[Red]Hard\cL" };

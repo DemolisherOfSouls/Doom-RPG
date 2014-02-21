@@ -1,0 +1,55 @@
+#library "RPGAlly"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGSList.acs"
+#import "RPGAFunc.acs"
+#import "RPGSFunc.acs"
+#import "RPGActor.acs"
+
+script "AllySetup" (void)
+{
+	int body = EntityID(TID_ALLY);
+	
+	EntityLevel(body);
+	EntityHealth(body);
+	EntitySpawnHead(body, "Marine_Head");
+}
+
+function void AllyStat (int amt, str pscript, str var)
+{
+	if(GetUserVar(0, "isfollowing"))
+	{
+		int player = GetUserVar(0, "leadplayer");
+		int tid = ActivatorTID();
+		SetActivator(player + TID_PLAYER);
+		ACS_NamedExecuteAlways(pscript, 0, amt);
+		SetActivator(tid);
+	}
+	else
+	{
+		IncrementUserVar(0, var, amt);
+	}
+}
+
+script "AllyExp" (int amt)
+{
+	AllyStat(amt, "PlayerExp", "rewardxp");
+}
+
+script "AllyRenown" (int amt)
+{
+	AllyStat(amt, "PlayerRenown", "rewardrenown");
+}
+
+script "AllyHead" (void)
+{
+	while(EntityHead())
+		Delay(1);
+}
+
+script "AllyDeath" (void)
+{
+	EntityDeath();
+}

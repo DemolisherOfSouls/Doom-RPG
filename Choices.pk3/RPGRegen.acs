@@ -1,0 +1,69 @@
+#library "RPGRegen"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+#import "RPGSList.acs"
+#import "RPGSFunc.acs"
+
+bool Flip = false;
+bool DidFlip = false;
+int TicSwap[2] = { 17, 18 };
+int TicTime = 35;
+
+script "PlayerRegen" enter
+{
+	int udog = GetSkill(SKILL_Underdog);
+	int fwound = GetSkill(SKILL_FleshWound);
+	
+	int mark = 20, amt = 1, topmark = 95, topamt = 1;
+	
+	if(fwound > 1)
+	{
+		topamt++;
+		topmark -= 5;
+	}
+	
+	switch(udog)
+	{
+	case 3:
+		amt++;
+	case 2:
+		mark += 10;
+		break;
+	}
+	
+	int health = GetActorProperty(0, APROP_Health);
+	
+	if(udog + fwound > 0)
+	{
+		if(udog > 0 && WithinRange(health, 1, mark - 1))
+		{
+			if(amt == 1 && TicTime == TicSwap[Flip] && DidFlip)
+				HealThing(1, mark);
+			
+			else if(amt == 2 && TicTime == TicSwap[Flip])
+				HealThing(1, mark);
+		}
+		if(fwound > 0 && WithinRange(health, topmark, 99))
+		{
+			if(topamt == 1 && TicTime == TicSwap[Flip] && DidFlip)
+				HealThing(1, 100);
+			
+			else if(topamt == 2 && TicTime == TicSwap[Flip])
+				HealThing(1, 100);
+		}
+		
+		if(TicTime == TicSwap[Flip])
+		{
+			TicTime = 0;
+			Flip = !Flip;
+			DidFlip = !DidFlip;
+		}
+		TicTime++;
+	}
+	
+	Delay(1);
+	restart;
+}

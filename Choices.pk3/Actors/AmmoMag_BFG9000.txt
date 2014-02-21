@@ -1,0 +1,7 @@
+Actor AmmoMag_BFG9000 : Ammo
+{
+	Inventory.MaxAmount 40
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 40
+	Inventory.Icon "BFUGA0"
+}

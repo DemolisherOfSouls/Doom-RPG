@@ -1,0 +1,144 @@
+#library "RPGActor"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGSList.acs"
+#import "RPGAFunc.acs"
+#import "RPGSFunc.acs"
+
+function void EntitySpawnHead (int body, int hclass)
+{
+	int hscript = "EnemyHead";
+	if(IsAlly(body))
+		hscript = "AllyHead";
+	else if(IsPlayer(body))
+		hscript = "PlayerHead"
+	
+	int head = GetHTID(body);
+	SpawnSpotFacingForced(hclass, body, head);
+	SetActorProperty(head, APROP_MasterTID, body);
+	
+	SetActivator(head);
+	ACS_NamedExecuteAlways(hscript, 0);
+}
+
+function void EntityLevel (int tid)
+{
+	int players = PlayerCount();
+	
+	int total = 0;
+	for(int i = 0; i < players; i++)
+		total += GetLevelP(i);
+	
+	int factor = I2F(players + 1) / 2;
+	
+	int level = I2F(total) / players;
+	level = FixedMul(level, factor);
+	level = F2I(FixedMul(level, 1.0001));
+	level = Min(level, 1);
+	
+	SetUserVar(tid, "level", level);
+}
+
+function void EntityHealth (int tid)
+{
+	int players = PlayerCount();
+	int factor = I2F(players + 1) / 2;
+	
+	int health = GetActorProperty(tid, APROP_Health);
+	health = I2F(health);
+	health = health + FixedMul(health / 50, factor);
+	health = FixedMul(health, 1.0001);
+	health = F2I(health);
+	
+	SetUserVar(tid, "health", health);
+	SetActorProperty(tid, APROP_SpawnHealth, health);
+	SetActorProperty(tid, APROP_Health, health);
+}
+
+function int EntityID (int btid)
+{
+	SetUserVar(0, "id", ActivatorTID());
+	
+	int tid = GetTID(btid);
+	Thing_ChangeTID(0, tid);
+	
+	return tid;
+}
+
+function void SetHeadPosition (int head, int body)
+{
+	int height = GetActorProperty(head, APROP_Height);
+	int bodyheight = GetActorProperty(body, APROP_Height);
+	SetActorPosition(head, GetActorX(body), GetActorY(body), GetActorZ(body) + bodyheight - height + 1, false);
+}
+
+function bool EntityHead (void)
+{
+	int head = ActivatorTID();
+	int body = GetActorProperty(0, APROP_MasterTID);
+	
+	SetHeadPosition(head, body);
+	
+	int health = GetActorProperty(0, APROP_Health);
+	int damage = HEALTH_HEAD - health;
+	
+	int target = GetActorProperty(0, APROP_TargetTID);
+	int btarget = GetActorProperty(body, APROP_TargetTID);
+	
+	if(target == NULL)
+		if(btarget != NULL)
+			target = btarget;
+	
+	if(damage > 0)
+	{
+		SetActivator(target);
+		
+		if(IsPlayer(0))
+		{
+			damage *= 2.0 + 0.20001 * GetSkill(SKILL_Finesse);
+			damage = F2I(damage);
+		}
+			
+		Thing_Damage2(body, damage, "Headshot");
+	
+		SetActivator(head);
+		
+		SetActorProperty(head, APROP_Health, HEALTH_HEAD);
+	}
+	
+	if(!IsAlive(body))
+	{
+		Thing_Remove(head);
+		return false;
+	}
+	
+	return true;
+}
+
+function void EntityDeath (void)
+{
+	int xp = GetUserVar(0, "rewardxp");
+	int renown = GetUserVar(0, "rewardrenown");
+	int rage = GetUserVar(0, "deathtype");
+	
+	SetActivatorToTarget(0);
+	
+	if(IsPlayer(0))
+	{
+		ACS_NamedExecuteAlways("PlayerExp", 0, xp);
+		ACS_NamedExecuteAlways("PlayerRage", 0, rage);
+		ACS_NamedExecuteAlways("PlayerRenown", 0, renown);
+	}
+	else if(IsEnemy(0))
+	{
+		ACS_NamedExecuteAlways("EnemyRenown", 0, renown);
+		ACS_NamedExecuteAlways("EnemyExp", 0, xp);
+	}
+	else if(IsAlly(0))
+	{
+		ACS_NamedExecuteAlways("AllyRenown", 0, renown);
+		ACS_NamedExecuteAlways("AllyExp", 0, xp);
+	}
+}

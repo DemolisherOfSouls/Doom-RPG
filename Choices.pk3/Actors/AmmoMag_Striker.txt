@@ -1,0 +1,7 @@
+Actor AmmoMag_Striker : Ammo
+{
+	Inventory.MaxAmount 12
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 12
+	Inventory.Icon "GAsgA0"
+}

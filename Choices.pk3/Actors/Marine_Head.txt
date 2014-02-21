@@ -1,0 +1,39 @@
+Actor Marine_Head
+{
+	Height 16
+	Radius 17
+	PainChance 255
+	Health 10000
+	
+	DamageFactor "Marine_Fist", 0
+	DamageFactor "Marine_Chainsaw", 0
+	DamageFactor "Marine_Pistol", 0
+	DamageFactor "Marine_Shotgun", 0
+	DamageFactor "Marine_SuperShotgun", 0
+	DamageFactor "Marine_Chaingun", 0
+	DamageFactor "Marine_RocketLauncher", 0
+	DamageFactor "Marine_PlasmaRifle", 0
+	DamageFactor "Marine_BFG", 0
+	DamageFactor "Marine_Rifle", 0
+	
+	Species "MarineThru"
+	
+	//+ISMONSTER
+	+SHOOTABLE
+	+THRUSPECIES
+	+NOGRAVITY
+	+LOOKALLAROUND
+	+NORADIUSDMG
+	+QUICKTORETALIATE
+	+STANDSTILL
+	
+	States
+	{
+	Spawn:
+		TNT1 A 1 A_Look
+		Loop
+	See:
+		TNT1 A -1
+		Stop
+	}
+}

@@ -1,0 +1,57 @@
+#library "RPGColor"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+str Colors[23] =
+{
+	"Brick",
+	"Tan",
+	"Grey",
+	"Green",
+	"Brown",
+	"Gold",
+	"Red",
+	"Blue",
+	"Orange",
+	"White",
+	"Yellow",
+	"Black",
+	"LightBlue",
+	"Cream",
+	"Olive",
+	"DarkGreen",
+	"DarkRed",
+	"DarkBrown",
+	"Purple",
+	"DarkGrey",
+	"Cyan",
+	"Teal"
+};
+
+function str CR (int color)
+{
+	str c = "\cl";
+	
+	if(color != CR_UNTRANSLATED)
+		c = StrParam(s:"\c[", s:Colors[color], s:"]");
+	
+	return c;
+}
+
+function str ForceColor (int color, str text)
+{
+	return StrParam(s:CR(color), s:text);
+}
+
+function str SurroundColor (int color, str text, int color2)
+{
+	return StrParam(s:CR(color), s:text, s:CR(color2));
+}
+
+function str PSurroundNumberC (int color, int numcolor, int value)
+{
+	return StrParam(s:SurroundColor(color, "(", numcolor), i:value, s:CR(color), s:")");
+}

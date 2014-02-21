@@ -1,0 +1,13 @@
+decorate_update : decorate {
+	name = "ZDoom Decorate (2/18/14)";
+
+	keywords = {
+		// General keywords
+		Const, Enum, Replaces,
+	}
+	
+	constants = {
+		// Why not?
+		TNT1
+	}
+}

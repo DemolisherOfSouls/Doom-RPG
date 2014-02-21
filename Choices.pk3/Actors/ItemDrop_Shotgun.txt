@@ -1,0 +1,17 @@
+Actor ItemDrop_Shotgun : ItemDrop_Base
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_Jump(Always, "Drop.Shotgun", "Drop.Shotgun", "Drop.Riotgun", "Drop.Striker")
+	Drop.Shotgun:
+		TNT1 A 0 A_SpawnItem("Item_Shotgun")
+		Stop
+	Drop.Riotgun:
+		TNT1 A 0 A_SpawnItem("Item_Riotgun")
+		Stop
+	Drop.Striker:
+		TNT1 A 0 A_SpawnItem("Item_Striker")
+		Stop
+	}
+}

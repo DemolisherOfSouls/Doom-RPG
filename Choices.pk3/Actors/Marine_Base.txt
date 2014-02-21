@@ -1,0 +1,78 @@
+Actor Marine_Base
+{
+	SpawnID 151
+	Height 56
+	Radius 16
+	Health 100
+	Mass 100
+	Speed 8
+	Painchance 160
+	
+	SeeSound "Marine/See"
+	DeathSound "*death"
+	PainSound "*pain50"
+	
+	Monster
+	
+	DamageFactor "Marine_Fist", 0
+	DamageFactor "Marine_Chainsaw", 0
+	DamageFactor "Marine_Pistol", 0
+	DamageFactor "Marine_Shotgun", 0
+	DamageFactor "Marine_SuperShotgun", 0
+	DamageFactor "Marine_Chaingun", 0
+	DamageFactor "Marine_RocketLauncher", 0
+	DamageFactor "Marine_PlasmaRifle", 0
+	DamageFactor "Marine_BFG", 0
+	DamageFactor "Marine_Rifle", 0
+	
+	Species "Marine"
+	
+	+FLOORCLIP
+	+DONTHARMSPECIES
+	+QUICKTORETALIATE
+	-COUNTKILL
+	
+	var int user_rewardxp;
+	var int user_rewardrenown;
+	
+	var int user_id;
+	var int user_type;
+	var int user_level;
+	var int user_health;
+	
+	var int user_awake;
+	var int user_alert;
+	var int user_sightarc;
+	
+	var int user_deathtype;
+	
+	var int user_isfollowing;
+	var int user_leadplayer;
+	var int user_ispassive;
+	var int user_isclose;
+	
+	var int user_currentweapon;
+	var int user_defaultweapon;
+	
+	States
+	{
+	Spawn:
+		PLAY A 0 NoDelay A_SetUserVar("user_sightarc", 120)
+		PLAY A 0 ACS_NamedExecuteAlways("AllySetup")
+	Idle:
+		PLAY A 1 A_LookEx(LOF_FULLVOLSEESOUND, 0, 0, 0, user_sightarc, "See.Initial")
+		Loop
+	See.Initial:
+		PLAY A 0 A_SetUserVar("user_awake", TRUE)
+		PLAY A 0 A_SetUserVar("user_alert", TRUE)
+		PLAY A 0 A_SetUserVar("user_sightarc", 160)
+	See:
+		PLAY A 0 A_JumpIf(user_isfollowing, "See.Follow")
+		PLAY ABCD 4
+		Loop
+	See.Follow:
+		PLAY ABCD 4
+		Loop
+		
+	}
+}

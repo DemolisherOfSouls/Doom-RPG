@@ -1,0 +1,31 @@
+Actor Weapon_Grinder : Weapon_BaseChaingun
+{
+	Inventory.Icon "GGdrA0"
+	
+	Tag "Grinder"
+	
+	States
+	{
+	Select:
+		GdrG A 0 A_SetArg(3, 2)
+		GdrG A 0 A_SetArg(4, 8)
+		Goto Super::Select
+	
+	Ready:
+		GdrG A 1 A_WeaponReady
+		Loop
+		
+	Flash.A:
+		GdrF A 0 A_Jump(Always, "Fire.Actual")
+	Flash.B:
+		GdrH A 0 A_Jump(Always, "Fire.Actual")
+		
+	Fire.Actual:
+		"####" A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_CHAINGUN, 29))
+		"####" A 0 A_AlertMonsters(760)
+		"####" A 0 A_Light(Random(2,3))
+		"####" A 0 A_FireCustomMissile("WeaponProj_Grinder", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, FRandom(-args[2], args[2]) / 10)
+		"####" AB 2 Bright
+		Goto LightDone
+	}
+}

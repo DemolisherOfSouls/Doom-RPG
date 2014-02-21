@@ -9,7 +9,7 @@ Actor Item_ShellBox : Item_AmmoBase replaces ShellBox
 		SBOX A 5 Bright
 		Loop
 	Pickup:
-		TNT1 A 0 A_GiveInventory("Ammo_Shell", 16)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 16, AT_SHELL)
 		Stop
 	}
 }

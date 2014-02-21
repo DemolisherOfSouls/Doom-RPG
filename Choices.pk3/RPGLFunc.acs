@@ -1,0 +1,115 @@
+#library "RPGLFunc"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGMVars.acs"
+#import "RPGAFunc.acs"
+#import "RPGKFunc.acs"
+#import "RPGOFunc.acs"
+
+function str GenerateMapName (void)
+{
+	str ret = "";
+	if(G_Map < 10)
+		ret = "0";
+	
+	if(WithinRange(G_Episode, EP_DoomE1, EP_DoomE4))
+		return StrParam(s:"E", i:G_Episode, s:"M", i:G_Map);
+	if(WithinRange(G_Episode, EP_Doom2, EP_Doom2Mod))
+		return StrParam(s:"Map", s:ret, i:G_Map);
+	
+	return StrParam(s:"Rpg", s:ret, i:G_Map);
+}
+
+function int CalculateSkill (void)
+{
+	int skill = GameSkill();
+	
+	if(Menu_SkillPending > 0)
+		skill = Menu_SkillPending;
+	
+	return skill;
+}
+
+function void DoorLock (int tag, int locknum, int speed, bool stay, bool mission)
+{
+	bool activate = false;
+	bool impossible = false;
+	
+	//Add array to save the opened lock on all doors of the same locknum, so they open normally.
+	
+	switch(locknum)
+	{
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+		if(GetKeyStorage(locknum))
+			activate = true;
+		break;
+	case 100:
+		if(KeyBits() > 0)
+			activate = true;
+		break;
+	case 101:
+		if(KeyBits() == KeyFlag[KF_ALLBITS])
+			activate = true;
+		break;
+	case 129:
+	case 130:
+	case 131:
+		if(GetKeyStorage(locknum - 128))
+			activate = true;
+		else if(GetKeyStorage(locknum - 125))
+			activate = true;
+		break;
+	case 132:
+	case 133:
+	case 134:
+		if(GetKeyStorage(locknum - 131))
+			activate = true;
+		else if(GetKeyStorage(locknum - 128))
+			activate = true;
+		break;
+	case 229:
+		for(int kc = 0; kc < 3; kc++)
+		{
+			int held = GetHeldKeyType(kc);
+			if(held == EXCEPTION)
+			{
+				activate = false;
+				break;
+			}
+			activate = true;
+		}
+		break;
+		
+	default:
+		impossible = true;
+		break;
+	}
+	
+	if(activate)
+	{
+		if(stay)
+			Door_Open(tag, speed);
+		else
+			Door_Raise(tag, speed, 150);
+		
+		SetKeyUsed(locknum);
+	}
+	else if(CheckKeyMission(locknum) && mission && !impossible)
+	{
+		ACS_NamedExecuteAlways("AddMission", 0, GetKeyDoorMission(locknum), G_Map, NULL);
+		Print(s:"You need a key");
+	}
+	else if(impossible)
+	{
+		//alert that door is not able to be opened at this time
+		Print(s:"Door is not functional.");
+	}
+}

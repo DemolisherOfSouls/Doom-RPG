@@ -1,136 +1,153 @@
-Include "MapInfo/D1Info.txt"
-Include "MapInfo/D2Info.txt"
-
 GameInfo
 {
 	DimColor = "Black"
 	DimAmount = 0.2
 	PlayerClasses = "RPGPlayer"
 	PickupColor = "Black"
+	Translator = "XLat/DoomRPG.txt"
 }
 
 ClearSkills
 
 Skill Easy
 {
-	SpawnFilter = 0
+	SpawnFilter = 1
 	ACSReturn = 1
 }
 
 Skill Normal
 {
-	SpawnFilter = 1
+	SpawnFilter = 2
 	ACSReturn = 2
-	Aggressiveness = 0.5
+	Aggressiveness = 0.3
 }
 
 Skill Hard
 {
-	SpawnFilter = 2
+	SpawnFilter = 3
 	ACSReturn = 3
-	Aggressiveness = 1.0
+	Aggressiveness = 0.6
 }
-
-ClearEpisodes
 
 Episode Rpg00
 {
-	Name = "The Doom RPG"
+	Name = "Battle for Mars"
 	NoSkillMenu
 }
 
-Episode E0M0
+Episode Map01
 {
-	Name = "Doom 1"
+	Name = "Doom II / Final Doom"
 	NoSkillMenu
+	Optional
 }
 
-Episode Map00
+Episode E1M1
 {
-	Name = "Doom 2"
+	Name = "Knee Deep in the Dead"
 	NoSkillMenu
+	Optional
 }
 
-Cluster 1
-{ Hub }
+Episode E2M1
+{
+	Name = "The Shores of Hell"
+	NoSkillMenu
+	Optional
+}
 
-Cluster 2
-{ Hub }
+Episode E3M1
+{
+	Name = "Inferno"
+	NoSkillMenu
+	Optional
+}
 
-Cluster 3
-{ Hub }
+Episode E4M1
+{
+	Name = "Thy Flesh Consumed"
+	NoSkillMenu
+	Optional
+}
+
+Cluster 1 { Hub }
+Cluster 2 { Hub }
+Cluster 3 { Hub }
+Cluster 4 { Hub }
+Cluster 5 { Hub }
+Cluster 6 { Hub }
+Cluster 7 { Hub }
+Cluster 8 { Hub }
+Cluster 9 { Hub }
 
 DefaultMap
 {
 	NoIntermission
 	EvenLighting
-	Cluster = 3
+	AllowJump
+	AllowCrouch
+	Sky1 = "Sky1", 0
+	Cluster = 9
 }
 
-Map TitleMap lookup MapName_TM {}
+Map TitleMap "The Forgotten" {}
 
-Map Rpg00 lookup MapName_00 //Setup
+Map Rpg00 "Player Setup"
 {
 	Next = "RPG01"
 	LevelNum = 0
 }
 
-Map Rpg01 lookup MapName_01 //Teleport
+Map Rpg01 "UAC: Recieving"
 {
-	Sky1 = "Sky1", 0
 	Next = "RPG02"
 	LevelNum = 1
 }
 
-Map Rpg02 lookup MapName_02 //Hell
+Map Rpg02 "Hell: The Lava Well"
 {
 	Sky1 = "Sky3", 0
 	Next = "RPG03"
 	LevelNum = 2
 }
 
-Map Rpg03 lookup MapName_03 //Void hell
+Map Rpg03 "Hell: The Deep"
 {
 	Sky1 = "SkyV", 0
 	Next = "RPG04"
 	LevelNum = 3
 }
 
-Map Rpg04 lookup MapName_04 //Maintenance
+Map Rpg04 "UAC: Maintenance"
 {
-	Sky1 = "Sky1", 0
 	Next = "RPG05"
 	LevelNum = 4
 }
 
-Map Rpg05 lookup MapName_05 //Warehouse
+Map Rpg05 "UAC: Warehouses"
 {
-	Sky1 = "Sky1", 0
 	Next = "InterMap"
 	SecretNext = "RPG04"
 	LevelNum = 5
 }
 
-Map Rpg06 lookup MapName_06
+Map Rpg06 "UAC: ???"
 {
-	Sky1 = "Sky1", 0
 	Next = "RPG07"
 	SecretNext = "InterMap"
 	LevelNum = 6
 }
 
-Map Rpg09 lookup MapName_09 //Surface Access
+Map Rpg09 "UAC: Surface Access"
 {
-	Sky1 = "Sky1", 0
 	Next = "RPG10"
 	SecretNext = "RPG08"
 	LevelNum = 9
 }
 
-Map InterMap lookup MapName_IM //Green zone
+Map InterMap "USMC: The Green Zone"
 {
-	Sky1 = "Sky1", 0
 	Next = "RPG06"
 	SecretNext = "RPG05"
-	LevelNum = 100
+	LevelNum = 99
 }

@@ -1,0 +1,54 @@
+Statusbar FullScreen, FullScreenOffsets
+{
+	//Bottom Left
+	
+		//Health
+		DrawImage "MEDIA0", 16, -8;
+		DrawNumber 3, BIGFONT, Yellow, Health, Alignment(Left), 64, -12, Red, 25, Green, 75;
+		
+		//Armor
+		DrawImage ArmorIcon, 16, -56;
+		DrawNumber 3, BIGFONT, Yellow, Armor, Alignment(Left), 64, -64, Red, 49, Green, 100;
+	
+	//Bottom Center
+	
+		//Selected Item
+		DrawSelectedInventory Center, BIGFONT, 0 + Center, -8;
+
+	//Top Left
+	
+		//Keys
+		DrawKeyBar 2, Horizontal, 24, 8, 8;
+
+	//Bottom Right
+	
+		WeaponAmmo Not Ammo_Clip
+		{
+			DrawNumber 3, INDEXFONT, Yellow, Ammo 			Ammo_Clip, -72, -160;
+			DrawNumber 3, INDEXFONT, Yellow, AmmoCapacity	Ammo_Clip, -32, -160;
+		}
+		WeaponAmmo Not Ammo_Shell
+		{
+			DrawNumber 3, INDEXFONT, Yellow, Ammo			Ammo_Shell, -72, -128;
+			DrawNumber 3, INDEXFONT, Yellow, AmmoCapacity	Ammo_Shell, -32, -128;
+		}
+		WeaponAmmo Not Ammo_Rocket
+		{
+			DrawNumber 3, INDEXFONT, Yellow, Ammo			Ammo_Rocket, -72, -96;
+			DrawNumber 3, INDEXFONT, Yellow, AmmoCapacity	Ammo_Rocket, -32, -96;
+		}
+		WeaponAmmo Not Ammo_Cell
+		{
+			DrawNumber 3, INDEXFONT, Yellow, Ammo			Ammo_Cell, -72, -64;
+			DrawNumber 3, INDEXFONT, Yellow, AmmoCapacity	Ammo_Cell, -32, -64;
+		}
+		
+		//Ammo and Icon
+		DrawImage AmmoIcon1, -128, -8;
+		DrawNumber 3, BIGFONT, Yellow, Ammo1, Alignment(Right), -80, -12, Red, 25, Green, 100;
+
+	//Top Right
+
+		//Level Up Notice
+		
+}

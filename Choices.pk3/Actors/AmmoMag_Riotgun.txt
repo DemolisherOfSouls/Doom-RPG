@@ -1,0 +1,7 @@
+Actor AmmoMag_Riotgun : Ammo
+{
+	Inventory.MaxAmount 7
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 7
+	Inventory.Icon "GRsgA0"
+}
