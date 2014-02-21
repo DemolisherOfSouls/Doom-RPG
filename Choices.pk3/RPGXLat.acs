@@ -6,6 +6,7 @@
 #import "RPGGVars.acs"
 #import "RPGIVars.acs"
 #import "RPGMVars.acs"
+#import "RPGIList.acs"
 #import "RPGOList.acs"
 #import "RPGAFunc.acs"
 #import "RPGOFunc.acs"

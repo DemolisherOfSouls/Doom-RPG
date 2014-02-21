@@ -25,6 +25,9 @@ str ItemInfo[3][II_ARRAY] =
 #libdefine	KEY_REDCARD		1
 #libdefine	KEY_BLUECARD	2
 #libdefine	KEY_YELLOWCARD	3
+#libdefine	KEY_REDSKULL	4
+#libdefine	KEY_BLUESKULL	5
+#libdefine	KEY_YELLOWSKULL	6
 
 int ItemData[2][ID_ARRAY] =
 {

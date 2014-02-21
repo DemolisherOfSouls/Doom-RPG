@@ -199,7 +199,7 @@ str ObjectiveText[3] =
 	"Kill the Baron holding the portal open"
 };
 
-int ObjectiveData[3][OD_ARRAY] =
+int ObjectiveData[2][OD_ARRAY] =
 {
 	{ ODT_FIND, ON_FIND_REDCARD, OT_RPG01_REDCARD, OI_REDCARD, ODD1_KEY|ODD1_MAP, 1, KEY_REDCARD },
 	{ ODT_KILL, ON_KILL_BARON, OT_RPG01_BARON, OI_BARON, ODD2_AMT|ODD2_MAP, ODD2_X_MARINE, ODD2_XX_ID, 1 }
