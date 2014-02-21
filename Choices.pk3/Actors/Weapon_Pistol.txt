@@ -17,10 +17,14 @@ Actor Weapon_Pistol : Weapon_BasePistol
 	
 	Ready:
 		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Ready.Second")
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Silent", 1, "Ready.Silent")
 		PISG A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
 		Loop
 	Ready.Second:
 		PISG F 1 A_WeaponReady(WRF_ALLOWRELOAD)
+		Loop
+	Ready.Silent:
+		PisS A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
 		Loop
 	
 	//******************************************************
@@ -29,9 +33,13 @@ Actor Weapon_Pistol : Weapon_BasePistol
 	
 	Select:
 		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Select.Second")
+		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Silent", 1, "Select.Silent")
 		Goto Super::Select
 	Select.Second:
 		PISG F 0
+		Goto Super::Select
+	Select.Silent:
+		PisS A 0
 		Goto Super::Select
 	
 	//******************************************************

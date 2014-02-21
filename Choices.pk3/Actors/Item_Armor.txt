@@ -39,3 +39,19 @@ Actor Item_ArmorBlue : BasicArmorPickup replaces BlueArmor
 		loop
 	}
 }
+
+Actor Item_ArmorRed : BasicArmorPickup 14000
+{
+  Inventory.Icon "ARM3A0"
+  
+  Armor.MaxFullAbsorb 10
+  Armor.Savepercent 70
+  Armor.Saveamount 250
+  States
+  {
+  Spawn:
+    ARM3 A 6
+    ARM3 B 7 bright
+    loop
+  }
+}
