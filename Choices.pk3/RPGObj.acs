@@ -21,7 +21,7 @@ script "AddMission" (int mission, int map, int owner)
 	SetUserArray(0, "user_m_owner", index, owner);
 	
 	ACS_NamedExecuteAlways("MissionAlert", 0, mission);
-	ACS_NamedExecuteAlways("MissionTracker", 0, mission, map, owner);
+	ACS_NamedExecuteAlways("MissionTracker", 0, index);
 }
 
 script "MissionTrackerStarter" enter
@@ -34,22 +34,24 @@ script "MissionTrackerStarter" enter
 		int s = GetUserArray(0, "user_m_status", i);
 		
 		if(WithinRange(s, MISSION_GOT, MISSION_DONE - 1))
-			ACS_NamedExecuteAlways("MissionTracker", 0, t, m, o);
+			ACS_NamedExecuteAlways("MissionTracker", 0, i);
 		
-		else if(s == MISSION_NONE)
+		else if(s == MISSION_NONE) // End of list
 			break;
 	}
 }
 
-script "MissionTracker" (int mission, int map, int owner)
+script "MissionTracker" (int MissionIndex)
 {
-	int status = GetMissionStatus(mission, map, owner);
-	int keyindex;
+	int owner = GetUserArray(0, "user_m_owner", MissionIndex);
+	int map = GetUserArray(0, "user_m_map", MissionIndex);
+	int type = GetUserArray(0, "user_m_type", MissionIndex);
+	int status = GetUserArray(0, "user_m_status", MissionIndex);
 	
-	if(WithinRange(mission, MISSION_KEY_START, MISSION_KEYOBJ_END))
-		keyindex = GetKeyIndex(mission);
+	int lockindex = GetKeyIndex(type); //If not a valid mission, EXCEPTION
+	int keynum;
 
-	switch(mission)
+	switch(type)
 	{
 	case MISSION_REDCARD:
 	case MISSION_BLUECARD:
@@ -57,21 +59,22 @@ script "MissionTracker" (int mission, int map, int owner)
 	case MISSION_REDSKULL:
 	case MISSION_BLUESKULL:
 	case MISSION_YELLOWSKULL:
+	case MISSION_REDKEY:
+	case MISSION_BLUEKEY:
+	case MISSION_YELLOWKEY:
 	
-		if(LevelKeyUsed[keyindex])
+		int keynum  = GetLevelKey(lockindex)
+		int keyused = LevelKeyUsed[keynum]
+	
+		if(keyused && status == MISSION_GOT)
 		{
 			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
 			status = MISSION_DONE;
 			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
 		}
 		
+		
 		break;
-	case MISSION_REDCARDOBJ:
-	case MISSION_BLUECARDOBJ:
-	case MISSION_YELLOWCARDOBJ:
-	case MISSION_REDSKULLOBJ:
-	case MISSION_BLUESKULLOBJ:
-	case MISSION_YELLOWSKULLOBJ:
 	
 		if(status == MISSION_GOT && LevelKeyFound[keyindex])
 		{

@@ -13,47 +13,45 @@
 
 function int GetKeyMission (int keynum)
 {
+	if(WithinRange(keynum, KEY_REDCARD, KEY_YELLOWSKULL))
+		return keynum;
+	
 	if(WithinRange(keynum, 129, 131))
-		return MISSION_REDKEY + keynum - 129;
+		return keynum - 128 + 6;
 	
 	if(WithinRange(keynum, 132, 134))
-		return MISSION_REDKEY + keynum - 132;
+		return keynum - 131 + 6;
 	
-	if(keynum == 100)
+	if(keynum == KEY_ANY)
 		return MISSION_ANYKEY;
 	
-	if(!TryIndex(keynum, 1, 6, "GetKeyMission", "keynum"))
-		return EXCEPTION;
+	if(keynum == KEY_EACH)
+		return MISSION_EACHKEY;
+		
+	if(keynum == KEY_ALL)
+		return MISSION_ALLKEYS;
 	
-	return keynum - 1 + MISSION_KEY_START;
-}
-
-function int GetKeyDoorMission (int keynum)
-{
-	if(WithinRange(keynum, 129, 131))
-		return MISSION_REDKEYOBJ + keynum - 129;
-	
-	if(WithinRange(keynum, 132, 134))
-		return MISSION_REDKEYOBJ + keynum - 132;
-	
-	if(!TryIndex(keynum, 1, 6, "GetKeyDoorMission", "keynum"))
-		return EXCEPTION;
-	
-	return keynum - 1 + MISSION_KEYOBJ_START;
+	return EXCEPTION;
 }
 
 function int GetKeyIndex (int mission)
 {
+	if(WithinRange(mission, MISSION_REDCARD, MISSION_YELLOWSKULL))
+		return mission;
+	
 	if(WithinRange(mission, MISSION_REDKEY, MISSION_YELLOWKEY))
-		return mission - MISSION_REDKEY;
+		return 128 - 6 + mission;
 	
-	if(!TryIndex(mission, MISSION_KEY_START, MISSION_KEYOBJ_END, "GetKeyIndex", "mission"))
-		return EXCEPTION;
+	if(mission == MISSION_ANYKEY)
+		return KEY_ANY;
 	
-	if(WithinRange(mission, MISSION_KEYOBJ_START, MISSION_KEYOBJ_END))
-		return mission - 6;
+	if(mission == MISSION_EACHKEY)
+		return KEY_EACH;
+		
+	if(mission == MISSION_ALLKEYS)
+		return KEY_ALL;
 	
-	return mission;
+	return EXCEPTION;
 }
 
 //Returns true if the key mission is not active
@@ -64,6 +62,7 @@ function bool CheckKeyMission (int keynum)
 	return true;
 }
 
+/*
 //Returns the keynum of the next needed key
 function int CheckAllKeysUsed (void)
 {
@@ -73,6 +72,7 @@ function int CheckAllKeysUsed (void)
 	
 	return NULL; // No key needed, all keys found
 }
+*/
 
 //Returns the next unused index (0-1023) or EXCEPTION if the list is full
 function int GetNextMissionIndex (void)
@@ -90,10 +90,8 @@ function int LookupMission (int mission, int map, int owner)
 	for(int m = 0; m < 1024; m++)
 	{
 		if(GetUserArray(0, "user_m_status", m) == MISSION_NONE)
-		{
-			//log(s:"LookupMission: Stopped Search at ", i:m);
 			break;
-		}
+		
 		if(mission != GetUserArray(0, "user_m_type", m))
 			continue;
 		if(map != GetUserArray(0, "user_m_map", m))
@@ -107,26 +105,22 @@ function int LookupMission (int mission, int map, int owner)
 	return EXCEPTION;
 }
 
-function int GetMissionStatus (int mission, int map, int owner)
+function int GetMissionStatus (int MissionIndex)
 {
-	int index = LookupMission(mission, map, owner);
-	
-	if(index == EXCEPTION)
+	if(MissionIndex == EXCEPTION)
 		return MISSION_NONE;
 	
-	return GetUserArray(0, "user_m_status", index);
+	return GetUserArray(0, "user_m_status", MissionIndex);
 }
 
-function void SetMissionStatus (int mission, int map, int owner, int value)
+function void SetMissionStatus (int MissionIndex, int value)
 {
-	int index = LookupMission(mission, map, owner);
-	
-	if(index == EXCEPTION)
+	if(MissionIndex == EXCEPTION)
 	{
-		log(s:MissionInfo[mission][MI_NAME], s:" in map ", i:map, s:" owned by ", i:owner, s:" cannot be found");
+		log(s:"Mission Status was not set. Use AddMission script instead.");
 		return;
 	}
 	
-	SetUserArray(0, "user_m_status", index, value);
+	SetUserArray(0, "user_m_status", MissionIndex, value);
 }
 

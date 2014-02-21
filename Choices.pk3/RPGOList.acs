@@ -12,59 +12,46 @@
 #libdefine MIDS_KEY		"This key looks important, there is probably a door or switch that uses it."
 #libdefine MIDS_DOOR	"This door is locked, there should be a key around here to open it."
 
-#libdefine MISSION_FAIL -100		//Mission cannot be completed this playthrough
+#libdefine MISSION_FAIL -3			//Mission cannot be completed this playthrough
 #libdefine MISSION_PMAP -2			//Mission paused due to leaving the map, mission is level specific
 #libdefine MISSION_STOP -1			//Mission stopped temporarily, NPC unavailable, level blocked, etc.
-#libdefine MISSION_NONE	0			//Mission unknown
+#libdefine MISSION_NONE	0			//Mission not acquired
 #libdefine MISSION_GOT	1			//Mission started
 #libdefine MISSION_DONE	100			//Mission complete
-#libdefine MISSION_LIST	101			//Mission complete, show in completed list
 
-#libdefine MISSION_KEY_START		0
-#libdefine MISSION_REDCARD			0
-#libdefine MISSION_BLUECARD			1
-#libdefine MISSION_YELLOWCARD		2
-#libdefine MISSION_REDSKULL			3
-#libdefine MISSION_BLUESKULL		4
-#libdefine MISSION_YELLOWSKULL		5
-#libdefine MISSION_KEY_END			5
-#libdefine MISSION_KEYOBJ_START		6
-#libdefine MISSION_REDCARDOBJ		6
-#libdefine MISSION_BLUECARDOBJ		7
-#libdefine MISSION_YELLOWCARDOBJ	8
-#libdefine MISSION_REDSKULLOBJ		9
-#libdefine MISSION_BLUESKULLOBJ		10
-#libdefine MISSION_YELLOWSKULLOBJ	11
-#libdefine MISSION_KEYOBJ_END		11
-#libdefine MISSION_MAIN_START		12
-#libdefine MISSION_REDKEY			13
-#libdefine MISSION_BLUEKEY			14
-#libdefine MISSION_YELLOWKEY		15
-#libdefine MISSION_ALLKEYS			16
-#libdefine MISSION_EACHKEY			17
-#libdefine MISSION_ANYKEY			18
-#libdefine MISSION_REDKEYOBJ		19
-#libdefine MISSION_BLUEKEYOBJ		20
-#libdefine MISSION_YELLOWKEYOBJ		21
-#libdefine MISSION_CLOSEPORTAL		22
-#libdefine MI_ARRAY					23
+#libdefine MISSION_REDCARD			1
+#libdefine MISSION_BLUECARD			2
+#libdefine MISSION_YELLOWCARD		3
+#libdefine MISSION_REDSKULL			4
+#libdefine MISSION_BLUESKULL		5
+#libdefine MISSION_YELLOWSKULL		6
+#libdefine MISSION_REDKEY			7
+#libdefine MISSION_BLUEKEY			8
+#libdefine MISSION_YELLOWKEY		9
+#libdefine MISSION_ALLKEYS			10
+#libdefine MISSION_EACHKEY			11
+#libdefine MISSION_ANYKEY			12
 
-str MissionInfo[MI_ARRAY][3] =
+#libdefine MISSION_RPG01_ARRIVAL		13
+#libdefine MISSION_RPG01_CLOSEPORTAL	14
+#libdefine MI_ARRAY						15
+
+str MissionInfo[MI_ARRAY][2] =
 {
-	{ "Gain Red Keycard Access", MIDS_KEY, "Key" },
-	{ "Use The Blue KeyCard", MIDS_KEY, "Key" },
-	{ "Use The Yellow KeyCard", MIDS_KEY, "Key" },
-	{ "Use The Red Skull Key", MIDS_KEY, "Key" },
-	{ "Use The Blue Skull Key", MIDS_KEY, "Key" },
-	{ "Use The Yellow Skull Key", MIDS_KEY, "Key" },
-	{ "Find The Red KeyCard", MIDS_DOOR, "Key" },
-	{ "Find The Blue KeyCard", MIDS_DOOR, "Key" },
-	{ "Find The Yellow KeyCard", MIDS_DOOR, "Key" },
-	{ "Find The Red Skull Key", MIDS_DOOR, "Key" },
-	{ "Find The Blue Skull Key", MIDS_DOOR, "Key" },
-	{ "Find The Yellow Skull Key", MIDS_DOOR, "Key" },
-	{ "Rendezvous With Base", "The Mars Commander has requested your assistance in dealing with the invasion.", "Main" },
-	{ "Close the Portal", "There is a detachment of Marines guarding an active portal, Assist them.", "Secondary" }
+	{ "Gain Red Keycard Access", "Access denied: You need a Red Keycard." },
+	{ "Gain Blue Keycard Access", "Access denied: You need a Blue Keycard." },
+	{ "Gain Yellow Keycard Access", "Access denied: You need a Yellow Keycard." },
+	{ "Use The Red Skull Key", MIDS_KEY },
+	{ "Use The Blue Skull Key", MIDS_KEY },
+	{ "Use The Yellow Skull Key", MIDS_KEY },
+	{ "Find The Red Key", MIDS_DOOR },
+	{ "Find The Blue Key", MIDS_DOOR },
+	{ "Find The Yellow Key", MIDS_DOOR },
+	{ "Find The Red Skull Key", MIDS_DOOR },
+	{ "Find The Blue Skull Key", MIDS_DOOR },
+	{ "Find The Yellow Skull Key", MIDS_DOOR },
+	{ "Arrival", "The Mars Commander has requested your assistance in dealing with the invasion." },
+	{ "Closing the Portal", "There is a detachment of Marines guarding an active portal, Assist them." }
 };
 
 #libdefine OD_TYPE			0 // Type of objective
@@ -181,11 +168,11 @@ str ObjectiveName[3] =
 #libdefine OI_BLUECARD	1
 #libdefine OI_BARON		2
 
-str ObjectiveIcon[3] =
+str ObjectiveIcon[3] = //Temp
 {
-	"R",
-	"B",
-	"B"
+	"MGUNA0",
+	"CGUNA0",
+	"PISTA0"
 };
 
 #libdefine OT_RPG01_REDCARD		0

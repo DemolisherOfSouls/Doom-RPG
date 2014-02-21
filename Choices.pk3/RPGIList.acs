@@ -28,6 +28,9 @@ str ItemInfo[3][II_ARRAY] =
 #libdefine	KEY_REDSKULL	4
 #libdefine	KEY_BLUESKULL	5
 #libdefine	KEY_YELLOWSKULL	6
+#libdefine	KEY_ANY			100
+#libdefine	KEY_ALL			101
+#libdefine	KEY_EACH		229
 
 int ItemData[2][ID_ARRAY] =
 {
