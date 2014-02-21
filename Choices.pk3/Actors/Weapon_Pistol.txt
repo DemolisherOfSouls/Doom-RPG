@@ -1,7 +1,5 @@
 Actor Weapon_Pistol : Weapon_BasePistol
 {
-	AttackSound "Weapon/Pistol"
-	
 	Weapon.AmmoType1 "AmmoMag_Pistol"
 	
 	Inventory.Icon "PISTA0"
@@ -154,10 +152,10 @@ Actor Weapon_Pistol : Weapon_BasePistol
 	
 	Reload:
 		PISG A 0 A_JumpIfInventory("InvMod_Pistol_Second", 1, "Reload.Second")
-		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 1, "Delay")
+		PISG A 0 A_JumpIfInventory("AmmoMag_MkII", 0, "Reload.Full")
 		PISG A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Start")
-		Goto ChangeWeapon
-	
+		PISG A 0 A_JumpIfNoAmmo("ChangeWeapon")
+		Goto Reload.Full
 	Reload.Start:
 		PISG A 0 A_JumpIfInventory("AmmoMag_Pistol", 0, "Ready")
 		PISG A 1 Offset(0,48)
@@ -165,12 +163,16 @@ Actor Weapon_Pistol : Weapon_BasePistol
 		PISG A 1 Offset(0,64)
 		PISG A 1 Offset(0,72)
 		PISG A 1 Offset(0,80)
-		PISG A 1 Offset(0,88) A_GunFlash("Reload.Process.L")
+		PISG A 1 Offset(0,88) A_GunFlash("Reload.Process.L", GFF_NOEXTCHANGE)
 		PISG A 1 Offset(0,80)
 		PISG A 1 Offset(0,72)
 		PISG A 1 Offset(0,64)
 		PISG A 1 Offset(0,56)
 		PISG A 1 Offset(0,48)
+		Goto Ready
+	
+	Reload.Full:
+		PISG A 10 A_PlayWeaponSound("Weapon/PistolEmpty")
 		Goto Ready
 	
 	//******************************************************
@@ -191,14 +193,14 @@ Actor Weapon_Pistol : Weapon_BasePistol
 	
 	Reload.Second.Left:
 		PISG F 1
-		PISG F 0 A_GunFlash("Reload.Process.L")
+		PISG F 0 A_GunFlash("Reload.Process.L", GFF_NOEXTCHANGE)
 		PISG F 1
 		PISG F 0 A_JumpIfInventory("AmmoMag_Pistol2", 0, "Reload.Second.Finish")
 		PISG F 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Second.Right")
 		Goto Reload.Second.Finish
 	Reload.Second.Right:
 		PISG F 1
-		PISG F 0 A_GunFlash("Reload.Process.R")
+		PISG F 0 A_GunFlash("Reload.Process.R", GFF_NOEXTCHANGE)
 		PISG F 1
 		Goto Reload.Second.Finish
 	Reload.Second.Finish:
