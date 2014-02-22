@@ -113,7 +113,8 @@ acs_rpg : acs_z {
 		
 		IndexOutOfBoundsException,
 		MissingActorException,
-		
+		CannotFindKeyException,
+		InvalidLockException
 	}
 
 	functions {
@@ -124,10 +125,12 @@ acs_rpg : acs_z {
 		WaitingRenown = "[player] = renown";
 		WaitingMoney = "[player] = money";
 		WaitingSouls = "[player] = souls";
+		WaitingAmmo = "[ammotype][player] = ammo"
 		
 		//RPGError.acs
 		TryIndex = "int index, int mi, int ma, str sender, str var";
 		Throw = "int type, str sender";
+		Throw2 = "int type, str sender, int index, str var";
 		
 		//RPGOpen.acs
 		DoomMapNames = "[episode] = str name";

@@ -49,7 +49,7 @@ script "MissionTracker" (int MissionIndex)
 	int status = GetUserArray(0, "user_m_status", MissionIndex);
 	
 	int lockindex = GetKeyIndex(type); //If not a valid mission, EXCEPTION
-	int keynum;
+	int keynum, keyused, index;
 
 	switch(type)
 	{
@@ -63,16 +63,24 @@ script "MissionTracker" (int MissionIndex)
 	case MISSION_BLUEKEY:
 	case MISSION_YELLOWKEY:
 	
-		int keynum  = GetLevelKey(lockindex)
-		int keyused = LevelKeyUsed[keynum]
+		keynum  = GetLevelKey(lockindex);
+		index   = keynum - 1;
+		keyused = LevelKeyUsed[index];
+		keyheld = GetKeyStorage(keynum);
 	
 		if(keyused && status == MISSION_GOT)
 		{
-			ACS_NamedExecuteAlways("ObjectiveDoneAlert", 0);
-			status = MISSION_DONE;
-			ACS_NamedExecuteAlways("MissionDoneAlert", 0, mission);
+			//Already Unlocked prior to mission
 		}
 		
+		if(keyheld && status == mission_got)
+		{
+			//Have key at start, so add 'nulled' objective
+			//AddNullObjective(MissionIndex, objinfo);
+			
+			//Set objective to unlock that object
+			//AddObjective(MissionIndex, objinfo);
+		}
 		
 		break;
 	

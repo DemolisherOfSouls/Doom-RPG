@@ -63,9 +63,9 @@ script "EnemyHead" (void)
 		Delay(1);
 }
 
-script "EnemyDeath" (void)
+script "EnemyDeath" (int DeathType)
 {
-	EntityDeath();
+	EntityDeath(DeathType);
 }
 
 script "EnemyRaise" (void)

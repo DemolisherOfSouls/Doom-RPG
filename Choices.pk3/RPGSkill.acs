@@ -55,6 +55,11 @@ script "Skill_HomingRounds" (void)
 	SetResultValue(GetSkill(SKILL_HomingRounds));
 }
 
+script "Skill_QuantumLasers" (void)
+{
+	SetResultValue(false);
+}
+
 script "Skill_QuickDraw" (void)
 {
 	SetResultValue(GetSkill(SKILL_QuickDraw));

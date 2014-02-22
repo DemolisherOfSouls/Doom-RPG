@@ -157,9 +157,7 @@ function void SetKeyStorage (int keynum)
 	int index = keynum - 1;
 	str class = GetKeyClass(keynum);
 	
-	if(!CheckInventory(class))
-		GiveInventory(class, 1);
-	
+	SetInventory(class, 1);
 	LevelKeyFound[index] = true;
 	AddKeyBit(keynum);
 }

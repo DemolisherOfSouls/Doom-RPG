@@ -117,18 +117,19 @@ function bool EntityHead (void)
 	return true;
 }
 
-function void EntityDeath (void)
+function void EntityDeath (int DeathType)
 {
+	SetUserVar(0, "deathtype", DeathType);
+	
 	int xp = GetUserVar(0, "rewardxp");
 	int renown = GetUserVar(0, "rewardrenown");
-	int rage = GetUserVar(0, "deathtype");
 	
 	SetActivatorToTarget(0);
 	
 	if(IsPlayer(0))
 	{
 		ACS_NamedExecuteAlways("PlayerExp", 0, xp);
-		ACS_NamedExecuteAlways("PlayerRage", 0, rage);
+		ACS_NamedExecuteAlways("PlayerRage", 0, DeathType);
 		ACS_NamedExecuteAlways("PlayerRenown", 0, renown);
 	}
 	else if(IsEnemy(0))

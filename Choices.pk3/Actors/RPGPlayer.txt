@@ -69,6 +69,23 @@ Actor RPGPlayer : DoomPlayer
 	var int user_m_map[1024];
 	var int user_m_owner[1024];
 	
+	// objectives
+	var int user_o_mission[2048];
+	var int user_o_status[2048];
+	var int user_o_map[2048];
+	var int user_o_lookup[2048];
+	var int user_o_type[2048];
+	var int user_o_name[2048];
+	var int user_o_desc[2048];
+	var int user_o_icon[2048];
+	var int user_o_data1[2048];
+	var int user_o_data2[2048];
+	var int user_o_data3[2048];
+	var int user_o_data4[2048];
+	var int user_o_data5[2048];
+	var int user_o_data6[2048];
+	var int user_o_data7[2048];
+	
 	States
 	{
 	Pain.Terrain_Nukage:
@@ -80,28 +97,9 @@ Actor RPGPlayer : DoomPlayer
 	}
 }
 
-Actor Player_Head
+Actor Player_Head : EntityHead
 {
-	Height 16
-	Radius 17
-	PainChance 255
-	Health 10000
-	
 	Species "PlayerThru"
 	
 	+ISMONSTER
-	+SHOOTABLE
-	+THRUSPECIES
-	+NOGRAVITY
-	+LOOKALLAROUND
-	+NORADIUSDMG
-	+QUICKTORETALIATE
-	+STANDSTILL
-	
-	States
-	{
-	Spawn:
-		TNT1 A -1
-		Stop
-	}
 }

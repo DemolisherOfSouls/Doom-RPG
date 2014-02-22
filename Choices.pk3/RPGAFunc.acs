@@ -89,6 +89,11 @@ function str PSurroundNumber (int value)
 	return StrParam(s:"(", i:value, s:")");
 }
 
+function void ACS (str name)
+{
+	CallACS(name, 0, 0, 0);
+}
+
 function void CallACS (str name, int v1, int v2, int v3)
 {
 	ACS_NamedExecuteAlways(name, 0, v1, v2, v3);

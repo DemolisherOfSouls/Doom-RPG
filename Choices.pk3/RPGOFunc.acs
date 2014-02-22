@@ -11,30 +11,31 @@
 #import "RPGColor.acs"
 #import "RPGError.acs"
 
-function int GetKeyMission (int keynum)
+function int GetKeyMission (int LockNumber)
 {
-	if(WithinRange(keynum, KEY_REDCARD, KEY_YELLOWSKULL))
-		return keynum;
+	if(WithinRange(LockNumber, KEY_REDCARD, KEY_YELLOWSKULL))
+		return LockNumber;
 	
-	if(WithinRange(keynum, 129, 131))
-		return keynum - 128 + 6;
+	if(WithinRange(LockNumber, 129, 131))
+		return LockNumber - 128 + 6;
 	
-	if(WithinRange(keynum, 132, 134))
-		return keynum - 131 + 6;
+	if(WithinRange(LockNumber, 132, 134))
+		return LockNumber - 131 + 6;
 	
-	if(keynum == KEY_ANY)
+	if(LockNumber == KEY_ANY)
 		return MISSION_ANYKEY;
 	
-	if(keynum == KEY_EACH)
+	if(LockNumber == KEY_EACH)
 		return MISSION_EACHKEY;
 		
-	if(keynum == KEY_ALL)
+	if(LockNumber == KEY_ALL)
 		return MISSION_ALLKEYS;
 	
 	return EXCEPTION;
 }
 
-function int GetKeyIndex (int mission)
+//Returns the LockNumber for the given mission, or EXCEPTION if the mission is not a key mission
+function int GetLockNumber (int mission)
 {
 	if(WithinRange(mission, MISSION_REDCARD, MISSION_YELLOWSKULL))
 		return mission;
@@ -55,26 +56,12 @@ function int GetKeyIndex (int mission)
 }
 
 //Returns true if the key mission is not active
-function bool CheckKeyMission (int keynum)
+function bool CheckKeyMission (int LockNumber)
 {
-	if(GetMissionStatus(GetKeyMission(keynum), G_Map, NULL) >= MISSION_GOT || GetMissionStatus(GetKeyDoorMission(keynum), G_Map, NULL) >= MISSION_GOT)
-		return false;
-	return true;
+	return GetMissionStatus(GetKeyMission(LockNumber), G_Map, NULL) < MISSION_GOT;
 }
 
-/*
-//Returns the keynum of the next needed key
-function int CheckAllKeysUsed (void)
-{
-	for(int k = 0; k < 6; k++)
-		if(!LevelKeyUsed[k])
-			return k+1;
-	
-	return NULL; // No key needed, all keys found
-}
-*/
-
-//Returns the next unused index (0-1023) or EXCEPTION if the list is full
+//Returns the next unused index (0-1023), or EXCEPTION if the list is full
 function int GetNextMissionIndex (void)
 {
 	for(int c = 0; c < 1024; c++)
@@ -124,3 +111,82 @@ function void SetMissionStatus (int MissionIndex, int value)
 	SetUserArray(0, "user_m_status", MissionIndex, value);
 }
 
+//Returns the next unused index (0-1023), or EXCEPTION if the list is full
+function int GetNextObjectiveIndex (void)
+{
+	for(int c = 0; c < 2048; c++)
+		if(GetUserArray(0, "user_o_status", c) == OBJECTIVE_NONE)
+			return c;
+	
+	return EXCEPTION;
+}
+
+//Adds an objective from custom parameters
+function void AddObjective (int MissionIndex, int map, int lookup, int type, int name, int desc, int icon,
+							int data1, int data2, int data3, int data4, int data5, int data6, int data7)
+{
+	int index = GetNextObjectiveIndex();
+	
+	SetUserArray(0, "user_o_mission", index, MissionIndex);
+	SetUserArray(0, "user_o_status", index, OBJECTIVE_GOT);
+	SetUserArray(0, "user_o_map", index, map);
+	SetUserArray(0, "user_o_lookup", index, lookup);
+	
+	SetUserArray(0, "user_o_type", index, ObjectiveData[lookup][OD_TYPE]);
+	SetUserArray(0, "user_o_name", index, ObjectiveData[lookup][OD_NAMEINDEX]);
+	SetUserArray(0, "user_o_desc", index, ObjectiveData[lookup][OD_DESCINDEX]);
+	SetUserArray(0, "user_o_icon", index, ObjectiveData[lookup][OD_ICONINDEX]);
+	SetUserArray(0, "user_o_data1", index, ObjectiveData[lookup][OD_DATA1]);
+	SetUserArray(0, "user_o_data2", index, ObjectiveData[lookup][OD_DATA2]);
+	SetUserArray(0, "user_o_data3", index, ObjectiveData[lookup][OD_DATA3]);
+	SetUserArray(0, "user_o_data4", index, ObjectiveData[lookup][OD_DATA4]);
+	SetUserArray(0, "user_o_data5", index, ObjectiveData[lookup][OD_DATA5]);
+	SetUserArray(0, "user_o_data6", index, ObjectiveData[lookup][OD_DATA6]);
+	SetUserArray(0, "user_o_data7", index, ObjectiveData[lookup][OD_DATA7]);
+	
+	ACS_NamedExecuteAlways("ObjectiveAlert", 0, index);
+}
+
+//Adds an objective from the lookup table
+function void AddObjective (int MissionIndex, int map, int lookup)
+{
+	int index = GetNextObjectiveIndex();
+	
+	SetUserArray(0, "user_o_mission", index, MissionIndex);
+	SetUserArray(0, "user_o_status", index, OBJECTIVE_GOT);
+	SetUserArray(0, "user_o_map", index, map);
+	SetUserArray(0, "user_o_lookup", index, lookup);
+	
+	SetUserArray(0, "user_o_type", index, ObjectiveData[lookup][OD_TYPE]);
+	SetUserArray(0, "user_o_name", index, ObjectiveData[lookup][OD_NAMEINDEX]);
+	SetUserArray(0, "user_o_desc", index, ObjectiveData[lookup][OD_DESCINDEX]);
+	SetUserArray(0, "user_o_icon", index, ObjectiveData[lookup][OD_ICONINDEX]);
+	SetUserArray(0, "user_o_data1", index, ObjectiveData[lookup][OD_DATA1]);
+	SetUserArray(0, "user_o_data2", index, ObjectiveData[lookup][OD_DATA2]);
+	SetUserArray(0, "user_o_data3", index, ObjectiveData[lookup][OD_DATA3]);
+	SetUserArray(0, "user_o_data4", index, ObjectiveData[lookup][OD_DATA4]);
+	SetUserArray(0, "user_o_data5", index, ObjectiveData[lookup][OD_DATA5]);
+	SetUserArray(0, "user_o_data6", index, ObjectiveData[lookup][OD_DATA6]);
+	SetUserArray(0, "user_o_data7", index, ObjectiveData[lookup][OD_DATA7]);
+	
+	ACS_NamedExecuteAlways("ObjectiveAlert", 0, index);
+}
+
+function int GetObjectiveStatus (int ObjectiveIndex)
+{
+	if(ObjectiveIndex == EXCEPTION)
+		return OBJECTIVE_NONE;
+	
+	return GetUserArray(0, "user_o_status", ObjectiveIndex);
+}
+
+function void SetObjectiveStatus (int ObjectiveIndex, int value)
+{
+	if(ObjectiveIndex == EXCEPTION)
+	{
+		log(s:"Objective Status was not set. Use AddObjective script instead.");
+		return;
+	}
+	
+	SetUserArray(0, "user_o_status", ObjectiveIndex, value);
+}

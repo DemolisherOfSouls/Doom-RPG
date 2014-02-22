@@ -33,12 +33,13 @@ Added Chaingun spindown
 Fixed accuracy display for weapons to only show one decimal place
 Fixed minigun locking on altfire
 Fixed laser rifle locking on reload
+Fixed keys horridly bugged
+Added 3 armor items
+Added silenced pistol sprites
 
 //TODO
 
 //weapons
-Add Chaingun belt AmmoMag_Chaingun
-Add Chaingun reload
 Add Chaingun movement penalty
 Add Unarmed movement bonus
 Add LR sprites
@@ -47,6 +48,8 @@ Add LR sounds
 Add worsening accuracy system
 Add keys found to inventory menu
 Add credits to inventory menu
+Add hell weapon
+Add pistol altfire 'hack'
 
 Add BFG weapon
 
@@ -61,6 +64,8 @@ Add Cyberdemon enemy
 
 //allies
 Add Marine ally
+Add weapon changing
+Add ammo use and alerts
 
 //general
 Add better soul items

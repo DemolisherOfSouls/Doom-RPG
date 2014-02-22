@@ -137,26 +137,28 @@
 #libdefine Req_Perk				5	// (int perk)
 
 #libdefine EFF_RunSpeed			100	// (int percent)
-#libdefine EFF_WeaponDamage		101 // (int weapon, int amt)
+#libdefine EFF_WeaponDamage		101 // (int weapon, int amount)
 #libdefine EFF_HealthRegen		102 // (int hps, int cap)
 #libdefine EFF_GibChance		103
 #libdefine EFF_HomingRounds		104
-#libdefine EFF_QuickDraw		105
-#libdefine EFF_RageExtend		106 // (int amt)
-#libdefine EFF_HealthItem		107 // (int amt)
-#libdefine EFF_AmmoStorage		108 // (int ammo, int amt)
+#libdefine EFF_QuickDraw		105 // (int amount)
+#libdefine EFF_RageExtend		106 // (int amount)
+#libdefine EFF_HealthItem		107 // (int amount)
+#libdefine EFF_AmmoStorage		108 // (int ammo, int amount)
 #libdefine EFF_SoulSeeker		109 // (int chance)
 #libdefine EFF_Discount			110 // (int percent)
 #libdefine EFF_ExperienceBoost	111 // (int percent)
-#libdefine EFF_WeaponAccuracy	112 // (int weapon, int amt)
+#libdefine EFF_WeaponAccuracy	112 // (int weapon, int amount)
 #libdefine EFF_DisableWeapon	113 // (int weapon)
 #libdefine EFF_HeadshotDamage	114 // (int percent)
 #libdefine EFF_ReloadSpeed		115 // (int percent)
-#libdefine EFF_GrenadeDamage	116 // (int grenade, int amt)
+#libdefine EFF_GrenadeDamage	116 // (int grenade, int amount)
 #libdefine EFF_MoneyDropRate	117 // (int percent)
 #libdefine EFF_MoneyDropAmt		118 // (int amount)
 #libdefine EFF_StimpackCarry	119 // (int amount)
-#libdefine EFF_ARRAY			20  // Number of different effects
+#libdefine EFF_LaserSpeed		120 // (int amount)
+#libdefine EFF_LaserHome		121 // (int ranks)
+#libdefine EFF_ARRAY			22  // Number of different effects
 
 #libdefine RAGE_SlowMotion		200 // (int strength)
 #libdefine RAGE_HealthRegen		201 // (int hps, int cap)

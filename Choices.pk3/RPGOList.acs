@@ -54,6 +54,13 @@ str MissionInfo[MI_ARRAY][2] =
 	{ "Closing the Portal", "There is a detachment of Marines guarding an active portal, Assist them." }
 };
 
+#libdefine OBJECTIVE_NONE	0  // No objective
+#libdefine OBJECTIVE_GOT	-1 // Got objective
+#libdefine OBJECTIVE_DONE	-2 // Completed objective
+#libdefine OBJECTIVE_STOP	-3 // Blocked temporarily
+#libdefine OBJECTIVE_PMAP	-4 // Not in level
+#libdefine OBJECTIVE_FAIL	-5 // Failed objective
+
 #libdefine OD_TYPE			0 // Type of objective
 #libdefine OD_NAMEINDEX		1 // Index of objective name in index
 #libdefine OD_DESCINDEX		2 // Index of objective description in index
@@ -186,6 +193,7 @@ str ObjectiveText[3] =
 	"Kill the Baron holding the portal open"
 };
 
+//ObjectiveData holds entire pre-assembled objectives
 int ObjectiveData[2][OD_ARRAY] =
 {
 	{ ODT_FIND, ON_FIND_REDCARD, OT_RPG01_REDCARD, OI_REDCARD, ODD1_KEY|ODD1_MAP, 1, KEY_REDCARD },

@@ -20,7 +20,8 @@
 #libdefine SKILL_Pyro			SKILL_FleshWound + 1
 #libdefine SKILL_Fortunate		SKILL_Pyro + 1
 #libdefine SKILL_FieldMedic		SKILL_Fortunate + 1
-#libdefine SKILL_ARRAY			SKILL_FieldMedic + 1
+#libdefine SKILL_QuantumLasers	SKILL_FieldMedic + 1
+#libdefine SKILL_ARRAY			SKILL_QuantumLasers + 1
 
 #libdefine SI_NAME	0
 #libdefine SI_DESC	1
@@ -75,6 +76,9 @@ str SkillInfo[SKILL_ARRAY][2] =
 	},{
 		"Field Medic",
 		"Up to 5 stimpacks can be carried if at full health"
+	},{
+		"Quantum Lasers",
+		"Increases laser speed, and slightly increases homing properties"
 	}
 };
 
@@ -236,5 +240,13 @@ int SkillData[SKILL_ARRAY][10][3] =
 		{ Null },
 		{ Null },
 		{ EFF_StimpackCarry, 5 }
+	},{ // Quantum Lasers
+		{ CATEGORY_General, CATEGORY_Offence },
+		{ Req_Level, 19 },
+		{ Req_Limit, 2 },
+		{ Null },
+		{ Null },
+		{ EFF_LaserHome, 1 },
+		{ EFF_LaserSpeed, 16 },
 	}
 };

@@ -49,7 +49,7 @@ script "AllyHead" (void)
 		Delay(1);
 }
 
-script "AllyDeath" (void)
+script "AllyDeath" (int DeathType)
 {
-	EntityDeath();
+	EntityDeath(DeathType);
 }
