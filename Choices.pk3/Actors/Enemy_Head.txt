@@ -1,24 +1,7 @@
-Actor Enemy_Head
+Actor Enemy_Head : Entity_Head
 {
-	Height 16
 	Radius 21
-	Health 10000
-	
 	+ISMONSTER
-	+SHOOTABLE
-	+THRUSPECIES
-	+NOGRAVITY
-	+LOOKALLAROUND
-	+NORADIUSDMG
-	+QUICKTORETALIATE
-	+STANDSTILL
-	
-	States
-	{
-	Spawn:
-		TNT1 A -1
-		Stop
-	}
 }
 
 Actor Enemy_DemonicHead : Enemy_Head

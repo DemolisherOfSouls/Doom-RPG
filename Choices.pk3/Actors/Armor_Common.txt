@@ -1,0 +1,31 @@
+Actor Armor_Green : BasicArmorPickup
+{
+	Inventory.Icon "ARM1A0"
+	Armor.MaxFullAbsorb 2
+	Armor.SavePercent 40
+	Armor.SaveAmount 100
+}
+
+Actor Armor_Blue : BasicArmorPickup
+{
+	Inventory.Icon "ARM2A0"
+	Armor.MaxFullAbsorb 5
+	Armor.SavePercent 60
+	Armor.SaveAmount 200
+}
+
+Actor Armor_Red : BasicArmorPickup
+{
+	Inventory.Icon "ARM3A0"
+	Armor.MaxFullAbsorb 10
+	Armor.Savepercent 70
+	Armor.Saveamount 250
+}
+
+Actor Armor_MegaSphere : BasicArmorPickup
+{
+	Inventory.Icon "MEGAA0"
+	Armor.MaxFullAbsorb 20
+	Armor.Savepercent 50
+	Armor.Saveamount 200
+}

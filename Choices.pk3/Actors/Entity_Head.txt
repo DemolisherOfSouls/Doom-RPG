@@ -1,0 +1,21 @@
+Actor Entity_Head
+{
+	Height 16
+	Radius 17
+	Health 10000
+	
+	+SHOOTABLE
+	+THRUSPECIES
+	+NOGRAVITY
+	+LOOKALLAROUND
+	+NORADIUSDMG
+	+QUICKTORETALIATE
+	+STANDSTILL
+	
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		Stop
+	}
+}

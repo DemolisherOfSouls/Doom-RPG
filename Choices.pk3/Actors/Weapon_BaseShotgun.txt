@@ -3,10 +3,16 @@ Actor Weapon_BaseShotgun : Weapon_Base
 	Weapon.SlotNumber 3
 	Weapon.SelectionOrder 4
 	
-	Weapon.AmmoUse1 1
 	Weapon.AmmoType2 "Ammo_Shell"
 
 	States
 	{
+	Reload.Click:
+		"####" A 1
+		"####" A 5 A_PlayWeaponSound("Weapon/ShotgunEmpty")
+	Reload:
+		"####" A 0 A_JumpIfInventory("Ammo_Shell", 1, "Reload.CheckFull")
+		"####" A 0 A_JumpIfNoAmmo("ChangeWeapon")
+		Goto Delay
 	}
 }

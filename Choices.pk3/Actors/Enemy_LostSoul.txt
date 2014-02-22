@@ -24,7 +24,7 @@ Actor Enemy_LostSoul : Enemy_DemonicFloater replaces LostSoul
 		SKUL A 0 A_SetUserVar("user_rewardxp", 10)
 		SKUL A 0 A_SetUserVar("user_paintime", 3)
 		SKUL A 0 A_SetUserVar("user_type", ET_LOSTSOUL)
-		"####" A 0 A_Jump(Always, "Spawn.Final")
+		Goto Spawn.Final
 	See.Real:
 		SKUL AABB 3 A_Chase
 		Loop

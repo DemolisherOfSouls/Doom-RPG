@@ -24,7 +24,7 @@ Actor Enemy_Demon : Enemy_Demonic replaces Demon
 		SARG A 0 A_SetUserVar("user_rewardxp", 15)
 		SARG A 0 A_SetUserVar("user_paintime", 2)
 		SARG A 0 A_SetUserVar("user_type", ET_DEMON)
-		"####" A 0 A_Jump(Always, "Spawn.Final")
+		Goto Spawn.Final
 	See.Real:
 		SARG AABBCCDD 2 A_Chase
 		Loop

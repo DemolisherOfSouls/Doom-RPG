@@ -10,7 +10,7 @@ Actor Item_Chaingun : Item_Weapon replaces Chaingun
 		Loop
 	Pickup:
 		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 5, W_CHAINGUN), "Pickup.Fail")
-		TNT1 A 0 A_GiveInventory("Ammo_Clip", 60)
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 60, AT_CLIP)
 		Goto Pickup.Force
 	}
 }

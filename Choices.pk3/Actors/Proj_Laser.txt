@@ -10,7 +10,7 @@ Actor Proj_Laser : Proj_Bullet
 	Select:
 		BULL C 0 A_Jump(Always, "Laser")
 	Laser:
-		BULL C 0 A_JumpIf(CallACS("Skill_HomingLasers"), "Laser.Homing")
+		BULL C 0 A_JumpIf(CallACS("Skill_QuantumLasers"), "Laser.Homing")
 		//BULL C 1 A_SpawnItemEx("Proj_LaserTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL)
 		BULL C 1 A_CustomMissile("Proj_LaserTrail", 32, 0, 0, CMF_STANDARD, 0)
 		Wait

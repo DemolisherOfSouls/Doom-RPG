@@ -1,0 +1,7 @@
+Actor Ammo_HERocket : Ammo
+{
+	Inventory.MaxAmount 16
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 16
+	//Inventory.Icon ""
+}

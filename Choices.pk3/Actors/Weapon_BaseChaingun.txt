@@ -3,7 +3,6 @@ Actor Weapon_BaseChaingun : Weapon_Base
 	Weapon.SlotNumber 4
 	Weapon.SelectionOrder 3
 	
-	Weapon.AmmoUse1 1
 	Weapon.AmmoType1 "Ammo_Clip"
 
 	States

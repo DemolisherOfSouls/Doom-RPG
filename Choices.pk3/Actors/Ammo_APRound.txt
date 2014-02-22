@@ -1,0 +1,7 @@
+Actor Ammo_APRound : Ammo
+{
+	Inventory.MaxAmount 150
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 150
+	//Inventory.Icon ""
+}

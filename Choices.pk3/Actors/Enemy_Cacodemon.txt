@@ -1,0 +1,49 @@
+Actor Enemy_Cacodemon : Enemy_DemonicFloater replaces Cacodemon
+{
+	SpawnID 19
+	Health 400
+	Radius 31
+	Mass 400
+	PainChance 128
+	SeeSound "caco/sight"
+	PainSound "caco/pain"
+	DeathSound "caco/death"
+	ActiveSound "caco/active"
+	Obituary "$OB_CACO"
+	HitObituary "$OB_CACOHIT"
+	States
+	{
+	Spawn.Stage2:
+		HEAD A 0 A_SetUserVar("user_rewardxp", 25)
+		HEAD A 0 A_SetUserVar("user_paintime", 0)
+		HEAD A 0 A_SetUserVar("user_type", ET_CACODEMON)
+		Goto Spawn.Final
+	See.Real:
+		HEAD A 3 A_Chase
+		Loop
+	Missile:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 5 Bright A_HeadAttack
+		Goto See
+	Pain:
+		HEAD E 3
+		HEAD E 3 A_Pain
+		HEAD F 6
+		Goto See
+	Headshot.Stage1:
+	XDeath.Stage1:
+	Death.Stage1:
+		HEAD G 8
+		HEAD H 8 A_Scream
+		HEAD IJ 8
+		HEAD K 8 A_NoBlocking
+		HEAD L 0 A_SetFloorClip
+		Goto Death.Finish
+	Raise.Headshot:
+	Raise.XDeath:
+	Raise.Death:
+		HEAD L 8 A_UnSetFloorClip
+		HEAD KJIHG 8
+		Goto See
+	}
+}

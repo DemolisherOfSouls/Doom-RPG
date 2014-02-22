@@ -1,6 +1,6 @@
 Actor Weapon_Base : Weapon
 {
-	Weapon.AmmoUse1 0
+	Weapon.AmmoUse1 1
 	Weapon.AmmoUse2 0
 	Weapon.AmmoGive1 0
 	Weapon.AmmoGive2 0
@@ -11,7 +11,7 @@ Actor Weapon_Base : Weapon
 	+WEAPON.NOALERT
 	
 	/*
-	0 - (CHG - Current Speed)
+	0 - (CHG - Current Speed, PIS - Gun Offset)
 	1 - (CHG - Tics in Frame)
 	2 - Accuracy
 	3 - (CHG - Speed Offset before Firing)

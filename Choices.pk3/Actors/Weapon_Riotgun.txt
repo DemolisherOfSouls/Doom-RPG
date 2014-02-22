@@ -16,17 +16,13 @@ Actor Weapon_Riotgun : Weapon_BaseShotgun
 		Goto Super::Select
 	
 	Fire:
-		RsgG A 1 A_JumpIfInventory("AmmoMag_Riotgun", 1, "Fire.HasAmmo")
-		Goto Reload
-	Fire.HasAmmo:
-		RsgG A 2
+		RsgG A 3 A_JumpIfNoAmmo("Reload.Click")
 		RsgG A 7 A_GunFlash("Shoot")
 		RsgG BCDCB 4
 		RsgG A 3
 		Goto Ready
 	
 	Shoot:
-		RsgG E 0 A_PlayWeaponSound("Weapon/Riotgun")
 		RsgG E 0 A_TakeInventory("AmmoMag_Riotgun", 1)
 		RsgG E 0 A_AlertMonsters(608)
 		RsgG E 0 A_JumpIfInventory("InvMod_Riotgun_Choke", 1, "Shoot.Choke")
@@ -41,11 +37,6 @@ Actor Weapon_Riotgun : Weapon_BaseShotgun
 		RsgG G 2 Bright A_Light1
 		Goto LightDone
 	
-	Reload:
-		RsgG A 0 A_JumpIfInventory("Ammo_Shell", 1, "Reload.Start")
-		RsgG A 0 A_JumpIfInventory("AmmoMag_Riotgun", 1, "Delay")
-		Goto ChangeWeapon
-		
 	Reload.Start:
 		RsgG A 2 A_JumpIfInventory("AmmoMag_Riotgun", 0, "Delay")
 		RsgG BCD 2
@@ -53,7 +44,7 @@ Actor Weapon_Riotgun : Weapon_BaseShotgun
 		RsgG D 1 Offset(0,48)
 		RsgG D 1 Offset(0,53)
 		RsgG D 1 Offset(0,58)
-		RsgG D 1 Offset(0,63) A_PlaySound("Weapon/ShotgunLoad", Chan_Weapon)
+		RsgG D 1 Offset(0,63) A_PlayWeaponSound("Weapon/ShotgunLoad")
 		RsgG D 1 Offset(0,58)
 		RsgG D 1 Offset(0,53)
 		RsgG D 1 Offset(0,48)

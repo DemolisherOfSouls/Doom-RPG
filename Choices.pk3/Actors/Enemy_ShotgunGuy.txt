@@ -20,7 +20,7 @@ Actor Enemy_ShotgunGuy : Enemy_Zombie replaces ShotgunGuy
 	Spawn.Stage2:
 		SPOS A 0 A_SetUserVar("user_rewardxp", 10)
 		SPOS A 0 A_SetUserVar("user_type", ET_SHOTGUNGUY)
-		"####" A 0 A_Jump(Always, "Spawn.Final")
+		Goto Spawn.Final
 	Missile:
 		SPOS E 10 A_FaceTarget
 		SPOS FFF 0 A_CustomMissile("EnemyProj_ShotgunGuy", 32, 0, FRandom(-5.75,5.75), CMF_STANDARD, FRandom(-5.75,5.75))

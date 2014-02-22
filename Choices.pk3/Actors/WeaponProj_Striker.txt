@@ -2,5 +2,6 @@ Actor WeaponProj_Striker : WeaponProj_Bullet
 {
 	Damage (CallACS("WeaponDamage", WD_STRIKER))
 	DamageType "Player_Shotgun"
+	SeeSound "Weapon/Striker"
 	Decal "BulletChip"
 }

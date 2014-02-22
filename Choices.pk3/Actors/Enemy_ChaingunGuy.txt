@@ -24,7 +24,7 @@ Actor Enemy_ChaingunGuy : Enemy_Zombie replaces ChaingunGuy
 	Spawn.Stage2:
 		CPOS A 0 A_SetUserVar("user_rewardxp", 15)
 		CPOS A 0 A_SetUserVar("user_type", ET_CHAINGUNGUY)
-		"####" A 0 A_Jump(Always, "Spawn.Final")
+		Goto Spawn.Final
 	See.Real:
 		CPOS AABBCCDD 3 A_Chase
 		Loop

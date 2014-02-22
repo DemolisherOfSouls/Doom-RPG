@@ -6,13 +6,11 @@ Actor Item_ArmorBase : Item_Base
 	Inventory.PickupSound "Pickup/Armor"
 }
 
-Actor Item_ArmorGreen : BasicArmorPickup replaces GreenArmor
+Actor Item_GreenArmor : Item_ArmorBase replaces GreenArmor 14000
 {
-	Inventory.Icon "ARM1A0"
+	//$Category Armor
 	
-	Armor.MaxFullAbsorb 2
-	Armor.SavePercent 40
-	Armor.SaveAmount 100
+	Tag "Green Security Armor"
 	
 	States
 	{
@@ -20,16 +18,17 @@ Actor Item_ArmorGreen : BasicArmorPickup replaces GreenArmor
 		ARM1 A 6
 		ARM1 B 7 bright
 		loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Armor_Green", 100)
+		Stop
 	}
 }
 
-Actor Item_ArmorBlue : BasicArmorPickup replaces BlueArmor
+Actor Item_BlueArmor : Item_ArmorBase replaces BlueArmor 14001
 {
-	Inventory.Icon "ARM2A0"
+	//$Category Armor
 	
-	Armor.MaxFullAbsorb 5
-	Armor.SavePercent 60
-	Armor.SaveAmount 200
+	Tag "Blue Tactical Armor"
 	
 	States
 	{
@@ -37,21 +36,26 @@ Actor Item_ArmorBlue : BasicArmorPickup replaces BlueArmor
 		ARM2 A 6
 		ARM2 B 7 bright
 		loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Armor_Blue", 200)
+		Stop
 	}
 }
 
-Actor Item_ArmorRed : BasicArmorPickup 14000
+Actor Item_RedArmor : Item_ArmorBase 14002
 {
-  Inventory.Icon "ARM3A0"
-  
-  Armor.MaxFullAbsorb 10
-  Armor.Savepercent 70
-  Armor.Saveamount 250
-  States
-  {
-  Spawn:
-    ARM3 A 6
-    ARM3 B 7 bright
-    loop
-  }
+	//$Category Armor
+	
+	Tag "Red Combat Armor"
+	
+	States
+	{
+	Spawn:
+		ARM3 A 6
+		ARM3 B 7 bright
+		loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Armor_Red", 250)
+		Stop
+	}
 }

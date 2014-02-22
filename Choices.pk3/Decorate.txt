@@ -1,5 +1,7 @@
 #include "Actors/RPGConst.txt"
 
+#include "Actors/Entity_Head.txt"
+
 #include "Actors/RPGPlayer.txt"
 
 //Inventory
@@ -8,6 +10,10 @@
 #include "Actors/Inv_Soul.txt"
 
 #include "Actors/InvMod_Common.txt"
+
+//Armor Types
+
+#include "Actors/Armor_Common.txt"
 
 //Item Base
 
@@ -40,6 +46,10 @@
 #include "Actors/Ammo_Shell.txt"
 #include "Actors/Ammo_Rocket.txt"
 #include "Actors/Ammo_Cell.txt"
+#include "Actors/Ammo_APRound.txt"
+#include "Actors/Ammo_SlugShell.txt"
+#include "Actors/Ammo_HERocket.txt"
+#include "Actors/Ammo_Fuel.txt"
 
 //Ammo Items
 #include "Actors/Item_AmmoBase.txt"
@@ -87,7 +97,7 @@
 #include "Actors/Item_BFG9000.txt"
 #include "Actors/Item_Rifle.txt"
 
-//Item Drops
+//Item Drops - Continue to use?
 #include "Actors/ItemDrop_Base.txt"
 #include "Actors/ItemDrop_Pistol.txt"
 #include "Actors/ItemDrop_Shotgun.txt"
@@ -118,6 +128,7 @@
 #include "Actors/Weapon_BasePistol.txt"
 #include "Actors/Weapon_BaseShotgun.txt"
 #include "Actors/Weapon_BaseChaingun.txt"
+#include "Actors/Weapon_BaseEnergy.txt"
 
 #include "Actors/Weapon_Pistol.txt"
 #include "Actors/Weapon_MkII.txt"
@@ -144,9 +155,11 @@
 #include "Actors/Enemy_Demon.txt"
 #include "Actors/Enemy_Spectre.txt"
 #include "Actors/Enemy_LostSoul.txt"
+#include "Actors/Enemy_Cacodemon.txt"
 #include "Actors/Enemy_HellKnight.txt"
 #include "Actors/Enemy_BaronOfHell.txt"
 #include "Actors/Enemy_Arachnotron.txt"
+//#include "Actors/Enemy_ArchVile.txt"
 
 //Marines
 #include "Actors/Marine_Base.txt"

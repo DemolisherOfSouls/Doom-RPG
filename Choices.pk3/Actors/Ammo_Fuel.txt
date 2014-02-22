@@ -1,0 +1,7 @@
+Actor Ammo_Fuel : Ammo
+{
+	Inventory.MaxAmount 600
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 600
+	//Inventory.Icon ""
+}

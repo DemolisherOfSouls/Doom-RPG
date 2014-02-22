@@ -3,7 +3,6 @@ Actor Weapon_BasePistol : Weapon_Base
 	Weapon.SlotNumber 2
 	Weapon.SelectionOrder 5
 	
-	Weapon.AmmoUse1 1
 	Weapon.AmmoType2 "Ammo_Clip"
 
 	+WEAPON.WIMPY_WEAPON
