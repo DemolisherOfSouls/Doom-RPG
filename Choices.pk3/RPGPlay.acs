@@ -18,7 +18,7 @@ script "PlayerSetup" enter
 		Thing_ChangeTID(0, GetTID(TID_PLAYER));
 		SetWeaponData(WT_PISTOL, W_PISTOL, NULL);
 		GetWeaponOrder();
-		BumpLevel();
+		BumpLevel(1);
 		
 		if(G_Episode != EP_RPG)
 			GiveInventory("Power_TerrainFix", 1);
