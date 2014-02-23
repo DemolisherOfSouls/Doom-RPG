@@ -44,14 +44,25 @@ Actor Enemy_Arachnotron : Enemy_Cyborg replaces Arachnotron
 	Headshot.Stage1:
 	XDeath.Stage1:
 	Death.Stage1:
+		"----" A 0 A_Jump(Always, "Death.Anim1", "Death.Anim2")
+		
+	Death.Anim1:
+		BSPI J 0 A_SetUserVar("user_deathanim", 1)
 		BSPI J 20 A_Scream
 		BSPI K 7 A_NoBlocking
 		BSPI LMNOP 7
 		Goto Death.Finish
-
-    Raise.Headshot:
-	Raise.XDeath:
-	Raise.Death:
+	Death.Anim2:
+		BSPI Q 0 A_SetUserVar("user_deathanim", 2)
+		BSPI Q 10 A_PlaySound("Arachnotron/AltDeath", Chan_Body)
+		BSPI R 8 A_NoBlocking
+		BSPI S 6
+		BSPI TU 6 Bright
+		BSPI V 5 Bright
+		BSPI WXY 4 Bright
+		Goto Death.Finish
+		
+	Raise.Anim1:
 		BSPI PONMLKJ 5
 		Goto See.NoDelay
 	}

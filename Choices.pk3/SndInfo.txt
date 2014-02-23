@@ -29,6 +29,8 @@ Weapon/ChaingunEmpty		ChaiEmpt
 Weapon/Minigun				MiniFire
 Weapon/MinigunEmpty			ChaiEmpt
 
+Weapon/PlasmaEmpty			PkpAmmo		//Placeholder
+
 Weapon/LaserRifle			PistSil7	//Placeholder
 
 $Limit Weapon/Pistol		0
@@ -48,3 +50,7 @@ $Limit Weapon/Minigun		0
 Marine/Stay					MarinSta
 Marine/Roger				MarinYes
 Marine/See					MarinSee
+
+//Enemies
+
+Arachnotron/AltDeath		ArachDth
