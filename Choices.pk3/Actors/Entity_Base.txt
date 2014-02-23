@@ -1,0 +1,30 @@
+Actor Entity_Base
+{
+	Height 56
+	
+	Monster
+	+FLOORCLIP
+	+DONTHARMSPECIES
+	+QUICKTORETALIATE
+	
+	var int user_rewardxp;
+	var int user_rewardrenown;
+	
+	var int user_awake;
+	var int user_alert;
+	
+	var int user_type;
+	var int user_id;
+	var int user_level;
+	var int user_health;
+	
+	var int user_deathtype;
+	
+	States
+	{
+	Raise:
+		"----" A 0 A_JumpIf(user_deathtype == 5, "Raise.Headshot")
+		"----" A 0 A_JumpIf(user_deathtype == 2, "Raise.XDeath")
+		"----" A 0 A_Jump(Always, "Raise.Death")
+	}
+}

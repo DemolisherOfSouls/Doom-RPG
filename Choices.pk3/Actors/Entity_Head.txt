@@ -3,6 +3,7 @@ Actor Entity_Head
 	Height 16
 	Radius 17
 	Health 10000
+	RenderStyle None
 	
 	+SHOOTABLE
 	+THRUSPECIES
