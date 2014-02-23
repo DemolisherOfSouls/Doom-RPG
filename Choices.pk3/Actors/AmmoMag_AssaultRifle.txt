@@ -1,0 +1,7 @@
+Actor AmmoMag_AssaultRifle : Ammo
+{
+	Inventory.MaxAmount 30
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 30
+	Inventory.Icon "GARfA0"
+}

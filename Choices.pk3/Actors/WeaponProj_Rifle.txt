@@ -1,0 +1,6 @@
+Actor WeaponProj_Rifle : WeaponProj_Bullet
+{
+	Damage (CallACS("WeaponDamage", WD_RIFLE))
+	DamageType "Player_Rifle"
+	Decal "BulletChip"
+}

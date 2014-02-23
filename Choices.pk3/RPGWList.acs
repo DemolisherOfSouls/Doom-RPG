@@ -5,20 +5,27 @@
 #import "RPGConst.acs"
 
 #libdefine W_PISTOL			1
-#libdefine W_MKII			W_PISTOL + 1
+#libdefine W_MKII			2
 
 #libdefine W_SHOTGUN		1
-#libdefine W_RIOTGUN		W_SHOTGUN + 1
-#libdefine W_STRIKER		W_RIOTGUN + 1
+#libdefine W_RIOTGUN		2
+#libdefine W_STRIKER		3
 
 #libdefine W_CHAINGUN		1
-#libdefine W_MINIGUN		W_CHAINGUN + 1
-#libdefine W_GRINDER		W_MINIGUN + 1
+#libdefine W_MINIGUN		2
+#libdefine W_GRINDER		3
 
 #libdefine W_ROCKETLAUNCHER	1
 
 #libdefine W_PLASMARIFLE	1
-#libdefine W_LASERRIFLE		W_PLASMARIFLE + 1
+#libdefine W_LASERRIFLE		2
+#libdefine W_PLASMATHROWER	3
+
+#libdefine W_BFG9000		1
+#libdefine W_BFG10K			2
+
+#libdefine W_RIFLE			1
+#libdefine W_ASSAULTRIFLE	2
 
 #libdefine WM_MAXEDWEAPON		255
 
@@ -76,7 +83,8 @@ str WeaponName[10][8] =
 		"BFG9000",
 		"BFG10K"
 	},{
-		"Standard Issue Rifle"
+		"Standard Issue Rifle",
+		"Assault Rifle"
 	}
 };
 
@@ -109,7 +117,8 @@ str WeaponClass[10][8] =
 		"BFG9000",
 		"BFG10K"
 	},{
-		"Rifle"
+		"Rifle",
+		"AssaultRifle"
 	}
 };
 
@@ -202,6 +211,7 @@ str WeaponIcon[10][8] =
 		"BFuGA0",
 		"GB10A0"
 	},{	// Rifle
-		"GRifA0"
+		"GRifA0",
+		"GARfA0"
 	}
 };

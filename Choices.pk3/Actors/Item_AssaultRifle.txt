@@ -3,8 +3,8 @@ Actor Item_AssaultRifle : Item_Weapon
 	States
 	{
 	Spawn:
-		GRif A 15
-		GRif A 5 Bright
+		GARf A 15
+		GARf A 5 Bright
 		Loop
 	Pickup:
 		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", WT_RIFLE, W_ASSAULTRIFLE), "Pickup.Fail")
