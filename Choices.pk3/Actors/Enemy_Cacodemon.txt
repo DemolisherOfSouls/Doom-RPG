@@ -15,7 +15,6 @@ Actor Enemy_Cacodemon : Enemy_DemonicFloater replaces Cacodemon
 	{
 	Spawn.Stage2:
 		HEAD A 0 A_SetUserVar("user_rewardxp", 25)
-		HEAD A 0 A_SetUserVar("user_paintime", 0)
 		HEAD A 0 A_SetUserVar("user_type", ET_CACODEMON)
 		Goto Spawn.Final
 	See.Real:
@@ -37,7 +36,7 @@ Actor Enemy_Cacodemon : Enemy_DemonicFloater replaces Cacodemon
 		HEAD H 8 A_Scream
 		HEAD IJ 8
 		HEAD K 8 A_NoBlocking
-		HEAD L 0 A_SetFloorClip
+		HEAD L 8 A_SetFloorClip
 		Goto Death.Finish
 	Raise.Headshot:
 	Raise.XDeath:
