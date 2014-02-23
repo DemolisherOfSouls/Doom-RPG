@@ -1,16 +1,18 @@
-Alias LevelToSunder "pukename RewardXP always 7200"
-Alias LevelToPlutonia "pukename RewardXP always 200"
-Alias LevelToPlutonia2 "pukename RewardXP always 500"
-
-Alias Level10 "pukename PlayerExp always 7200"
-Alias Level20 "pukename PlayerExp always 32000"
-Alias Level30 "pukename PlayerExp always 96000;"
-
 Alias AddExp "pukename PlayerExp always %0"
 Alias AddRenown "pukename PlayerRenown always %0"
 Alias AddLevel "pukename AddLevel always %0"
 Alias AddSkill "pukename AddSkill always %0 %1"
 Alias AddMission "pukename AddMission always %0 %1 %2"
+
+Alias Level2			"AddLevel 1"
+Alias Level3			"AddLevel 2"
+Alias Level10			"AddLevel 9"
+Alias Level20			"AddLevel 19"
+Alias Level30			"AddLevel 29"
+
+Alias LevelToSunder		Level10
+Alias LevelToPlutonia	Level2
+Alias LevelToPlutonia2	Level3
 
 Alias SlowMo "pukename Debug_SlowMo always %0"
 

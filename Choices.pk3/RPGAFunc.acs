@@ -300,9 +300,9 @@ function int GetRenown (void)
 	return GetUserVar(0, "renown");
 }
 
-function void BumpLevel (void)
+function void BumpLevel (int amt)
 {
-	IncrementUserVar(0, "level", 1);
+	IncrementUserVar(0, "level", amt);
 }
 
 function bool IsAlive (int tid)
@@ -336,7 +336,7 @@ function bool IsEnemy (int tid)
 	if(tid == 0)
 		tid = ActivatorTID();
 	
-	return WithinRange(tid, TID_ENEMY, TID_ENEMY + 1023);
+	return WithinRange(tid, TID_ENEMY, TID_ENEMY + TID_MAX - 1);
 }
 
 function bool IsAlly (int tid)
@@ -344,7 +344,7 @@ function bool IsAlly (int tid)
 	if(tid == 0)
 		tid = ActivatorTID();
 	
-	return WithinRange(tid, TID_ALLY, TID_ALLY + 1023);
+	return WithinRange(tid, TID_ALLY, TID_ALLY + TID_MAX - 1);
 }
 
 function void PlayerFreeze (bool active)

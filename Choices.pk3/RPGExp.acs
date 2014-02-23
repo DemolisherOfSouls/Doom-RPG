@@ -71,24 +71,29 @@ script "PlayerLevel" (void)
 	int levelups = 0;
 	int perks = 0;
 	
-	while(exp >= GetLevelUp(level))
-	{
-		BumpLevel();
-		level++;
+	while(exp >= GetLevelUp(level + levelups))
 		levelups++;
-		if(level % 2 == 1 && level > 4)
-			perks++;
-	}
 	
 	if(levelups > 0)
-	{
-		IncrementUserVar(0, "skillpoints", 3 * levelups);
-		IncrementUserVar(0, "perkpoints", perks);
-		ACS_NamedExecuteAlways("LevelAlert", 0, levelups, perks);
-	}
+		ACS_NamedExecuteAlways("AddLevel", 0, levelups);
 	
 	Delay(1);
 	restart;
+}
+
+script "AddLevel" (int amt)
+{
+	int old_level = GetLevel();
+	int new_level = old_level + amt;
+	
+	int got = (old_level - 3) / 2;
+	int perks = (new_level - 3) / 2 - got;
+	
+	BumpLevel(amt);
+	
+	IncrementUserVar(0, "skillpoints", 3 * amt);
+	IncrementUserVar(0, "perkpoints", perks);
+	ACS_NamedExecuteAlways("LevelAlert", 0, amt, perks);
 }
 
 script "PlayerExp" (int amt)
