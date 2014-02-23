@@ -38,7 +38,6 @@ Actor Enemy_ChaingunGuy : Enemy_Zombie replaces ChaingunGuy
 		CPOS I 5 A_ScreamAndUnblock
 		CPOS JKLMN 5
 		Goto Death.Finish
-	Headshot.Stage1:
 	XDeath.Stage1:
 		CPOS O 5 
 		CPOS P 5 A_XScream
@@ -48,7 +47,6 @@ Actor Enemy_ChaingunGuy : Enemy_Zombie replaces ChaingunGuy
 	Raise.Death:
 		CPOS NMLKJIH 5
 		Goto See
-	Raise.Headshot:
 	Raise.XDeath:
 		CPOS TSRQPO 5
 		Goto See

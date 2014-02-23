@@ -29,8 +29,6 @@ Actor Enemy_Cacodemon : Enemy_DemonicFloater replaces Cacodemon
 		HEAD E 3 A_Pain
 		HEAD F 6
 		Goto See
-	Headshot.Stage1:
-	XDeath.Stage1:
 	Death.Stage1:
 		HEAD G 8
 		HEAD H 8 A_Scream
@@ -38,8 +36,6 @@ Actor Enemy_Cacodemon : Enemy_DemonicFloater replaces Cacodemon
 		HEAD K 8 A_NoBlocking
 		HEAD L 8 A_SetFloorClip
 		Goto Death.Finish
-	Raise.Headshot:
-	Raise.XDeath:
 	Raise.Death:
 		HEAD L 8 A_UnSetFloorClip
 		HEAD KJIHG 8

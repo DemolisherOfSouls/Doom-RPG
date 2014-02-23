@@ -33,6 +33,12 @@ Actor Enemy_Base : Entity_Base
 		"----" A 0 A_SetUserVar("user_deathtype", 5)
 		"----" A 0 ACS_NamedExecuteAlways("EnemyDeath")
 		"----" A 0 A_Jump(Always, "Headshot.Stage1")
+	Headshot.Stage1:
+	XDeath.Stage1:
+		"----" A 0 A_Jump(Always, "Death.Stage1")
+	Raise.Headshot:
+	Raise.XDeath:
+		"----" A 0 A_Jump(Always, "Raise.Death")
 	Death.Finish:
 		"----" A -1 A_CheckFlag("BOSSDEATH", "Death.Finish.Boss")
 		Stop

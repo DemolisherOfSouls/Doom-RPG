@@ -19,6 +19,7 @@ Actor Entity_Base
 	var int user_health;
 	
 	var int user_deathtype;
+	var int user_deathanim;
 	
 	States
 	{
@@ -26,5 +27,11 @@ Actor Entity_Base
 		"----" A 0 A_JumpIf(user_deathtype == 5, "Raise.Headshot")
 		"----" A 0 A_JumpIf(user_deathtype == 2, "Raise.XDeath")
 		"----" A 0 A_Jump(Always, "Raise.Death")
+	
+	Raise.Death:
+		"----" A 0 A_JumpIf(user_deathanim == 4, "Raise.Anim4")
+		"----" A 0 A_JumpIf(user_deathanim == 3, "Raise.Anim3")
+		"----" A 0 A_JumpIf(user_deathanim == 2, "Raise.Anim2")
+		"----" A 0 A_Jump(Always, "Raise.Anim1")
 	}
 }
