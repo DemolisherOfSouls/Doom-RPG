@@ -1,0 +1,24 @@
+Actor Item_AssaultRifle : Item_Weapon
+{
+	States
+	{
+	Spawn:
+		GRif A 15
+		GRif A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", WT_RIFLE, W_ASSAULTRIFLE), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("AmmoMag_AssaultRifle", 30)
+		Goto Pickup.Force
+	}
+}
+
+Actor Item_AssaultRifleDropped : Item_AssaultRifle
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", WT_RIFLE, W_ASSAULTRIFLE), "Pickup.Fail")
+		Goto Pickup.Force
+	}
+}
