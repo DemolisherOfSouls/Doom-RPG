@@ -1,7 +1,6 @@
-Actor Marine_Base
+Actor Marine_Base : Entity_Base
 {
 	SpawnID 151
-	Height 56
 	Radius 16
 	Health 100
 	Mass 100
@@ -11,8 +10,6 @@ Actor Marine_Base
 	SeeSound "Marine/See"
 	DeathSound "*death"
 	PainSound "*pain50"
-	
-	Monster
 	
 	DamageFactor "Marine_Fist", 0
 	DamageFactor "Marine_Chainsaw", 0
@@ -27,24 +24,9 @@ Actor Marine_Base
 	
 	Species "Marine"
 	
-	+FLOORCLIP
-	+DONTHARMSPECIES
-	+QUICKTORETALIATE
 	-COUNTKILL
 	
-	var int user_rewardxp;
-	var int user_rewardrenown;
-	
-	var int user_id;
-	var int user_type;
-	var int user_level;
-	var int user_health;
-	
-	var int user_awake;
-	var int user_alert;
 	var int user_sightarc;
-	
-	var int user_deathtype;
 	
 	var int user_isfollowing;
 	var int user_leadplayer;
