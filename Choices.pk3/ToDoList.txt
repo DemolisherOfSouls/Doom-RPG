@@ -33,42 +33,52 @@ Added Chaingun spindown
 Fixed accuracy display for weapons to only show one decimal place
 Fixed minigun locking on altfire
 Fixed laser rifle locking on reload
+Added Cacodemon enemy
 
 //TODO
 
 //weapons
-Add Chaingun belt AmmoMag_Chaingun
-Add Chaingun reload
 Add Chaingun movement penalty
 Add Unarmed movement bonus
 Add LR sprites
 Add LR animation
 Add LR sounds
 Add worsening accuracy system
-Add keys found to inventory menu
-Add credits to inventory menu
 
-Add BFG weapon
+Add BFG9000
+Add BFG10K
+Add AssaultRifle
+Add SubmachineGun
+Add LightMachinegun
+Add HeavyMachinegun
+Add PlasmaThrower
+Add Repeater
 
 Fix trig on tracer and laser trails
 
 //enemies
-Add Cacodemon enemy
 Add Revenant enemy
 Add Mancubus enemy
 Add ArchVile enemy
 Add Cyberdemon enemy
+Add ChaingunMajor enemy variant
+Add RapidFireZombie enemy variant
 
 //allies
 Add Marine ally
+Add money items to marine drops
+Add follow code
+Add follow options
+Add smarter AI, so less getting stuck
 
 //general
 Add better soul items
-Add money items to marine drops
+Add leveled loot and acs based dropitem scripts
 
 Add better map scripts
 
 //menu
-
 Fix skill drag-drop list
 Add new graphics for buttons, boxes, etc.
+Add keys found to inventory menu
+Add credits to inventory menu

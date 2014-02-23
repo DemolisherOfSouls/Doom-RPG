@@ -1,0 +1,40 @@
+//Assault Rifle (M16)
+
+	Submitted: JoeyTD
+	Decorate: Xim
+	Sounds: Unknown
+	Sprite Edit: JoeyTD, Xim
+
+//Silent Pistol - Firing Sprites
+
+	JoeyTD
+
+//Money Items
+
+	Strife
+
+//MkII (Demon Eclipse Pistol)
+//Riot Shotgun (Demon Eclipse Shotgun)
+//Grinder (Demon Eclipse Chaingun)
+//Demon Gib Sprites
+
+	Eriance
+
+//Combat Armor (Heavy Armor)
+
+	Captain Toenail
+
+//Imp Sprites
+
+	//Alt Death 1
+	Vader (Dark Imp [Void] death)
+	ItsNatureToDie (editing)
+	
+	//Alt Death 2
+	Vader (Dark Imp [Skulltag] death)
+	Kinsie (recolor)
+	ItsNatureToDie (improvements)
+	
+	//Alt Death 3
+	osjclatchford (main work)
+	Blox (editing and cleaning up)
