@@ -76,7 +76,7 @@
 #include "Actors/AmmoMag_LaserRifle.txt"
 #include "Actors/AmmoMag_BFG9000.txt"
 #include "Actors/AmmoMag_Rifle.txt"
-//#include "Actors/AmmoMag_AssaultRifle.txt"
+#include "Actors/AmmoMag_AssaultRifle.txt"
 
 //Weapon Mods
 
@@ -98,7 +98,7 @@
 #include "Actors/Item_LaserRifle.txt"
 #include "Actors/Item_BFG9000.txt"
 #include "Actors/Item_Rifle.txt"
-//#include "Actors/Item_AssaultRifle.txt"
+#include "Actors/Item_AssaultRifle.txt"
 
 //Item Drops - Continue to use?
 #include "Actors/ItemDrop_Base.txt"
@@ -150,6 +150,7 @@
 #include "Actors/Weapon_PlasmaRifle.txt"
 #include "Actors/Weapon_LaserRifle.txt"
 //#include "Actors/Weapon_Rifle.txt"
+//#include "Actors/Weapon_AssaultRifle.txt"
 
 //Enemies
 #include "Actors/EnemyProj_Common.txt"

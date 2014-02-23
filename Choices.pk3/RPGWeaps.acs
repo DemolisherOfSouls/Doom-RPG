@@ -36,6 +36,8 @@
 #define WS_HOTPLASMA	21
 #define WR_HOTPLASMA	22
 #define WD_LASERRIFLE	23
+#define WD_ASSAULTRIFLE	24
+#define WD_RIFLE		25
 
 int ForbidWeaponPickup[8];
 
@@ -123,6 +125,12 @@ script "WeaponDamage" (int weapon)
 		break;
 	case WD_LASERRIFLE:
 		damage = 16;
+		break;
+	case WD_ASSAULTRIFLE:
+		damage = 12;
+		break;
+	case WD_RIFLE:
+		damage = 15;
 		break;
 	}
 	

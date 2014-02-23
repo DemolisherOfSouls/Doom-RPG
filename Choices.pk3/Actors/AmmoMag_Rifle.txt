@@ -1,7 +1,7 @@
 Actor AmmoMag_Rifle : Ammo
 {
-	Inventory.MaxAmount 30
+	Inventory.MaxAmount 12
 	Ammo.BackpackAmount 0
-	Ammo.BackpackMaxAmount 30
+	Ammo.BackpackMaxAmount 12
 	Inventory.Icon "GRifA0"
 }

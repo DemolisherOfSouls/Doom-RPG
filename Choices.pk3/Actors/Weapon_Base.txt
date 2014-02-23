@@ -11,8 +11,8 @@ Actor Weapon_Base : Weapon
 	+WEAPON.NOALERT
 	
 	/*
-	0 - (CHG - Current Speed, PIS - Gun Offset)
-	1 - (CHG - Tics in Frame)
+	0 - (CHG - Current Speed)
+	1 - (CHG - Tics in Frame, PIS - Firing Flags)
 	2 - Accuracy
 	3 - (CHG - Speed Offset before Firing)
 	4 - (CHG - Slow Speed)

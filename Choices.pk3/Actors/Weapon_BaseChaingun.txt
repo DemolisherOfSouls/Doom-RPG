@@ -17,20 +17,22 @@ Actor Weapon_BaseChaingun : Weapon_Base
 		"####" B 0 A_SetArg(0, args[0] - 1)
 	SpinDown.B:
 		"####" B 0 A_SetArg(1, 0)
+		"####" B 0 A_PlayWeaponSound("Weapon/ChaingunEmpty")
 		"####" B 1 A_WeaponReady
 		"####" B 0 A_SetArg(1, args[1] + 1)
 		"####" B 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.A.Drop")
-		Goto SpinDown.B + 1
+		Goto SpinDown.B + 2
 	
 	SpinDown.A.Drop:
 		"####" A 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
 		"####" A 0 A_SetArg(0, args[0] - 1)
 	SpinDown.A:
 		"####" A 0 A_SetArg(1, 0)
+		"####" A 0 A_PlayWeaponSound("Weapon/ChaingunEmpty")
 		"####" A 1 A_WeaponReady
 		"####" A 0 A_SetArg(1, args[1] + 1)
 		"####" A 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.B.Drop")
-		Goto SpinDown.A + 1
+		Goto SpinDown.A + 2
 		
 	//******************************************************
 	//	CheckTrigger
