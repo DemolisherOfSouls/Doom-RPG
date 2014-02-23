@@ -7,13 +7,13 @@ Actor Weapon_BaseChaingun : Weapon_Base
 
 	States
 	{
-
+	
 	//******************************************************
 	//	SpinDown
 	//******************************************************
 
 	SpinDown.B.Drop:
-		"####" B 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo.Clip")
+		"####" B 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
 		"####" B 0 A_SetArg(0, args[0] - 1)
 	SpinDown.B:
 		"####" B 0 A_SetArg(1, 0)
@@ -23,7 +23,7 @@ Actor Weapon_BaseChaingun : Weapon_Base
 		Goto SpinDown.B + 1
 	
 	SpinDown.A.Drop:
-		"####" A 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo.Clip")
+		"####" A 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
 		"####" A 0 A_SetArg(0, args[0] - 1)
 	SpinDown.A:
 		"####" A 0 A_SetArg(1, 0)

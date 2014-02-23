@@ -17,7 +17,7 @@ Actor Weapon_MkII : Weapon_BasePistol
 		Loop
 	
 	Fire:
-		MK2G A 2 A_JumpIfNoAmmo("Reload")
+		MK2G A 2 A_JumpIfNoAmmo("Reload.Click")
 		MK2G B 5 A_GunFlash("Shoot")
 		MK2G C 4
 		MK2G B 4 A_ReFire("Fire")
@@ -50,18 +50,11 @@ Actor Weapon_MkII : Weapon_BasePistol
 		MK2F A 0 A_FireCustomMissile("WeaponProj_MkII_57", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, FRandom(-args[2], args[2]) / 10)
 		Goto Flash
 	
-	Reload:
-		MK2G A 0 A_JumpIfInventory("AmmoMag_MkII", 0, "Reload.Full")
-		MK2G A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Start")
-		MK2G A 0 A_JumpIfNoAmmo("ChangeWeapon")
-		Goto Reload.Full
+	Reload.CheckMag:
+		MK2G A 0 A_JumpIfInventory("AmmoMag_MkII", 0, "Delay")
 	Reload.Start:
 		MK2G DEFGHIJKLMNOPQR 2
 		MK2G S 2 A_GunFlash("Reload.Process", GFF_NOEXTCHANGE)
-		Goto Ready
-	
-	Reload.Full:
-		MK2G A 10 A_PlayWeaponSound("Weapon/MkIIEmpty")
 		Goto Ready
 	
 	Reload.Process:

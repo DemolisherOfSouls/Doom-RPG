@@ -22,7 +22,7 @@ Actor Weapon_LaserRifle : Weapon_BaseEnergy
 		Goto Super::Select
 	
 	Fire:
-		PLSG A 0 A_JumpIfNoAmmo("Reload")
+		PLSG A 0 A_JumpIfNoAmmo("Reload.Click")
 		PLSG A 4 A_GunFlash("Fire.Actual")
 		Goto Ready
 	
@@ -39,8 +39,10 @@ Actor Weapon_LaserRifle : Weapon_BaseEnergy
 		PLSF B 4 Bright A_Light1
 		Goto LightDone
 	
+	Reload.CheckMag:
+		PLSG A 0 A_JumpIfInventory("AmmoMag_LaserRifle", 0, "Delay")
 	Reload.Start:
-		PLSG B 15 A_JumpIfInventory("AmmoMag_LaserRifle", 0, "Delay")
+		PLSG B 15
 		PLSG A 0 A_GunFlash("Reload.Process", GFF_NOEXTCHANGE)
 		Goto Ready
 		

@@ -41,8 +41,8 @@ Actor Weapon_SuperShotgun : Weapon_Base
 	
 	Reload:
 		SHT2 A 1 A_JumpIfInventory("Ammo_Shell", 2, "Reload.Restart")
-		SHT2 A 0 A_JumpIfInventory("AmmoMag_SuperShotgun", 2, "Ready")
-		Goto ChangeWeapon
+		SHT2 A 0 A_JumpIfNoAmmo("ChangeWeapon")
+		Goto Delay
 	Reload.Force:
 		SHT2 C 0 A_JumpIfInventory("Ammo_Shell", 2, "Reload.Start")
 		Goto ChangeWeapon

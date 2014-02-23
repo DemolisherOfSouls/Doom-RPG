@@ -10,7 +10,6 @@ Actor Weapon_BaseEnergy : Weapon_Base
 	{
 	Reload:
 		PLSG A 0 A_JumpIfInventory("Ammo_Cell", 1, "Reload.Start")
-		PLSG A 0 A_JumpIfNoAmmo("ChangeWeapon")
-		Goto Delay
+		Goto Ready.CheckAmmo
 	}
 }

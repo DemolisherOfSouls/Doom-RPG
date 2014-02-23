@@ -39,9 +39,10 @@ Actor Weapon_Shotgun : Weapon_BaseShotgun
 		SHTF B 3 Bright A_Light2
 		Goto LightDone
 	
+	Reload.CheckMag:
+		SHTG A 0 A_JumpIfInventory("AmmoMag_Shotgun", 0, "Delay")
 	Reload.Start:
-		SHTG A 2 A_JumpIfInventory("AmmoMag_Shotgun", 0, "Delay")
-		SHTG BCD 2
+		SHTG ABCD 2
 	Reload.HasAmmo:
 		SHTG D 1 Offset(0,48)
 		SHTG D 1 Offset(0,52)

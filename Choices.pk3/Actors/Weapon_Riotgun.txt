@@ -37,9 +37,10 @@ Actor Weapon_Riotgun : Weapon_BaseShotgun
 		RsgG G 2 Bright A_Light1
 		Goto LightDone
 	
+	Reload.CheckMag:
+		RsgG A 0 A_JumpIfInventory("AmmoMag_Riotgun", 0, "Delay")
 	Reload.Start:
-		RsgG A 2 A_JumpIfInventory("AmmoMag_Riotgun", 0, "Delay")
-		RsgG BCD 2
+		RsgG ABCD 2
 	Reload.HasAmmo:
 		RsgG D 1 Offset(0,48)
 		RsgG D 1 Offset(0,53)
