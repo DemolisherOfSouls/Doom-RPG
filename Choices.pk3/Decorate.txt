@@ -1,6 +1,7 @@
 #include "Actors/RPGConst.txt"
 
 #include "Actors/Entity_Head.txt"
+#include "Actors/Entity_Base.txt"
 
 #include "Actors/RPGPlayer.txt"
 
@@ -75,6 +76,7 @@
 #include "Actors/AmmoMag_LaserRifle.txt"
 #include "Actors/AmmoMag_BFG9000.txt"
 #include "Actors/AmmoMag_Rifle.txt"
+//#include "Actors/AmmoMag_AssaultRifle.txt"
 
 //Weapon Mods
 
@@ -96,6 +98,7 @@
 #include "Actors/Item_LaserRifle.txt"
 #include "Actors/Item_BFG9000.txt"
 #include "Actors/Item_Rifle.txt"
+//#include "Actors/Item_AssaultRifle.txt"
 
 //Item Drops - Continue to use?
 #include "Actors/ItemDrop_Base.txt"
@@ -122,6 +125,8 @@
 #include "Actors/WeaponProj_Grinder.txt"
 #include "Actors/WeaponProj_PlasmaBall.txt"
 #include "Actors/WeaponProj_LaserRifle.txt"
+//#include "Actors/WeaponProj_Rifle.txt"
+//#include "Actors/WeaponProj_AssaultRifle.txt"
 
 //Weapons
 #include "Actors/Weapon_Base.txt"
@@ -129,7 +134,9 @@
 #include "Actors/Weapon_BaseShotgun.txt"
 #include "Actors/Weapon_BaseChaingun.txt"
 #include "Actors/Weapon_BaseEnergy.txt"
+//#include "Actors/Weapon_BaseRifle.txt"
 
+#include "Actors/Weapon_Chainsaw.txt"
 #include "Actors/Weapon_Pistol.txt"
 #include "Actors/Weapon_MkII.txt"
 #include "Actors/Weapon_Shotgun.txt"
@@ -142,6 +149,7 @@
 #include "Actors/Weapon_RocketLauncher.txt"
 #include "Actors/Weapon_PlasmaRifle.txt"
 #include "Actors/Weapon_LaserRifle.txt"
+//#include "Actors/Weapon_Rifle.txt"
 
 //Enemies
 #include "Actors/EnemyProj_Common.txt"
@@ -156,10 +164,15 @@
 #include "Actors/Enemy_Spectre.txt"
 #include "Actors/Enemy_LostSoul.txt"
 #include "Actors/Enemy_Cacodemon.txt"
+//#include "Actors/Enemy_PainElemental.txt"
 #include "Actors/Enemy_HellKnight.txt"
 #include "Actors/Enemy_BaronOfHell.txt"
+//#include "Actors/Enemy_Revenant.txt"
 #include "Actors/Enemy_Arachnotron.txt"
+//#include "Actors/Enemy_Mancubus.txt"
 //#include "Actors/Enemy_ArchVile.txt"
+//#include "Actors/Enemy_SpiderMaster.txt"
+//#include "Actors/Enemy_Cyberdemon.txt"
 
 //Marines
 #include "Actors/Marine_Base.txt"
