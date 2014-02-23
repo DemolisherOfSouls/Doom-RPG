@@ -70,16 +70,41 @@ script "MissionTracker" (int MissionIndex)
 	
 		if(keyused && status == MISSION_GOT)
 		{
-			//Already Unlocked prior to mission
+			//Bug
+			status = MISSION_DONE;
 		}
 		
-		if(keyheld && status == mission_got)
+		else if(keyheld && status == mission_got)
 		{
 			//Have key at start, so add 'nulled' objective
 			//AddNullObjective(MissionIndex, objinfo);
 			
 			//Set objective to unlock that object
 			//AddObjective(MissionIndex, objinfo);
+			
+			status = 60;
+		}
+		
+		else if(status == mission_got)
+		{
+			//Set objective to find the key
+			//AddObjective(MissionIndex, objinfo);
+		
+			status = 30;
+		}
+		
+		if(status == 30 && keyheld)
+		{
+			//Set objective to unlock that object
+			//AddObjective(MissionIndex, objinfo);
+		
+			status = 60;
+		}
+		else if(status == 30 && keyused)
+		{
+			//Bug
+		
+			status = MISSION_DONE;
 		}
 		
 		break;

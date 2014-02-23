@@ -121,8 +121,16 @@ function int GetNextObjectiveIndex (void)
 	return EXCEPTION;
 }
 
+//Adds an objective from the lookup table
+function void AddObjective (int MissionIndex, int map, int lookup)
+{
+	AddNullObjective(MissionIndex, map, lookup, OBJECTIVE_GOT);
+	
+	ACS_NamedExecuteAlways("ObjectiveAlert", 0, index);
+}
+
 //Adds an objective from custom parameters
-function void AddObjective (int MissionIndex, int map, int lookup, int type, int name, int desc, int icon,
+function void AddObjective2 (int MissionIndex, int map, int lookup, int type, int name, int desc, int icon,
 							int data1, int data2, int data3, int data4, int data5, int data6, int data7)
 {
 	int index = GetNextObjectiveIndex();
@@ -132,28 +140,27 @@ function void AddObjective (int MissionIndex, int map, int lookup, int type, int
 	SetUserArray(0, "user_o_map", index, map);
 	SetUserArray(0, "user_o_lookup", index, lookup);
 	
-	SetUserArray(0, "user_o_type", index, ObjectiveData[lookup][OD_TYPE]);
-	SetUserArray(0, "user_o_name", index, ObjectiveData[lookup][OD_NAMEINDEX]);
-	SetUserArray(0, "user_o_desc", index, ObjectiveData[lookup][OD_DESCINDEX]);
-	SetUserArray(0, "user_o_icon", index, ObjectiveData[lookup][OD_ICONINDEX]);
-	SetUserArray(0, "user_o_data1", index, ObjectiveData[lookup][OD_DATA1]);
-	SetUserArray(0, "user_o_data2", index, ObjectiveData[lookup][OD_DATA2]);
-	SetUserArray(0, "user_o_data3", index, ObjectiveData[lookup][OD_DATA3]);
-	SetUserArray(0, "user_o_data4", index, ObjectiveData[lookup][OD_DATA4]);
-	SetUserArray(0, "user_o_data5", index, ObjectiveData[lookup][OD_DATA5]);
-	SetUserArray(0, "user_o_data6", index, ObjectiveData[lookup][OD_DATA6]);
-	SetUserArray(0, "user_o_data7", index, ObjectiveData[lookup][OD_DATA7]);
+	SetUserArray(0, "user_o_type", index, type);
+	SetUserArray(0, "user_o_name", index, name);
+	SetUserArray(0, "user_o_desc", index, desc);
+	SetUserArray(0, "user_o_icon", index, icon);
+	SetUserArray(0, "user_o_data1", index, data1);
+	SetUserArray(0, "user_o_data2", index, data2);
+	SetUserArray(0, "user_o_data3", index, data3);
+	SetUserArray(0, "user_o_data4", index, data4);
+	SetUserArray(0, "user_o_data5", index, data5);
+	SetUserArray(0, "user_o_data6", index, data6);
+	SetUserArray(0, "user_o_data7", index, data7);
 	
 	ACS_NamedExecuteAlways("ObjectiveAlert", 0, index);
 }
 
-//Adds an objective from the lookup table
-function void AddObjective (int MissionIndex, int map, int lookup)
+function void AddNullObjective (int MissionIndex, int map, int lookup, int status)
 {
 	int index = GetNextObjectiveIndex();
 	
 	SetUserArray(0, "user_o_mission", index, MissionIndex);
-	SetUserArray(0, "user_o_status", index, OBJECTIVE_GOT);
+	SetUserArray(0, "user_o_status", index, status);
 	SetUserArray(0, "user_o_map", index, map);
 	SetUserArray(0, "user_o_lookup", index, lookup);
 	
@@ -168,8 +175,6 @@ function void AddObjective (int MissionIndex, int map, int lookup)
 	SetUserArray(0, "user_o_data5", index, ObjectiveData[lookup][OD_DATA5]);
 	SetUserArray(0, "user_o_data6", index, ObjectiveData[lookup][OD_DATA6]);
 	SetUserArray(0, "user_o_data7", index, ObjectiveData[lookup][OD_DATA7]);
-	
-	ACS_NamedExecuteAlways("ObjectiveAlert", 0, index);
 }
 
 function int GetObjectiveStatus (int ObjectiveIndex)
