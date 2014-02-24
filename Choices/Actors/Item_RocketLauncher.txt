@@ -1,0 +1,16 @@
+Actor Item_RocketLauncher : Item_Weapon replaces RocketLauncher
+{
+	SpawnID 29
+	
+	States
+	{
+	Spawn:
+		LAUN A 15
+		LAUN A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 6, W_ROCKETLAUNCHER), "Pickup.Fail")
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 1, AT_ROCKET)
+		Goto Pickup.Force
+	}
+}

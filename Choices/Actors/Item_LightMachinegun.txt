@@ -1,0 +1,24 @@
+Actor Item_LightMachinegun : Item_Weapon
+{
+	States
+	{
+	Spawn:
+		GLmg A 15
+		GLmg A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", WT_RIFLE, W_LIGHTMACHINEGUN), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("AmmoMag_LightMachinegun", 60)
+		Goto Pickup.Force
+	}
+}
+
+Actor Item_LightMachinegunDropped : Item_LightMachinegun
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", WT_RIFLE, W_LIGHTMACHINEGUN), "Pickup.Fail")
+		Goto Pickup.Force
+	}
+}

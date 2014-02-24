@@ -1,0 +1,4 @@
+Actor Inv_Soul : Inv_Base
+{
+	Tag "Souls"
+}

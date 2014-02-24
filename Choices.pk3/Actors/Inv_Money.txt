@@ -1,4 +1,0 @@
-Actor Inv_Money : Inv_Base
-{
-	Tag "Money"
-}

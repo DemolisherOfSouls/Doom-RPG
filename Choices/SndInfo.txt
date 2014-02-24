@@ -1,0 +1,64 @@
+//Pickup
+
+Pickup/Powerup				dsgetpow
+Pickup/Ammo					PkpAmmo
+Pickup/Item					dsitemup
+Pickup/Weapon				dswpnup		//Placeholder?
+
+//Weapons
+
+Weapon/Pistol				dspistol
+Weapon/PistolSilent			PistSil2
+Weapon/PistolEmpty			PistEmpt
+
+Weapon/MkII					PistSil4
+Weapon/MkIISilent			PistSil1
+Weapon/MkIIEmpty			PistEmpt
+
+Weapon/Shotgun				dsshotgn
+Weapon/ShotgunLoad			PkpAmmo
+Weapon/ShotgunEmpty			PistEmpt
+
+Weapon/Riotgun				dsshotgn	//Placeholder
+
+Weapon/Striker				dsshotgn	//Placeholder
+
+Weapon/Chaingun				dspistol
+Weapon/ChaingunEmpty		ChaiEmpt
+
+Weapon/Minigun				MiniFire
+Weapon/MinigunEmpty			ChaiEmpt
+
+Weapon/PlasmaEmpty			PkpAmmo		//Placeholder
+
+Weapon/LaserRifle			PistSil7	//Placeholder
+
+Weapon/RifleEmpty			PistEmpt	//Placeholder
+
+Weapon/RepeaterFire			RePeFire
+Weapon/RepeaterHit			RePeHit
+Weapon/RepeaterSpin			RePeSpin
+Weapon/RepeaterStop			RePeStop
+
+$Limit Weapon/Pistol		0
+$Limit Weapon/PistolEmpty	0
+$Limit Weapon/MkII			0
+$Limit Weapon/Shotgun		0
+$Limit Weapon/ShotgunLoad	0
+$Limit Weapon/ShotgunEmpty	0
+$Limit Weapon/Riotgun		0
+$Limit Weapon/Striker		0
+$Limit Weapon/Chaingun		0
+$Limit Weapon/ChaingunEmpty	0
+$Limit Weapon/Minigun		0
+$Limit Weapon/RepeaterHit	0
+
+//Marines
+
+Marine/Stay					MarinSta
+Marine/Roger				MarinYes
+Marine/See					MarinSee
+
+//Enemies
+
+Arachnotron/AltDeath		ArachDth

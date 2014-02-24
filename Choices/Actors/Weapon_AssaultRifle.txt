@@ -1,0 +1,46 @@
+//Needs SKILL_Reloader implementation
+//Needs Accuracy implementation
+
+Actor Weapon_AssaultRifle : Weapon_BaseRifle
+{
+	Weapon.AmmoType1 "AmmoMag_AssaultRifle"
+	
+	Inventory.Icon "GARfA0"
+	
+	Tag "Assault Rifle"
+	
+	States
+	{
+	Ready:
+		ARfG A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		Loop
+	Select:
+		ARfG A 0
+		Goto Super::Select
+	
+	Fire:
+		ARfG A 0 A_JumpIfNoAmmo("Reload.Click")
+		ARfG A 5 A_GunFlash("Fire.Actual")
+		Goto Ready
+	
+	Fire.Actual:
+		ARfF A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_RIFLE, 15))
+		ARfF A 0 A_FireCustomMissile("WeaponProj_AssaultRifle", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, , FRandom(-args[2], args[2]) / 10)
+		ARfF A 0 A_AlertMonsters(840)
+	Flash:
+		ARfF AB 2 Bright A_Light(Random(1, 2))
+		Goto LightDone
+	
+	Reload.Start:
+		ARfG A 20 A_JumpIfInventory("AmmoMag_AssaultRifle", 0, "Delay")
+		ARfG A 0 A_GunFlash("Reload.Process", GFF_NOEXTCHANGE)
+		Goto Ready
+	
+	Reload.Process:
+		TNT1 A 0 A_GiveInventory("AmmoMag_AssaultRifle", 1)
+		TNT1 A 0 A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
+		TNT1 A 0 A_JumpIfInventory("AmmoMag_AssaultRifle", 0, LightDone)
+		TNT1 A 0 A_JumpIfInventory("Ammo_Clip", 1, "Reload.Process")
+		Stop
+	}
+}

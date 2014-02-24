@@ -1,0 +1,20 @@
+#library "RPGPerks"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGPList.acs"
+#import "RPGAFunc.acs"
+#import "RPGPFunc.acs"
+
+script "AddPerk" (int perk)
+{
+	SetUserArray(0, "user_perks", perk, 1);
+	ACS_NamedExecuteAlways("PerkAlert", 0, perk);
+	
+	switch(perk)
+	{
+	default:
+		break;
+	}
+}

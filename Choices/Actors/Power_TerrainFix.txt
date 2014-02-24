@@ -1,0 +1,8 @@
+Actor Power_TerrainFix : PowerProtection
+{
+	DamageFactor "Terrain_Slime", 0
+	DamageFactor "Terrain_Lava", 0
+	Powerup.Duration 0x7fffffff
+	+INVENTORY.HUBPOWER
+	+INVENTORY.PERSISTENTPOWER
+}

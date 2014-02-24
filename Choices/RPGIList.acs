@@ -1,0 +1,45 @@
+#library "RPGIList"
+
+#include "zcommon.acs"
+
+#libdefine	II_ITEM			0
+#libdefine	II_INV			1
+#define		II_ARRAY		2
+
+str ItemInfo[3][II_ARRAY] =
+{
+	{ "Item_Soul", "Inv_Soul" },
+	{ "Item_Money", "Inv_Money" },
+	{ "Item_RedCard", "Item_Red" },
+};
+
+#libdefine	ID_VALUE		0
+#libdefine	ID_TYPE			1
+#libdefine	ID_STOREAMT		2
+#define		ID_ARRAY		3
+
+#libdefine	IDT_MISC		0
+#libdefine	IDT_AMMO		1
+#libdefine	IDT_ARMOR		2
+
+#libdefine	KEY_REDCARD		1
+#libdefine	KEY_BLUECARD	2
+#libdefine	KEY_YELLOWCARD	3
+#libdefine	KEY_REDSKULL	4
+#libdefine	KEY_BLUESKULL	5
+#libdefine	KEY_YELLOWSKULL	6
+
+int ItemData[2][ID_ARRAY] =
+{
+	{ 2, IDT_MISC, 0 },
+	{ 1, IDT_MISC, 0 }
+};
+
+str AmmoTypes[5] =
+{
+	"None",
+	"Clip",
+	"Shell",
+	"Rocket",
+	"Cell"
+};

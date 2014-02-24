@@ -1,6 +1,0 @@
-Actor WeaponProj_SuperShotgun : WeaponProj_Bullet
-{
-	Damage (CallACS("WeaponDamage", WD_SUPERSHOTGUN))
-	DamageType "Player_SuperShotgun"
-	Decal "BulletChip"
-}

@@ -1,7 +1,0 @@
-Actor Ammo_Clip : Ammo
-{
-	Inventory.MaxAmount 300
-	Ammo.BackpackAmount 0
-	Ammo.BackpackMaxAmount 300
-	Inventory.Icon "AMMOA0"
-}

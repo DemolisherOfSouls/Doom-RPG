@@ -1,0 +1,6 @@
+Actor WeaponProj_LightMachinegun : WeaponProj_Bullet
+{
+	Damage (CallACS("WeaponDamage", WD_LightMachinegun))
+	DamageType "Player_Rifle"
+	Decal "BulletChip"
+}

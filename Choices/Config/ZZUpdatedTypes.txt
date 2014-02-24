@@ -1,0 +1,88 @@
+entry_types
+{
+	acs_empty
+	{
+		name = "Compiled ACS (Empty)";
+		icon = "e_map_data";
+		export_ext = "o";
+		match_name = "behavior";
+		match_extorname = 1;
+		match_ext = "o";
+		match_size = 32;
+		category = "Maps";
+	}
+
+	decaldef_update : decaldef
+	{
+		text_language = "z_decaldef_update";
+		reliability = 200;
+	}
+
+	decorate_update : decorate
+	{
+		match_name = "decorate", "actors";
+		text_language = "decorate_update";
+		reliability = 199;
+	}
+
+	language : text
+	{
+		name = "Language";
+		icon = "t_rename";
+		match_name = "language";
+		text_language = "z_language";
+	}
+
+	textcolo_update : textcolo
+	{
+		text_language = "z_textcolors";
+	}
+	
+	sladenodebuilders : text
+	{
+		name = "Slade Nodebuilders Config";
+		icon = "e_data";
+		match_name = "nodebuilders";
+		match_ext = "cfg";
+		text_language = "slade_nodebuilders";
+		reliability = 200;
+	}
+	
+	sladecfg_update : sladecfg
+	{
+		icon = "t_settings";
+		match_name = "sladecfg", "types_*";
+		match_ext = "cfg";
+		match_extorname = 1;
+		text_language = "slade_config";
+		reliability = 199;
+	}
+	
+	configfile_update : configfile
+	{
+		match_ext = "cfg", "ini", "inf";
+		reliability = 198;
+	}
+	
+	styleset : text
+	{
+		name = "Slade Style Set";
+		icon = "e_colormap";
+		match_ext = "sss";
+		text_language = "slade_styleset";
+		reliability = 200;
+	}
+	
+	sourcecode_c : text
+	{
+		name = "Source Code (C Based)";
+		match_ext = "c", "cpp", "cxx", "h", "hpp", "hxx", "java", "cs", "js";
+		text_language = "cstyle";
+	}
+	
+	sourcecode_other : text
+	{
+		name = "Source Code (Other)";
+		match_ext = "bas", "py", "pl", "pm", "php", "pas", "p", "pp", "vb", "rb", "l", "m", "d", "e";
+	}
+}

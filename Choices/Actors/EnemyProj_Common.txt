@@ -1,0 +1,121 @@
+Actor EnemyProj_Ball : Proj_Base
+{
+	Radius 6
+	Height 8
+	Speed 10
+	Species "DemonThru"
+	+RANDOMIZE
+	RenderStyle Add
+	Alpha 0.8
+	States
+	{
+	Death:
+		"####" CDE 6
+		Stop
+	}
+}
+
+Actor EnemyProj_ZombieBullet : Proj_Bullet
+{
+	Species "ZombieThru"
+}
+
+Actor EnemyProj_Zombieman : EnemyProj_ZombieBullet
+{
+	Damage (8)
+	DamageType "Enemy_RifleBullet"
+}
+
+Actor EnemyProj_ShotgunGuy : EnemyProj_ZombieBullet
+{
+	Damage (7)
+	DamageType "Enemy_ShotgunPellet"
+}
+
+Actor EnemyProj_ChaingunGuy : EnemyProj_ZombieBullet
+{
+	Damage (7)
+	DamageType "Enemy_ChaingunBullet"
+}
+
+Actor EnemyProj_CyborgBullet : Proj_Bullet
+{
+	Species "CyborgThru"
+}
+
+Actor EnemyProj_ImpBall : EnemyProj_Ball replaces DoomImpBall
+{
+	SpawnID 10
+	Damage (12)
+	DamageType "Enemy_ImpBall"
+	SeeSound "imp/attack"
+	DeathSound "imp/shotx"
+	Decal "DoomImpScorch"
+	States
+	{
+	Spawn:
+		BAL1 AB 4
+		Loop
+	}
+}
+
+Actor EnemyProj_CacodemonBall : EnemyProj_Ball replaces CacodemonBall
+{
+	SpawnID 126
+	Damage (20)
+	DamageType "Enemy_CacoBall"
+	SeeSound "caco/attack"
+	DeathSound "caco/shotx"
+	Decal "CacoScorch"
+	States
+	{
+	Spawn:
+		BAL2 AB 4
+		Loop
+	}
+}
+
+Actor EnemyProj_ArachnotronPlasma : EnemyProj_Ball replaces ArachnotronPlasma
+{
+	SpawnID 129
+	Radius 13
+	Speed 25
+	Damage (20)
+	DamageType "Enemy_ArachPlasma"
+	SeeSound "baby/attack"
+	DeathSound "baby/shotx"
+	Decal "ArachnotronScorch"
+	States
+	{
+	Spawn:
+		APLS AB 5
+		Loop
+	Death:
+		APBX ABCDE 5
+		Stop
+	}
+}
+
+Actor EnemyProj_BaronBall : EnemyProj_Ball replaces BaronBall
+{
+	SpawnID 154
+	Height 16
+	Speed 15
+	Damage (32)
+	DamageType "Enemy_BaronBall"
+	SeeSound "baron/attack"
+	DeathSound "baron/shotx"
+	Decal "BaronScorch"
+	States
+	{
+	Spawn:
+		BAL7 AB 4
+		Loop
+	}
+}
+
+Actor EnemyProj_HellKnightBall : EnemyProj_BaronBall
+{
+	DamageType "Enemy_HellKnightBall"
+	Decal "BaronScorch"
+}

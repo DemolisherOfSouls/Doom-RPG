@@ -1,0 +1,7 @@
+Actor Ammo_Cell : Ammo
+{
+	Inventory.MaxAmount 360
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 360
+	Inventory.Icon "CELPA0"
+}

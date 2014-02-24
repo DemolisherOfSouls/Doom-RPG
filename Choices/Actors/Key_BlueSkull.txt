@@ -1,0 +1,15 @@
+Actor Key_BlueSkull : CustomInventory replaces BlueSkull
+{
+	SpawnID 90
+	
+	States
+	{
+	Spawn:
+		BSKU A 15
+		BSKU B 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 5)
+		Stop
+	}
+}

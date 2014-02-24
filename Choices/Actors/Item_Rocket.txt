@@ -1,0 +1,15 @@
+Actor Item_Rocket : Item_AmmoBase replaces RocketAmmo
+{
+	SpawnID 140
+	
+	States
+	{
+	Spawn:
+		ROCK A 15
+		ROCK A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 1, AT_ROCKET)
+		Stop
+	}
+}

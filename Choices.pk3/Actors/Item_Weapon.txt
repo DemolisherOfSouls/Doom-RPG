@@ -1,4 +1,0 @@
-Actor Item_Weapon : Item_Base
-{
-	Inventory.PickupSound "Pickup/Weapon"
-}

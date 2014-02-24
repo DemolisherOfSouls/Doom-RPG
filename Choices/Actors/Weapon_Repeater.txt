@@ -1,0 +1,248 @@
+Actor Repeater : Weapon_BaseChaingun
+{
+	Inventory.Icon "GRepA0"
+	Weapon.AmmoType1 "Ammo_Cell"
+	Weapon.AmmoUse 1
+	AttackSound "Weapons/RepeaterFire"
+	+Weapon.Explosive
+	
+	States
+	{
+
+	//******************************************************
+	//	AltFire - SpinUp
+	//******************************************************
+
+	AltFire:
+		"####" A 7 A_SetTics(args[4] - args[0])
+		"####" A 0 A_JumpIf(args[0] == args[3], "CheckTrigger.A")
+		Goto CheckTrigger.A
+		
+	AltHold:
+		"####" B 7 A_SetTics(args[4] - args[0])
+		"####" B 0 A_JumpIf(args[0] == args[3], "CheckTrigger.B")
+		"####" B 0 A_SetArg(0, args[0] + 1)
+		"####" B 0 A_JumpIf(args[0] == args[3], "CheckTrigger.B")
+		Goto CheckTrigger.B
+	
+	//******************************************************
+	//	Fire / Hold
+	//******************************************************
+	
+	Fire:
+		"####" A 0 A_JumpIf(args[0] == args[3], "Fire.CheckAmmo")
+		"####" A 7 A_SetTics(args[4] - args[0])
+		Goto CheckTrigger.A
+	Fire.CheckAmmo:
+		"####" A 0 A_JumpIfNoAmmo("Fire.NoAmmo")
+		"####" A 0 A_GunFlash("Flash.A")
+		"####" A 7 A_SetTics(args[4] - args[0])
+		Goto CheckTrigger.A
+	Fire.NoAmmo:
+		"####" A 0 A_PlayWeaponSound("Weapon/ChaingunEmpty")
+		"####" A 7 A_SetTics(args[4] - args[0])
+		Goto SpinDown.B
+		
+	Hold:
+		"####" B 0 A_JumpIf(args[0] == args[3], "Hold.CheckAmmo")
+		"####" B 7 A_SetTics(args[4] - args[0])
+		"####" B 0 A_SetArg(0, args[0] + 1)
+		Goto CheckTrigger.B
+	Hold.CheckAmmo:
+		"####" A 0 A_JumpIfNoAmmo("Hold.NoAmmo")
+		"####" B 0 A_GunFlash("Flash.B")
+		"####" B 7 A_SetTics(args[4] - args[0])
+		Goto CheckTrigger.B
+	Hold.NoAmmo:
+		"####" B 0 A_PlayWeaponSound("Weapon/ChaingunEmpty")
+		"####" B 7 A_SetTics(args[4] - args[0])
+		Goto SpinDown.A
+	}
+	
+	States
+	{
+	Ready:
+		REPG A 1 A_WeaponReady
+		Loop
+	Select:
+		REPG A 0
+		Goto Super::Select
+	
+	//start spinup @ 7
+	//fire @ 2
+	//needed spin time = 5
+	
+	Fire.Actual:
+		REPG E 2 Bright A_Gunflash("Flash")
+		REPG F 2 Bright
+		REPG A 0 A_Refire("Fire.Actual.B")
+		REPG A 0 A_PlaySound("Weapon/RepeaterStop")
+		Goto SpinDown.C
+	Fire.Actual.B
+		REPG G 2 Bright A_Gunflash("Flash")
+		REPG H 2 Bright
+		REPG A 0 A_Refire("Fire.Actual")
+		REPG A 0 A_PlaySound("Weapon/RepeaterStop")
+		Goto SpinDown.A
+	Flash:
+		TNT1 A 0 A_AlertMonsters(992)
+		TNT1 A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_CHAINGUN, 25))
+		TNT1 A 0 A_FireBullets(FRandom(-args[2], args[2]) / 10, FRandom(-args[2], args[2]) / 10, 2, 8, "Puff_Repeater", FBF_NORANDOM, 10240)
+		TNT1 A 2 A_Light2
+		TNT1 A 1 A_Light1
+		Goto LightDone
+	
+	SpinDown.D.Drop:
+		"####" D 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
+		"####" D 0 A_SetArg(0, args[0] - 1)
+	SpinDown.D:
+		"####" D 0 A_SetArg(1, 0)
+		"####" D 1 A_WeaponReady
+		"####" D 0 A_SetArg(1, args[1] + 1)
+		"####" D 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.A.Drop")
+		Goto SpinDown.D + 1
+	
+	SpinDown.C.Drop:
+		"####" C 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
+		"####" C 0 A_SetArg(0, args[0] - 1)
+	SpinDown.C:
+		"####" C 0 A_SetArg(1, 0)
+		"####" C 1 A_WeaponReady
+		"####" C 0 A_SetArg(1, args[1] + 1)
+		"####" C 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.D.Drop")
+		Goto SpinDown.C + 1
+	
+	SpinDown.B.Drop:
+		"####" B 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
+		"####" B 0 A_SetArg(0, args[0] - 1)
+	SpinDown.B:
+		"####" B 0 A_SetArg(1, 0)
+		"####" B 1 A_WeaponReady
+		"####" B 0 A_SetArg(1, args[1] + 1)
+		"####" B 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.C.Drop")
+		Goto SpinDown.B + 1
+	
+	SpinDown.A.Drop:
+		"####" A 0 A_JumpIf(args[0] == 0, "Ready.CheckAmmo")
+		"####" A 0 A_SetArg(0, args[0] - 1)
+	SpinDown.A:
+		"####" A 0 A_SetArg(1, 0)
+		"####" A 1 A_WeaponReady
+		"####" A 0 A_SetArg(1, args[1] + 1)
+		"####" A 0 A_JumpIf(args[1] == 7 - args[0], "SpinDown.B.Drop")
+		Goto SpinDown.A + 1
+	Fire:
+		//===========Spinup
+		REPG A 0 A_PlaySound("Weapons/RepeaterSpinup")
+		REPG A 0 A_JumpIfInventory("RepeaterSpin", 1, 8)
+		REPG A 0 A_JumpIfInventory("RepeaterB", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterC", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterD", 1, 4)
+		REPG A 4
+		REPG B 4
+		REPG C 4
+		REPG D 4 A_GiveInventory("RepeaterFrameA")
+		REPG A 0 A_JumpIfInventory("RepeaterSpin", 2, 9)
+		REPG A 0 A_GiveInventory("RepeaterSpin", 1)
+		REPG A 0 A_JumpIfInventory("RepeaterB", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterC", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterD", 1, 4)
+		REPG A 3
+		REPG B 3
+		REPG C 3
+		REPG D 3 A_GiveInventory("RepeaterFrameA")
+		REPG A 0 A_JumpIfInventory("RepeaterB", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterC", 1, 4)
+		REPG A 0 A_JumpIfInventory("RepeaterD", 1, 4)
+		REPG A 2
+		REPG B 2
+		REPG C 2
+		REPG D 2 A_GiveInventory("RepeaterFrameA")
+		//===========Fire
+		REPG A 0 A_Refire
+		//===========Spindown
+		REPG A 0 A_PlaySound("Weapons/RepeaterSpindown")
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DD 1 A_WeaponReady(11)
+		REPG A 0 A_TakeInventory("RepeaterSpin", 1)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDD 1 A_WeaponReady(11)
+		REPG A 0 A_TakeInventory("RepeaterSpin", 1)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDDD 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDDD 1 A_WeaponReady(11)
+		Goto Ready
+	Hold:
+		//===========Fire
+		REPG E 0 Bright A_Gunflash
+		REPG E 0 Bright A_AlertMonsters
+		REPG E 2 Bright A_FireBullets(5, 4, 2, 6, "RepPuff", 1, 10240)
+		REPG F 2 Bright
+		REPG G 0 Bright A_AlertMonsters
+		REPG G 2 Bright A_FireBullets(5, 4, 2, 6, "RepPuff", 1, 10240)
+		REPG H 2 Bright
+		REPG A 0 A_Refire
+		//===========Spindown
+		REPG A 0 A_PlaySound("Weapons/RepeaterSpindown")
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DD 1 A_WeaponReady(11)
+		REPG A 0 A_TakeInventory("RepeaterSpin", 1)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDD 1 A_WeaponReady(11)
+		REPG A 0 A_TakeInventory("RepeaterSpin", 1)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDDD 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameA", 1)
+		REPG AAAA 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameB", 1)
+		REPG BBBB 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameC", 1)
+		REPG CCCC 1 A_WeaponReady(11)
+		REPG A 0 A_GiveInventory("RepeaterFrameD", 1)
+		REPG DDDD 1 A_WeaponReady(11)
+		Goto Ready
+	}
+}

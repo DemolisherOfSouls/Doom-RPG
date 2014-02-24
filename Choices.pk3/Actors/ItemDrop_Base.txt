@@ -1,5 +1,0 @@
-Actor ItemDrop_Base
-{
-	+NOINTERACTION
-	+NOGRAVITY
-}

@@ -1,0 +1,84 @@
+//DONE
+
+Fixed Chaingun flash state
+Fixed SuperShotgun ammo type typo
+Fixed TracerTrail models not showing up
+Fixed optional label in MapInfo (not needed)
+Added Chaingun ammo check
+Fixed souls counting as monsters
+Added terrain fix for non rpg maps
+Added in game menu key to controls menu
+Added DrawBox() function
+Updated menudef to zdoom.pk3 version
+Added Demon enemy
+Added menu buttons
+Added menu text
+Added tab system
+Added layout system
+Added one finished layout for testing
+Added silenced pistol mod
+Added Rocket launcher weapon
+Added Riot shotgun weapon
+Added Spectre enemy
+Added money items
+Fixed headshots
+Fixed self headshots
+Added save option to menu
+Added money items to zombie drops
+Added lost soul drops
+Added args array use for minigun windup and spindown
+Added laser rifle
+Fixed money drops having insane values
+Added Chaingun spindown
+Fixed accuracy display for weapons to only show one decimal place
+Fixed minigun locking on altfire
+Fixed laser rifle locking on reload
+Added Cacodemon enemy
+
+//TODO
+
+//weapons
+Add Chaingun movement penalty
+Add Unarmed movement bonus
+Add LR sprites
+Add LR animation
+Add LR sounds
+Add worsening accuracy system
+
+Add BFG9000
+Add BFG10K
+Add AssaultRifle
+Add SubmachineGun
+Add LightMachinegun
+Add HeavyMachinegun
+Add PlasmaThrower
+Add Repeater
+
+Fix trig on tracer and laser trails
+
+//enemies
+Add Revenant enemy
+Add Mancubus enemy
+Add ArchVile enemy
+Add Cyberdemon enemy
+Add ChaingunMajor enemy variant
+Add RapidFireZombie enemy variant
+
+//allies
+Add Marine ally
+Add money items to marine drops
+Add follow code
+Add follow options
+Add smarter AI, so less getting stuck
+
+//general
+Add better soul items
+Add leveled loot and acs based dropitem scripts
+
+Add better map scripts
+
+//menu
+Fix skill drag-drop list
+Add new graphics for buttons, boxes, etc.
+Add keys found to inventory menu
+Add credits to inventory menu

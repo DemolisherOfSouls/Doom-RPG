@@ -1,0 +1,12 @@
+Actor WeaponProj_Minigun : WeaponProj_Bullet
+{
+	Damage (CallACS("WeaponDamage", WD_MINIGUN))
+	DamageType "Player_Chaingun"
+	SeeSound "Weapon/Minigun"
+	Decal "BulletChip"
+	States
+	{
+	Select:
+		BULL A 0 A_Jump(Always, "Normal", "Tracer", "Tracer")
+	}
+}
