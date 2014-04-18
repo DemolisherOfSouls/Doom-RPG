@@ -3,7 +3,7 @@ decorate_update : decorate {
 
 	keywords = {
 		// General keywords
-		Const, Enum, Replaces,
+		Const, Enum, Replaces, Super, LightDone
 	}
 	
 	constants = {
@@ -93,7 +93,7 @@ slade_config
 		//Editor
 		gfx, audio, ansi, animated, switches, text, palette
 	}
-
+}
 
 slade_styleset : slade_config
 {

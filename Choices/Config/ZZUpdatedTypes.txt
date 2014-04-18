@@ -15,14 +15,14 @@ entry_types
 	decaldef_update : decaldef
 	{
 		text_language = "z_decaldef_update";
-		reliability = 200;
+		reliability = 1000;
 	}
 
 	decorate_update : decorate
 	{
 		match_name = "decorate", "actors";
 		text_language = "decorate_update";
-		reliability = 199;
+		reliability = 999;
 	}
 
 	language : text
@@ -45,7 +45,7 @@ entry_types
 		match_name = "nodebuilders";
 		match_ext = "cfg";
 		text_language = "slade_nodebuilders";
-		reliability = 200;
+		reliability = 1000;
 	}
 	
 	sladecfg_update : sladecfg
@@ -55,13 +55,13 @@ entry_types
 		match_ext = "cfg";
 		match_extorname = 1;
 		text_language = "slade_config";
-		reliability = 199;
+		reliability = 999;
 	}
 	
 	configfile_update : configfile
 	{
 		match_ext = "cfg", "ini", "inf";
-		reliability = 198;
+		reliability = 998;
 	}
 	
 	styleset : text
@@ -70,7 +70,7 @@ entry_types
 		icon = "e_colormap";
 		match_ext = "sss";
 		text_language = "slade_styleset";
-		reliability = 200;
+		reliability = 1000;
 	}
 	
 	sourcecode_c : text

@@ -125,8 +125,8 @@
 #include "Actors/WeaponProj_Grinder.txt"
 #include "Actors/WeaponProj_PlasmaBall.txt"
 #include "Actors/WeaponProj_LaserRifle.txt"
-//#include "Actors/WeaponProj_Rifle.txt"
-//#include "Actors/WeaponProj_AssaultRifle.txt"
+#include "Actors/WeaponProj_Rifle.txt"
+#include "Actors/WeaponProj_AssaultRifle.txt"
 
 //Weapons
 #include "Actors/Weapon_Base.txt"

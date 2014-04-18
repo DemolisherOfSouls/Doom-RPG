@@ -4,12 +4,12 @@ entry_types
 	{
 		match_name = "decorate", "actors";
 		text_language = "decorate_rpg";
-		reliability = 200;
+		reliability = 1000;
 	}
 	
 	acs_rpg : acs
 	{
 		text_language = "acs_rpg";
-		reliability = 200;
+		reliability = 1000;
 	}
 }

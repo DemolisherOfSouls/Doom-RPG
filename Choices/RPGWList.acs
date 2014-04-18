@@ -84,7 +84,10 @@ str WeaponName[10][8] =
 		"BFG10K"
 	},{
 		"Standard Issue Rifle",
-		"Assault Rifle"
+		"Assault Rifle",
+		"Light Machinegun",
+		"Heavy Machinegun",
+		"Sub-Machinegun"
 	}
 };
 
@@ -118,7 +121,10 @@ str WeaponClass[10][8] =
 		"BFG10K"
 	},{
 		"Rifle",
-		"AssaultRifle"
+		"AssaultRifle",
+		"LightMachinegun",
+		"HeavyMachinegun",
+		"SubMachinegun"
 	}
 };
 

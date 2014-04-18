@@ -6,3 +6,12 @@ int WaitingAmmo[5][8];
 
 bool LevelKeyFound[6];
 bool LevelKeyUsed[6];
+
+bool LevelLockNumbers[15] =
+{
+	1,2,3,4,5,6,
+	129,130,131,132,133,134,
+	100,101,229
+};
+
+bool LevelLockOpened[15];

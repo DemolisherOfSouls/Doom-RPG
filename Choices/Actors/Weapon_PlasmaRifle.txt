@@ -25,7 +25,7 @@ Actor Weapon_PlasmaRifle : Weapon_BaseEnergy
 	
 	Fire.Actual:
 		PLSF A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_ENERGY, 07))
-		PLSF A 0 A_FireCustomMissile("WeaponProj_PlasmaBall", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, , FRandom(-args[2], args[2]) / 10)
+		PLSF A 0 A_FireCustomMissile("WeaponProj_PlasmaBall", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, FRandom(-args[2], args[2]) / 10)
 		PLSF A 0 A_AlertMonsters(640)
 		PLSF A 0 A_Jump(Always, "Flash.A", "Flash.B")
 	Flash.A:
@@ -43,7 +43,7 @@ Actor Weapon_PlasmaRifle : Weapon_BaseEnergy
 	Reload.Process:
 		TNT1 A 0 A_GiveInventory("AmmoMag_PlasmaRifle", 1)
 		TNT1 A 0 A_TakeInventory("Ammo_Cell", 1, TIF_NOTAKEINFINITE)
-		TNT1 A 0 A_JumpIfInventory("AmmoMag_PlasmaRifle", 0, LightDone)
+		TNT1 A 0 A_JumpIfInventory("AmmoMag_PlasmaRifle", 0, "LightDone")
 		TNT1 A 0 A_JumpIfInventory("Ammo_Cell", 1, "Reload.Process")
 		Stop
 	}

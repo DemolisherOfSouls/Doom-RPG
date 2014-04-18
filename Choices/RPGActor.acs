@@ -9,7 +9,7 @@
 
 function void EntitySpawnHead (int body, int hclass)
 {
-	int hscript = "EnemyHead";
+	str hscript = "EnemyHead";
 	if(IsAlly(body))
 		hscript = "AllyHead";
 	else if(IsPlayer(body))

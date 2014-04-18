@@ -10,3 +10,9 @@ Actor WeaponProj_Chaingun : WeaponProj_Bullet
 		BULL A 0 A_Jump(Always, "Normal", "Tracer")
 	}
 }
+
+Actor WeaponProj_Chaingun_Pain : WeaponProj_Chaingun
+{
+	DamageType "Player_Chaingun_Pain"
+	Decal "BulletChip"
+}

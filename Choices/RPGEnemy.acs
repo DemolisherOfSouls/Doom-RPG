@@ -34,6 +34,8 @@ function str GetEnemyHeadClass (int type)
 		return "Enemy_DemonHead";
 	else if(WithinRange(type, ET_HELLKNIGHT, ET_BARON))
 		return "Enemy_BaronHead";
+	else if(type == ET_CACODEMON)
+		return "Enemy_CacodemonHead";
 	return "Enemy_DemonicHead";
 }
 

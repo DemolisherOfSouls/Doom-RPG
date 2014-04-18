@@ -53,6 +53,11 @@ function int GetFirstKey (void)
 	return NULL;
 }
 
+function int GetLockIndex(int locknum)
+{
+	return NULL;
+}
+
 //Returns (0) for cards, and (1) for skulls, based on the held key of the given color
 //Returns (EXCEPTION) if the key is not held
 function int GetHeldKeyType (int kc)
@@ -67,6 +72,10 @@ function int GetHeldKeyType (int kc)
 function void SetKeyUsed (int locknum)
 {
 	int held;
+	
+	//int lockindex = GetLockIndex(locknum);
+	//LevelLockOpened[lockindex] = true;
+	
 	switch(locknum)
 	{
 	case 1:
@@ -127,7 +136,7 @@ function void SetKeyUsed (int locknum)
 	default:
 		Throw2(InvalidLockException, "SetKeyUsed", locknum, "locknum");
 		return;
-	}	
+	}
 }
 
 function int KeyBits (void)

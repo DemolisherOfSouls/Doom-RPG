@@ -29,7 +29,7 @@ Actor Weapon_Shotgun : Weapon_BaseShotgun
 		SHTF A 0 A_TakeInventory("AmmoMag_Shotgun", 1)
 		SHTF A 0 A_AlertMonsters(640)
 		SHTF A 0 A_PlayWeaponSound("Weapon/Shotgun")
-		SHTF A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_SHOTGUN, 27))
+		SHTF A 0 A_SetArg(ARG_ACC, CallACS("WeaponAccuracy", WT_SHOTGUN, 27))
 		SHTF A 0 A_JumpIfInventory("InvMod_Shotgun_Shot", 1, "Shoot.Big")
 		SHTF AAAAAAA 0 A_FireCustomMissile("WeaponProj_Shotgun", FRandom(-args[2], args[2]) / 10, false, 0, 0, 0, FRandom(-args[2], args[2]) / 10)
 		Goto Flash

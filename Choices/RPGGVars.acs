@@ -6,6 +6,6 @@
 
 global int 0:G_Episode;					//Episode (Doom, Doom 2, Final Doom, etc.)
 global int 1:G_Map;						//Map (E1M#, Map##, RPG##)
-global int 2:G_Status[];				//Status ('OR'd with this array by map)
-global int 3:G_Keys[];					//Keys owned (bitfield of keys)
+global int 2:G_Status[];				//Status [map] - bitfield of map variables
+global int 3:G_Keys[];					//Keys Owned [map] - bitfield of keys
 global int 4:G_Reset;					//Level was reloaded to change skill (set to different values based on success)

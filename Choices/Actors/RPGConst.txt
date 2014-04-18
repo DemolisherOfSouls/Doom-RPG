@@ -48,6 +48,15 @@ enum
 
 enum
 {
+	ARG_SPEED,
+	ARG_TICS,
+	ARG_ACC,
+	ARG_FIRE,
+	ARG_SLOW
+};
+
+enum
+{
 	WD_FIST,
 	WD_CHAINSAW,
 	WD_PISTOL,
@@ -158,6 +167,11 @@ enum
 	W_CHAINGUN,
 	W_MINIGUN,
 	W_GRINDER
+};
+
+enum
+{
+	WM_CHAINGUN_MOTOR = 1
 };
 
 enum

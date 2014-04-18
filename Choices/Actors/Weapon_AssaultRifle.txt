@@ -24,8 +24,8 @@ Actor Weapon_AssaultRifle : Weapon_BaseRifle
 		Goto Ready
 	
 	Fire.Actual:
-		ARfF A 0 A_SetArg(2, CallACS("WeaponAccuracy", WT_RIFLE, 15))
-		ARfF A 0 A_FireCustomMissile("WeaponProj_AssaultRifle", FRandom(-args[2], args[2]) / 10, true, 0, 0, 0, , FRandom(-args[2], args[2]) / 10)
+		ARfF A 0 A_SetArg(ARG_ACC, CallACS("WeaponAccuracy", WT_RIFLE, 15))
+		ARfF A 0 A_FireCustomMissile("WeaponProj_AssaultRifle", FRandom(-args[ARG_ACC], args[ARG_ACC]) / 10, true, 0, 0, 0, , FRandom(-args[ARG_ACC], args[ARG_ACC]) / 10)
 		ARfF A 0 A_AlertMonsters(840)
 	Flash:
 		ARfF AB 2 Bright A_Light(Random(1, 2))
