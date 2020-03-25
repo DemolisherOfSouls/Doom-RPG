@@ -2,11 +2,10 @@
 
 cd Choices
 
-
-"%ProgramFiles%\7-Zip\7z.exe" a -tzip ..\Choices.pk3 * -mx9
+"%ProgramFiles%\WinRAR\winrar.exe" a -r -afzip Choices.pk3 *
 
 cd ..\
 
-copy "Choices.pk3" "..\..\..\Doom\RPGv4\Choices.pk3"
+move /y Choices\Choices.pk3 Debug\Choices.pk3
 
 pause
