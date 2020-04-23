@@ -216,3 +216,10 @@ pip-log.txt
 
 #Links
 .lnk
+
+#acc stuff
+zcommon.acs
+zdefs.acs
+zspecial.acs
+zwvars.acs
+acs.err

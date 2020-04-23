@@ -10,7 +10,7 @@
 #libdefine NOCLASS			"ACS_Failure"
 #libdefine NOICON			"TNT1A0"
 
-#libdefine CR_TEAL			22
+//#libdefine CR_TEAL			22
 
 #libdefine AT_None			0
 #libdefine AT_Clip			1

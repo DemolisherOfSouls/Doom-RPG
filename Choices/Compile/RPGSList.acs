@@ -5,27 +5,28 @@
 #import "RPGConst.acs"
 
 #libdefine SKILL_OldSchool		0
-#libdefine SKILL_Underdog		SKILL_OldSchool + 1
-#libdefine SKILL_BloodyMess		SKILL_Underdog + 1
-#libdefine SKILL_HomingRounds	SKILL_BloodyMess + 1
-#libdefine SKILL_QuickDraw		SKILL_HomingRounds + 1
-#libdefine SKILL_Observant		SKILL_QuickDraw + 1
-#libdefine SKILL_Gunner			SKILL_Observant + 1
-#libdefine SKILL_Heavy			SKILL_Gunner + 1
-#libdefine SKILL_Finesse		SKILL_Heavy + 1
-#libdefine SKILL_PackMule		SKILL_Finesse + 1
-#libdefine SKILL_Reloader		SKILL_PackMule + 1
-#libdefine SKILL_PlasmaSpaz		SKILL_Reloader + 1
-#libdefine SKILL_FleshWound		SKILL_PlasmaSpaz + 1
-#libdefine SKILL_Pyro			SKILL_FleshWound + 1
-#libdefine SKILL_Fortunate		SKILL_Pyro + 1
-#libdefine SKILL_FieldMedic		SKILL_Fortunate + 1
-#libdefine SKILL_ARRAY			SKILL_FieldMedic + 1
+#libdefine SKILL_Underdog		1
+#libdefine SKILL_BloodyMess		2
+#libdefine SKILL_HomingRounds	3
+#libdefine SKILL_QuickDraw		4
+#libdefine SKILL_Observant		5
+#libdefine SKILL_Gunner			6
+#libdefine SKILL_Heavy			7
+#libdefine SKILL_Finesse		8
+#libdefine SKILL_PackMule		9
+#libdefine SKILL_Reloader		10
+#libdefine SKILL_PlasmaSpaz		11
+#libdefine SKILL_FleshWound		12
+#libdefine SKILL_Pyro			13
+#libdefine SKILL_Fortunate		14
+#libdefine SKILL_FieldMedic		15
+#libdefine SKILL_ARRAY			16 //Array Size
 
 #libdefine SI_NAME	0
 #libdefine SI_DESC	1
+#libdefine SI_ARRAY	2
 
-str SkillInfo[SKILL_ARRAY][2] =
+str SkillInfo[SKILL_ARRAY][SI_ARRAY] =
 {
 	{
 		"Old School",
@@ -95,16 +96,17 @@ str SkillInfo[SKILL_ARRAY][2] =
 #libdefine SD_EFFECT3			7
 #libdefine SD_EFFECT4			8
 #libdefine SD_EFFECT5			9
+#libdefine SD_ARRAY				10
 
 #libdefine SDR_REQNAME			0
 #libdefine SDR_REQVAR1			1
 #libdefine SDR_REQVAR2			2
+#libdefine SDR_ARRAY			3
+#libdefine SDR_EFFNAME			SDR_REQNAME
+#libdefine SDR_EFFVAR1			SDR_REQVAR1
+#libdefine SDR_EFFVAR2			SDR_REQVAR2
 
-#libdefine SDR_EFFNAME			0
-#libdefine SDR_EFFVAR1			1
-#libdefine SDR_EFFVAR2			2
-
-int SkillData[SKILL_ARRAY][10][3] =
+int SkillData[SKILL_ARRAY][SD_ARRAY][SDR_ARRAY] =
 {
 	{ // Old School
 		{ CATEGORY_General, CATEGORY_Offence, CATEGORY_Bullets },
@@ -137,7 +139,7 @@ int SkillData[SKILL_ARRAY][10][3] =
 		{ Req_Level, 20 },
 		{ Req_Limit, 1 },
 		{ Null },
-		{ null },
+		{ Null },
 		{ EFF_HomingRounds, 1 }
 	},{ // Quick Draw
 		{ CATEGORY_General, CATEGORY_Offence },

@@ -1,0 +1,41 @@
+Actor Item_Money : Item_Base
+{
+	States
+	{
+	Spawn:
+		GOLD A 5 Bright
+		GOLD A 15
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Money", 0, 1)
+		Stop
+	}
+}
+
+Actor Item_Money10 : Item_Money
+{
+	States
+	{
+	Spawn:
+		GOLD B 5 Bright
+		GOLD B 15
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Money", 0, 10)
+		Stop
+	}
+}
+
+Actor Item_Money25 : Item_Money
+{
+	States
+	{
+	Spawn:
+		GOLD C 5 Bright
+		GOLD C 15
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Money", 0, 25)
+		Stop
+	}
+}
