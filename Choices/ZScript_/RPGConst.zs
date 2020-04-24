@@ -18,3 +18,54 @@ const int SKILL_FleshWound		= 12;
 const int SKILL_Pyro			= 13;
 const int SKILL_Fortunate		= 14;
 const int SKILL_FieldMedic		= 15;
+
+const string WeaponClass[10][8] =
+{
+	{
+		"Fist"
+	},{
+		"Chainsaw"
+	},{
+		"Pistol",
+		"MkII"
+	},{
+		"Shotgun",
+		"Riotgun",
+		"Striker"
+	},{
+		"SuperShotgun"
+	},{
+		"Chaingun",
+		"Minigun",
+		"Grinder"
+	},{
+		"RocketLauncher"
+	},{
+		"PlasmaRifle",
+		"LaserRifle",
+		"PlasmaThrower"
+	},{
+		"BFG9000",
+		"BFG10K"
+	},{
+		"Rifle",
+		"AssaultRifle",
+		"LightMachinegun",
+		"HeavyMachinegun",
+		"SubMachinegun"
+	}
+};
+
+const string AmmoClass[10] =
+{
+	"None",
+	"None",
+	"Clip",
+	"Shell",
+	"Shell",
+	"Clip",
+	"Rocket",
+	"Cell",
+	"Cell",
+	"Clip"
+};

@@ -1,12 +1,15 @@
-Actor Weapon_Pistol : Weapon_BasePistol
+class Weapon_Pistol : Weapon_BasePistol
 {
-	Weapon.AmmoType1 "AmmoMag_Pistol"
+	default
+	{
+		Weapon.AmmoType1 "AmmoMag_Pistol"
+		
+		Inventory.Icon "PISTA0"
+		
+		Tag "Standard Issue Pistol"
+	}
 	
-	Inventory.Icon "PISTA0"
-	
-	Tag "Standard Issue Pistol"
-	
-	States
+	states
 	{
 	
 	//******************************************************

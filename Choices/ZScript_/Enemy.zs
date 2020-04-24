@@ -40,6 +40,10 @@ class Enemy : Entity
 	{
 		if(bBOSSDEATH) A_BossDeath;
 	}
+	void E_FireBullet(string type, int zoff, double spread)
+	{
+		A_CustomMissile(type, zoff, 0, FRandom(-spread,spread), CMF_STANDARD, FRandom(-spread,spread));
+	}
 	
 	states
 	{

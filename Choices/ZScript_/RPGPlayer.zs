@@ -16,6 +16,11 @@ class RPGPlayer : DoomPlayer
 	int skillpoints;
 	int perkpoints;
 	
+	// message queue
+	int ammoqueue[5];
+	int moneyqueue;
+	int soulsqueue;
+	
 	// weapons
 	int cur_weapon[10];
 	int cur_mod[10];

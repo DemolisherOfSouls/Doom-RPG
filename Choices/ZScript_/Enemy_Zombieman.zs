@@ -26,7 +26,7 @@ class Enemy_Zombieman : Enemy_Zombie replaces Zombieman
 	{
 	Spawn.Stage2:
 		POSS A 0;
-		goto Spawn.Final
+		goto Spawn.Final;
 	Missile:
 		POSS E 10 A_FaceTarget;
 		POSS F 8 Bright A_CustomMissile("EnemyProj_Zombieman", 32, 0, FRandom(-5.75,5.75), CMF_STANDARD, FRandom(-5.75,5.75));
