@@ -107,9 +107,6 @@
     <Text Include="..\Choices\ZScript_\Enemy_Imp.txt">
       <Filter>Header Files</Filter>
     </Text>
-    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.txt">
-      <Filter>Header Files</Filter>
-    </Text>
     <Text Include="..\Choices\ZScript_\Item_MkII.txt">
       <Filter>Header Files</Filter>
     </Text>
@@ -120,6 +117,9 @@
       <Filter>Header Files</Filter>
     </Text>
     <Text Include="..\Choices\ZScript_\WeaponPuff_Common.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.zs">
       <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>

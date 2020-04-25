@@ -12,8 +12,8 @@ class Weapon_Base : Weapon
 		+WEAPON.CHEATNOTWEAPON
 		+WEAPON.NOALERT
 	}
-	
-	mixin Jumper;
+
+	mixin Mix_Jump;
 	
 	string GetWeaponAmmoClass(int slot, int var)
 	{
@@ -88,29 +88,28 @@ class Weapon_Base : Weapon
 	
 	ChangeWeapon:
 		"----" A 0 W_ChangeWeapon();
-		"----" A 0 Jump("Ready.NoFire")
-	
+		"----" A 0 Jump(state("Ready.NoFire"));
 	
 	//******************************************************
 	//	CheckAmmo
 	//******************************************************
 	
 	Ready.CheckAmmo:
-		"----" A 0 A_JumpIfNoAmmo("ChangeWeapon")
-		goto Delay
+	"----" A 0 A_JumpIfNoAmmo("ChangeWeapon");
+		goto Delay;
 	
 	//******************************************************
 	//	Ready / Delay
 	//******************************************************
 	
 	Delay:
-		"----" A 1
-		"----" A 0 Jump("Ready")
+		"----" A 1;
+		"----" A 0 Jump(state("Ready"));
 	Ready:
-		"----" A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		"----" A 1 A_WeaponReady(WRF_NOSECONDARY | WRF_ALLOWRELOAD);
 		loop;
 	Ready.NoFire:
-		"----" A 1 A_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD)
+		"----" A 1 A_WeaponReady(WRF_NOFIRE | WRF_ALLOWRELOAD);
 		loop;
 	
 	//******************************************************

@@ -43,7 +43,7 @@
   <ItemGroup>
     <Text Include="..\Choices\ZScript_\Enemy_HellKnight.txt" />
     <Text Include="..\Choices\ZScript_\Enemy_Imp.txt" />
-    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.txt" />
+    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.zs" />
     <Text Include="..\Choices\ZScript_\Item_MkII.txt" />
     <Text Include="..\Choices\ZScript_\Item_Pistol.txt" />
     <Text Include="..\Choices\ZScript_\WeaponPuff_Common.txt" />

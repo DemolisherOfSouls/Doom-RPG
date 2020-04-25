@@ -1,0 +1,123 @@
+#library "RPGWeapU"
+#include "zcommon.acs"
+
+#LibDefine LIMIT_WeaponTypes	10
+#LibDefine LIMIT_WeaponVariants	8
+#LibDefine LIMIT_WeaponUpgrades	6
+#LibDefine LIMIT_UpgradeTypes	34
+
+//DupRef Spec
+//### - ex. 253
+// type 2, variant 5, upgrade 3
+// 10 base
+
+#LibDefine MWU_DupRef		0
+#LibDefine MWU_UpName		1
+#LibDefine MWU_ItemName		2
+#LibDefine MWU_AddName		3
+#LibDefine MWU_Number		4
+#LibDefine MWU_Type			5
+#LibDefine MWU_ReqIndex		6
+
+#LibDefine MWUT_Speed		0
+#LibDefine MWUT_Damage		1
+#LibDefine MWUT_Accuracy	2
+#LibDefine MWUT_Scope		3
+#LibDefine MWUT_Suppress	4
+#LibDefine MWUT_Second		5
+#LibDefine MWUT_DualFire	6
+#LibDefine MWUT_SemiAuto	7
+#LibDefine MWUT_FullAuto	8
+#LibDefine MWUT_Explosive	9
+#LibDefine MWUT_ExRadius	10
+#LibDefine MWUT_ExDamage	11
+#LibDefine MWUT_Buckshot	12
+#LibDefine MWUT_Recoil		13
+#LibDefine MWUT_Dragons		14
+#LibDefine MWUT_Napalm		15
+#LibDefine MWUT_TwoFist		16
+#LibDefine MWUT_Charge		17
+#LibDefine MWUT_Silent		18
+#LibDefine MWUT_Turbulence	19
+#LibDefine MWUT_Piercing	20
+#LibDefine MWUT_Tracer		21
+#LibDefine MWUT_MagSize		22
+#LibDefine MWUT_Reload		23
+#LibDefine MWUT_DualBlade	24
+#LibDefine MWUT_Quiet		25
+#LibDefine MWUT_Throwable	26
+#LibDefine MWUT_BurstMode	27
+#LibDefine MWUT_AutoMode	28
+#LibDefine MWUT_SingleMode	29
+#LibDefine MWUT_Recharger	30
+#LibDefine MWUT_FistSpeed	31
+#LibDefine MWUT_FistDamage	32
+#LibDefine MWUT_BladeDamage	33
+
+str MWUT_Header = "This upgrade ";
+
+str MWUT_Main[LIMIT_UpgradeTypes] =
+{
+	"increases the weapon's speed, making it fire faster",
+	"increases the weapon's damage, giving each shot more power",
+	"increases the weapon's accuracy, decreasing the spread",
+	"adds a scope, allowing zoom capabilities with the <Zoom> key",
+	"decreases weapon firing noise, but does not eliminate it",
+	"adds a second weapon, one for each hand",
+	"allows the weapon to fire two bullets each shot",
+	"causes the weapon to fire semi-auto, eliminating pumping",
+	"causes the weapon to fire full-auto, increasing firing speed",
+	"causes the projectile to explode upon impact, explosions alert enemies",
+	"increases the explosion radius of the projectile",
+	"increases the explosion damgage of the projectile",
+	"increases the number of pellets in a shell, increasing damage",
+	"decreases the recoil of the weapon, increasing accruacy and weapon recentering",
+	"adds dragon breath rounds, adding a chance to ignite enemies, doing fire damage",
+	"adds napalm to the rocket, ading a chance to ignite enemies, doing fire damage",
+	"allows use of both hands in combat",
+	"decreases the charge time before firing",
+	"silences the ",
+	"",
+	"",
+};
+
+str MWU_Main[LIMIT_WeaponTypes][LIMIT_WeaponVariants][LIMIT_WeaponUpgrades][7] =
+{
+	{ // Fist
+		{ // Basic Unarmed
+			{0, "Adrenaline",	"Item_Adrenaline",	"fast",		1,	MWUT_FistSpeed,		WUR_Adrenaline},
+			{0, "Berserk",		"Item_Berserk",		"berserk",	1,	MWUT_FistDamage,	WUR_Berserk},
+			{0, "Training",		"Item_H2HTraining",	"trained",	1,	MWUT_Uppercut,		WUR_Uppercut},
+			{0, "Training II",	"Item_H2HTraining",	"stun",		5,	MWUT_StunFist,		WUR_StunFist},
+			{0, "Training III",	"Item_H2HTraining",	"kick",		10,	MWUT_Kick,			WUR_Kick},
+			{0, "Training IV",	"Item_H2HTraining",	"ko",		15,	MWUT_KO,			WUR_KO}
+		},{ // Gloves
+
+		}
+	}
+};
+
+function int AFix (int value)
+{
+	if(value > 32000)
+		return value - 0x7fff;
+	return value;
+}
+
+function int DupRef_Type (int value)
+{
+	return value / 100;
+}
+
+function int DupRef_Var (int value)
+{
+	value -= value / 100 * 100;
+	return value / 10;
+}
+
+function int DupRef_Up (int value)
+{
+	value -= value / 100 * 100;
+	value -= value / 10 * 10;
+	return value;
+}

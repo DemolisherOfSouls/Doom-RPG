@@ -2,6 +2,8 @@ class Enemy : Entity
 {
 	int ptime;
 	bool painjump;
+
+	mixin Mix_Jump;
 	
 	property PainTime: ptime;
 	
@@ -48,9 +50,7 @@ class Enemy : Entity
 	states
 	{
 	Spawn:
-		TNT1 A 0 NoDelay A_Jump(Always, "Spawn.Stage2");
-	Spawn.Stage2:
-		"----" A 0 A_Jump(Always, "Spawn.Final");
+		TNT1 A 0 NoDelay Jump(state("Spawn.StageFinal"));
 	Spawn.Final:
 		"----" A 0 NoDelay E_Setup();
 	Idle:
@@ -78,13 +78,13 @@ class Enemy : Entity
 		"----" A 0 E_Death("Headshot");
 	Headshot.Stage1:
 	XDeath.Stage1:
-		"----" A 0 A_Jump(Always, "Death.Stage1");
+		"----" A 0 Jump("Death.Stage1");
 	Raise.Headshot:
 	Raise.XDeath:
-		"----" A 0 A_Jump(Always, "Raise.Death");
+		"----" A 0 Jump("Raise.Death");
 	Death.Finish:
 		"----" A -1 E_BossCheck();
-		Stop;
+		stop;
 	}
 }
 
@@ -108,7 +108,7 @@ class Enemy_Zombie : Enemy
 		"####" AAAABBBBCCCCDDDD 2 A_Chase;
 		loop;
 	Pain:
-		"####" G 0 A_Jump(Always, "Pain.Actual");
+		"####" G 0 Jump("Pain.Actual");
 	Death.Stage1:
 		"####" H 5;
 		"####" I 5 A_ScreamAndUnblock;
@@ -120,7 +120,7 @@ class Enemy_Zombie : Enemy
 		"####" N 5 A_XScream;
 		"####" O 5 A_NoBlocking;
 		"####" PQRSTU 5;
-		Goto Death.Finish;
+		goto Death.Finish;
 	Raise.Death:
 		"####" LKJIH 5;
 		goto See;
@@ -168,25 +168,26 @@ class Enemy_Baron : Enemy_Demonic
 		BloodColor "Green"
 		Enemy.PainTime 2;
 	}
+
 	states
 	{
 	See.Real:
 		"####" AABBCCDD 3 A_Chase("Attack", "Attack");
-		Loop;
+		loop;
 	Pain:
-		"####" H 0 A_Jump(Always, "Pain.Actual");
+		"####" H 0 Jump("Pain.Actual");
 	Headshot.Stage1:
 	XDeath.Stage1:
 	Death.Stage1:
 		"####" I 8;
 		"####" J 8 A_ScreamAndUnBlock;
 		"####" KLMN 8;
-		Goto Death.Finish;
+		goto Death.Finish;
 	Raise.Headshot:
 	Raise.XDeath:
 	Raise.Death:
 		"####" ONMLKJI 8;
-		Goto See;
+		goto See;
 	}
 }
 

@@ -1,7 +1,7 @@
-mixin class Jumper
+mixin class Mix_Jump
 {
-	action state Jump(statelabel label)
+	action state Jump(string label)
 	{
-		return ResolveState(label);
+		return state(label);
 	}
 }

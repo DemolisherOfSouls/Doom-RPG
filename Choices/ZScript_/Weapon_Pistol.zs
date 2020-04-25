@@ -2,11 +2,11 @@ class Weapon_Pistol : Weapon_BasePistol
 {
 	default
 	{
-		Weapon.AmmoType1 "AmmoMag_Pistol"
-		
-		Inventory.Icon "PISTA0"
-		
-		Tag "Standard Issue Pistol"
+		Weapon.AmmoType1 "AmmoMag_Pistol";
+
+		Inventory.Icon "PISTA0";
+
+		Tag "Standard Issue Pistol";
 	}
 	
 	states

@@ -20,7 +20,13 @@ const int SKILL_Fortunate		= 14;
 const int SKILL_FieldMedic		= 15;
 
 //perks
-
+const int PERK_Craft = 0;
+const int PERK_Skill = 1;
+const int PERK_Skill2 = 2;
+const int PERK_Rage = 3;
+const int PERK_Pure = 4;
+const int PERK_RageAssist = 5;
+const int PERK_WeaponTech = 6;
 
 const string WeaponClass[10][8] =
 {

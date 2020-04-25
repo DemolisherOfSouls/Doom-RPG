@@ -11,9 +11,11 @@ class Enemy_Zombieman : Enemy_Zombie replaces Zombieman
 		DeathSound "grunt/death";
 		ActiveSound "grunt/active";
 		Obituary "$OB_ZOMBIE";
+
 		Entity.XP 5;
 		Entity.Renown 0;
 		Entity.Type "Zombieman";
+		Entity.HasDeathAnim false;
 		
 		DropItem "Item_Clip", 255;
 		DropItem "Item_Clip", 128;
@@ -24,7 +26,7 @@ class Enemy_Zombieman : Enemy_Zombie replaces Zombieman
 
 	states
 	{
-	Spawn.Stage2:
+	Spawn:
 		POSS A 0;
 		goto Spawn.Final;
 	Missile:
