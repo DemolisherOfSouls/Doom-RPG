@@ -1,8 +1,8 @@
-@ECHO OFF
 
-cd Choices
 
-"%ProgramFiles%\WinRAR\winrar.exe" a -r -afzip Choices.pk3 *
+cd "..\Choices
+
+"C:\Program Files\WinRAR\winrar.exe" a -r -afzip Choices.pk3 *
 
 cd ..\
 

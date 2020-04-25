@@ -57,7 +57,7 @@ class RPGPlayer : DoomPlayer
 	}
 	void addRage (int amt)
 	{
-		if(hasPerk(PK_Rage))
+		if(hasPerk(PERK_Rage))
 			rage += amt;
 	}
 

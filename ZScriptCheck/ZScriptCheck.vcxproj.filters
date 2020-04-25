@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Choices\ZScript.zs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Ammo_Cell.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Ammo_Clip.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Ammo_None.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Ammo_Rocket.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Ammo_Shell.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Enemy.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Enemy_Arachnotron.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Enemy_Zombieman.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\EnemyProj.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Entity.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Inv.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\InvMod.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Item.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Item_Ammo.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Item_Money.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Item_Weapon.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Proj.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Proj_Bullet.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\RPGConst.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\RPGMixin.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\RPGPlayer.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Weapon_Base.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Weapon_BasePistol.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\Weapon_Pistol.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\WeaponProj.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\WeaponProj_MkII.zs">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\Choices\ZScript_\WeaponProj_Pistol.zs">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Choices\ZScript_\Enemy_HellKnight.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Enemy_Imp.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Item_MkII.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Item_Pistol.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\Weapon_MkII.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="..\Choices\ZScript_\WeaponPuff_Common.txt">
+      <Filter>Header Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

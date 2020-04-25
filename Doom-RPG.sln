@@ -1,0 +1,244 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D09E2144-BB26-473C-B693-D4A78A4926A4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{63C3B1B2-7EE3-455E-A35F-AE3984C291CD}"
+	ProjectSection(SolutionItems) = preProject
+		Debug\Choices old.pk3 = Debug\Choices old.pk3
+		Debug\Choices.pk3 = Debug\Choices.pk3
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Choices", "Choices", "{F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\AltHudCf.txt = Choices\AltHudCf.txt
+		Choices\Credits.txt = Choices\Credits.txt
+		Choices\CVarInfo.txt = Choices\CVarInfo.txt
+		Choices\Decorate.txt = Choices\Decorate.txt
+		Choices\GameInfo.txt = Choices\GameInfo.txt
+		Choices\KeyConf.txt = Choices\KeyConf.txt
+		Choices\LoadACS.txt = Choices\LoadACS.txt
+		Choices\MapInfo.txt = Choices\MapInfo.txt
+		Choices\Menudef.controls = Choices\Menudef.controls
+		Choices\Menudef.mainmenu = Choices\Menudef.mainmenu
+		Choices\Menudef.newgame = Choices\Menudef.newgame
+		Choices\Modeldef.Chaingun = Choices\Modeldef.Chaingun
+		Choices\Modeldef.grinder = Choices\Modeldef.grinder
+		Choices\Modeldef.laser = Choices\Modeldef.laser
+		Choices\Modeldef.laserrifle = Choices\Modeldef.laserrifle
+		Choices\Modeldef.minigun = Choices\Modeldef.minigun
+		Choices\Modeldef.mkii = Choices\Modeldef.mkii
+		Choices\Modeldef.pistol = Choices\Modeldef.pistol
+		Choices\Modeldef.riotgun = Choices\Modeldef.riotgun
+		Choices\Modeldef.shotgun = Choices\Modeldef.shotgun
+		Choices\Modeldef.shotgunguy = Choices\Modeldef.shotgunguy
+		Choices\Modeldef.striker = Choices\Modeldef.striker
+		Choices\Modeldef.supershotgun = Choices\Modeldef.supershotgun
+		Choices\Modeldef.tracer = Choices\Modeldef.tracer
+		Choices\Modeldef.zombieman = Choices\Modeldef.zombieman
+		Choices\SBarInfo.txt = Choices\SBarInfo.txt
+		Choices\SndInfo.txt = Choices\SndInfo.txt
+		Choices\Terrain.txt = Choices\Terrain.txt
+		Choices\TextColors.txt = Choices\TextColors.txt
+		Choices\Textures.main = Choices\Textures.main
+		Choices\Textures.menu = Choices\Textures.menu
+		Choices\Textures.sprites = Choices\Textures.sprites
+		Choices\ToDoList.txt = Choices\ToDoList.txt
+		Choices\Version.txt = Choices\Version.txt
+		Choices\ZScript.zs = Choices\ZScript.zs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{5A9B3106-7750-4B82-95EF-554EEA0A50AF}"
+	ProjectSection(SolutionItems) = preProject
+		Batch\Compile.bat = Batch\Compile.bat
+		Batch\Debug.bat = Batch\Debug.bat
+		Batch\Make.bat = Batch\Make.bat
+		Batch\Rebuild & Debug.bat = Batch\Rebuild & Debug.bat
+		Batch\Slade.bat = Batch\Slade.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ACS", "ACS", "{BEDDDABC-1A11-47F2-8913-74A4740A7F2B}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\ACS\RPGActor.acs_o = Choices\ACS\RPGActor.acs_o
+		Choices\ACS\RPGAFunc.acs_o = Choices\ACS\RPGAFunc.acs_o
+		Choices\ACS\RPGAlert.acs_o = Choices\ACS\RPGAlert.acs_o
+		Choices\ACS\RPGAlly.acs_o = Choices\ACS\RPGAlly.acs_o
+		Choices\ACS\RPGColor.acs_o = Choices\ACS\RPGColor.acs_o
+		Choices\ACS\RPGConst.acs_o = Choices\ACS\RPGConst.acs_o
+		Choices\ACS\RPGCount.acs_o = Choices\ACS\RPGCount.acs_o
+		Choices\ACS\RPGDeath.acs_o = Choices\ACS\RPGDeath.acs_o
+		Choices\ACS\RPGDList.acs_o = Choices\ACS\RPGDList.acs_o
+		Choices\ACS\RPGDraw.acs_o = Choices\ACS\RPGDraw.acs_o
+		Choices\ACS\RPGEnemy.acs_o = Choices\ACS\RPGEnemy.acs_o
+		Choices\ACS\RPGError.acs_o = Choices\ACS\RPGError.acs_o
+		Choices\ACS\RPGExp.acs_o = Choices\ACS\RPGExp.acs_o
+		Choices\ACS\RPGGreet.acs_o = Choices\ACS\RPGGreet.acs_o
+		Choices\ACS\RPGGVars.acs_o = Choices\ACS\RPGGVars.acs_o
+		Choices\ACS\RPGIFunc.acs_o = Choices\ACS\RPGIFunc.acs_o
+		Choices\ACS\RPGIList.acs_o = Choices\ACS\RPGIList.acs_o
+		Choices\ACS\RPGItems.acs_o = Choices\ACS\RPGItems.acs_o
+		Choices\ACS\RPGIVars.acs_o = Choices\ACS\RPGIVars.acs_o
+		Choices\ACS\RPGKeys.acs_o = Choices\ACS\RPGKeys.acs_o
+		Choices\ACS\RPGKFunc.acs_o = Choices\ACS\RPGKFunc.acs_o
+		Choices\ACS\RPGLevel.acs_o = Choices\ACS\RPGLevel.acs_o
+		Choices\ACS\RPGLFunc.acs_o = Choices\ACS\RPGLFunc.acs_o
+		Choices\ACS\RPGMenu.acs_o = Choices\ACS\RPGMenu.acs_o
+		Choices\ACS\RPGMFunc.acs_o = Choices\ACS\RPGMFunc.acs_o
+		Choices\ACS\RPGMove.acs_o = Choices\ACS\RPGMove.acs_o
+		Choices\ACS\RPGMVars.acs_o = Choices\ACS\RPGMVars.acs_o
+		Choices\ACS\RPGObj.acs_o = Choices\ACS\RPGObj.acs_o
+		Choices\ACS\RPGOFunc.acs_o = Choices\ACS\RPGOFunc.acs_o
+		Choices\ACS\RPGOList.acs_o = Choices\ACS\RPGOList.acs_o
+		Choices\ACS\RPGOpen.acs_o = Choices\ACS\RPGOpen.acs_o
+		Choices\ACS\RPGPain.acs_o = Choices\ACS\RPGPain.acs_o
+		Choices\ACS\RPGPDisc.acs_o = Choices\ACS\RPGPDisc.acs_o
+		Choices\ACS\RPGPerks.acs_o = Choices\ACS\RPGPerks.acs_o
+		Choices\ACS\RPGPFunc.acs_o = Choices\ACS\RPGPFunc.acs_o
+		Choices\ACS\RPGPlay.acs_o = Choices\ACS\RPGPlay.acs_o
+		Choices\ACS\RPGPList.acs_o = Choices\ACS\RPGPList.acs_o
+		Choices\ACS\RPGRage.acs_o = Choices\ACS\RPGRage.acs_o
+		Choices\ACS\RPGRegen.acs_o = Choices\ACS\RPGRegen.acs_o
+		Choices\ACS\RPGSFunc.acs_o = Choices\ACS\RPGSFunc.acs_o
+		Choices\ACS\RPGSkill.acs_o = Choices\ACS\RPGSkill.acs_o
+		Choices\ACS\RPGSList.acs_o = Choices\ACS\RPGSList.acs_o
+		Choices\ACS\RPGSpecs.acs_o = Choices\ACS\RPGSpecs.acs_o
+		Choices\ACS\RPGWeaps.acs_o = Choices\ACS\RPGWeaps.acs_o
+		Choices\ACS\RPGWFunc.acs_o = Choices\ACS\RPGWFunc.acs_o
+		Choices\ACS\RPGWList.acs_o = Choices\ACS\RPGWList.acs_o
+		Choices\ACS\RPGXLat.acs_o = Choices\ACS\RPGXLat.acs_o
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compile", "Compile", "{0840A41C-9836-4A4A-ADA2-53B9C799ECC4}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\Compile\RPGActor.acs = Choices\Compile\RPGActor.acs
+		Choices\Compile\RPGAFunc.acs = Choices\Compile\RPGAFunc.acs
+		Choices\Compile\RPGAlert.acs = Choices\Compile\RPGAlert.acs
+		Choices\Compile\RPGAlly.acs = Choices\Compile\RPGAlly.acs
+		Choices\Compile\RPGColor.acs = Choices\Compile\RPGColor.acs
+		Choices\Compile\RPGConst.acs = Choices\Compile\RPGConst.acs
+		Choices\Compile\RPGCount.acs = Choices\Compile\RPGCount.acs
+		Choices\Compile\RPGDeath.acs = Choices\Compile\RPGDeath.acs
+		Choices\Compile\RPGDList.acs = Choices\Compile\RPGDList.acs
+		Choices\Compile\RPGDraw.acs = Choices\Compile\RPGDraw.acs
+		Choices\Compile\RPGEnemy.acs = Choices\Compile\RPGEnemy.acs
+		Choices\Compile\RPGError.acs = Choices\Compile\RPGError.acs
+		Choices\Compile\RPGExp.acs = Choices\Compile\RPGExp.acs
+		Choices\Compile\RPGGreet.acs = Choices\Compile\RPGGreet.acs
+		Choices\Compile\RPGGVars.acs = Choices\Compile\RPGGVars.acs
+		Choices\Compile\RPGIFunc.acs = Choices\Compile\RPGIFunc.acs
+		Choices\Compile\RPGIList.acs = Choices\Compile\RPGIList.acs
+		Choices\Compile\RPGItems.acs = Choices\Compile\RPGItems.acs
+		Choices\Compile\RPGIVars.acs = Choices\Compile\RPGIVars.acs
+		Choices\Compile\RPGKeys.acs = Choices\Compile\RPGKeys.acs
+		Choices\Compile\RPGKFunc.acs = Choices\Compile\RPGKFunc.acs
+		Choices\Compile\RPGLevel.acs = Choices\Compile\RPGLevel.acs
+		Choices\Compile\RPGLFunc.acs = Choices\Compile\RPGLFunc.acs
+		Choices\Compile\RPGMenu.acs = Choices\Compile\RPGMenu.acs
+		Choices\Compile\RPGMFunc.acs = Choices\Compile\RPGMFunc.acs
+		Choices\Compile\RPGMove.acs = Choices\Compile\RPGMove.acs
+		Choices\Compile\RPGMVars.acs = Choices\Compile\RPGMVars.acs
+		Choices\Compile\RPGObj.acs = Choices\Compile\RPGObj.acs
+		Choices\Compile\RPGOFunc.acs = Choices\Compile\RPGOFunc.acs
+		Choices\Compile\RPGOList.acs = Choices\Compile\RPGOList.acs
+		Choices\Compile\RPGOpen.acs = Choices\Compile\RPGOpen.acs
+		Choices\Compile\RPGPain.acs = Choices\Compile\RPGPain.acs
+		Choices\Compile\RPGPDisc.acs = Choices\Compile\RPGPDisc.acs
+		Choices\Compile\RPGPerks.acs = Choices\Compile\RPGPerks.acs
+		Choices\Compile\RPGPFunc.acs = Choices\Compile\RPGPFunc.acs
+		Choices\Compile\RPGPlay.acs = Choices\Compile\RPGPlay.acs
+		Choices\Compile\RPGPList.acs = Choices\Compile\RPGPList.acs
+		Choices\Compile\RPGRage.acs = Choices\Compile\RPGRage.acs
+		Choices\Compile\RPGRegen.acs = Choices\Compile\RPGRegen.acs
+		Choices\Compile\RPGSFunc.acs = Choices\Compile\RPGSFunc.acs
+		Choices\Compile\RPGSkill.acs = Choices\Compile\RPGSkill.acs
+		Choices\Compile\RPGSList.acs = Choices\Compile\RPGSList.acs
+		Choices\Compile\RPGSpecs.acs = Choices\Compile\RPGSpecs.acs
+		Choices\Compile\RPGWeaps.acs = Choices\Compile\RPGWeaps.acs
+		Choices\Compile\RPGWFunc.acs = Choices\Compile\RPGWFunc.acs
+		Choices\Compile\RPGWList.acs = Choices\Compile\RPGWList.acs
+		Choices\Compile\RPGXLat.acs = Choices\Compile\RPGXLat.acs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_ZScript", "_ZScript", "{35E85457-A0B7-410E-8190-7BB3E5FA45DD}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\ZScript_\Ammo_Cell.zs = Choices\ZScript_\Ammo_Cell.zs
+		Choices\ZScript_\Ammo_Clip.zs = Choices\ZScript_\Ammo_Clip.zs
+		Choices\ZScript_\Ammo_None.zs = Choices\ZScript_\Ammo_None.zs
+		Choices\ZScript_\Ammo_Rocket.zs = Choices\ZScript_\Ammo_Rocket.zs
+		Choices\ZScript_\Ammo_Shell.zs = Choices\ZScript_\Ammo_Shell.zs
+		Choices\ZScript_\Enemy.zs = Choices\ZScript_\Enemy.zs
+		Choices\ZScript_\Enemy_Arachnotron.zs = Choices\ZScript_\Enemy_Arachnotron.zs
+		Choices\ZScript_\Enemy_HellKnight.txt = Choices\ZScript_\Enemy_HellKnight.txt
+		Choices\ZScript_\Enemy_Imp.txt = Choices\ZScript_\Enemy_Imp.txt
+		Choices\ZScript_\Enemy_ShotgunGuy.txt = Choices\ZScript_\Enemy_ShotgunGuy.txt
+		Choices\ZScript_\Enemy_Zombieman.zs = Choices\ZScript_\Enemy_Zombieman.zs
+		Choices\ZScript_\EnemyProj.zs = Choices\ZScript_\EnemyProj.zs
+		Choices\ZScript_\Entity.zs = Choices\ZScript_\Entity.zs
+		Choices\ZScript_\Inv.zs = Choices\ZScript_\Inv.zs
+		Choices\ZScript_\InvMod.zs = Choices\ZScript_\InvMod.zs
+		Choices\ZScript_\Item.zs = Choices\ZScript_\Item.zs
+		Choices\ZScript_\Item_Ammo.zs = Choices\ZScript_\Item_Ammo.zs
+		Choices\ZScript_\Item_MkII.txt = Choices\ZScript_\Item_MkII.txt
+		Choices\ZScript_\Item_Money.zs = Choices\ZScript_\Item_Money.zs
+		Choices\ZScript_\Item_Pistol.txt = Choices\ZScript_\Item_Pistol.txt
+		Choices\ZScript_\Item_Weapon.zs = Choices\ZScript_\Item_Weapon.zs
+		Choices\ZScript_\Proj.zs = Choices\ZScript_\Proj.zs
+		Choices\ZScript_\Proj_Bullet.zs = Choices\ZScript_\Proj_Bullet.zs
+		Choices\ZScript_\RPGConst.zs = Choices\ZScript_\RPGConst.zs
+		Choices\ZScript_\RPGMixin.zs = Choices\ZScript_\RPGMixin.zs
+		Choices\ZScript_\RPGPlayer.zs = Choices\ZScript_\RPGPlayer.zs
+		Choices\ZScript_\Weapon_Base.zs = Choices\ZScript_\Weapon_Base.zs
+		Choices\ZScript_\Weapon_BasePistol.zs = Choices\ZScript_\Weapon_BasePistol.zs
+		Choices\ZScript_\Weapon_MkII.txt = Choices\ZScript_\Weapon_MkII.txt
+		Choices\ZScript_\Weapon_Pistol.zs = Choices\ZScript_\Weapon_Pistol.zs
+		Choices\ZScript_\WeaponProj.zs = Choices\ZScript_\WeaponProj.zs
+		Choices\ZScript_\WeaponProj_MkII.zs = Choices\ZScript_\WeaponProj_MkII.zs
+		Choices\ZScript_\WeaponProj_Pistol.zs = Choices\ZScript_\WeaponProj_Pistol.zs
+		Choices\ZScript_\WeaponPuff_Common.txt = Choices\ZScript_\WeaponPuff_Common.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArchiveBuilder", "ArchiveBuilder\ArchiveBuilder.vcxproj", "{A474F533-699C-47DD-9928-5D1585F5E58E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3} = {F285E73C-1B0F-439E-ABA4-2C44F13839B3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ACSCompiler", "ACSCompiler\ACSCompiler.vcxproj", "{F285E73C-1B0F-439E-ABA4-2C44F13839B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZScriptCheck", "ZScriptCheck\ZScriptCheck.vcxproj", "{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|gzdoom = Debug|gzdoom
+		Release|gzdoom = Release|gzdoom
+		Description = Wrapper to use Visual Studio to edit my mods.
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|gzdoom.ActiveCfg = Debug|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|gzdoom.Build.0 = Debug|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|gzdoom.ActiveCfg = Release|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|gzdoom.Build.0 = Release|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|gzdoom.ActiveCfg = Debug|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|gzdoom.Build.0 = Debug|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.ActiveCfg = Release|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.Build.0 = Release|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|gzdoom.ActiveCfg = Debug|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|gzdoom.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63C3B1B2-7EE3-455E-A35F-AE3984C291CD} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
+		{F475F52B-A49C-40AC-A79C-FA5FC1D00DDA} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
+		{5A9B3106-7750-4B82-95EF-554EEA0A50AF} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
+		{BEDDDABC-1A11-47F2-8913-74A4740A7F2B} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+		{0840A41C-9836-4A4A-ADA2-53B9C799ECC4} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+		{35E85457-A0B7-410E-8190-7BB3E5FA45DD} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+	EndGlobalSection
+EndGlobal

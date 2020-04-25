@@ -218,8 +218,4 @@ pip-log.txt
 .lnk
 
 #acc stuff
-zcommon.acs
-zdefs.acs
-zspecial.acs
-zwvars.acs
 acs.err

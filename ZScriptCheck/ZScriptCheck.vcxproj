@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Choices\ZScript.zs" />
+    <None Include="..\Choices\ZScript_\Ammo_Cell.zs" />
+    <None Include="..\Choices\ZScript_\Ammo_Clip.zs" />
+    <None Include="..\Choices\ZScript_\Ammo_None.zs" />
+    <None Include="..\Choices\ZScript_\Ammo_Rocket.zs" />
+    <None Include="..\Choices\ZScript_\Ammo_Shell.zs" />
+    <None Include="..\Choices\ZScript_\Enemy.zs" />
+    <None Include="..\Choices\ZScript_\EnemyProj.zs" />
+    <None Include="..\Choices\ZScript_\Enemy_Arachnotron.zs" />
+    <None Include="..\Choices\ZScript_\Enemy_Zombieman.zs" />
+    <None Include="..\Choices\ZScript_\Entity.zs" />
+    <None Include="..\Choices\ZScript_\Inv.zs" />
+    <None Include="..\Choices\ZScript_\InvMod.zs" />
+    <None Include="..\Choices\ZScript_\Item.zs" />
+    <None Include="..\Choices\ZScript_\Item_Ammo.zs" />
+    <None Include="..\Choices\ZScript_\Item_Money.zs" />
+    <None Include="..\Choices\ZScript_\Item_Weapon.zs" />
+    <None Include="..\Choices\ZScript_\Proj.zs" />
+    <None Include="..\Choices\ZScript_\Proj_Bullet.zs" />
+    <None Include="..\Choices\ZScript_\RPGConst.zs" />
+    <None Include="..\Choices\ZScript_\RPGMixin.zs" />
+    <None Include="..\Choices\ZScript_\RPGPlayer.zs" />
+    <None Include="..\Choices\ZScript_\WeaponProj.zs" />
+    <None Include="..\Choices\ZScript_\WeaponProj_MkII.zs" />
+    <None Include="..\Choices\ZScript_\WeaponProj_Pistol.zs" />
+    <None Include="..\Choices\ZScript_\Weapon_Base.zs" />
+    <None Include="..\Choices\ZScript_\Weapon_BasePistol.zs" />
+    <None Include="..\Choices\ZScript_\Weapon_Pistol.zs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Choices\ZScript_\Enemy_HellKnight.txt" />
+    <Text Include="..\Choices\ZScript_\Enemy_Imp.txt" />
+    <Text Include="..\Choices\ZScript_\Enemy_ShotgunGuy.txt" />
+    <Text Include="..\Choices\ZScript_\Item_MkII.txt" />
+    <Text Include="..\Choices\ZScript_\Item_Pistol.txt" />
+    <Text Include="..\Choices\ZScript_\WeaponPuff_Common.txt" />
+    <Text Include="..\Choices\ZScript_\Weapon_MkII.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ExecutablePath />
+    <IncludePath>D:\Game Design\gzdoom\wadsrc\static\zscript</IncludePath>
+    <ReferencePath>D:\Game Design\gzdoom\wadsrc\static\zscript</ReferencePath>
+    <LibraryPath />
+    <LibraryWPath />
+    <SourcePath>D:\Game Design\Doom RPG\Doom-RPG\Choices\ZScript_</SourcePath>
+    <ExcludePath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ExecutablePath />
+    <IncludePath>D:\Game Design\gzdoom\wadsrc\static\zscript</IncludePath>
+    <ReferencePath>D:\Game Design\gzdoom\wadsrc\static\zscript</ReferencePath>
+    <LibraryPath />
+    <LibraryWPath />
+    <SourcePath>D:\Game Design\Doom RPG\Doom-RPG\Choices\ZScript_</SourcePath>
+    <ExcludePath />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

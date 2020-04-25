@@ -1,5 +1,5 @@
 
-cd "Choices\Compile\"
+cd "..\Choices\Compile\"
 
 for %%f in (.\*) do (
 "D:\Programs\ACC\acc.exe" %%f

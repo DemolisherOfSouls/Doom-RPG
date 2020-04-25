@@ -19,6 +19,9 @@ const int SKILL_Pyro			= 13;
 const int SKILL_Fortunate		= 14;
 const int SKILL_FieldMedic		= 15;
 
+//perks
+
+
 const string WeaponClass[10][8] =
 {
 	{
