@@ -52,11 +52,19 @@
     <None Include="..\Choices\Compile\RPGRegen.acs" />
     <None Include="..\Choices\Compile\RPGSFunc.acs" />
     <None Include="..\Choices\Compile\RPGSkill.acs" />
-    <None Include="..\Choices\Compile\RPGSList.acs" />
+    <Library Include="..\Choices\Compile\RPGSList.acs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Library>
     <None Include="..\Choices\Compile\RPGSpecs.acs" />
     <None Include="..\Choices\Compile\RPGWeaps.acs" />
-    <None Include="..\Choices\Compile\RPGWFunc.acs" />
-    <None Include="..\Choices\Compile\RPGWList.acs" />
+    <None Include="..\Choices\Compile\RPGWFunc.acs">
+      <FileType>Script</FileType>
+    </None>
+    <None Include="..\Choices\Compile\RPGWList.acs">
+      <FileType>Script</FileType>
+    </None>
     <None Include="..\Choices\Compile\RPGXLat.acs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

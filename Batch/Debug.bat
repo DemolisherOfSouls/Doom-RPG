@@ -2,4 +2,4 @@
 
 cd D:\
 
-"Games\GZDoom\gzdoom.exe" "Game Design\Doom RPG\Doom-RPG\Debug\Choices.pk3"
+gzdoom "..\Debug\Choices.pk3"

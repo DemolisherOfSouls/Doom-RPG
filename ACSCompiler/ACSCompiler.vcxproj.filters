@@ -30,9 +30,6 @@
     <None Include="..\Choices\Compile\RPGSpecs.acs">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\Choices\Compile\RPGSList.acs">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="..\Choices\Compile\RPGSkill.acs">
       <Filter>Source Files</Filter>
     </None>
@@ -156,5 +153,10 @@
     <None Include="..\Choices\Compile\RPGActor.acs">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Choices\Compile\RPGSList.acs">
+      <Filter>Source Files</Filter>
+    </Library>
   </ItemGroup>
 </Project>

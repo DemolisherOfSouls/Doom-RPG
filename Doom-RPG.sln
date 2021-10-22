@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D09E2144-BB26-473C-B693-D4A78A4926A4}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{63C3B1B2-7EE3-455E-A35F-AE3984C291CD}"
@@ -25,30 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Choices", "Choices", "{F475
 		Choices\KeyConf.txt = Choices\KeyConf.txt
 		Choices\LoadACS.txt = Choices\LoadACS.txt
 		Choices\MapInfo.txt = Choices\MapInfo.txt
-		Choices\Menudef.controls = Choices\Menudef.controls
-		Choices\Menudef.mainmenu = Choices\Menudef.mainmenu
-		Choices\Menudef.newgame = Choices\Menudef.newgame
-		Choices\Modeldef.Chaingun = Choices\Modeldef.Chaingun
-		Choices\Modeldef.grinder = Choices\Modeldef.grinder
-		Choices\Modeldef.laser = Choices\Modeldef.laser
-		Choices\Modeldef.laserrifle = Choices\Modeldef.laserrifle
-		Choices\Modeldef.minigun = Choices\Modeldef.minigun
-		Choices\Modeldef.mkii = Choices\Modeldef.mkii
-		Choices\Modeldef.pistol = Choices\Modeldef.pistol
-		Choices\Modeldef.riotgun = Choices\Modeldef.riotgun
-		Choices\Modeldef.shotgun = Choices\Modeldef.shotgun
-		Choices\Modeldef.shotgunguy = Choices\Modeldef.shotgunguy
-		Choices\Modeldef.striker = Choices\Modeldef.striker
-		Choices\Modeldef.supershotgun = Choices\Modeldef.supershotgun
-		Choices\Modeldef.tracer = Choices\Modeldef.tracer
-		Choices\Modeldef.zombieman = Choices\Modeldef.zombieman
 		Choices\SBarInfo.txt = Choices\SBarInfo.txt
 		Choices\SndInfo.txt = Choices\SndInfo.txt
 		Choices\Terrain.txt = Choices\Terrain.txt
 		Choices\TextColors.txt = Choices\TextColors.txt
-		Choices\Textures.main = Choices\Textures.main
-		Choices\Textures.menu = Choices\Textures.menu
-		Choices\Textures.sprites = Choices\Textures.sprites
 		Choices\ToDoList.txt = Choices\ToDoList.txt
 		Choices\Version.txt = Choices\Version.txt
 		Choices\ZScript.zs = Choices\ZScript.zs
@@ -165,44 +146,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compile", "Compile", "{0840
 		Choices\Compile\RPGXLat.acs = Choices\Compile\RPGXLat.acs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_ZScript", "_ZScript", "{35E85457-A0B7-410E-8190-7BB3E5FA45DD}"
-	ProjectSection(SolutionItems) = preProject
-		Choices\ZScript_\Ammo_Cell.zs = Choices\ZScript_\Ammo_Cell.zs
-		Choices\ZScript_\Ammo_Clip.zs = Choices\ZScript_\Ammo_Clip.zs
-		Choices\ZScript_\Ammo_None.zs = Choices\ZScript_\Ammo_None.zs
-		Choices\ZScript_\Ammo_Rocket.zs = Choices\ZScript_\Ammo_Rocket.zs
-		Choices\ZScript_\Ammo_Shell.zs = Choices\ZScript_\Ammo_Shell.zs
-		Choices\ZScript_\Enemy.zs = Choices\ZScript_\Enemy.zs
-		Choices\ZScript_\Enemy_Arachnotron.zs = Choices\ZScript_\Enemy_Arachnotron.zs
-		Choices\ZScript_\Enemy_HellKnight.txt = Choices\ZScript_\Enemy_HellKnight.txt
-		Choices\ZScript_\Enemy_Imp.txt = Choices\ZScript_\Enemy_Imp.txt
-		Choices\ZScript_\Enemy_ShotgunGuy.txt = Choices\ZScript_\Enemy_ShotgunGuy.txt
-		Choices\ZScript_\Enemy_Zombieman.zs = Choices\ZScript_\Enemy_Zombieman.zs
-		Choices\ZScript_\EnemyProj.zs = Choices\ZScript_\EnemyProj.zs
-		Choices\ZScript_\Entity.zs = Choices\ZScript_\Entity.zs
-		Choices\ZScript_\Inv.zs = Choices\ZScript_\Inv.zs
-		Choices\ZScript_\InvMod.zs = Choices\ZScript_\InvMod.zs
-		Choices\ZScript_\Item.zs = Choices\ZScript_\Item.zs
-		Choices\ZScript_\Item_Ammo.zs = Choices\ZScript_\Item_Ammo.zs
-		Choices\ZScript_\Item_MkII.txt = Choices\ZScript_\Item_MkII.txt
-		Choices\ZScript_\Item_Money.zs = Choices\ZScript_\Item_Money.zs
-		Choices\ZScript_\Item_Pistol.txt = Choices\ZScript_\Item_Pistol.txt
-		Choices\ZScript_\Item_Weapon.zs = Choices\ZScript_\Item_Weapon.zs
-		Choices\ZScript_\Proj.zs = Choices\ZScript_\Proj.zs
-		Choices\ZScript_\Proj_Bullet.zs = Choices\ZScript_\Proj_Bullet.zs
-		Choices\ZScript_\RPGConst.zs = Choices\ZScript_\RPGConst.zs
-		Choices\ZScript_\RPGMixin.zs = Choices\ZScript_\RPGMixin.zs
-		Choices\ZScript_\RPGPlayer.zs = Choices\ZScript_\RPGPlayer.zs
-		Choices\ZScript_\Weapon_Base.zs = Choices\ZScript_\Weapon_Base.zs
-		Choices\ZScript_\Weapon_BasePistol.zs = Choices\ZScript_\Weapon_BasePistol.zs
-		Choices\ZScript_\Weapon_MkII.txt = Choices\ZScript_\Weapon_MkII.txt
-		Choices\ZScript_\Weapon_Pistol.zs = Choices\ZScript_\Weapon_Pistol.zs
-		Choices\ZScript_\WeaponProj.zs = Choices\ZScript_\WeaponProj.zs
-		Choices\ZScript_\WeaponProj_MkII.zs = Choices\ZScript_\WeaponProj_MkII.zs
-		Choices\ZScript_\WeaponProj_Pistol.zs = Choices\ZScript_\WeaponProj_Pistol.zs
-		Choices\ZScript_\WeaponPuff_Common.txt = Choices\ZScript_\WeaponPuff_Common.txt
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArchiveBuilder", "ArchiveBuilder\ArchiveBuilder.vcxproj", "{A474F533-699C-47DD-9928-5D1585F5E58E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3} = {F285E73C-1B0F-439E-ABA4-2C44F13839B3}
@@ -212,23 +155,123 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ACSCompiler", "ACSCompiler\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZScriptCheck", "ZScriptCheck\ZScriptCheck.vcxproj", "{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZScript", "ZScript", "{A24D201E-4C66-408A-B15F-4801DCA788EA}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\ZScript\Ammo_Cell.zs = Choices\ZScript\Ammo_Cell.zs
+		Choices\ZScript\Ammo_Clip.zs = Choices\ZScript\Ammo_Clip.zs
+		Choices\ZScript\Ammo_None.zs = Choices\ZScript\Ammo_None.zs
+		Choices\ZScript\Ammo_Rocket.zs = Choices\ZScript\Ammo_Rocket.zs
+		Choices\ZScript\Ammo_Shell.zs = Choices\ZScript\Ammo_Shell.zs
+		Choices\ZScript\Enemy.zs = Choices\ZScript\Enemy.zs
+		Choices\ZScript\Enemy_Arachnotron.zs = Choices\ZScript\Enemy_Arachnotron.zs
+		Choices\ZScript\Enemy_HellKnight.txt = Choices\ZScript\Enemy_HellKnight.txt
+		Choices\ZScript\Enemy_Imp.txt = Choices\ZScript\Enemy_Imp.txt
+		Choices\ZScript\Enemy_ShotgunGuy.zs = Choices\ZScript\Enemy_ShotgunGuy.zs
+		Choices\ZScript\Enemy_Zombieman.zs = Choices\ZScript\Enemy_Zombieman.zs
+		Choices\ZScript\EnemyProj.zs = Choices\ZScript\EnemyProj.zs
+		Choices\ZScript\Entity.zs = Choices\ZScript\Entity.zs
+		Choices\ZScript\Inv.zs = Choices\ZScript\Inv.zs
+		Choices\ZScript\InvMod.zs = Choices\ZScript\InvMod.zs
+		Choices\ZScript\Item.zs = Choices\ZScript\Item.zs
+		Choices\ZScript\Item_Ammo.zs = Choices\ZScript\Item_Ammo.zs
+		Choices\ZScript\Item_MkII.txt = Choices\ZScript\Item_MkII.txt
+		Choices\ZScript\Item_Money.zs = Choices\ZScript\Item_Money.zs
+		Choices\ZScript\Item_Pistol.txt = Choices\ZScript\Item_Pistol.txt
+		Choices\ZScript\Item_Weapon.zs = Choices\ZScript\Item_Weapon.zs
+		Choices\ZScript\Proj.zs = Choices\ZScript\Proj.zs
+		Choices\ZScript\Proj_Bullet.zs = Choices\ZScript\Proj_Bullet.zs
+		Choices\ZScript\RPGConst.zs = Choices\ZScript\RPGConst.zs
+		Choices\ZScript\RPGMixin.zs = Choices\ZScript\RPGMixin.zs
+		Choices\ZScript\RPGPlayer.zs = Choices\ZScript\RPGPlayer.zs
+		Choices\ZScript\Weapon_Base.zs = Choices\ZScript\Weapon_Base.zs
+		Choices\ZScript\Weapon_BasePistol.zs = Choices\ZScript\Weapon_BasePistol.zs
+		Choices\ZScript\Weapon_MkII.txt = Choices\ZScript\Weapon_MkII.txt
+		Choices\ZScript\Weapon_Pistol.zs = Choices\ZScript\Weapon_Pistol.zs
+		Choices\ZScript\WeaponProj.zs = Choices\ZScript\WeaponProj.zs
+		Choices\ZScript\WeaponProj_MkII.zs = Choices\ZScript\WeaponProj_MkII.zs
+		Choices\ZScript\WeaponProj_Pistol.zs = Choices\ZScript\WeaponProj_Pistol.zs
+		Choices\ZScript\WeaponPuff_Common.txt = Choices\ZScript\WeaponPuff_Common.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelDef", "ModelDef", "{263D848B-F651-4645-8423-7C8782B4EDCA}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\Modeldef.Chaingun = Choices\Modeldef.Chaingun
+		Choices\Modeldef.grinder = Choices\Modeldef.grinder
+		Choices\Modeldef.laser = Choices\Modeldef.laser
+		Choices\Modeldef.laserrifle = Choices\Modeldef.laserrifle
+		Choices\Modeldef.minigun = Choices\Modeldef.minigun
+		Choices\Modeldef.mkii = Choices\Modeldef.mkii
+		Choices\Modeldef.pistol = Choices\Modeldef.pistol
+		Choices\Modeldef.riotgun = Choices\Modeldef.riotgun
+		Choices\Modeldef.shotgun = Choices\Modeldef.shotgun
+		Choices\Modeldef.shotgunguy = Choices\Modeldef.shotgunguy
+		Choices\Modeldef.striker = Choices\Modeldef.striker
+		Choices\Modeldef.supershotgun = Choices\Modeldef.supershotgun
+		Choices\Modeldef.tracer = Choices\Modeldef.tracer
+		Choices\Modeldef.zombieman = Choices\Modeldef.zombieman
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{E782B7EF-A6FC-431D-9950-01FAC9FB8C04}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\Textures.main = Choices\Textures.main
+		Choices\Textures.menu = Choices\Textures.menu
+		Choices\Textures.sprites = Choices\Textures.sprites
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MenuDef", "MenuDef", "{3C30279F-34B8-4F99-8D96-300354CA623C}"
+	ProjectSection(SolutionItems) = preProject
+		Choices\Menudef.controls = Choices\Menudef.controls
+		Choices\Menudef.mainmenu = Choices\Menudef.mainmenu
+		Choices\Menudef.newgame = Choices\Menudef.newgame
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OokLanguage", "..\..\VSSDK-Extensibility-Samples\Ook_Language_Integration\C#\OokLanguage.csproj", "{F091221E-FD10-41A7-AAC4-C9359178BDB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|gzdoom = Debug|gzdoom
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|gzdoom = Release|gzdoom
+		Release|x86 = Release|x86
 		Description = Wrapper to use Visual Studio to edit my mods.
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|gzdoom.ActiveCfg = Debug|x64
 		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|gzdoom.Build.0 = Debug|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Debug|x86.ActiveCfg = Debug|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|Any CPU.ActiveCfg = Release|x64
 		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|gzdoom.ActiveCfg = Release|x64
 		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|gzdoom.Build.0 = Release|x64
+		{A474F533-699C-47DD-9928-5D1585F5E58E}.Release|x86.ActiveCfg = Release|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|gzdoom.ActiveCfg = Debug|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|gzdoom.Build.0 = Debug|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Debug|x86.ActiveCfg = Debug|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|Any CPU.ActiveCfg = Release|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.ActiveCfg = Release|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.Build.0 = Release|x64
+		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|x86.ActiveCfg = Release|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|gzdoom.ActiveCfg = Debug|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|x86.ActiveCfg = Debug|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|Any CPU.ActiveCfg = Release|x64
 		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|gzdoom.ActiveCfg = Release|x64
+		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|x86.ActiveCfg = Release|x64
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|gzdoom.ActiveCfg = Debug|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|gzdoom.Build.0 = Debug|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|x86.ActiveCfg = Debug|x86
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Debug|x86.Build.0 = Debug|x86
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|gzdoom.ActiveCfg = Release|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|gzdoom.Build.0 = Release|Any CPU
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|x86.ActiveCfg = Release|x86
+		{F091221E-FD10-41A7-AAC4-C9359178BDB1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,6 +282,12 @@ Global
 		{5A9B3106-7750-4B82-95EF-554EEA0A50AF} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
 		{BEDDDABC-1A11-47F2-8913-74A4740A7F2B} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
 		{0840A41C-9836-4A4A-ADA2-53B9C799ECC4} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
-		{35E85457-A0B7-410E-8190-7BB3E5FA45DD} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+		{A24D201E-4C66-408A-B15F-4801DCA788EA} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
+		{263D848B-F651-4645-8423-7C8782B4EDCA} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+		{E782B7EF-A6FC-431D-9950-01FAC9FB8C04} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+		{3C30279F-34B8-4F99-8D96-300354CA623C} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5D0043D-1137-4E12-919B-06C6F8F2B1AA}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-GameInfo
+GameInfo 
 {
 	DimColor = "Black"
 	DimAmount = 0.2

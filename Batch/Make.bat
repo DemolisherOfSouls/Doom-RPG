@@ -1,8 +1,8 @@
 
 
-cd "..\Choices
+cd "..\Choices"
 
-"C:\Program Files\WinRAR\winrar.exe" a -r -afzip Choices.pk3 *
+winrar a -r -afzip Choices.pk3 *
 
 cd ..\
 

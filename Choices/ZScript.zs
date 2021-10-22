@@ -14,8 +14,8 @@ version "4.3"
 
 #include "ZScript_/Enemy.zs"
 #include "ZScript_/Enemy_Arachnotron.zs"
-#include "ZScript_/
-#include "ZScript_/
+//#include "ZScript_/
+//#include "ZScript_/
 #include "ZScript_/Enemy_Zombieman.zs"
 
 #include "ZScript_/Ammo_None.zs"
@@ -30,7 +30,7 @@ version "4.3"
 #include "ZScript_/Item_Ammo.zs"
 #include "ZScript_/Item_Weapon.zs"
 #include "ZScript_/Item_Money.zs"
-#include "ZScript_/
+//#include "ZScript_/
 
 #include "ZScript_/WeaponProj.zs"
 #include "ZScript_/WeaponProj_MkII.zs"
