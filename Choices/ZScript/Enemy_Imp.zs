@@ -1,21 +1,23 @@
-Actor Enemy_Imp : Enemy_Demonic replaces DoomImp
+class Enemy_Imp : Enemy_Demonic replaces DoomImp
 {
-	SpawnID 5
-	Health 60
-	Radius 20
-	Mass 100
-	PainChance 200
-	SeeSound "imp/sight"
-	PainSound "imp/pain"
-	DeathSound "imp/death"
-	ActiveSound "imp/active"
-	HitObituary "$OB_IMPHIT"
-	Obituary "$OB_IMP"
-	
-	DropItem "Item_Soul", 255
-	DropItem "Item_Soul", 128
-	DropItem "Item_Soul", 16
-
+  default
+  {
+    SpawnID 5
+    Health 60
+    Radius 20
+    Mass 100
+    PainChance 200
+    SeeSound "imp/sight"
+    PainSound "imp/pain"
+    DeathSound "imp/death"
+    ActiveSound "imp/active"
+    HitObituary "$OB_IMPHIT"
+    Obituary "$OB_IMP"
+    
+    DropItem "Item_Soul", 255
+    DropItem "Item_Soul", 128
+    DropItem "Item_Soul", 16
+  }
 	States
 	{
 	Spawn.Stage2:

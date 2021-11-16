@@ -1,11 +1,11 @@
-Actor Weapon_MkII : Weapon_BasePistol
+class Weapon_MkII : Weapon_BasePistol
 {
-	Weapon.AmmoType1 "AmmoMag_MkII"
-	
-	Inventory.Icon "Gmk2A0"
-	
-	Tag "MkII Sidearm"
-	
+  default
+  {
+    Weapon.AmmoType1 "AmmoMag_MkII"
+    Inventory.Icon "Gmk2A0"
+    Tag "MkII Sidearm"
+	}
 	States
 	{
 	Select:

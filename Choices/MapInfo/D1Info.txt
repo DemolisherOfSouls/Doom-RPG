@@ -1,7 +1,6 @@
 //////////DOOM 1\\\\\\\\\\----------------------------------------------------------\\\\\
 
-DefaultMap
-{
+DefaultMap {
 	NoIntermission
 	EvenLighting
 	cluster = 1

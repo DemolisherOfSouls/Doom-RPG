@@ -12,7 +12,7 @@ class Weapon_Base : Weapon
 		+WEAPON.CHEATNOTWEAPON
 		+WEAPON.NOALERT
 	}
-
+ 
 	mixin Mix_Jump;
 	
 	string GetWeaponAmmoClass(int slot, int var)

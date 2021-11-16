@@ -3,197 +3,197 @@
 
 Graphic MN_PT001, 628, 128
 {
-	Patch SHAWN2, 0, 0
-	Patch SHAWN2, 64, 0
-	Patch SHAWN2, 128, 0
-	Patch SHAWN2, 192, 0
-	Patch SHAWN2, 256, 0
-	Patch SHAWN2, 320, 0
-	Patch SHAWN2, 384, 0
-	Patch SHAWN2, 448, 0
-	Patch SHAWN2, 512, 0
-	Patch SHAWN2, 576, 0
+  Patch SHAWN2, 0, 0
+  Patch SHAWN2, 64, 0
+  Patch SHAWN2, 128, 0
+  Patch SHAWN2, 192, 0
+  Patch SHAWN2, 256, 0
+  Patch SHAWN2, 320, 0
+  Patch SHAWN2, 384, 0
+  Patch SHAWN2, 448, 0
+  Patch SHAWN2, 512, 0
+  Patch SHAWN2, 576, 0
 }
 
 Graphic MN_PT002, 128, 8
 {
-	Patch STEP06, 0, 0
-	Patch STEP06, 32, 0
-	Patch STEP06, 64, 0
-	Patch STEP06, 96, 0
+  Patch STEP06, 0, 0
+  Patch STEP06, 32, 0
+  Patch STEP06, 64, 0
+  Patch STEP06, 96, 0
 }
 
 Graphic MN_PT003, 628, 8
 {
-	Patch MN_PT002, 0, 0
-	Patch MN_PT002, 128, 0
-	Patch MN_PT002, 256, 0
-	Patch MN_PT002, 384, 0
-	Patch MN_PT002, 512, 0
+  Patch MN_PT002, 0, 0
+  Patch MN_PT002, 128, 0
+  Patch MN_PT002, 256, 0
+  Patch MN_PT002, 384, 0
+  Patch MN_PT002, 512, 0
 }
 
 Graphic MN_BACK1, 628, 384
 {
-	Patch MN_PT001, 0, 0
-	Patch MN_PT001, 0, 128
-	Patch MN_PT001, 0, 256
-	Patch MN_PT003, 0, 0
-	{
-		Rotate 90
-	}
-	Patch MN_PT003, 620, 0
-	{
-		Rotate 90
-	}
-	Patch MN_PT003, 0, 376
-	Patch MN_PT003, 0, 0
+  Patch MN_PT001, 0, 0
+  Patch MN_PT001, 0, 128
+  Patch MN_PT001, 0, 256
+  Patch MN_PT003, 0, 0
+  {
+    Rotate 90
+  }
+  Patch MN_PT003, 620, 0
+  {
+    Rotate 90
+  }
+  Patch MN_PT003, 0, 376
+  Patch MN_PT003, 0, 0
 }
 
 Graphic MN_TAB01, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch RW31_3, 0, 0
+  XScale 1.3
+  YScale 2.0
+  Patch RW31_3, 0, 0
 }
 
 Graphic MN_TAB02, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch W33_5, 0, 0
+  XScale 1.3
+  YScale 2.0
+  Patch W33_5, 0, 0
 }
 
 Graphic MN_TAB03, 48, 32
 {
-	Patch WALL47_1, -9, 0
+  Patch WALL47_1, -9, 0
 }
 
 Graphic MN_PT004, 8, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch COMP04_7, -9, 0
+  XScale 1.3
+  YScale 2.0
+  Patch COMP04_7, -9, 0
 }
 
 Graphic MN_BTN01, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch COMP04_7, 0, 0
-	Patch MN_PT004, 20, 0
-	Patch MN_PT004, 28, 0
-	Patch MN_PT004, 36, 0
+  XScale 1.3
+  YScale 2.0
+  Patch COMP04_7, 0, 0
+  Patch MN_PT004, 20, 0
+  Patch MN_PT004, 28, 0
+  Patch MN_PT004, 36, 0
 }
 
 Graphic MN_BTN02, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch COMP04_7, 0, 0
-	{
-		Blend "#000000", 0.2
-	}
-	Patch MN_PT004, 20, 0
-	{
-		Blend "#000000", 0.2
-	}
-	Patch MN_PT004, 28, 0
-	{
-		Blend "#000000", 0.2
-	}
-	Patch MN_PT004, 36, 0
-	{
-		Blend "#000000", 0.2
-	}
+  XScale 1.3
+  YScale 2.0
+  Patch COMP04_7, 0, 0
+  {
+    Blend "#000000", 0.2
+  }
+  Patch MN_PT004, 20, 0
+  {
+    Blend "#000000", 0.2
+  }
+  Patch MN_PT004, 28, 0
+  {
+    Blend "#000000", 0.2
+  }
+  Patch MN_PT004, 36, 0
+  {
+    Blend "#000000", 0.2
+  }
 }
 
 Graphic MN_BAR01, 192, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch W31_1, 0, 0
-	Patch W31_1, 128, 0
-	{
-		FlipX
-	}
-	Patch W32_4, 8, 0
-	Patch W32_1, 64, 0
-	Patch W32_4, 120, 0
-	{
-		FlipX
-	}
+  XScale 1.3
+  YScale 2.0
+  Patch W31_1, 0, 0
+  Patch W31_1, 128, 0
+  {
+    FlipX
+  }
+  Patch W32_4, 8, 0
+  Patch W32_1, 64, 0
+  Patch W32_4, 120, 0
+  {
+    FlipX
+  }
 }
 
 Graphic MN_TOG01, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch W33_5, 0, 0
-	Patch SW4S1, 21, 20
+  XScale 1.3
+  YScale 2.0
+  Patch W33_5, 0, 0
+  Patch SW4S1, 21, 20
 }
 
 Graphic MN_TOG02, 64, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch W33_5, 0, 0
-	Patch SW4S0, 21, 20
+  XScale 1.3
+  YScale 2.0
+  Patch W33_5, 0, 0
+  Patch SW4S0, 21, 20
 }
 
 Texture MN_BOX01, 96, 192
 {
-	Patch WALL47_2, 16, 0
-	Patch WALL47_2, 16, 64
-	Patch WALL42_3, 0, 24
-	Patch WALL42_3, 72, 24
-	Patch WALL42_3, 0, 143
-	{
-		FlipY
-	}
-	Patch WALL42_3, 72, 143
-	{
-		FlipY
-	}
-	Patch WALL42_3, 0, 0
-	{
-		Rotate 90
-	}
-	Patch WALL42_3, 0, 168
-	{
-		Rotate 90
-	}
+  Patch WALL47_2, 16, 0
+  Patch WALL47_2, 16, 64
+  Patch WALL42_3, 0, 24
+  Patch WALL42_3, 72, 24
+  Patch WALL42_3, 0, 143
+  {
+    FlipY
+  }
+  Patch WALL42_3, 72, 143
+  {
+    FlipY
+  }
+  Patch WALL42_3, 0, 0
+  {
+    Rotate 90
+  }
+  Patch WALL42_3, 0, 168
+  {
+    Rotate 90
+  }
 }
 
 Texture MN_BAR02, 256, 64
 {
-	XScale 1.3
-	YScale 2.0
-	Patch BCRATEL1, 0, 0
-	Patch BCRATEM1, 32, 0
-	Patch BCRATEM1, 40, 0
-	Patch BCRATEM1, 48, 0
-	Patch BCRATEM1, 56, 0
-	Patch BCRATEM1, 64, 0
-	Patch BCRATEM1, 72, 0
-	Patch BCRATEM1, 80, 0
-	Patch BCRATEM1, 88, 0
-	Patch BCRATEM1, 96, 0
-	Patch BCRATEM1, 104, 0
-	Patch BCRATEM1, 112, 0
-	Patch BCRATEM1, 120, 0
-	Patch BCRATEM1, 128, 0
-	Patch BCRATEM1, 136, 0
-	Patch BCRATEM1, 144, 0
-	Patch BCRATEM1, 152, 0
-	Patch BCRATEM1, 160, 0
-	Patch BCRATEM1, 168, 0
-	Patch BCRATEM1, 176, 0
-	Patch BCRATEM1, 184, 0
-	Patch BCRATEM1, 192, 0
-	Patch BCRATEM1, 200, 0
-	Patch BCRATEM1, 208, 0
-	Patch BCRATEM1, 216, 0
-	Patch BCRATER1, 224, 0
+  XScale 1.3
+  YScale 2.0
+  Patch BCRATEL1, 0, 0
+  Patch BCRATEM1, 32, 0
+  Patch BCRATEM1, 40, 0
+  Patch BCRATEM1, 48, 0
+  Patch BCRATEM1, 56, 0
+  Patch BCRATEM1, 64, 0
+  Patch BCRATEM1, 72, 0
+  Patch BCRATEM1, 80, 0
+  Patch BCRATEM1, 88, 0
+  Patch BCRATEM1, 96, 0
+  Patch BCRATEM1, 104, 0
+  Patch BCRATEM1, 112, 0
+  Patch BCRATEM1, 120, 0
+  Patch BCRATEM1, 128, 0
+  Patch BCRATEM1, 136, 0
+  Patch BCRATEM1, 144, 0
+  Patch BCRATEM1, 152, 0
+  Patch BCRATEM1, 160, 0
+  Patch BCRATEM1, 168, 0
+  Patch BCRATEM1, 176, 0
+  Patch BCRATEM1, 184, 0
+  Patch BCRATEM1, 192, 0
+  Patch BCRATEM1, 200, 0
+  Patch BCRATEM1, 208, 0
+  Patch BCRATEM1, 216, 0
+  Patch BCRATER1, 224, 0
 }
 
 // End of texture definitions

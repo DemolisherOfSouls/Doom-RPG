@@ -1,5 +1,4 @@
-Model WeaponProj_Shotgun
-{
+Model WeaponProj_Shotgun {
 	Path "Models/Tracer"
 	Model 0 "Tracer.md2"
 	Skin 0 "Bullet.png"
@@ -9,8 +8,7 @@ Model WeaponProj_Shotgun
 	FrameIndex BULL A 0 0
 }
 
-Model WeaponProj_Shotgun
-{
+Model WeaponProj_Shotgun {
 	Path "Models/Tracer"
 	Model 0 "Tracer.md2"
 	Skin 0 "Tracer.png"
