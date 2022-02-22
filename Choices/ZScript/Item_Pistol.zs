@@ -1,4 +1,4 @@
-Actor Item_Pistol : Item_Weapon replaces Pistol
+class Item_Pistol : Item_Weapon replaces Pistol
 {
 	States
 	{
@@ -13,7 +13,7 @@ Actor Item_Pistol : Item_Weapon replaces Pistol
 	}
 }
 
-Actor Item_PistolDropped : Item_Pistol
+class Item_PistolDropped : Item_Pistol
 {
 	States
 	{
@@ -23,7 +23,7 @@ Actor Item_PistolDropped : Item_Pistol
 	}
 }
 
-Actor Item_Pistol_Second : Item_Weapon
+class Item_Pistol_Second : Item_Weapon
 {
 	States
 	{
@@ -40,7 +40,7 @@ Actor Item_Pistol_Second : Item_Weapon
 	}
 }
 
-Actor Item_PistolDropped_Second : Item_Weapon
+class Item_PistolDropped_Second : Item_Weapon
 {
 	States
 	{
@@ -51,7 +51,7 @@ Actor Item_PistolDropped_Second : Item_Weapon
 	}
 }
 
-Actor Item_Pistol_Silent : Item_Weapon
+class Item_Pistol_Silent : Item_Weapon
 {
 	States
 	{
@@ -67,7 +67,7 @@ Actor Item_Pistol_Silent : Item_Weapon
 	}
 }
 
-Actor Item_PistolDropped_Silent : Item_Pistol_Silent
+class Item_PistolDropped_Silent : Item_Pistol_Silent
 {
 	States
 	{

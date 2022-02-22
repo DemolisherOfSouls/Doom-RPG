@@ -1,14 +1,16 @@
 class Proj_Bullet : Proj
 {
-
 	const int SXF_TRACERTRAIL = SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION;
 	const int SMF_SEEK = SMF_LOOK|SMF_PRECISE;
 	
 	bool seek;
 	
-	void P_TracerTrail()
+	void P_TryHome(bool trace)
 	{
-		A_SpawnItemEx("Proj_TracerTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL);
+    if(seek)
+      A_SeekerMissile(1, 2, SMF_SEEK, 128, 5);
+    if(trace)
+      A_SpawnItemEx("Proj_TracerTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL);
 	}
 
 	default
@@ -36,18 +38,11 @@ class Proj_Bullet : Proj
 	Select:
 		BULL A 0 A_Jump(Always, "Normal");
 	Normal:
-		BULL A -1 A_JumpIf(seek, "Normal.Homing");
-	Normal.Homing:
-		BULL A 1 A_SeekerMissile(1, 2, SMF_SEEK, 128, 5);
-		loop;
+		BULL A 1 P_TryHome(false)
+    wait;
 	Tracer:
-		BULL B 0 A_JumpIf(seek, "Tracer.Homing");
-		BULL B 1 P_TracerTrail();
+		BULL B 1 P_TryHome(true)
 		wait;
-	Tracer.Homing:
-		BULL B 0 A_SeekerMissile(1, 2, SMF_SEEK, 128, 5);
-		BULL B 1 P_TracerTrail();
-		loop;
 	Death:
 		TNT1 A 0 A_SpawnItem("BulletPuff");
 	XDeath:
