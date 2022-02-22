@@ -1,12 +1,15 @@
-Actor Action_Base : CustomInventory
+class Action_Base : CustomInventory
 {
-	Inventory.MaxAmount 0
-	+INVENTORY.ALWAYSPICKUP
-	+INVENTORY.AUTOACTIVATE
-	States
-	{
-	Done:
-		TNT1 A 0
-		Stop
-	}
+  default
+  {
+    Inventory.MaxAmount 0
+    +INVENTORY.ALWAYSPICKUP
+    +INVENTORY.AUTOACTIVATE
+  }
+  States
+  {
+  Done:
+    TNT1 A 0
+    Stop
+  }
 }

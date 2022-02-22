@@ -40,7 +40,7 @@ class Enemy : Entity
 	}
 	void E_BossCheck()
 	{
-		if(bBOSSDEATH) A_BossDeath;
+		if(BOSSDEATH) A_BossDeath;
 	}
 	void E_FireBullet(string type, int zoff, double spread)
 	{
