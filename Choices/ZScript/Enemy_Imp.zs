@@ -14,6 +14,12 @@ class Enemy_Imp : Enemy_Demonic replaces DoomImp
     HitObituary "$OB_IMPHIT"
     Obituary "$OB_IMP"
     
+    Entity.XP 10;
+		Entity.Renown 0;
+		Entity.Type "Imp";
+		Entity.HasDeathAnim false;
+    Enemy.PainTime 2
+    
     DropItem "Item_Soul", 255
     DropItem "Item_Soul", 128
     DropItem "Item_Soul", 16
@@ -21,10 +27,8 @@ class Enemy_Imp : Enemy_Demonic replaces DoomImp
 	States
 	{
 	Spawn.Stage2:
-		TROO A 0 A_SetUserVar("user_rewardxp", 10)
-		TROO A 0 A_SetUserVar("user_paintime", 2)
-		TROO A 0 A_SetUserVar("user_type", ET_IMP)
-		Goto Spawn.Final
+		TROO A 0;
+		goto Spawn.Final;
 	
 	See.Real:
 		TROO AABBCCDD 3 A_Chase("Attack", "Attack")
@@ -35,7 +39,7 @@ class Enemy_Imp : Enemy_Demonic replaces DoomImp
 		Goto See
 	
 	Pain:
-		TROO H 0 A_Jump(Always, "Pain.Actual")
+		TROO H 0 Jump("Pain.Actual");
 	
 	Death.Stage1:
 		TROO I 0 A_Jump(Always, "Death.Anim1", "Death.Anim2", "Death.Anim3", "Death.Anim4")

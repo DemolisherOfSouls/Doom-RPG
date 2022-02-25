@@ -4,72 +4,64 @@ class Enemy : Entity
 	bool painjump;
 
 	mixin Mix_Jump;
+  mixin Mix_ACS;
 	
 	property PainTime: ptime;
 	
-	void E_Setup()
-	{
+	void E_Setup() {
 		//ACS_NamedExecuteAlways("EnemySetup")
 	}
-	state E_Death(string type)
-	{
-		deathtype = type;
-		
-		let killer_player = RPGPlayer(target);
-		let killer_enemy  = Enemy(target);
-		let killer_ally   = Ally(target);
-		
-		if(killer_player)
+	state E_Death(string type) {
+		if(RPGPlayer(target))
 		{
-			ACS_NamedExecuteAlways("PlayerExp", 0, rewardxp);
-			ACS_NamedExecuteAlways("PlayerRage", 0, deathtype);
-			ACS_NamedExecuteAlways("PlayerRenown", 0, rewardrenown);
+			ACS_ExecInt("PlayerExp", rewardxp);
+			ACS_ExecInt("PlayerRenown", rewardrenown);
+      ACS_ExecStr("PlayerRage", type);
 		}
-		else if(killer_enemy)
+		else if(Enemy(target))
 		{
-			ACS_NamedExecuteAlways("EnemyRenown", 0, rewardrenown);
-			ACS_NamedExecuteAlways("EnemyExp", 0, rewardxp);
+			ACS_ExecInt("EnemyRenown", rewardrenown);
+			ACS_ExecInt("EnemyExp", rewardxp);
 		}
-		else if(killer_ally)
+		else if(Ally(target))
 		{
-			ACS_NamedExecuteAlways("AllyRenown", 0, rewardrenown);
-			ACS_NamedExecuteAlways("AllyExp", 0, rewardxp);
+			ACS_ExecInt("AllyRenown", rewardrenown);
+			ACS_ExecInt("AllyExp", rewardxp);
 		}
 		
 		return state(type..".Stage1");
 	}
-	void E_BossCheck()
-	{
+	void E_BossCheck() {
 		if(BOSSDEATH) A_BossDeath;
 	}
-	void E_FireBullet(string type, int zoff, double spread)
-	{
+	void E_FireBullet(string type, int zoff, double spread) {
 		A_CustomMissile(type, zoff, 0, FRandom(-spread,spread), CMF_STANDARD, FRandom(-spread,spread));
 	}
 	
+  void E_See() {
+    awake = true;
+    alert = true;
+    if(painjump)
+      Jump("See.NoDelay");
+    Jump("See.Real");
+  }
+ 
 	states
 	{
 	Spawn:
-		TNT1 A 0 NoDelay Jump(state("Spawn.StageFinal"));
+		TNT1 A 0 NoDelay Jump("Spawn.StageFinal");
 	Spawn.Final:
 		"----" A 0 NoDelay E_Setup();
 	Idle:
 		"####" AAAAAAAAAABBBBBBBBBB 1 A_Look;
 		Loop;
 	See:
-		"----" A 0
-		{
-			awake = true;
-			alert = true;
-			if(painjump)
-				return state("See.NoDelay");
-			return state("See.Real");
-		}
+		"----" A 0 E_See();
 	Pain.Actual:
 		"----" A 3 A_SetTics(user_paintime);
 		"----" A 0 A_Pain;
 		"----" A 3 A_SetTics(user_paintime);
-		"----" A 0 A_Jump(Always, "See");
+		"----" A 0 Jump("See");
 	Death:
 		"----" A 0 E_Death("Death");
 	XDeath:

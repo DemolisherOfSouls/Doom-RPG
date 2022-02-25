@@ -20,7 +20,7 @@ class Enemy_Arachnotron : Enemy_Cyborg replaces Arachnotron
 		+BOSSDEATH
 	}
 	
-	mixin Jumper;
+	mixin Mix_Jump;
 	
 	states
 	{

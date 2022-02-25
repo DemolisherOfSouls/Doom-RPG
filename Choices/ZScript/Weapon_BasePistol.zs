@@ -9,6 +9,8 @@ class Weapon_BasePistol : Weapon_Base
 
 	+WEAPON.WIMPY_WEAPON
 	}
+  
+  mixin Mix_Pistol;
 	
 	states
 	{

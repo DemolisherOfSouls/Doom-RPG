@@ -1,11 +1,14 @@
-Actor Proj_TracerTrail
+class Proj_TracerTrail
 {
-	Height 4
-	Radius 2
-	+NOGRAVITY
-	+NOINTERACTION
-	
-	var int user_offset;
+  default
+  {
+    Height 4
+    Radius 2
+    +NOGRAVITY
+    +NOINTERACTION
+  }
+  
+	int user_offset;
 	
 	States
 	{
