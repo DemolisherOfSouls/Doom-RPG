@@ -24,7 +24,7 @@ Statusbar FullScreen, FullScreenOffsets
 	
 		WeaponAmmo Not Ammo_Clip
 		{
-			DrawNumber 3, INDEXFONT, Yellow, Ammo 			Ammo_Clip, -72, -160;
+			DrawNumber 3, INDEXFONT, Yellow, Ammo         Ammo_Clip, -72, -160;
 			DrawNumber 3, INDEXFONT, Yellow, AmmoCapacity	Ammo_Clip, -32, -160;
 		}
 		WeaponAmmo Not Ammo_Shell
