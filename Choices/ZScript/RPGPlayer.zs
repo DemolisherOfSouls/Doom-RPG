@@ -44,7 +44,7 @@ class RPGPlayer : DoomPlayer
 	int mission_owner[1024];
 	
 	// props
-	actor head;
+	int head_tid;
 	
 	// functions
 	bool hasPerk (int index)
@@ -117,14 +117,14 @@ class Player_Head
 		
 		Species "PlayerThru";
 		
-		+ISMONSTER
-		+SHOOTABLE
-		+THRUSPECIES
-		+NOGRAVITY
-		+LOOKALLAROUND
-		+NORADIUSDMG
-		+QUICKTORETALIATE
-		+STANDSTILL
+		+ISMONSTER;
+		+SHOOTABLE;
+		+THRUSPECIES;
+		+NOGRAVITY;
+		+LOOKALLAROUND;
+		+NORADIUSDMG;
+		+QUICKTORETALIATE;
+		+STANDSTILL;
 	}
 	
 	states

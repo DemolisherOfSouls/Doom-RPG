@@ -87,3 +87,11 @@ mixin class Mix_Pistol
 		A_PlayWeaponSound("Weapon/PistolEmpty")
   }
 }
+
+mixin class Mix_Imp
+{
+  void E_ImpAttack()
+  {
+    A_CustomComboAttack("EnemyProj_ImpBall", 32, 3 * random(1, 8), "imp/melee", "Enemy_ImpMelee", true)
+  }
+}
