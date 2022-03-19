@@ -1,55 +1,26 @@
 class Enemy : Entity
 {
 	int ptime;
-	bool painjump;
+  string returnstate;
 
 	mixin Mix_Jump;
   mixin Mix_ACS;
+  mixin Mix_AI;
 	
 	property PainTime: ptime;
-	
-	void E_Setup() {
-		//ACS_NamedExecuteAlways("EnemySetup")
-	}
-	state E_Death(string type) {
-		if(RPGPlayer(target))
-		{
-			ACS_ExecInt("PlayerExp", rewardxp);
-			ACS_ExecInt("PlayerRenown", rewardrenown);
-      ACS_ExecStr("PlayerRage", type);
-		}
-		else if(Enemy(target))
-		{
-			ACS_ExecInt("EnemyRenown", rewardrenown);
-			ACS_ExecInt("EnemyExp", rewardxp);
-		}
-		else if(Ally(target))
-		{
-			ACS_ExecInt("AllyRenown", rewardrenown);
-			ACS_ExecInt("AllyExp", rewardxp);
-		}
-		
-		return state(type..".Stage1");
-	}
-	void E_BossCheck() {
-		if(BOSSDEATH) A_BossDeath;
-	}
-	void E_FireBullet(string type, int zoff, double spread) {
-		A_CustomMissile(type, zoff, 0, FRandom(-spread,spread), CMF_STANDARD, FRandom(-spread,spread));
-	}
-	
-  void E_See() {
-    awake = true;
-    alert = true;
-    if(painjump)
-      Jump("See.NoDelay");
-    Jump("See.Real");
+	property AlertState: returnstate;
+  
+  default
+  {
+    Enemy.AlertState "See";
+    Enemy.PainTime 3;
+
   }
  
 	states
 	{
 	Spawn:
-		TNT1 A 0 NoDelay Jump("Spawn.StageFinal");
+		TNT1 A 0 NoDelay Jump("Spawn.Stage2");
 	Spawn.Final:
 		"----" A 0 NoDelay E_Setup();
 	Idle:
@@ -58,9 +29,9 @@ class Enemy : Entity
 	See:
 		"----" A 0 E_See();
 	Pain.Actual:
-		"----" A 3 A_SetTics(user_paintime);
+		"----" A 3 A_SetTics(ptime);
 		"----" A 0 A_Pain;
-		"----" A 3 A_SetTics(user_paintime);
+		"----" A 3 A_SetTics(ptime);
 		"----" A 0 Jump("See");
 	Death:
 		"----" A 0 E_Death("Death");
@@ -69,11 +40,15 @@ class Enemy : Entity
 	Death.Headshot:
 		"----" A 0 E_Death("Headshot");
 	Headshot.Stage1:
+    "----" A 0 Jump("XDeath.Stage1");
 	XDeath.Stage1:
 		"----" A 0 Jump("Death.Stage1");
 	Raise.Headshot:
+    "----" A 0 Jump("Raise.XDeath");
 	Raise.XDeath:
 		"----" A 0 Jump("Raise.Death");
+  Raise.Finish:
+    "####" A 0 E_RaiseFinish(AlertState);
 	Death.Finish:
 		"----" A -1 E_BossCheck();
 		stop;
@@ -92,8 +67,19 @@ class Enemy_Zombie : Enemy
 		DamageFactor "Enemy_RifleBullet", 0;
 		DamageFactor "Enemy_ShotgunPellet", 0;
 		DamageFactor "Enemy_ChaingunBullet", 0;
-		Enemy.PainTime 3;
 	}
+  
+  float Acc()
+  {
+    return FRandom(-5.75,5.75);
+  }
+  
+  action void EZ_FireBullet(string type, int bullets = 1)
+  {
+    for(int i = 0; i< bullets; i++)
+      A_CustomMissile("EnemyProj_"..type, 32, 0, Acc(), CMF_STANDARD, Acc());
+  }
+  
 	states
 	{
 	See.Real:
@@ -106,7 +92,6 @@ class Enemy_Zombie : Enemy
 		"####" I 5 A_ScreamAndUnblock;
 		"####" JKL 5;
 		goto Death.Finish;
-	Headshot.Stage1:
 	XDeath.Stage1:
 		"####" M 5;
 		"####" N 5 A_XScream;
@@ -116,7 +101,6 @@ class Enemy_Zombie : Enemy
 	Raise.Death:
 		"####" LKJIH 5;
 		goto See;
-	Raise.Headshot:
 	Raise.XDeath:
 		"####" UTSRQPONM 5;
 		goto See;
@@ -135,7 +119,7 @@ class Enemy_Demonic : Enemy
 		DamageFactor "Enemy_HellKnightBall", 0;
 		DamageFactor "Enemy_ImpMelee", 0;
 		DamageFactor "Enemy_BaronMelee", 0;
-		+MISSILEMORE
+		+MISSILEMORE;
 	}
 }
 
@@ -143,9 +127,9 @@ class Enemy_DemonicFloater : Enemy_Demonic
 {
 	default
 	{
-		+FLOAT
-		+NOGRAVITY
-		+DONTFALL
+		+FLOAT;
+		+NOGRAVITY;
+		+DONTFALL;
 	}
 }
 
@@ -153,11 +137,11 @@ class Enemy_Baron : Enemy_Demonic
 {
 	default
 	{
-		Radius 24
-		Height 64
-		Mass 1000
-		PainChance 50
-		BloodColor "Green"
+		Radius 24;
+		Height 64;
+		Mass 1000;
+		PainChance 50;
+		BloodColor "Green";
 		Enemy.PainTime 2;
 	}
 
@@ -187,13 +171,20 @@ class Enemy_Cyborg : Enemy
 {
 	default
 	{
-		Species "Cyborg"
-		DamageFactor "Enemy_ArachPlasma", 0
-		DamageFactor "Enemy_MancubusShot", 0
-		DamageFactor "Enemy_RevenantSeeker", 0
-		DamageFactor "Enemy_SpiderBullet", 0
-		DamageFactor "Enemy_CyberdemonRocket", 0
-		+NOFEAR
-		+MISSILEEVENMORE
+		Species "Cyborg";
+		DamageFactor "Enemy_ArachPlasma", 0;
+		DamageFactor "Enemy_MancubusShot", 0;
+		DamageFactor "Enemy_RevenantSeeker", 0;
+		DamageFactor "Enemy_SpiderBullet", 0;
+		DamageFactor "Enemy_CyberdemonRocket", 0;
+		+NOFEAR;
+		+MISSILEEVENMORE;
+    
+    Enemy.AlertState "See.NoDelay";
 	}
+  
+  states
+  {
+  
+  }
 }

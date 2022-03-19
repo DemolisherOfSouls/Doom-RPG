@@ -1,8 +1,13 @@
+const NoParam = "@@@@@";
+
 mixin class Mix_Jump
 {
-	action state Jump(string label)
+	action state Jump(string label, string label2 = NoParam)
 	{
-		return state(label);
+    if(label2 == NoParam || Random(1, 2) == 1)
+      return state(label);
+    else
+      return state(label2);
 	}
 }
 
@@ -17,6 +22,77 @@ mixin class Mix_ACS
   {
     ACS_NamedExecuteAlways(s, 0, a);
   }
+  
+  void ACS_Exec(string s)
+  {
+    ACS_NamedExecuteAlways(s, 0);
+  }
+}
+
+mixin class Mix_AI
+{
+  bool painjump;
+  bool awake;
+  bool alert;
+  
+  int deathanim;
+  string deathtype;
+
+  mixin Mix_Jump;
+  mixin Mix_ACS;
+
+  void E_See() {
+    awake = true;
+    alert = true;
+    if(painjump)
+      Jump("See.NoDelay");
+    Jump("See.Real");
+  }
+  
+  void E_RaiseFinish(string next = "See")
+  {
+    painjump = false;
+    Jump(next);
+  }
+  
+  void E_Pain()
+  {
+    painjump = true;
+		Jump("Pain.Actual");
+  }
+  
+  void E_Setup() {
+		//ACS_Exec("EnemySetup")
+	}
+	state E_Death(string type, int anims = 1) {
+		if(RPGPlayer(target))
+		{
+			ACS_ExecInt("PlayerExp", rewardxp);
+			ACS_ExecInt("PlayerRenown", rewardrenown);
+      ACS_ExecStr("PlayerRage", type);
+		}
+		else if(Enemy(target))
+		{
+			ACS_ExecInt("EnemyRenown", rewardrenown);
+			ACS_ExecInt("EnemyExp", rewardxp);
+		}
+		else if(Ally(target))
+		{
+			ACS_ExecInt("AllyRenown", rewardrenown);
+			ACS_ExecInt("AllyExp", rewardxp);
+		}
+    
+    deathanim = Random(1, anims);
+    deathtype = type;
+    
+    if(anims > 1)
+      return state(type..".Anim"..r);
+		
+		return state(type..".Stage1");
+	}
+	void E_BossCheck() {
+		if(BOSSDEATH) A_BossDeath;
+	}
 }
 
 mixin class Mix_Weapon
@@ -82,7 +158,7 @@ mixin class Mix_Pistol
     //GiveInventory(Class<Inventory> type, int amount, bool givecheat = false)
     //TakeInventory("Ammo_Clip", 1, , true)
 		A_TakeInventory("Ammo_Clip", 1, TIF_NOTAKEINFINITE)
-		A_JumpIfInventory("AmmoMag_Pistol", 0, "LightDone")
+		//A_JumpIfInventory("AmmoMag_Pistol", 0, "LightDone")
 		A_JumpIfInventory("Ammo_Clip", 1, "Reload.Process")
 		A_PlayWeaponSound("Weapon/PistolEmpty")
   }

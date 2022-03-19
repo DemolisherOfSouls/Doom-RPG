@@ -15,7 +15,7 @@ class Enemy_Zombieman : Enemy_Zombie replaces Zombieman
 		Entity.XP 5;
 		Entity.Renown 0;
 		Entity.Type "Zombieman";
-		Entity.HasDeathAnim false;
+		Entity.DeathAnims
 		
 		DropItem "Item_Clip", 255;
 		DropItem "Item_Clip", 128;
@@ -27,11 +27,10 @@ class Enemy_Zombieman : Enemy_Zombie replaces Zombieman
 	states
 	{
 	Spawn:
-		POSS A 0;
-		goto Spawn.Final;
+		POSS A 0 NoDelay Jump("Spawn.Final");
 	Missile:
 		POSS E 10 A_FaceTarget;
-		POSS F 8 Bright A_CustomMissile("EnemyProj_Zombieman", 32, 0, FRandom(-5.75,5.75), CMF_STANDARD, FRandom(-5.75,5.75));
+		POSS F 8 Bright EZ_FireBullet("Zombieman")
 		POSS E 8;
 		goto See;
 	}

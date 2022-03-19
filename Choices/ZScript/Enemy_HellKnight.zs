@@ -1,4 +1,4 @@
-Actor Enemy_HellKnight : Enemy_Baron replaces HellKnight
+class Enemy_HellKnight : Enemy_Baron replaces HellKnight
 {
 	SpawnID 113
 	Health 500

@@ -1,6 +1,11 @@
 //for A_Jump
 const int Always	= 256;
 
+const int SXF_TRACERTRAIL = SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION;
+const int SMF_SEEK = SMF_LOOK|SMF_PRECISE;
+
+const int WRF_NoSecNormal = WRF_NOSECONDARY|WRF_ALLOWRELOAD;
+
 //skills
 const int SKILL_OldSchool		= 0;
 const int SKILL_Underdog		= 1;

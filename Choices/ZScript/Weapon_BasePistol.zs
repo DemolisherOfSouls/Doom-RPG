@@ -2,12 +2,12 @@ class Weapon_BasePistol : Weapon_Base
 {
 	default
 	{
-	Weapon.SlotNumber 2;
-	Weapon.SelectionOrder 5;
-	
-	Weapon.AmmoType2 "Ammo_Clip";
+    Weapon.SlotNumber 2;
+    Weapon.SelectionOrder 5;
+    
+    Weapon.AmmoType2 "Ammo_Clip";
 
-	+WEAPON.WIMPY_WEAPON
+    +WEAPON.WIMPY_WEAPON
 	}
   
   mixin Mix_Pistol;

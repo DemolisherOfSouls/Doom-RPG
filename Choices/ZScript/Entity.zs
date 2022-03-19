@@ -7,9 +7,11 @@ class Entity : Actor
 	
 	bool awake;
 	bool alert;
-	bool useanim;
+	int anim_death;
+  int anim_hdeath;
+  int anim_xdeath;
 	
-	actor head;
+	int headid;
 	int id;
 	int level;
 	
@@ -19,15 +21,20 @@ class Entity : Actor
 	property Type: typ;
 	property XP: rewardxp;
 	property Renown: rewardrenown;
-	property HasDeathAnim: useanim;
+	property DeathAnimCount: anim_death;
+  property HDeathAnimCount: anim_hdeath;
+  property XDeathAnimCount: anim_xdeath;
 	
 	default
 	{
+    Entity.DeathAnimCount 1;
+    Entity.HDeathAnimCount 0;
+    Entity.XDeathAnimCount 1;
 		Height 56;
 		Monster;
-		+FLOORCLIP
-		+DONTHARMSPECIES
-		+QUICKTORETALIATE
+		+FLOORCLIP;
+		+DONTHARMSPECIES;
+		+QUICKTORETALIATE;
 	}
 
 	states
@@ -35,8 +42,8 @@ class Entity : Actor
 	Raise:
 		"----" A 0
 		{
-			if(useanim)
-				return state("Raise."..deathtype.."."..deathanim);
+			if(DeathAnimCount > 1)
+				return state("Raise."..deathtype..".Anim"..deathanim);
 			return state("Raise."..deathtype);
 		}
 	}

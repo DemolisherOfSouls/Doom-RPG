@@ -31,7 +31,7 @@ class Enemy_ShotgunGuy : Enemy_Zombie replaces ShotgunGuy
 		goto Spawn.Final;
 	Missile:
 		SPOS E 10 A_FaceTarget;
-		SPOS FFF 0 A_CustomMissile("EnemyProj_ShotgunGuy", 32, 0, FRandom(-5.75, 5.75), CMF_STANDARD, FRandom(-5.75, 5.75));
+		SPOS FFF 0 A_CustomMissile("EnemyProj_ShotgunGuy", 32, 0, Acc(), CMF_STANDARD, Acc());
 		SPOS F 10 BRIGHT;
 		SPOS E 10;
 		goto See;

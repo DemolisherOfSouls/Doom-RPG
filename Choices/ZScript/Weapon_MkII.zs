@@ -13,7 +13,7 @@ class Weapon_MkII : Weapon_BasePistol
 		Goto Super::Select
 	
 	Ready:
-		MK2G A 1 A_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD)
+		MK2G A 1 A_WeaponReady(WRF_NoSecNormal)
 		Loop
 	
 	Fire:

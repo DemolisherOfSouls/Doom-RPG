@@ -1,7 +1,6 @@
 class Proj_Bullet : Proj
 {
-	const int SXF_TRACERTRAIL = SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION;
-	const int SMF_SEEK = SMF_LOOK|SMF_PRECISE;
+	
 	
 	bool seek;
 	
