@@ -19,6 +19,7 @@
 .project
 .metadata
 .vs/
+.vscode/
  
 *_i.c
 *_p.c
@@ -97,4 +98,3 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
-.vs/Doom-RPG/v17/Preview/Browse.VC.db
