@@ -1,0 +1,7 @@
+Actor Ammo_Rocket : Ammo
+{
+	Inventory.MaxAmount 32
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 32
+	Inventory.Icon "BROKA0"
+}

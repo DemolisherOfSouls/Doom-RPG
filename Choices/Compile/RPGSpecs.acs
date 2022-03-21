@@ -1,0 +1,26 @@
+#library "RPGSpecs"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGAFunc.acs"
+
+function str GetSpecStr (void)
+{
+	//"Level ## "
+	str ret = StrParam(s:"Level ", i:GetLevel(), s:" ");
+	
+	//if purity is high add loyal
+	//if low then add corrupt
+	
+	//if above level 20 add experienced
+	//if above level 30 add hardened
+	
+	//"Marine"
+	ret = StrParam(s:ret, s:"Marine");
+	
+	//if new game+ add " Veteran"
+	
+	return ret;
+}
+

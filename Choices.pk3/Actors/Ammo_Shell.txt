@@ -1,7 +1,0 @@
-Actor Ammo_Shell : Ammo
-{
-	Inventory.MaxAmount 64
-	Ammo.BackpackAmount 0
-	Ammo.BackpackMaxAmount 64
-	Inventory.Icon "SBOXA0"
-}

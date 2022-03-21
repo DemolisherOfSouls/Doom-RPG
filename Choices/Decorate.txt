@@ -1,0 +1,153 @@
+#include "Actors/RPGConst.txt"
+
+#include "Actors/RPGPlayer.txt"
+
+//Inventory
+#include "Actors/Inv_Base.txt"
+#include "Actors/Inv_Money.txt"
+#include "Actors/Inv_Soul.txt"
+
+#include "Actors/InvMod_Common.txt"
+
+//Item Base
+
+#include "Actors/Item_Base.txt"
+
+//Action Base
+
+#include "Actors/Action_Base.txt"
+#include "Actors/Action_Common.txt"
+
+//Items
+#include "Actors/Item_Soul.txt"
+#include "Actors/Item_Money.txt"
+#include "Actors/Item_Armor.txt"
+
+//Key Items
+#include "Actors/Key_RedCard.txt"
+#include "Actors/Key_BlueCard.txt"
+#include "Actors/Key_YellowCard.txt"
+#include "Actors/Key_RedSkull.txt"
+#include "Actors/Key_BlueSkull.txt"
+#include "Actors/Key_YellowSkull.txt"
+
+//Powers
+#include "Actors/Power_TerrainFix.txt"
+
+//Ammo Types
+#include "Actors/Ammo_None.txt"
+#include "Actors/Ammo_Clip.txt"
+#include "Actors/Ammo_Shell.txt"
+#include "Actors/Ammo_Rocket.txt"
+#include "Actors/Ammo_Cell.txt"
+
+//Ammo Items
+#include "Actors/Item_AmmoBase.txt"
+#include "Actors/Item_Backpack.txt"
+#include "Actors/Item_Clip.txt"
+#include "Actors/Item_ClipBox.txt"
+#include "Actors/Item_Shell.txt"
+#include "Actors/Item_ShellBox.txt"
+#include "Actors/Item_Rocket.txt"
+#include "Actors/Item_RocketBox.txt"
+#include "Actors/Item_Cell.txt"
+#include "Actors/Item_CellPack.txt"
+
+//Ammo Magazines
+#include "Actors/AmmoMag_Pistol.txt"
+#include "Actors/AmmoMag_MkII.txt"
+#include "Actors/AmmoMag_Shotgun.txt"
+#include "Actors/AmmoMag_Riotgun.txt"
+#include "Actors/AmmoMag_Striker.txt"
+#include "Actors/AmmoMag_SuperShotgun.txt"
+#include "Actors/AmmoMag_RocketLauncher.txt"
+#include "Actors/AmmoMag_PlasmaRifle.txt"
+#include "Actors/AmmoMag_LaserRifle.txt"
+#include "Actors/AmmoMag_BFG9000.txt"
+#include "Actors/AmmoMag_Rifle.txt"
+
+//Weapon Mods
+
+#include "Actors/Item_Mod.txt"
+
+//Weapon Items
+#include "Actors/Item_Weapon.txt"
+#include "Actors/Item_Pistol.txt"
+#include "Actors/Item_MkII.txt"
+#include "Actors/Item_Shotgun.txt"
+#include "Actors/Item_Riotgun.txt"
+#include "Actors/Item_Striker.txt"
+#include "Actors/Item_SuperShotgun.txt"
+#include "Actors/Item_Chaingun.txt"
+#include "Actors/Item_Minigun.txt"
+#include "Actors/Item_Grinder.txt"
+#include "Actors/Item_RocketLauncher.txt"
+#include "Actors/Item_PlasmaRifle.txt"
+#include "Actors/Item_LaserRifle.txt"
+#include "Actors/Item_BFG9000.txt"
+#include "Actors/Item_Rifle.txt"
+
+//Item Drops
+#include "Actors/ItemDrop_Base.txt"
+#include "Actors/ItemDrop_Pistol.txt"
+#include "Actors/ItemDrop_Shotgun.txt"
+#include "Actors/ItemDrop_Chaingun.txt"
+
+//Common Projectiles
+#include "Actors/Proj_Base.txt"
+#include "Actors/Proj_Bullet.txt"
+#include "Actors/Proj_Laser.txt"
+#include "Actors/Proj_TracerTrail.txt"
+
+//Weapon Projectiles
+#include "Actors/WeaponProj_Base.txt"
+#include "Actors/WeaponProj_Pistol.txt"
+#include "Actors/WeaponProj_MkII.txt"
+#include "Actors/WeaponProj_Shotgun.txt"
+#include "Actors/WeaponProj_Riotgun.txt"
+#include "Actors/WeaponProj_Striker.txt"
+#include "Actors/WeaponProj_SuperShotgun.txt"
+#include "Actors/WeaponProj_Chaingun.txt"
+#include "Actors/WeaponProj_Minigun.txt"
+#include "Actors/WeaponProj_Grinder.txt"
+#include "Actors/WeaponProj_PlasmaBall.txt"
+#include "Actors/WeaponProj_LaserRifle.txt"
+
+//Weapons
+#include "Actors/Weapon_Base.txt"
+#include "Actors/Weapon_BasePistol.txt"
+#include "Actors/Weapon_BaseShotgun.txt"
+#include "Actors/Weapon_BaseChaingun.txt"
+
+#include "Actors/Weapon_Pistol.txt"
+#include "Actors/Weapon_MkII.txt"
+#include "Actors/Weapon_Shotgun.txt"
+#include "Actors/Weapon_Riotgun.txt"
+#include "Actors/Weapon_Striker.txt"
+#include "Actors/Weapon_SuperShotgun.txt"
+#include "Actors/Weapon_Chaingun.txt"
+#include "Actors/Weapon_Minigun.txt"
+#include "Actors/Weapon_Grinder.txt"
+#include "Actors/Weapon_RocketLauncher.txt"
+#include "Actors/Weapon_PlasmaRifle.txt"
+#include "Actors/Weapon_LaserRifle.txt"
+
+//Enemies
+#include "Actors/EnemyProj_Common.txt"
+#include "Actors/Enemy_Base.txt"
+#include "Actors/Enemy_Head.txt"
+
+#include "Actors/Enemy_Zombieman.txt"
+#include "Actors/Enemy_ShotgunGuy.txt"
+#include "Actors/Enemy_ChaingunGuy.txt"
+#include "Actors/Enemy_Imp.txt"
+#include "Actors/Enemy_Demon.txt"
+#include "Actors/Enemy_Spectre.txt"
+#include "Actors/Enemy_LostSoul.txt"
+#include "Actors/Enemy_HellKnight.txt"
+#include "Actors/Enemy_BaronOfHell.txt"
+#include "Actors/Enemy_Arachnotron.txt"
+
+//Marines
+#include "Actors/Marine_Base.txt"
+#include "Actors/Marine_Head.txt"

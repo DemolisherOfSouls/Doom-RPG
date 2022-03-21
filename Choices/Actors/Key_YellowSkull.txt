@@ -1,0 +1,15 @@
+Actor Key_YellowSkull : CustomInventory replaces YellowSkull
+{
+	SpawnID 88
+	
+	States
+	{
+	Spawn:
+		YSKU A 15
+		YSKU B 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 6)
+		Stop
+	}
+}

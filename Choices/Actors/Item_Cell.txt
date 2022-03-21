@@ -1,0 +1,15 @@
+Actor Item_Cell : Item_AmmoBase replaces Cell
+{
+	SpawnID 75
+	
+	States
+	{
+	Spawn:
+		CELL A 15
+		CELL A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 30, AT_CELL)
+		Stop
+	}
+}

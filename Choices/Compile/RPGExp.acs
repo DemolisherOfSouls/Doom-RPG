@@ -1,0 +1,104 @@
+#library "RPGExp"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGGVars.acs"
+#import "RPGIVars.acs"
+#import "RPGIList.acs"
+#import "RPGSList.acs"
+#import "RPGAFunc.acs"
+#import "RPGIFunc.acs"
+#import "RPGSFunc.acs"
+
+int WaitingExp[8];
+int WaitingRenown[8];
+
+function void PlayerUpdateVar (str acs, str var, int value)
+{
+	ACS_NamedExecuteAlways(acs, 0, value);
+	IncrementUserVar(0, var, value);
+}
+
+function void PlayerUpdateInv (str acs, str inv, int value)
+{
+	ACS_NamedExecuteAlways(acs, 0, value);
+	GiveInventory(inv, value);
+}
+
+script "PlayerLevel" (void)
+{
+	int player = PlayerNumber();
+	
+	if(WaitingExp[player] > 0)
+	{
+		WaitingExp[player] += F2I(WaitingExp[player] * 0.1001 * GetSkill(SKILL_Observant));
+		PlayerUpdateVar("ExpAlert", "experience", WaitingExp[player]);
+		WaitingExp[player] = 0;
+	}
+	
+	if(WaitingRenown[player] > 0)
+	{
+		PlayerUpdateVar("RenownAlert", "renown", WaitingRenown[player]);
+		WaitingRenown[player] = 0;
+	}
+	
+	if(WaitingMoney[player] > 0)
+	{
+		PlayerUpdateInv("MoneyAlert", "Inv_Money", WaitingMoney[player]);
+		WaitingMoney[player] = 0;
+	}
+	
+	if(WaitingSouls[player] > 0)
+	{
+		PlayerUpdateInv("SoulAlert", "Inv_Soul", WaitingSouls[player]);
+		WaitingSouls[player] = 0;
+	}
+	
+	for(int ammotype = 1; ammotype <= 4; ammotype++)
+	{
+		if(WaitingAmmo[ammotype][player])
+		{
+			ACS_NamedExecuteAlways("AmmoAlert", 0, WaitingAmmo[ammotype][player], ammotype);
+			GiveInventory(GetAmmoClass(ammotype), WaitingAmmo[ammotype][player]);
+			WaitingAmmo[ammotype][player] = 0;
+		}
+	}
+	
+	int level = GetLevel();
+	int exp = GetExp();
+	
+	int levelups = 0;
+	int perks = 0;
+	
+	while(exp >= GetLevelUp(level))
+	{
+		BumpLevel();
+		level++;
+		levelups++;
+		if(level % 2 == 1 && level > 4)
+			perks++;
+	}
+	
+	if(levelups > 0)
+	{
+		IncrementUserVar(0, "skillpoints", 3 * levelups);
+		IncrementUserVar(0, "perkpoints", perks);
+		ACS_NamedExecuteAlways("LevelAlert", 0, levelups, perks);
+	}
+	
+	Delay(1);
+	restart;
+}
+
+script "PlayerExp" (int amt)
+{
+	int player = PlayerNumber();
+	WaitingExp[player] += amt;
+}
+
+script "PlayerRenown" (int amt)
+{
+	int player = PlayerNumber();
+	WaitingRenown[player] += amt;
+}

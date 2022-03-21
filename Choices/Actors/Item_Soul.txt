@@ -1,0 +1,41 @@
+Actor Item_Soul : Item_Base
+{
+	FloatSpeed 18
+	Speed 6
+	Scale 0.25
+	
+	+ISMONSTER
+	+CANPASS
+	+BRIGHT
+	+FLOAT
+	+NOGRAVITY
+	+FLOORCLIP
+	+LOOKALLAROUND
+	+VISIBILITYPULSE
+	States
+	{
+	Spawn:
+		SOUL AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 1 Bright A_Look
+		Loop
+	See:
+		SOUL AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 1 Bright A_Chase("", "")
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Soul", 0, 1)
+		Stop
+	}
+}
+
+Actor Item_Soul5 : Item_Soul
+{
+	FloatSpeed 15
+	Speed 5
+	Scale 0.35
+	
+	States
+	{
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Soul", 0, 5)
+		Stop
+	}
+}

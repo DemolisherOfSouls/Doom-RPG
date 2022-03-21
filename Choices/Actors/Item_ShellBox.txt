@@ -1,0 +1,15 @@
+Actor Item_ShellBox : Item_AmmoBase replaces ShellBox
+{
+	SpawnID 143
+	
+	States
+	{
+	Spawn:
+		SBOX A 15
+		SBOX A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Ammo", 0, 16, AT_SHELL)
+		Stop
+	}
+}

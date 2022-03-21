@@ -1,0 +1,26 @@
+Actor Item_SuperShotgun : Item_Weapon replaces SuperShotgun
+{
+	SpawnID 33
+	
+	States
+	{
+	Spawn:
+		SGN2 A 15
+		SGN2 A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 4, W_SUPERSHOTGUN), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("AmmoMag_SuperShotgun", 2)
+		Goto Pickup.Force
+	}
+}
+
+Actor Item_SuperShotgunDropped : Item_SuperShotgun
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 4, W_SUPERSHOTGUN), "Pickup.Fail")
+		Goto Pickup.Force
+	}
+}

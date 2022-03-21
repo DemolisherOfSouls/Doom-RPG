@@ -1,0 +1,177 @@
+#library "RPGConst"
+
+#include "zcommon.acs"
+
+#libdefine NULL				0
+#libdefine EXCEPTION		-1
+#libdefine CLEAR			-1
+
+#libdefine NOWEAPON			"Unknown Weapon"
+#libdefine NOCLASS			"ACS_Failure"
+#libdefine NOICON			"TNT1A0"
+
+#libdefine CR_TEAL			22
+
+#libdefine AT_None			0
+#libdefine AT_Clip			1
+#libdefine AT_Shell			2
+#libdefine AT_Rocket		3
+#libdefine AT_Cell			4
+
+#libdefine WT_Unarmed		0
+#libdefine WT_Melee			1
+#libdefine WT_Pistol		2
+#libdefine WT_Shotgun		3
+#libdefine WT_SuperShotgun	4
+#libdefine WT_Chaingun		5
+#libdefine WT_Rocket		6
+#libdefine WT_Plasma		7
+#libdefine WT_Experimental	8
+#libdefine WT_Rifle			9
+
+#libdefine GT_Flash			0
+#libdefine GT_Frag			1
+#libdefine GT_Plasma		2
+#libdefine GT_Fire			3
+
+//**********************************************************************************************************************
+//	Thing Id's
+//**********************************************************************************************************************
+
+#libdefine TID_MAX			1024
+
+#libdefine TID_PLAYER		1024
+#libdefine TID_DEATHCAM		TID_PLAYER + 8
+#libdefine TID_PLAYERSPOT	TID_PLAYER + 16
+#libdefine TID_PLAYERHEAD	TID_PLAYER + 24
+
+#libdefine TID_ENEMY		2048
+#libdefine TID_ENEMYHEAD	TID_ENEMY + TID_MAX
+
+#libdefine TID_ALLY			4096
+#libdefine TID_ALLYHEAD		TID_ALLY + TID_MAX
+
+
+#libdefine HEALTH_HEAD		10000
+
+//**********************************************************************************************************************
+//	Episodes
+//**********************************************************************************************************************
+
+#libdefine EP_DoomE			0
+#libdefine EP_DoomE1		1
+#libdefine EP_DoomE2		2
+#libdefine EP_DoomE3		3
+#libdefine EP_DoomE4		4
+#libdefine EP_DoomEXMod		4
+#libdefine EP_DoomE1Mod		5
+#libdefine EP_DoomE2Mod		6
+#libdefine EP_DoomE3Mod		7
+#libdefine EP_DoomE4Mod		8
+#libdefine EP_DoomMod		9
+
+#libdefine EP_Doom2			10
+#libdefine EP_TNT			11
+#libdefine EP_Plutonia		12
+#libdefine EP_Doom2Mod		13
+
+#libdefine EP_TitleMap		14
+
+#libdefine EP_Unknown		15
+
+#libdefine EP_RPG			16
+
+//**********************************************************************************************************************
+//	Level Numbers
+//**********************************************************************************************************************
+
+#libdefine LEVELNUM_INTER	99
+#libdefine LEVELNUM_ARRAY	100
+
+//**********************************************************************************************************************
+//	HudMessage Id's
+//**********************************************************************************************************************
+
+#libdefine MSG_CURSOR		1		//1
+#libdefine MSG_CURSORTEXT	2		//1
+#libdefine MSG_LEFT			100		//100
+#libdefine MSG_TOP			200		//100
+#libdefine MSG_BOTTOM		300		//100
+#libdefine MSG_CENTER		400 	//100
+#libdefine MSG_WISH			500		//20
+#libdefine MSG_WEAPON		520		//1
+#libdefine MSG_MENUFRONT	600		//400
+#libdefine MSG_MENUBACK		1000	//400
+
+//**********************************************************************************************************************
+//	HudMessage Dimensions
+//**********************************************************************************************************************
+
+#libdefine HUD_WIDTH		1024
+#libdefine HUD_HEIGHT		768
+#libdefine HUD_FWIDTH		HUD_WIDTH * 1.0
+#libdefine HUD_FCENTERX		HUD_FWIDTH / 2
+#libdefine HUD_FHEIGHT		HUD_HEIGHT * 1.0
+#libdefine HUD_FCENTERY		HUD_FHEIGHT / 2
+
+//**********************************************************************************************************************
+//	Button Definitions / Statuses
+//**********************************************************************************************************************
+
+#libdefine BT_MENUKEY		BT_USER1
+
+#libdefine M_STATUS_NORMAL	0
+#libdefine M_STATUS_INVALID	1
+#libdefine M_STATUS_OVER	2
+#libdefine M_STATUS_CLICK	3
+#libdefine M_STATUS_RELEASE	4
+
+//**********************************************************************************************************************
+//	Perk / Skill Requirements
+//**********************************************************************************************************************
+
+#libdefine Req_Level			1	// (int level)
+#libdefine Req_Limit			2	// (int limit)
+#libdefine Req_Skill			3	// (int skill, int ranks)
+#libdefine Req_RankEffect		4	// Use effect list as a per rank index, rather than add all per rank
+#libdefine Req_Perk				5	// (int perk)
+
+#libdefine EFF_RunSpeed			100	// (int percent)
+#libdefine EFF_WeaponDamage		101 // (int weapon, int amount)
+#libdefine EFF_HealthRegen		102 // (int hps, int cap)
+#libdefine EFF_GibChance		103
+#libdefine EFF_HomingRounds		104
+#libdefine EFF_QuickDraw		105 // (int amount)
+#libdefine EFF_RageExtend		106 // (int amount)
+#libdefine EFF_HealthItem		107 // (int amount)
+#libdefine EFF_AmmoStorage		108 // (int ammo, int amount)
+#libdefine EFF_SoulSeeker		109 // (int chance)
+#libdefine EFF_Discount			110 // (int percent)
+#libdefine EFF_ExperienceBoost	111 // (int percent)
+#libdefine EFF_WeaponAccuracy	112 // (int weapon, int amount)
+#libdefine EFF_DisableWeapon	113 // (int weapon)
+#libdefine EFF_HeadshotDamage	114 // (int percent)
+#libdefine EFF_ReloadSpeed		115 // (int percent)
+#libdefine EFF_GrenadeDamage	116 // (int grenade, int amount)
+#libdefine EFF_MoneyDropRate	117 // (int percent)
+#libdefine EFF_MoneyDropAmt		118 // (int amount)
+#libdefine EFF_StimpackCarry	119 // (int amount)
+#libdefine EFF_LaserSpeed		120 // (int amount)
+#libdefine EFF_LaserHome		121 // (int ranks)
+#libdefine EFF_ARRAY			22  // Number of different effects
+
+#libdefine RAGE_SlowMotion		200 // (int strength)
+#libdefine RAGE_HealthRegen		201 // (int hps, int cap)
+
+//**********************************************************************************************************************
+//	Map Status Updates
+//**********************************************************************************************************************
+
+#libdefine GS01_RED_DOOR_PASSED		1
+#libdefine GS01_TOXIC_DOOR_PASSED	2
+#libdefine GS01_BLUE_DOOR_PASSED	4
+#libdefine GS01_TOXIC_DOOR_OPEN		8
+#libdefine GS01_YELLOW_DOOR_PASSED	16
+#libdefine GS01_MARINES_FOUND		32
+#libdefine GS01_HELL_PORTAL_CLOSED	64
+#libdefine GS01_ENTERING_HELL		128

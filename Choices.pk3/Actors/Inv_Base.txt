@@ -1,5 +1,0 @@
-Actor Inv_Base : Inventory
-{
-	Inventory.MaxAmount 0x7fffffff
-	+INVENTORY.UNDROPPABLE
-}

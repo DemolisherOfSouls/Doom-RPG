@@ -1,0 +1,82 @@
+#library "RPGEnemy"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGSList.acs"
+#import "RPGAFunc.acs"
+#import "RPGSFunc.acs"
+#import "RPGActor.acs"
+
+#define ET_ZOMBIEMAN		0
+#define ET_SHOTGUNGUY		1
+#define ET_CHAINGUNGUY		2
+#define ET_IMP				3
+#define ET_DEMON			4
+#define ET_SPECTRE			5
+#define ET_LOSTSOUL			6
+#define ET_CACODEMON		7
+#define ET_PAINELEMENTAL	8
+#define ET_HELLKNIGHT		9
+#define ET_BARON			10
+#define ET_REVENANT			11
+#define ET_ARACHNOTRON		12
+#define ET_MANCUBUS			13
+#define ET_ARCHVILE			14
+#define ET_SPIDERMASTERMIND	15
+#define ET_CYBERDEMON		16
+
+function str GetEnemyHeadClass (int type)
+{
+	if(type <= ET_CHAINGUNGUY)
+		return "Enemy_ZombieHead";
+	if(WithinRange(type, ET_DEMON, ET_SPECTRE))
+		return "Enemy_DemonHead";
+	else if(WithinRange(type, ET_HELLKNIGHT, ET_BARON))
+		return "Enemy_BaronHead";
+	return "Enemy_DemonicHead";
+}
+
+script "EnemySetup" (void)
+{
+	int type = GetUserVar(0, "type");
+	int body = EntityID(TID_ENEMY);
+	
+	EntityLevel(body);
+	EntityHealth(body);
+	EntitySpawnHead(body, GetEnemyHeadClass(type));
+}
+
+script "EnemyExp" (int amt)
+{
+	IncrementUserVar(0, "rewardxp", amt);
+}
+
+script "EnemyRenown" (int amt)
+{
+	IncrementUserVar(0, "rewardrenown", amt);
+}
+
+script "EnemyHead" (void)
+{
+	while(EntityHead())
+		Delay(1);
+}
+
+script "EnemyDeath" (int DeathType)
+{
+	EntityDeath(DeathType);
+}
+
+script "EnemyRaise" (void)
+{
+	// Get Vars
+	int body = ActivatorTID();
+	int players = PlayerCount();
+	int oldlevel = GetUserVar(0, "level");
+	int type = GetUserVar(0, "type");
+	
+	SetUserVar(0, "level", oldlevel + Min(players / 2, 1));
+	EntityHealth(0);
+	EntitySpawnHead(0, GetEnemyHeadClass(type));
+}

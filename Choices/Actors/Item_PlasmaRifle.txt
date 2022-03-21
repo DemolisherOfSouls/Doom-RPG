@@ -1,0 +1,16 @@
+Actor Item_PlasmaRifle : Item_Weapon replaces PlasmaRifle
+{
+	SpawnID 30
+	
+	States
+	{
+	Spawn:
+		PLAS A 15
+		PLAS A 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 A_JumpIf(!CallACS("WeaponPickup", 7, W_PLASMARIFLE), "Pickup.Fail")
+		TNT1 A 0 A_GiveInventory("AmmoMag_PlasmaRifle", 30)
+		Goto Pickup.Force
+	}
+}

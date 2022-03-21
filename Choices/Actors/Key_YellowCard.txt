@@ -1,0 +1,15 @@
+Actor Key_YellowCard : CustomInventory replaces YellowCard
+{
+	SpawnID 87
+	
+	States
+	{
+	Spawn:
+		YKEY A 15
+		YKEY B 5 Bright
+		Loop
+	Pickup:
+		TNT1 A 0 ACS_NamedExecuteAlways("Item_Key", 0, 3)
+		Stop
+	}
+}

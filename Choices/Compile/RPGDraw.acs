@@ -1,0 +1,289 @@
+#library "RPGDraw"
+
+#include "zcommon.acs"
+
+#import "RPGConst.acs"
+#import "RPGMVars.acs"
+#import "RPGPList.acs"
+#import "RPGSList.acs"
+#import "RPGWList.acs"
+#import "RPGAFunc.acs"
+#import "RPGSFunc.acs"
+#import "RPGPFunc.acs"
+#import "RPGWFunc.acs"
+
+//**********************************************************************************************************************
+//	BasicDraw
+//**********************************************************************************************************************
+
+function void BasicDrawTC (int x, int y, str font, str text, int width, int height, bool checkFade)
+{
+	int player = PlayerNumber();
+	int id = Menu_NextMessageID[player]++;
+	int xtc = I2TC(x, width);
+	int ytc = I2TC(y, height);
+	BasicDraw2(id, xtc, ytc, 1.0, font, text, checkFade);
+}
+
+function void BasicDrawIC (int x, int y, str img, bool checkFade)
+{
+	int player = PlayerNumber();
+	int id = Menu_LastMessageID[player]--;
+	int xic = I2IC(x);
+	int yic = I2IC(y);
+	BasicDraw2(id, xic, yic, 1.0, img, "A", checkFade);
+}
+
+function void BasicDrawCC (int id, str font, str text)
+{
+	int player = PlayerNumber();
+	int x = F2IC(Menu_CursorX[player]);
+	int y = F2IC(Menu_CursorY[player]);
+	BasicDraw2(id, x, y, 0.8, font, text, false);
+}
+
+function void BasicDraw (int id, int x, int y, str font, str text)
+{
+	BasicDraw2(id, x, y, 1.0, font, text, true);
+}
+
+function void BasicDraw2 (int id, int x, int y, int alpha, str font, str text, bool checkFade)
+{
+	if(Menu_Fade[PlayerNumber()] && checkFade)
+		alpha = 0.1;
+	
+	BasicDraw3(id, x, y, alpha, 0, font, text);
+}
+
+function void BasicDraw3 (int id, int x, int y, int alpha, int time, str font, str text)
+{
+	SetHUDSize(HUD_WIDTH, HUD_HEIGHT, true);
+	SetFont(font);
+	HudMessage(s:text; HUDMSG_PLAIN|HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, time, alpha);
+	SetFont("SMALLFONT");
+}
+
+//**********************************************************************************************************************
+//	DrawCursor
+//**********************************************************************************************************************
+
+function void DrawCursor (void)
+{
+	BasicDrawCC(MSG_CURSOR, "CURSOR", "A");
+}
+
+function void DrawCursorText (str text)
+{
+	BasicDrawCC(MSG_CURSORTEXT, "SMALLFONT", text);
+}
+
+//**********************************************************************************************************************
+//	GetStatusColor
+//**********************************************************************************************************************
+
+str ColorArray[4][5] =
+{
+	{ "\c[Blue]",	"\c[LightBlue]",	"\c[DarkRed]",	"\c[Red]",		"\c[Black]"	},
+	{ "\c[Green]",	"\c[DarkGreen]",	"\c[Teal]",		"\c[Blue]",		"\c[Black]"	},
+	{ "\c[Red]",	"\c[DarkRed]",		"\c[Gold]",		"\c[Yellow]",	"\c[Black]"	},
+	{ "\c[Yellow]",	"\c[Gold]",			"\c[Cream]",	"\c[White]",	"\c[Black]"	}
+};
+
+int ColorArrayRef[4] = { CR_UNTRANSLATED, CR_GREEN, CR_RED, CR_YELLOW };
+int StatusArrayRef[5] = { M_STATUS_NORMAL, M_STATUS_OVER, M_STATUS_CLICK, M_STATUS_RELEASE, M_STATUS_INVALID };
+
+function int GetColorIndex (int color)
+{
+	for(int c = 0; c < 4; c++)
+		if(color == ColorArrayRef[c])
+			return c;
+	return 0;
+}
+
+function int GetStatusIndex (int status)
+{
+	for(int s = 0; s < 5; s++)
+		if(status == StatusArrayRef[s])
+			return s;
+	return 0;
+}
+
+function str GetStatusColor (int status, int color)
+{
+	color = GetColorIndex(color);
+	status = GetStatusIndex(status);
+	
+	return ColorArray[color][status];
+}
+
+//**********************************************************************************************************************
+//	DrawBox
+//**********************************************************************************************************************
+
+function void DrawBox (int x, int y, str img)
+{
+	BasicDrawIC(x, y, img, true);
+}
+
+function void DrawBox2 (int x, int y, int status)
+{
+	DrawBox3(x, y, status, "MN_BASE1", "MN_BASED");
+}
+
+function void DrawBox3 (int x, int y, int status, str img1, str img2)
+{
+	DrawBox4(x, y, status, img1, img2, true);
+}
+
+function void DrawBox4 (int x, int y, int status, str img1, str img2, bool checkFade)
+{
+	if(status == M_STATUS_CLICK || status == M_STATUS_OVER)
+		BasicDrawIC(x, y, img2, checkFade);
+	else
+		BasicDrawIC(x, y, img1, checkFade);
+}
+
+function void DrawTextBox (int x, int y, str img, str text)
+{
+	DrawTextBox2(x, y, MENU_BOXWIDTH, MENU_BOXHEIGHT, img, text);
+}
+
+function void DrawTextBox2 (int x, int y, int sizeX, int sizeY, str img, str text)
+{
+	DrawBox(x, y, img);
+	DrawText3(x, y, "SMALLFONT", text, sizeX, sizeY);
+}
+
+//**********************************************************************************************************************
+//	DrawImage
+//**********************************************************************************************************************
+
+function void DrawImage (int x, int y, str img)
+{
+	DrawText2(x, y, img, "A");
+}
+
+//**********************************************************************************************************************
+//	DrawText
+//**********************************************************************************************************************
+
+function void DrawText (int x, int y, str text)
+{
+	if(Compare(text, "")) return;
+	DrawText2(x, y, "SMALLFONT", text);
+}
+
+function void DrawText2 (int x, int y, str font, str text)
+{
+	DrawText3(x, y, font, text, MENU_BOXWIDTH, MENU_BOXHEIGHT);
+}
+
+function void DrawText3 (int x, int y, str font, str text, int width, int height)
+{
+	DrawText4(x, y, font, text, width, height, true);
+}
+
+function void DrawTextA (int x, int y, str text)
+{
+	DrawText4(x, y, "SMALLFONT", text, MENU_BOXWIDTH, MENU_BOXHEIGHT, false);
+}
+
+function void DrawText2A (int x, int y, str font, str text)
+{
+	DrawText4(x, y, font, text, MENU_BOXWIDTH, MENU_BOXHEIGHT, false);
+}
+
+function void DrawText4 (int x, int y, str font, str text, int width, int height, bool checkFade)
+{
+	BasicDrawTC(x, y, font, text, width, height, checkFade);
+}
+
+//**********************************************************************************************************************
+//	DrawButton
+//**********************************************************************************************************************
+
+function void DrawButton (int x, int y, str text, int status, str img1, str img2)
+{
+	DrawButton2(x, y, text, status, img1, img2, CR_UNTRANSLATED);
+}
+
+function void DrawButton2 (int x, int y, str text, int status, str img1, str img2, int color)
+{
+	DrawButton3(x, y, text, status, img1, img2, color, true);
+}
+
+function void DrawButton3 (int x, int y, str text, int status, str img1, str img2, int color, bool checkFade)
+{
+	DrawBox4(x, y, status, img1, img2, checkFade);
+	DrawText4(x, y, "SMALLFONT", StrParam(s:GetStatusColor(status, color), s:text), MENU_BOXWIDTH, MENU_BOXHEIGHT, checkFade);
+}
+
+function void DrawImageButton (int x, int y, str img, int status)
+{
+	DrawBox2(x, y, status);
+	DrawImage(x, y, img);
+}
+
+function void DrawTabButton (int x, int y, int tab, int status)
+{
+	int player = PlayerNumber();
+	
+	if(tab == Menu_Tab[player])
+		DrawButton2(x, y, Menu_TabList[tab], M_STATUS_INVALID, "MN_TAB01", "MN_TAB01", CR_UNTRANSLATED);
+	else if(status == M_STATUS_INVALID)
+		DrawButton2(x, y, Menu_TabList[tab], status, "MN_TAB03", "MN_TAB03", CR_UNTRANSLATED);
+	else
+		DrawButton2(x, y, Menu_TabList[tab], status, "MN_TAB02", "MN_TAB02", CR_UNTRANSLATED);
+}
+
+//**********************************************************************************************************************
+//	DrawWeaponMessage
+//**********************************************************************************************************************
+
+function str GetWeaponModText (int mod)
+{
+	if(mod > 0)
+		return "+";
+	return "";
+}
+
+function void DrawWeaponMessage (int type, int weapon, int mod, int currentweapon, int currentmod)
+{
+	str text = StrParam(s:"Press <Use> to pick up a ", s:WeaponName[type][weapon-1], s:GetWeaponModText(mod));
+
+	if(currentweapon != NULL)
+		text = StrParam(s:"You have a ", s:WeaponName[type][currentweapon-1], s:GetWeaponModText(currentmod), s:"\n", s:text);
+	
+	DrawWeaponMessageCommon(text);
+}
+
+function void DrawWeaponHeldMessage (int type, int weapon, int mod, int currentmod)
+{
+	str text = StrParam(s:"You already possess a ", s:WeaponName[type][weapon-1], s:GetWeaponModText(currentmod), s:"\n");
+	text = StrParam(s:text, s:"Press <Use> to pick up a ", s:WeaponName[type][weapon-1], s:GetWeaponModText(mod));
+	
+	DrawWeaponMessageCommon(text);
+}
+
+function void DrawWeaponMessageCommon (str text)
+{
+	BasicDraw3(MSG_WEAPON, HUD_FCENTERX, 540.0, 1.0, 0.1, "SMALLFONT", StrParam(s:"\c[DarkRed]", s:text));
+}
+
+//**********************************************************************************************************************
+//	DrawSkillList
+//**********************************************************************************************************************
+
+function void DrawSkillList (int x, int y, int status)
+{
+	str list = ListSkills(status);
+	
+	DrawText(x, y, list);
+}
+
+function void DrawChosenSkillList (int x, int y, int status)
+{
+	str list = ListChosenSkills(status);
+	
+	DrawText(x, y, list);
+}

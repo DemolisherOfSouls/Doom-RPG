@@ -1,0 +1,31 @@
+Actor Enemy_ShotgunGuy : Enemy_Zombie replaces ShotgunGuy
+{
+	SpawnID 1
+	Health 30
+	PainChance 170
+	SeeSound "shotguy/sight"
+	PainSound "shotguy/pain"
+	DeathSound "shotguy/death"
+	ActiveSound "shotguy/active"
+	Obituary "$OB_SHOTGUY"
+	
+	DropItem "Item_Shell", 255
+	DropItem "ItemDrop_Shotgun", 128
+	DropItem "Item_Money", 160
+	DropItem "Item_Money", 72
+	DropItem "Item_Money", 24
+
+	States
+	{
+	Spawn.Stage2:
+		SPOS A 0 A_SetUserVar("user_rewardxp", 10)
+		SPOS A 0 A_SetUserVar("user_type", ET_SHOTGUNGUY)
+		"####" A 0 A_Jump(Always, "Spawn.Final")
+	Missile:
+		SPOS E 10 A_FaceTarget
+		SPOS FFF 0 A_CustomMissile("EnemyProj_ShotgunGuy", 32, 0, FRandom(-5.75,5.75), CMF_STANDARD, FRandom(-5.75,5.75))
+		SPOS F 10 BRIGHT A_PlaySound("shotguy/attack", CHAN_AUTO)
+		SPOS E 10
+		Goto See
+	}
+}
