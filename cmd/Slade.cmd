@@ -1,0 +1,1 @@
+"X:\Apps\Slade3\slade.exe" "..\Choices"
