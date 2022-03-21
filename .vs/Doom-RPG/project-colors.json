@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "0840a41c-9836-4a4a-ada2-53b9c799ecc4": {
+      "ProjectGuid": "0840a41c-9836-4a4a-ada2-53b9c799ecc4",
+      "DisplayName": "Compile",
+      "ColorIndex": 0
+    },
+    "5a9b3106-7750-4b82-95ef-554eea0a50af": {
+      "ProjectGuid": "5a9b3106-7750-4b82-95ef-554eea0a50af",
+      "DisplayName": "Batch",
+      "ColorIndex": 1
+    },
+    "d09e2144-bb26-473c-b693-d4a78a4926a4": {
+      "ProjectGuid": "d09e2144-bb26-473c-b693-d4a78a4926a4",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 2
+    },
+    "a24d201e-4c66-408a-b15f-4801dca788ea": {
+      "ProjectGuid": "a24d201e-4c66-408a-b15f-4801dca788ea",
+      "DisplayName": "ZScript",
+      "ColorIndex": 3
+    },
+    "f475f52b-a49c-40ac-a79c-fa5fc1d00dda": {
+      "ProjectGuid": "f475f52b-a49c-40ac-a79c-fa5fc1d00dda",
+      "DisplayName": "Choices",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}
