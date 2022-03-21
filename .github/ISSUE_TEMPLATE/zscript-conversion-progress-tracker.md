@@ -1,10 +1,7 @@
 ---
-name: ZScript Conversion Progress Tracker
+name: ZScript Conversion
 about: ZScript Conversion Issue Template
-title: ZScript Conversion - <Classname>
+title: ZScript Conversion - classname
 labels: Conversion
 assignees: DemolisherOfSouls
-
 ---
-
-
