@@ -20,7 +20,7 @@
 .metadata
 .vs/
 .vscode/
- 
+
 *_i.c
 *_p.c
 *.ilk
@@ -65,7 +65,6 @@
 *.tmp
 *.bak
 *.swp
-
 *~.nib
 
 _UpgradeReport_Files/
@@ -74,33 +73,26 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 *.[Pp]ublish.xml
-$RECYCLE.BIN/
+
 ArchiveBuilder/Debug/
 AppPackages/
 sql/
 x64/
 ClientBin/
 [Ss]tyle[Cc]op.*
+local.properties
 ~$*
 *~
 
+# Windows Garbage
 [tT]humbs.db
 ehthumbs.db
 [dD]esktop.ini
-local.properties
+$RECYCLE.BIN/
 
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
-
-#Doom Builder 2 Backups
+# Doom Builder 2 Backups
 *.backup1
 *.backup2
 
-#Notepad++ Backups
+# Notepad++ Backups
 */nppBackup/

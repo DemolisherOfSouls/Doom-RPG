@@ -9,15 +9,16 @@ class Item_Ammo : Item
 	default
 	{
 		Inventory.PickupSound "Pickup/Ammo";
-    Item_Ammo.Quanity 1
+    Item_Ammo.Quanity 1;
 	}
+
   states
   {
   Pickup:
 		TNT1 A 0
     {
-      ACS_NamedExecuteAlways("Item_Ammo", 0, qty, AT_SHELL)
+      ACS_NamedExecuteAlways("Item_Ammo", 0, qty, AT_SHELL);
     }
-		Stop
+		Stop;
   }
 }
