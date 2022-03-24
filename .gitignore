@@ -96,3 +96,5 @@ $RECYCLE.BIN/
 
 # Notepad++ Backups
 */nppBackup/
+*.db
+.vs/Doom-RPG/v17/Preview/Browse.VC.db
