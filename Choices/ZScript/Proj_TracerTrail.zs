@@ -2,32 +2,41 @@ class Proj_TracerTrail
 {
   default
   {
-    Height 4
-    Radius 2
-    +NOGRAVITY
-    +NOINTERACTION
+    Height 4;
+    Radius 2;
+    +NOGRAVITY;
+    +NOINTERACTION;
   }
   
-	int user_offset;
+  action void P_Trail(bool dospawn)
+  {
+    int offset = 0;
+    
+    if(dospawn)
+    {
+      do
+      {
+        A_SpawnItemEx("Proj_TracerTrail2", cos(pitch) * offset, 0, sin(pitch) * offset, velx, vely, velz, 0, SXF_TRACERTRAIL);
+        offset += 7;
+      } while (offset < 56)
+    }
+    A_FadeOut(0.05, true);
+  }
 	
-	States
+	states
 	{
 	Spawn:
-		BULL B 0 NoDelay A_JumpIf(user_offset == -56, "Fade")
-		BULL B 0 A_SpawnItemEx("Proj_TracerTrail2", cos(pitch) * -user_offset, 0, sin(pitch) * -user_offset, velx, vely, velz, 0, SXF_TRACERTRAIL)
-		BULL B 0 A_SetUserVar("user_offset", user_offset - 7)
-		Loop
-	Fade:
-		BULL B 1 A_FadeOut(0.05, true)
-		Wait
+		BULL B 1 NoDelay P_Trail(true);
+    wait;
 	}
 }
 
 class Proj_TracerTrail2 : Proj_TracerTrail
 {
-	States
+	states
 	{
 	Spawn:
-		Goto Fade;
+		BULL B 1 NoDelay P_Trail(false);
+    wait;
 	}
 }

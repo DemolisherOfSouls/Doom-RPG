@@ -18,10 +18,10 @@ class Entity : Actor
 	string deathtype;
 	int deathanim;
 
-	property Type: typ;
-	property XP: rewardxp;
+	property Type:   typ;
+	property XP:     rewardxp;
 	property Renown: rewardrenown;
-	property DeathAnimCount: anim_death;
+	property DeathAnimCount:  anim_death;
   property HDeathAnimCount: anim_hdeath;
   property XDeathAnimCount: anim_xdeath;
 	

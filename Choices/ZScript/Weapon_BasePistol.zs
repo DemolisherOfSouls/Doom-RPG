@@ -7,7 +7,7 @@ class Weapon_BasePistol : Weapon_Base
     
     Weapon.AmmoType2 "Ammo_Clip";
 
-    +WEAPON.WIMPY_WEAPON
+    +WEAPON.WIMPY_WEAPON;
 	}
   
   mixin Mix_Pistol;

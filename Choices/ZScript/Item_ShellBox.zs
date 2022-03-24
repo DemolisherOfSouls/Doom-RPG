@@ -1,4 +1,4 @@
-class Item_ShellBox : Item_AmmoBase replaces ShellBox
+class Item_ShellBox : Item_Ammo replaces ShellBox
 {
 	default
 	{
