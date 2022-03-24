@@ -1,9 +1,24 @@
 class Proj_Bullet : Proj
 {
-	
-	
 	bool seek;
+  bool trace;
+  int shootertyp;
+  
+  property IsTracer: trace;
+  property IsSeeker: seek;
+  property ShooterType: shootertyp;
 	
+  void P_Init()
+  {
+    let shooter = RPGPlayer(target);
+    if(shooter)
+      seek = shooter.getSkill(SKILL_HomingRounds);
+      trace = true; //shooter.get?
+    else
+      seek = false;
+      trace = false;
+  }
+  
 	void P_TryHome(bool trace)
 	{
     if(seek)
@@ -11,6 +26,8 @@ class Proj_Bullet : Proj
     if(trace)
       A_SpawnItemEx("Proj_TracerTrail", 0, 0, 0, velx / 64, vely / 64, velz / 64, 0, SXF_TRACERTRAIL);
 	}
+  
+  
 
 	default
 	{
@@ -24,23 +41,12 @@ class Proj_Bullet : Proj
 	states
 	{
 	Spawn:
-		BULL A 0 NoDelay
-		{
-			A_GiveInventory("Action_Set_ExtremeDeath", 1);
-			let shooter = RPGPlayer(target);
-			if(shooter)
-				seek = shooter.getSkill(SKILL_HomingRounds);
-			else
-				seek = false;
-			return state("Select");
-		}
-	Select:
-		BULL A 0 A_Jump(Always, "Normal");
+		BULL A 0 NoDelay P_Init();
 	Normal:
-		BULL A 1 P_TryHome(false)
+		BULL A 1 P_TryHome(trace);
     wait;
 	Tracer:
-		BULL B 1 P_TryHome(true)
+		BULL B 1 P_TryHome(true);
 		wait;
 	Death:
 		TNT1 A 0 A_SpawnItem("BulletPuff");

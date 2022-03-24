@@ -12,9 +12,11 @@ script "AddPerk" (int perk)
 	SetUserArray(0, "user_perks", perk, 1);
 	ACS_NamedExecuteAlways("PerkAlert", 0, perk);
 	
+  //Special Actions
 	switch(perk)
 	{
 	default:
+    
 		break;
 	}
 }

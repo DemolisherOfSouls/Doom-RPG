@@ -1,5 +1,5 @@
-Compile.bat
+Compile.cmd
 pause
-Make.bat
+Make.cmd
 pause
-Debug.bat
+Debug.cmd

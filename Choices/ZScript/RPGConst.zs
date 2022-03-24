@@ -6,6 +6,12 @@ const int SMF_SEEK = SMF_LOOK|SMF_PRECISE;
 
 const int WRF_NoSecNormal = WRF_NOSECONDARY|WRF_ALLOWRELOAD;
 
+const int AT_None  	=	0
+const int AT_Clip	  =	1
+const int AT_Shell  =	2
+const int AT_Rocket =	3
+const int AT_Cell	  =	4
+
 //skills
 const int SKILL_OldSchool		= 0;
 const int SKILL_Underdog		= 1;

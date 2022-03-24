@@ -1,5 +1,7 @@
 class Item : CustomInventory
 {
+  mixin Mix_Jump;
+
 	default
 	{
 		+INVENTORY.HUBPOWER

@@ -1,1 +1,1 @@
-slade "Game Design/Doom RPG/Doom-RPG/Choices"
+slade "../Choices"
