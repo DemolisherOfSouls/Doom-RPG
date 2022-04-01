@@ -24,15 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doom-RPG", "Doom-RPG", "{F4
 		Choices\ZScript.zs = Choices\ZScript.zs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{5A9B3106-7750-4B82-95EF-554EEA0A50AF}"
-	ProjectSection(SolutionItems) = preProject
-		Batch\Compile.bat = Batch\Compile.bat
-		Batch\Debug.bat = Batch\Debug.bat
-		Batch\Make.bat = Batch\Make.bat
-		Batch\Rebuild & Debug.bat = Batch\Rebuild & Debug.bat
-		Batch\Slade.bat = Batch\Slade.bat
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compiled ACS", "Compiled ACS", "{BEDDDABC-1A11-47F2-8913-74A4740A7F2B}"
 	ProjectSection(SolutionItems) = preProject
 		Choices\ACS\RPGActor.acs_o = Choices\ACS\RPGActor.acs_o
@@ -141,8 +132,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArchiveBuilder", "ArchiveBu
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ACSCompiler", "ACSCompiler\ACSCompiler.vcxproj", "{F285E73C-1B0F-439E-ABA4-2C44F13839B3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZScriptCheck", "ZScriptCheck\ZScriptCheck.vcxproj", "{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZScript", "ZScript", "{A24D201E-4C66-408A-B15F-4801DCA788EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -358,13 +347,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapInfo", "MapInfo", "{05B7
 		Choices\MapInfo\D2Info.txt = Choices\MapInfo\D2Info.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{A3D1E431-32D9-4168-95A4-C863F7BFEB55}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ref", "ref", "{A3D1E431-32D9-4168-95A4-C863F7BFEB55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{9958CC32-B5F0-443D-A879-CE11D6776374}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		License.txt = License.txt
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{19FD8B9E-F4E4-4A4E-83AB-D2D9A8F26D95}"
+	ProjectSection(SolutionItems) = preProject
+		cmd\Compile.cmd = cmd\Compile.cmd
+		cmd\Debug.cmd = cmd\Debug.cmd
+		cmd\Make.cmd = cmd\Make.cmd
+		cmd\Rebuild & Debug.cmd = cmd\Rebuild & Debug.cmd
+		cmd\Slade.cmd = cmd\Slade.cmd
 	EndProjectSection
 EndProject
 Global
@@ -394,19 +393,12 @@ Global
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.ActiveCfg = Release|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|gzdoom.Build.0 = Release|x64
 		{F285E73C-1B0F-439E-ABA4-2C44F13839B3}.Release|x86.ActiveCfg = Release|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|gzdoom.ActiveCfg = Debug|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Debug|x86.ActiveCfg = Debug|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|Any CPU.ActiveCfg = Release|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|gzdoom.ActiveCfg = Release|x64
-		{CBB9385D-2D25-4A28-9D83-0BBEEF1EEFE9}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F475F52B-A49C-40AC-A79C-FA5FC1D00DDA} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
-		{5A9B3106-7750-4B82-95EF-554EEA0A50AF} = {9958CC32-B5F0-443D-A879-CE11D6776374}
 		{BEDDDABC-1A11-47F2-8913-74A4740A7F2B} = {D09E2144-BB26-473C-B693-D4A78A4926A4}
 		{0840A41C-9836-4A4A-ADA2-53B9C799ECC4} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}
 		{A24D201E-4C66-408A-B15F-4801DCA788EA} = {F475F52B-A49C-40AC-A79C-FA5FC1D00DDA}

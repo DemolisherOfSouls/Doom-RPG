@@ -17,12 +17,12 @@ mixin class Mix_ACS
 	{
 		ACS_NamedExecuteAlways(s, 0, a);
 	}
-  
+
   void ACS_ExecStr(string s, string a)
   {
     ACS_NamedExecuteAlways(s, 0, a);
   }
-  
+
   void ACS_Exec(string s)
   {
     ACS_NamedExecuteAlways(s, 0);
@@ -34,7 +34,7 @@ mixin class Mix_AI
   bool painjump;
   bool awake;
   bool alert;
-  
+
   int deathanim;
   string deathtype;
 
@@ -48,19 +48,23 @@ mixin class Mix_AI
       Jump("See.NoDelay");
     Jump("See.Real");
   }
-  
+
   void E_RaiseFinish(string next = "See")
   {
     painjump = false;
     Jump(next);
   }
-  
+
   void E_Pain()
   {
     painjump = true;
 		Jump("Pain.Actual");
   }
-  
+  action void EZ_FireBullet(string type, int bullets = 1)
+  {
+    for(int i = 0; i< bullets; i++)
+      A_CustomMissile("EnemyProj_"..type, 32, 0, Acc(), CMF_STANDARD, Acc());
+  }
   void E_Setup() {
 		//ACS_Exec("EnemySetup")
 	}
@@ -81,13 +85,13 @@ mixin class Mix_AI
 			ACS_ExecInt("AllyRenown", rewardrenown);
 			ACS_ExecInt("AllyExp", rewardxp);
 		}
-    
+
     deathanim = Random(1, anims);
     deathtype = type;
-    
+
     if(anims > 1)
       return state(type..".Anim"..r);
-		
+
 		return state(type..".Stage1");
 	}
 	void E_BossCheck() {
@@ -99,7 +103,7 @@ mixin class Mix_Weapon
 {
   string GetWeaponAmmoClass(int slot, int var) {
 		//exceptions go here
-	
+
 		return "Ammo_"..AmmoClass[slot];
 	}
 	string GetAmmoMagClass (int slot, int var) {
@@ -110,19 +114,19 @@ mixin class Mix_Weapon
 		return "Weapon_"..WeaponClass[slot][var-1];
 	}
 	bool HasAmmo(int slot, int var) {
-		return CheckInventory(GetWeaponAmmoClass(type, var)) + CheckInventory(GetAmmoMagClass(type, var)) > 0;	
+		return CheckInventory(GetWeaponAmmoClass(type, var)) + CheckInventory(GetAmmoMagClass(type, var)) > 0;
 	}
 	bool TryWeapon(int slot) {
 		let player = RPGPlayer(self.player);
-		
+
 		if(player == NULL)
 			return false;
-		
+
 		string w = GetWeaponClass(slot)
 		int var = player.cur_weapon[slot];
-		
+
 		let weap = Weapon(player.FindInventory(w));
-		
+
 		if( CheckInventory(w) && HasAmmo(slot, var) && player.ReadyWeapon != weap)
 			player.PendingWeapon = weap;
 	}
@@ -138,7 +142,7 @@ mixin class Mix_Weapon
 		for(int w = 0; w < 10; w++)
 		{
 			int type = RPGPlayer(owner).weaponorder[w];
-			
+
 			if(TryWeapon(type))
 				return;
 		}
@@ -149,9 +153,9 @@ mixin class Mix_Pistol
 {
   void FirePistol (bool offhand)
   {
-    
+
   }
-  
+
   void EmptyPistol (bool offhand)
   {
     //GiveAmmo("AmmoMag_Pistol", 1)
