@@ -10,63 +10,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Choices\Compile\RPGActor.acs" />
-    <None Include="..\Choices\Compile\RPGAFunc.acs" />
-    <None Include="..\Choices\Compile\RPGAlert.acs" />
-    <None Include="..\Choices\Compile\RPGAlly.acs" />
-    <None Include="..\Choices\Compile\RPGColor.acs" />
-    <None Include="..\Choices\Compile\RPGConst.acs" />
-    <None Include="..\Choices\Compile\RPGCount.acs" />
-    <None Include="..\Choices\Compile\RPGDeath.acs" />
-    <None Include="..\Choices\Compile\RPGDList.acs" />
-    <None Include="..\Choices\Compile\RPGDraw.acs" />
-    <None Include="..\Choices\Compile\RPGEnemy.acs" />
-    <None Include="..\Choices\Compile\RPGError.acs" />
-    <None Include="..\Choices\Compile\RPGExp.acs" />
-    <None Include="..\Choices\Compile\RPGGreet.acs" />
-    <None Include="..\Choices\Compile\RPGGVars.acs" />
-    <None Include="..\Choices\Compile\RPGIFunc.acs" />
-    <None Include="..\Choices\Compile\RPGIList.acs" />
-    <None Include="..\Choices\Compile\RPGItems.acs" />
-    <None Include="..\Choices\Compile\RPGIVars.acs" />
-    <None Include="..\Choices\Compile\RPGKeys.acs" />
-    <None Include="..\Choices\Compile\RPGKFunc.acs" />
-    <None Include="..\Choices\Compile\RPGLevel.acs" />
-    <None Include="..\Choices\Compile\RPGLFunc.acs" />
-    <None Include="..\Choices\Compile\RPGMenu.acs" />
-    <None Include="..\Choices\Compile\RPGMFunc.acs" />
-    <None Include="..\Choices\Compile\RPGMove.acs" />
-    <None Include="..\Choices\Compile\RPGMVars.acs" />
-    <None Include="..\Choices\Compile\RPGObj.acs" />
-    <None Include="..\Choices\Compile\RPGOFunc.acs" />
-    <None Include="..\Choices\Compile\RPGOList.acs" />
-    <None Include="..\Choices\Compile\RPGOpen.acs" />
-    <None Include="..\Choices\Compile\RPGPain.acs" />
-    <None Include="..\Choices\Compile\RPGPDisc.acs" />
-    <None Include="..\Choices\Compile\RPGPerks.acs" />
-    <None Include="..\Choices\Compile\RPGPFunc.acs" />
-    <None Include="..\Choices\Compile\RPGPlay.acs" />
-    <None Include="..\Choices\Compile\RPGPList.acs" />
-    <None Include="..\Choices\Compile\RPGRage.acs" />
-    <None Include="..\Choices\Compile\RPGRegen.acs" />
-    <None Include="..\Choices\Compile\RPGSFunc.acs" />
-    <None Include="..\Choices\Compile\RPGSkill.acs" />
-    <Library Include="..\Choices\Compile\RPGSList.acs">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <FileType>Document</FileType>
-    </Library>
-    <None Include="..\Choices\Compile\RPGSpecs.acs" />
-    <None Include="..\Choices\Compile\RPGWeaps.acs" />
-    <None Include="..\Choices\Compile\RPGWFunc.acs">
-      <FileType>Script</FileType>
-    </None>
-    <None Include="..\Choices\Compile\RPGWList.acs">
-      <FileType>Script</FileType>
-    </None>
-    <None Include="..\Choices\Compile\RPGXLat.acs" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F285E73C-1B0F-439E-ABA4-2C44F13839B3}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
@@ -77,6 +20,7 @@
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
@@ -98,14 +42,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Choices\ACS</OutDir>
     <IntDir>..\Choices\ACS</IntDir>
-    <ExecutablePath>$(SolutionDir)Batch</ExecutablePath>
-    <IncludePath>D:\Programs\ACC</IncludePath>
-    <ReferencePath>D:\Programs\ACC</ReferencePath>
-    <LibraryPath>D:\Game Design\Doom RPG\Doom-RPG\Choices\Compile</LibraryPath>
+    <ExecutablePath>$(SolutionDir)cmd</ExecutablePath>
+    <IncludePath>X:\Apps\UltimateDoomBuilder\Compilers\ZDoom\nppBackup</IncludePath>
+    <ReferencePath>X:\Apps\UltimateDoomBuilder\Compilers\ZDoom\nppBackup</ReferencePath>
+    <LibraryPath>$(SolutionDir)Choices\Compile</LibraryPath>
     <LibraryWPath />
-    <SourcePath>D:\Game Design\Doom RPG\Doom-RPG\Choices\Compile</SourcePath>
+    <SourcePath>$(SolutionDir)Choices\Compile</SourcePath>
     <ExcludePath />
-    <NMakeBuildCommandLine>Compile.bat</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>Compile.cmd</NMakeBuildCommandLine>
     <NMakeIncludeSearchPath>D:\Progams\ACC</NMakeIncludeSearchPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
