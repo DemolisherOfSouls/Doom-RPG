@@ -92,6 +92,7 @@ $RECYCLE.BIN/
 # Doom Builder 2 Backups
 *.backup1
 *.backup2
+*.bak
 
 # Notepad++ Backups
 */nppBackup/
